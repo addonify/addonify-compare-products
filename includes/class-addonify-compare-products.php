@@ -157,6 +157,22 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+
+		// admin menu
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu_callback', 20 );
+
+		// custom link in plugins.php page in wp-admin
+		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'custom_plugin_link_callback', 10, 2 );
+
+		// show settings page ui 
+		$this->loader->add_action("admin_init", $plugin_admin, 'settings_page_ui' );
+		
+		//show notice if woocommerce is not active
+		$this->loader->add_action('admin_init', $plugin_admin, 'addonify_cp_show_woocommerce_not_active_notice_callback' );
+
+		// show admin notices after form submission
+		$this->loader->add_action('admin_notices', $plugin_admin, 'addonify_cp_form_submission_notification_callback' );
+
 	}
 
 	/**

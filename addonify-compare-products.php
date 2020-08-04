@@ -36,6 +36,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Rename this for your plugin and update it as you release new versions.
  */
 define( 'ADDONIFY_COMPARE_PRODUCTS_VERSION', '1.0.0' );
+define( 'ADDONIFY_CP_DB_INITIALS', 'addonify_cp_' );
 
 /**
  * The code that runs during plugin activation.
