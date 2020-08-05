@@ -189,6 +189,31 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+
+		// add "Compare" button after add to cart button
+		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_after_add_to_cart_btn_callback', 20 );
+
+
+		// add "Compare" button before add to cart button
+		$this->loader->add_action( 'woocommerce_after_shop_loop_item_title', $plugin_public, 'show_compare_products_btn_before_add_to_cart_btn_callback', 20 );
+
+
+		// add "Compare Button" button aside image
+		$this->loader->add_action( 'woocommerce_shop_loop_item_title', $plugin_public, 'show_compare_products_btn_aside_image_callback', 10 );
+		
+
+		// add custom markup into footer
+		$this->loader->add_action( 'wp_footer', $plugin_public, 'add_markup_into_footer_callback' );
+
+
+		// add custom styles into header
+		$this->loader->add_action( 'wp_head', $plugin_public, 'generate_custom_styles_callback' );
+
+
+		// ajax callback
+		$this->loader->add_action( 'wp_ajax_get_compare_products_contents', $plugin_public, 'compare_products_contents_callback' );
+		$this->loader->add_action( 'wp_ajax_nopriv_get_compare_products_contents', $plugin_public, 'compare_products_contents_callback' );
+
 	}
 
 	/**
