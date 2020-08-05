@@ -643,7 +643,9 @@ class Addonify_Compare_Products_Admin {
 	// callback function
 	// show notification after form submission
 	public function addonify_cp_form_submission_notification_callback(){
-		settings_errors();
+		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug ){
+			settings_errors();			
+		}
 	}
 
 
