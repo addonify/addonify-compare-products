@@ -88,6 +88,12 @@ class Addonify_Compare_Products_Public {
 			if( $this->show_compare_btn === 1 ){
 				$this->compare_products_btn_position =  $this->get_db_values('compare_products_btn_position', 'after_add_to_cart' );
 				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label' );
+
+				if( $this->compare_products_btn_position == 'overlay_on_image' ){
+					// modify woocommerce shop loop
+					// if quick view btn is selected to display in overlay of image
+					$this->modify_woocommerce_shop_loop();
+				}
 			}
 		}
 
@@ -171,7 +177,7 @@ class Addonify_Compare_Products_Public {
 			$this->compare_products_btn_label 
 		) {
 			ob_start();
-			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label) );
+			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => '') );
 			echo ob_get_clean();
 
 		}
@@ -194,7 +200,7 @@ class Addonify_Compare_Products_Public {
 		) {
 			
 			ob_start();
-			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label) );
+			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => '') );
 			echo ob_get_clean();
 
 		}
@@ -211,7 +217,7 @@ class Addonify_Compare_Products_Public {
 		
 		if( $this->show_compare_btn && $this->compare_products_btn_position == 'overlay_on_image' ) {
 			ob_start();
-			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label) );
+			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => 'addonify-overlay-image') );
 			echo ob_get_clean();
 		}
 
@@ -383,6 +389,35 @@ class Addonify_Compare_Products_Public {
 		}
 
 	}
+
+
+	// modify woocommerce_before_shop_loop_item
+	// wrap loop in custom container
+	// works only if compare_products_btn_position == overlay_on_image
+	public function modify_woocommerce_shop_loop(){
+
+		// var_dump( defined( ADDONIFY_OVERLAY_CONTAINER_CLASS_ADDED ) );
+		// die;
+
+
+		// if( ! defined( ADDONIFY_OVERLAY_CONTAINER_CLASS_ADDED ) ) return;
+
+		// define( 'ADDONIFY_OVERLAY_CONTAINER_CLASS_ADDED', 1 );
+
+		if( $this->compare_products_btn_position == 'overlay_on_image' ){
+
+			// add_action ( 'woocommerce_before_shop_loop_item' ,  function (){
+			// 	echo '<div class="addonify-qvm-overlay-button">';
+			// });
+			
+			// add_action ( 'woocommerce_after_shop_loop_item' ,  function (){
+			// 	echo '</div>';
+			// });
+
+		}
+
+	}
+
 
 
 	// require proper templates for use in front end
