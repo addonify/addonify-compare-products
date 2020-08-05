@@ -189,6 +189,9 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		// run after all  plugins are loaded
+		// $this->loader->add_action( 'plugins_loaded', $plugin_public, 'modify_woocommerce_shop_loop', 20 );
+
 
 		// add "Compare" button after add to cart button
 		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_after_add_to_cart_btn_callback', 20 );
