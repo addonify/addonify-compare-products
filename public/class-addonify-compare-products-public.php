@@ -88,12 +88,6 @@ class Addonify_Compare_Products_Public {
 			if( $this->show_compare_btn === 1 ){
 				$this->compare_products_btn_position =  $this->get_db_values('compare_products_btn_position', 'after_add_to_cart' );
 				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label' );
-
-				if( $this->compare_products_btn_position == 'overlay_on_image' ){
-					// modify woocommerce shop loop
-					// if quick view btn is selected to display in overlay of image
-					// $this->modify_woocommerce_shop_loop();
-				}
 			}
 		}
 
@@ -105,7 +99,7 @@ class Addonify_Compare_Products_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/addonify-compare-products-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -118,10 +112,10 @@ class Addonify_Compare_Products_Public {
 		// required min version wordpress 4.9.0
 		wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery' ), $this->version, false );
 
 		// for ajax
-		wp_enqueue_script( 'addonify_cp_ajax_scripts', plugin_dir_url( __FILE__ ) . 'addonify-cp-ajax-scripts.js', array('jquery'), $this->version, true );
+		// wp_enqueue_script( 'addonify_cp_ajax_scripts', plugin_dir_url( __FILE__ ) . 'addonify-cp-ajax-scripts.js', array('jquery'), $this->version, true );
 
 		// localize ajax script
 		wp_localize_script( 
@@ -228,7 +222,7 @@ class Addonify_Compare_Products_Public {
 	// add custom markup into footer
 	public function add_markup_into_footer_callback(){
 		ob_start();
-		$this->get_templates( 'addonify-compare-products-content-wrapper' );
+		$this->get_templates( 'addonify-compare-products-bottom-bar' );
 		echo ob_get_clean();
 	}
 

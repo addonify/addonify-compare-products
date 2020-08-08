@@ -1,0 +1,74 @@
+#addonify-compare-products-bottom-bar{
+    position: fixed;
+    bottom: 0;
+    background: rgb(41, 42, 48);
+    padding: 10px;
+    left: 0;
+    right: 0;
+}
+
+#addonify-compare-bottom-inner{
+    float: right;
+    overflow: hidden;
+    height: 100%;
+}
+
+.addonify-cbi-components{
+    float: left;
+    margin-left: 10px;
+
+    img{
+        height: 48px;
+        width: 48px;
+    }
+
+    button{
+        height: 48px;
+    }
+}
+
+.addonify-cbi-thumbnail{
+    position:relative;
+    cursor: pointer;
+}
+
+.addonify-cbi-remove{
+    top: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    background-image: url(../../images/remove.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #292a30;
+    z-index: 7;
+    border-radius: 1px;
+}
+
+.addonify-cbi-add{
+    width: 48px;
+    height: 48px;
+    display: block;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.1);
+    background-image: url(../../images/add.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 2px;
+}
+
+.addonify-cbi-settings{
+    width: 48px;
+    height: 48px;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url(../../images/checkbox.svg);
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 2px;
+}
