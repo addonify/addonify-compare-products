@@ -92,7 +92,7 @@ class Addonify_Compare_Products_Public {
 				if( $this->compare_products_btn_position == 'overlay_on_image' ){
 					// modify woocommerce shop loop
 					// if quick view btn is selected to display in overlay of image
-					$this->modify_woocommerce_shop_loop();
+					// $this->modify_woocommerce_shop_loop();
 				}
 			}
 		}
@@ -395,25 +395,63 @@ class Addonify_Compare_Products_Public {
 	// wrap loop in custom container
 	// works only if compare_products_btn_position == overlay_on_image
 	public function modify_woocommerce_shop_loop(){
-
-		// var_dump( defined( ADDONIFY_OVERLAY_CONTAINER_CLASS_ADDED ) );
-		// die;
-
-
-		// if( ! defined( ADDONIFY_OVERLAY_CONTAINER_CLASS_ADDED ) ) return;
-
-		// define( 'ADDONIFY_OVERLAY_CONTAINER_CLASS_ADDED', 1 );
-
+		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 
-			// add_action ( 'woocommerce_before_shop_loop_item' ,  function (){
-			// 	echo '<div class="addonify-qvm-overlay-button">';
-			// });
-			
-			// add_action ( 'woocommerce_after_shop_loop_item' ,  function (){
-			// 	echo '</div>';
-			// });
+			// start session
+			// if( ! session_id() ) session_start();
 
+			// // check if overlay_container is already created by another addonify plugin
+			$is_overlay_added = isset( $_SESSION['is_overlay_added'] ) ? $_SESSION['is_overlay_added'] : 0;
+
+			// var_dump( $is_overlay_added );
+
+
+			// if( ! $is_overlay_added ){
+
+				// create overlay container
+
+				// $_SESSION['is_overlay_added'] = 1;
+				
+				add_action ( 'woocommerce_before_shop_loop_item' ,  function (){
+					echo '<div class="addonify-qvm-overlay-button">';
+				});
+					
+				add_action ( 'woocommerce_after_shop_loop_item' ,  function (){
+					echo '</div>';
+				});
+				
+			// }
+		}
+
+	}
+
+
+	// callback function
+	// print opening tag of overlay image container
+	public function addonify_overlay_container_start_callback(){
+		
+		global $overlay_opening_tag_is_added;
+		if( $overlay_opening_tag_is_added ) return;
+
+		if( $this->compare_products_btn_position == 'overlay_on_image' ){
+			$overlay_opening_tag_is_added = 1;
+			echo '<div class="addonify-qvm-overlay-button">';
+		}
+
+	}
+
+
+	// callback function
+	// print closing tag of overlay image container
+	public function addonify_overlay_container_end_callback(){
+
+		global $overlay_closing_tag_is_added;
+		if( $overlay_closing_tag_is_added ) return;
+		
+		if( $this->compare_products_btn_position == 'overlay_on_image' ){
+			$overlay_closing_tag_is_added = 1;
+			echo '</div>';
 		}
 
 	}
