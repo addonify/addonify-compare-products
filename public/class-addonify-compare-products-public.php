@@ -114,44 +114,45 @@ class Addonify_Compare_Products_Public {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery' ), $this->version, false );
 
-		// for ajax
-		// wp_enqueue_script( 'addonify_cp_ajax_scripts', plugin_dir_url( __FILE__ ) . 'addonify-cp-ajax-scripts.js', array('jquery'), $this->version, true );
+		// js cookie
+		wp_enqueue_script( 'js-cookie', '//cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js', array('jquery'), $this->version, true );
 
 		// localize ajax script
 		wp_localize_script( 
-			'addonify_cp_ajax_scripts', 
-			'ajax_object', 
+			$this->plugin_name, 
+			'addonify_compare_ajax_object', 
 			array( 
 				'ajax_url' 	=> admin_url( 'admin-ajax.php' ), 
-				'action' 	=> 'get_compare_products_contents'
+				'action' 	=> 'get_products_thumbnails'
 			) 
 		);
 
 	}
 
-
+	
+	
+	// ajax request
 	// callback function
 	// get contents for quick view
-	public function compare_products_contents_callback(){
+	public function get_products_thumbnails_callback(){
 
-		// product id is required
-		if( ! isset( $_GET['id'] ) || ! is_numeric( $_GET['id'] ) ) wp_die( 'product id is missing' );
+		// only ajax request is allowed
+		if( ! wp_doing_ajax() ) wp_die( 'Invalid Request' );
 
-		$product_id = intval( $_GET['id'] );
-		
-		// generate contents dynamically
-		$this->generate_contents();
+		// product ids is required
+		if( ! isset( $_GET['ids'] ) ) wp_die( 'product ids are missing' );
 
-		// Set the main wp query for the product.
-		wp( 'p=' . $product_id . '&post_type=product' );
+		$product_ids = $_GET['ids'];
 
-		ob_start();
-		while ( have_posts() ) {
-			the_post();
-			$this->get_templates( 'addonify-compare-products-content' );
+		// convert into array
+		$product_ids = explode( ',', $product_ids );
+		$return_data = array();
+
+		foreach($product_ids as $id){
+			$return_data[ $id ] = get_the_post_thumbnail_url( $id, 'thumbnail' );
 		}
-		echo ob_get_clean();
-
+		
+		echo json_encode($return_data);
 		wp_die();
 
 	}

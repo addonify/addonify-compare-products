@@ -216,8 +216,8 @@ class Addonify_Compare_Products {
 
 
 		// ajax callback
-		$this->loader->add_action( 'wp_ajax_get_compare_products_contents', $plugin_public, 'compare_products_contents_callback' );
-		$this->loader->add_action( 'wp_ajax_nopriv_get_compare_products_contents', $plugin_public, 'compare_products_contents_callback' );
+		$this->loader->add_action( 'wp_ajax_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
+		$this->loader->add_action( 'wp_ajax_nopriv_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
 
 	}
 

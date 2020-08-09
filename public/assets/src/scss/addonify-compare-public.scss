@@ -1,25 +1,40 @@
-#addonify-compare-products-bottom-bar{
+#addonify-compare-footer{
     position: fixed;
     bottom: 0;
     background: rgb(41, 42, 48);
     padding: 10px;
     left: 0;
     right: 0;
+    transition: 0.4s;
 }
 
-#addonify-compare-bottom-inner{
+#addonify-compare-footer.hidden{
+    display: none;
+}
+
+#addonify-compare-footer-message{
+    float: left;
+    color: #9c9c9c;
+    padding-top: 12px;
+}
+
+#addonify-compare-footer-inner, #addonify-footer-thumbnails{
     float: right;
     overflow: hidden;
     height: 100%;
 }
 
-.addonify-cbi-components{
+#addonify-footer-thumbnails{
+    float: left;
+}
+
+.addonify-footer-components{
     float: left;
     margin-left: 10px;
 
     img{
-        height: 48px;
-        width: 48px;
+        height: 100%;
+        width: 100%;
     }
 
     button{
@@ -27,12 +42,22 @@
     }
 }
 
-.addonify-cbi-thumbnail{
+.addonify-footer-thumbnail{
     position:relative;
     cursor: pointer;
+    width: 48px;
+    height: 48px;
+    background: #3c3c3c;
+    border-radius: 2px;
 }
 
-.addonify-cbi-remove{
+.addonify-footer-thumbnail.loading{
+    background-image: url(../../images/loading-dots.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.addonify-footer-remove{
     top: 2px;
     right: 2px;
     width: 12px;
@@ -46,12 +71,12 @@
     border-radius: 1px;
 }
 
-.addonify-cbi-add{
+.addonify-footer-add{
     width: 48px;
     height: 48px;
     display: block;
     position: relative;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #3c3c3c;
     background-image: url(../../images/add.svg);
     background-size: 20px 20px;
     background-repeat: no-repeat;
@@ -59,7 +84,7 @@
     border-radius: 2px;
 }
 
-.addonify-cbi-settings{
+.addonify-footer-settings{
     width: 48px;
     height: 48px;
     display: block;
