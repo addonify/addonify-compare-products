@@ -122,8 +122,10 @@ class Addonify_Compare_Products_Public {
 			$this->plugin_name, 
 			'addonify_compare_ajax_object', 
 			array( 
-				'ajax_url' 	=> admin_url( 'admin-ajax.php' ), 
-				'action' 	=> 'get_products_thumbnails'
+				'ajax_url' 						=> admin_url( 'admin-ajax.php' ), 
+				'action_get_thumbnails' 		=> 'get_products_thumbnails',
+				'action_search_items' 			=> 'search_items',
+				'action_get_compare_contents' 	=> 'get_compare_contents'
 			) 
 		);
 
@@ -153,6 +155,69 @@ class Addonify_Compare_Products_Public {
 		}
 		
 		echo json_encode($return_data);
+		wp_die();
+
+	}
+
+
+	// ajax request
+	// callback function
+	// search for products
+	public function search_items_callback(){
+
+		// only ajax request is allowed
+		if( ! wp_doing_ajax() ) wp_die( 'Invalid Request' );
+
+		// search query is required
+		if( ! isset( $_GET['query'] )  ) wp_die( 'search query is required !' );
+		
+		$query = esc_attr($_GET['query']);
+		$items_in_cookie_ar = array();
+		$items_in_cookie = $_COOKIE['addonify_selected_product_ids'];
+
+		if( $items_in_cookie ){
+			$items_in_cookie_ar = explode(',', $items_in_cookie);
+		}
+
+		// skip products that are already in cookies
+		$wp_query = new WP_Query( array( 's' => $query, 'post__not_in' =>  $items_in_cookie_ar, 'post_type' => 'product' ) );
+
+		echo '<ul>';
+
+		if( $wp_query->have_posts() ){
+			$this->get_templates('addonify-compare-products-search-result', false, array('query' => $wp_query) );
+		}
+		else{
+			echo '<li>No results found for <strong>'. $query .' </strong></li>';
+		}
+		
+		echo '</ul>';
+		
+		wp_die();
+
+	}
+
+
+	// ajax request
+	// callback function
+	// get contents to compare
+	public function get_compare_contents_callback(){
+
+		// only ajax request is allowed
+		if( ! wp_doing_ajax() ) wp_die( 'Invalid Request' );
+
+		// product ids is required
+		if( ! isset( $_GET['ids'] ) ) wp_die( 'product ids are missing' );
+
+		$product_ids = $_GET['ids'];
+
+		// convert into array
+		// $product_ids = explode( ',', $product_ids );
+
+		ob_start();
+		$this->get_templates( 'addonify-compare-products-content' );
+		echo ob_get_clean();
+		
 		wp_die();
 
 	}
@@ -223,7 +288,7 @@ class Addonify_Compare_Products_Public {
 	// add custom markup into footer
 	public function add_markup_into_footer_callback(){
 		ob_start();
-		$this->get_templates( 'addonify-compare-products-bottom-bar' );
+		$this->get_templates( 'addonify-compare-products-wrapper' );
 		echo ob_get_clean();
 	}
 
@@ -386,52 +451,14 @@ class Addonify_Compare_Products_Public {
 	}
 
 
-	// modify woocommerce_before_shop_loop_item
-	// wrap loop in custom container
-	// works only if compare_products_btn_position == overlay_on_image
-	public function modify_woocommerce_shop_loop(){
-		
-		if( $this->compare_products_btn_position == 'overlay_on_image' ){
-
-			// start session
-			// if( ! session_id() ) session_start();
-
-			// // check if overlay_container is already created by another addonify plugin
-			$is_overlay_added = isset( $_SESSION['is_overlay_added'] ) ? $_SESSION['is_overlay_added'] : 0;
-
-			// var_dump( $is_overlay_added );
-
-
-			// if( ! $is_overlay_added ){
-
-				// create overlay container
-
-				// $_SESSION['is_overlay_added'] = 1;
-				
-				add_action ( 'woocommerce_before_shop_loop_item' ,  function (){
-					echo '<div class="addonify-qvm-overlay-button">';
-				});
-					
-				add_action ( 'woocommerce_after_shop_loop_item' ,  function (){
-					echo '</div>';
-				});
-				
-			// }
-		}
-
-	}
-
 
 	// callback function
 	// print opening tag of overlay image container
 	public function addonify_overlay_container_start_callback(){
 		
-		global $overlay_opening_tag_is_added;
-		if( $overlay_opening_tag_is_added ) return;
-
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 			$overlay_opening_tag_is_added = 1;
-			echo '<div class="addonify-qvm-overlay-button">';
+			echo '<div class="addonify-compare-overlay-button">';
 		}
 
 	}
@@ -440,9 +467,6 @@ class Addonify_Compare_Products_Public {
 	// callback function
 	// print closing tag of overlay image container
 	public function addonify_overlay_container_end_callback(){
-
-		global $overlay_closing_tag_is_added;
-		if( $overlay_closing_tag_is_added ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 			$overlay_closing_tag_is_added = 1;

@@ -7,9 +7,13 @@
 		var $footer = $('#addonify-compare-footer');
 		var $footer_thumbnail_container = $('#addonify-footer-thumbnails');
 		var $message_sel = $('#addonify-compare-footer-message');
+		var $search_modal_sel = $('#addonify-compare-search-modal');
+		var $search_result_container = $('#addonify-compare-search-results');
+		var $compare_modal_sel = $('#addonify-compare-modal');
+		var search_input_timer;
 
-		// prevent empty anchor 
-		$('#addonify-compare-products-footer-bar a').click(function(e){
+		// prevent default behavior
+		$('#addonify-compare-products-footer-bar a, button.addonify-cp-button').click(function(e){
 			e.preventDefault();
 		})	
 
@@ -18,13 +22,13 @@
 
 		
 		// add item
-		$('button.addonify-cp-button').click(function(){
+		$('body').on('click', 'button.addonify-cp-button, #addonify-compare-search-results .item-add', function(){
 
 			var product_id = $(this).data('product_id');
 
 			// product id is required
 			if( ! product_id ) return;
-			
+
 			// prevent duplicates
 			if( selected_product_ids.includes( product_id ) ) return;
 
@@ -33,11 +37,17 @@
 
 			// store product ids list into cookies, cookies will be deleted after browser close
 			Cookies.set('addonify_selected_product_ids', selected_product_ids );
+			
 
 			show_thumbnail_preloader( product_id.toString() );
 
 			// get thumbnail and dump into footer footer bar
 			get_thumbnails_from_ajax( selected_product_ids.join(',') );
+
+
+			// close modal, if it is open
+			$search_modal_sel.addClass('hidden');
+
 
 			// show footers bar 
 			if( $footer.hasClass('hidden') ){
@@ -50,7 +60,7 @@
 
 		})
 
-
+		
 		// remove item
 		$('body').on('click', 'span.addonify-footer-remove', function(){
 
@@ -77,15 +87,49 @@
 		})
 
 
-		function fetch_items_from_cookies(){
-			var items_from_cookies = Cookies.get('addonify_selected_product_ids');
-			
-			// do not continue if cookies is empty
-			if( ! items_from_cookies ) return;
 
-			// copy product ids into selected_product_ids
-			selected_product_ids = items_from_cookies.split(',');
-		}
+		// show search modal
+		$('body').on('click', '#addonify-footer-add', function(){
+			$search_modal_sel.removeClass('hidden');
+		})
+
+
+		// close search modal
+		$('body').on('click', '#addonify-compare-search-close-button', function(){
+			$search_modal_sel.addClass('hidden');
+		})
+
+
+		// on search
+		$('body').on('keyup', '#addonify-compare-search-query', function(){
+
+			var query = $(this).val();
+
+			clearTimeout(search_input_timer);
+			search_input_timer = setTimeout(function () {
+				// ajax search
+				search_items_ajax( query );
+			}, 500);
+
+		})
+
+
+		// show compare modal
+		$('body').on('click', '#addonify-footer-compare-btn', function(){
+			$compare_modal_sel.removeClass('hidden');
+			get_compare_contents_ajax( selected_product_ids.join(',') );
+		})
+
+
+		// close compare modal
+		$('body').on('click', '#addonify-compare-close-button', function(){
+			$compare_modal_sel.addClass('hidden');
+		})
+
+		
+
+
+		// --------------------------------------------------------------------------------------
 
 
 		function init(){
@@ -115,13 +159,27 @@
 		}
 
 
+		function fetch_items_from_cookies(){
+			var items_from_cookies = Cookies.get('addonify_selected_product_ids');
+
+			// do not continue if cookies is empty
+			if( ! items_from_cookies ) return;
+
+			// generate selected_product_ids from cookies
+			selected_product_ids = $.map( items_from_cookies.split(','), function(value){
+				return parseInt(value);
+			});
+
+		}
+
+
 		function get_thumbnails_from_ajax(product_ids){
 
 			// do not continue if product ids is empty
 			if( ! product_ids.length ) return;
 
 			var data = {
-                'action': addonify_compare_ajax_object.action,
+                'action': addonify_compare_ajax_object.action_get_thumbnails,
                 'ids': product_ids
             };
 	
@@ -157,6 +215,43 @@
 			else{
 				$message_sel.fadeIn();
 			}
+		}
+
+
+		function search_items_ajax(query){
+
+			// do not continue if cookies is empty
+			if( ! query.length ) return;
+
+			// show loading animation
+			$search_result_container.html('').addClass('loading');
+
+			var data = {
+                'action': addonify_compare_ajax_object.action_search_items,
+                'query': query
+            };
+	
+            $.get(addonify_compare_ajax_object.ajax_url, data, function( response ) {
+				$search_result_container.removeClass('loading').html( response );
+            })
+
+		}
+
+
+		function get_compare_contents_ajax(product_ids){
+
+			// do not continue if product ids is empty
+			if( ! product_ids ) return;
+
+			var data = {
+                'action': addonify_compare_ajax_object.action_get_compare_contents,
+                'ids': product_ids
+            };
+	
+            $.get(addonify_compare_ajax_object.ajax_url, data, function(response) {
+				$('#addonify-compare-modal-content').html(response);
+            })
+
 		}
 
 
