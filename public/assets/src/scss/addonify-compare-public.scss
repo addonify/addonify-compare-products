@@ -2,6 +2,10 @@ $bck_color: rgb(41, 42, 48);
 $padding: 15px;
 $thumbnail_height : 48px;
 
+button.addonify-cp-button.selected{
+    border: solid 2px #000;
+}
+
 #addonify-compare-footer{
     position: fixed;
     bottom: 0;
@@ -11,10 +15,17 @@ $thumbnail_height : 48px;
     right: 0;
     transition: 0.4s;
     z-index: 9999991;
+    display: none;
 }
 
 .hidden{
     display: none;
+}
+
+body.addonify-compare-footer-is-visible{
+    #addonify-compare-footer{
+        display: block;
+    }
 }
 
 #addonify-compare-footer-message{

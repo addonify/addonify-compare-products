@@ -214,8 +214,10 @@ class Addonify_Compare_Products_Public {
 		// convert into array
 		// $product_ids = explode( ',', $product_ids );
 
+		$compare_data = $this->generate_contents_data();
+
 		ob_start();
-		$this->get_templates( 'addonify-compare-products-content' );
+		$this->get_templates( 'addonify-compare-products-content', true, array( 'data' => $compare_data ) );
 		echo ob_get_clean();
 		
 		wp_die();
@@ -395,61 +397,102 @@ class Addonify_Compare_Products_Public {
 
 	// generate contents dynamically to modal templates with hooks
 	// called by get_compare_products_contents()
-	private function generate_contents() {
+	private function generate_contents_data() {
 
-		return;
+		$selected_product_ids = array();
+		$selected_products_data = array();
 		
-		// Show Hide Image according to user choices 
-		if( (int) $this->get_db_values( 'show_product_image' ) ) {
+		$cookie_name = 'addonify_selected_product_ids';
 
-			// show or hide gallery thumbnails according to user choice
-			if( $this->get_db_values( 'product_image_display_type' ) == 'image_only' ) {
-				$this->disable_gallery_thumbnails();
+		if ( isset( $_COOKIE[ $cookie_name ] ) && ! empty( $_COOKIE[ $cookie_name ] ) ) {
+			$selected_product_ids = explode( ',', $_COOKIE[ $cookie_name ] );
+		}
+
+
+		if ( is_array( $selected_product_ids ) && ( count( $selected_product_ids ) > 0 ) ) {
+
+			foreach ( $selected_product_ids as $product_id ) {
+
+				$product = wc_get_product( $product_id );
+				$parent_product = false;
+
+				if ( ! $product )  continue;
+
+				if ( $product->is_type( 'variation' ) ) {
+					$parent_product = wc_get_product( $product->get_parent_id() );
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_title' ) ) {
+					$selected_products_data['title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>';
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_image' ) ) {
+					$selected_products_data['Image'][] =  '<a href="' . $product->get_permalink() . '" >' . $product->get_image( get_option( '_wooscp_image_size', 'wooscp-large' ), array( 'draggable' => 'false' ) ) . '</a>';
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_price' ) ) {
+					$selected_products_data['Price'][] =  $product->get_price_html();
+				}
+
+
+				if( (int) $this->get_db_values( 'show_stock_info' ) ) {
+					$selected_products_data['Stock'][] =  wc_get_stock_html( $product );
+				}
+
+
+				if( (int) $this->get_db_values( 'show_add_to_cart_btn' ) ) {
+					$selected_products_data['Add To Cart'][] =   do_shortcode( '[add_to_cart id="' . $product_id . '" show_price="false" style="" ]' );
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_excerpt' ) ) {
+					if ( $product->is_type( 'variation' ) ) {
+						$selected_products_data['Description'][] =  $product->get_description();
+					} else {
+						$selected_products_data['Description'][] =  $product->get_short_description();
+					}
+				}
+
+
+				if( (int) $this->get_db_values( 'show_attributes' ) ) {
+
+					ob_start();
+						wc_display_product_attributes( $product );
+						$additional = ob_get_contents();
+					ob_end_clean();
+
+					$selected_products_data['Attributes'][] =  $additional;
+
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_rating' ) ) {
+					$selected_products_data['Rating'][] =  wc_get_rating_html( $product->get_average_rating() );
+				}
+
+			}
+
+		}
+
+		// craete atleast 3 <td> in frontend table
+		foreach( $selected_products_data as $key => $value){
+
+			if( count( $selected_products_data[$key] ) === 1){
+				$selected_products_data[$key][] = '';
+				$selected_products_data[$key][] = '';
+			}
+			if( count( $selected_products_data[$key] ) === 2){
+				$selected_products_data[$key][] = '';
 			}
 			
-			// show images
-			add_action( 'addonify_cp_product_image', 'woocommerce_show_product_sale_flash', 10 );
-			add_action( 'addonify_cp_product_image', 'woocommerce_show_product_images', 20 );
-			
 		}
-
-		// show or hide title
-		if( (int) $this->get_db_values( 'show_product_title' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_title', 5 );
-		}
-
-		// show or hide product ratings
-		if( (int) $this->get_db_values( 'show_product_rating' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_rating', 10 );
-		}
-
-		// show or hide price
-		if( (int) $this->get_db_values( 'show_product_price' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_price', 15 );
-		}
-
-		// show or hide excerpt
-		if( (int) $this->get_db_values( 'show_product_excerpt' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_excerpt', 20 );
-		}
-
-		// show or hide add to cart button
-		if( (int) $this->get_db_values( 'show_add_to_cart_btn' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
-		}
-
-		// show or hide product meta
-		if( (int) $this->get_db_values( 'show_product_meta' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_meta', 30 );
-		}
-
-		// show  or hide view details button
-		if( (int) $this->get_db_values( 'show_view_detail_btn' ) && $this->get_db_values( 'view_detail_btn_label' ) ) {
-			add_action( 'addonify_cp_after_product_summary_content', array($this, 'view_details_btn_callback') );
-		}
+	
+		return $selected_products_data;
 
 	}
-
 
 
 	// callback function

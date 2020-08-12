@@ -63,7 +63,7 @@
             </svg>
         </button>
 
-        <div id="addonify-compare-modal-content"></div>
+        <div id="addonify-compare-modal-content" style="height: 100%; overflow: scroll;"></div>
 
     </div>
 </div>
