@@ -3,7 +3,7 @@
 ?>
 
 <div id="addonify-compare-footer" class="hidden">
-    <div id="addonify-compare-footer-message">Select atleast 2 items to compare</div>
+    <div id="addonify-compare-footer-message">Please select 1 more item to compare</div>
 
     <div id="addonify-compare-footer-inner">
 
@@ -30,7 +30,7 @@
 <div id="addonify-compare-search-modal" class="hidden" >
     <div class="addonify-compare-search-model-inner">
 
-        <button id="addonify-compare-search-close-button">
+        <button id="addonify-compare-search-close-button" class="addonify-compare-all-close-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -55,7 +55,7 @@
 <div id="addonify-compare-modal" class="hidden" >
     <div class="addonify-compare-model-inner">
 
-        <button id="addonify-compare-close-button" >
+        <button id="addonify-compare-close-button" class="addonify-compare-all-close-btn" >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>

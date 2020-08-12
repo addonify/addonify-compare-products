@@ -17,6 +17,11 @@
 		var first_boot = true;
 
 
+		$( "#addonify-footer-thumbnails" ).sortable({
+			stop: function() { get_selected_product_ids_from_dom(); }
+		}).disableSelection();
+
+
 		// prevent default behavior
 		$('#addonify-compare-products-footer-bar a, button.addonify-cp-button').click(function(e){
 			e.preventDefault();
@@ -353,6 +358,18 @@
 		function close_compare_modal(){
 			$compare_modal_sel.addClass('hidden');
 			compare_modal_is_open = false;
+		}
+
+		
+		function get_selected_product_ids_from_dom(){
+			selected_product_ids = [];
+
+			$footer_thumbnail_container.find('.addonify-footer-components').each(function(){
+				selected_product_ids.push( $(this).data('product_id') );
+			});
+
+			selected_items_has_changed = true;
+
 		}
 
 	})

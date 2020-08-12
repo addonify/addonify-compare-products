@@ -7,7 +7,7 @@
                 echo '<tr>';
                 if($key == 'title'){
                     echo '<th></th>';
-                    foreach($value as $data){
+                    foreach($value as $key1 => $data){
                         echo '<th>' . $data . '</th>';
                     }
                 }
@@ -22,8 +22,8 @@
                 echo '<tr>';
                 if($key != 'title'){
                     echo '<td>' . $key . '</td>';
-                    foreach($value as $data){
-                        echo '<td>' . $data . '</td>';
+                    foreach($value as $key1 => $data){
+                        echo '<td  class="'. ( ( ! is_numeric( $key1 ) ? $key1 : '' ) ) .'" >' . $data . '</td>';
                     }
                 }
                 echo '</tr>';

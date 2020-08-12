@@ -2,6 +2,7 @@ $bck_color: rgb(41, 42, 48);
 $padding: 15px;
 $thumbnail_height : 48px;
 
+
 button.addonify-cp-button.selected{
     border: solid 2px #000;
 }
@@ -60,11 +61,17 @@ body.addonify-compare-footer-is-visible{
 
 .addonify-footer-thumbnail{
     position:relative;
-    cursor: pointer;
+    cursor: move;
     width: $thumbnail_height;
     height: $thumbnail_height;
     background: #3c3c3c;
     border-radius: 2px;
+
+    &:hover{
+        .addonify-footer-remove{
+            display: block;
+        }
+    }
 }
 
 .addonify-footer-thumbnail.loading{
@@ -74,6 +81,8 @@ body.addonify-compare-footer-is-visible{
 }
 
 .addonify-footer-remove{
+    display: none;
+    cursor: pointer;
     top: 2px;
     right: 2px;
     width: 12px;
@@ -262,4 +271,13 @@ body.addonify-compare-footer-is-visible{
     right: 0;
     top: 0;
     z-index: 99;
+}
+
+
+
+// compare table contents
+#addonofy-compare-products-table{
+    td{
+        width: 25%;
+    }
 }
