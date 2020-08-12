@@ -1,15 +1,32 @@
+$bck_color: rgb(41, 42, 48);
+$padding: 15px;
+$thumbnail_height : 48px;
+
+
+button.addonify-cp-button.selected{
+    border: solid 2px #000;
+}
+
 #addonify-compare-footer{
     position: fixed;
     bottom: 0;
-    background: rgb(41, 42, 48);
-    padding: 10px;
+    background: $bck_color;
+    padding: $padding;
     left: 0;
     right: 0;
     transition: 0.4s;
+    z-index: 9999991;
+    display: none;
 }
 
-#addonify-compare-footer.hidden{
+.hidden{
     display: none;
+}
+
+body.addonify-compare-footer-is-visible{
+    #addonify-compare-footer{
+        display: block;
+    }
 }
 
 #addonify-compare-footer-message{
@@ -38,17 +55,23 @@
     }
 
     button{
-        height: 48px;
+        height: $thumbnail_height;
     }
 }
 
 .addonify-footer-thumbnail{
     position:relative;
-    cursor: pointer;
-    width: 48px;
-    height: 48px;
+    cursor: move;
+    width: $thumbnail_height;
+    height: $thumbnail_height;
     background: #3c3c3c;
     border-radius: 2px;
+
+    &:hover{
+        .addonify-footer-remove{
+            display: block;
+        }
+    }
 }
 
 .addonify-footer-thumbnail.loading{
@@ -58,6 +81,8 @@
 }
 
 .addonify-footer-remove{
+    display: none;
+    cursor: pointer;
     top: 2px;
     right: 2px;
     width: 12px;
@@ -71,9 +96,9 @@
     border-radius: 1px;
 }
 
-.addonify-footer-add{
-    width: 48px;
-    height: 48px;
+#addonify-footer-add{
+    width: $thumbnail_height;
+    height: $thumbnail_height;
     display: block;
     position: relative;
     background-color: #3c3c3c;
@@ -85,8 +110,8 @@
 }
 
 .addonify-footer-settings{
-    width: 48px;
-    height: 48px;
+    width: $thumbnail_height;
+    height: $thumbnail_height;
     display: block;
     position: relative;
     cursor: pointer;
@@ -96,4 +121,163 @@
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 2px;
+}
+
+
+// search modal
+#addonify-compare-search-modal{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: #{$bck_color}ed;
+    z-index: 9999991;
+}
+
+.addonify-compare-search-model-inner{
+    width: 360px;
+    height: 400px;
+
+    // height: calc(100vh - ( #{$thumbnail_height} + #{$padding} + #{$padding} ) - #{$padding} );
+
+    background: #fff;
+    margin: calc( (100vh - 400px - ( #{$thumbnail_height} + #{$padding} + #{$padding} ) ) / 2 ) auto 0;
+    position: relative;
+    border-radius: 3px;
+}
+
+.addonify-compare-search-head{
+    position: relative;
+}
+
+#addonify-compare-search-close-button{
+    position: absolute;
+    right: 0;
+    top: -30px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+    font-weight: 400;
+    border-radius: 100%;
+    background: none;
+    border: 0;
+    padding: 0;
+    color: #fff;
+}
+
+.addonify-compare-search-modal-content{
+    padding: 15px;
+}
+
+#addonify-compare-search-query{
+    width: 100%;
+    border: solid 1px #000;
+    padding: 10px;
+    font-size: 16px;
+}
+
+
+#addonify-compare-search-results{
+    padding-top: 15px;
+    overflow-y: auto;
+    height: 328px;
+
+
+    &.loading{
+        background: url( ../../images/search.gif) no-repeat center;
+        min-height: 325px;
+    }
+
+    ul{
+        margin: 0;
+        padding: 0;
+    }
+
+    li{
+        list-style: none;
+        overflow: hidden;
+        border-bottom: solid 1px #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    li:last-child{
+        border-bottom: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+
+    .item{
+        img.item-image{
+            width: 48px;
+            height: 48px;
+            border-radius: 2px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        .item-name{
+            font-size: 18px;
+            padding-top: 11px;
+            float: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .item-add{
+            text-align: center;
+            float: right;
+            width: 32px;
+            height: 32px;
+            margin-top: 8px;
+            text-align: center;
+            color: #222;
+            background-color: #f2f2f2;
+            cursor: pointer;
+
+            span{
+                line-height: 31px;
+            }
+        }
+    }
+}
+
+
+
+// main display modal
+#addonify-compare-modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: $bck_color;
+    z-index: 999999;
+}
+
+.addonify-compare-model-inner{
+    width: calc( 100% - ( #{$padding} + #{$padding} ) );
+    height: calc(100vh - ( #{$thumbnail_height} + #{$padding} + #{$padding} ) - #{$padding} );
+    margin: $padding auto 0;
+    background: #fff;
+    position: relative;
+}
+
+#addonify-compare-close-button{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 99;
+}
+
+
+
+// compare table contents
+#addonofy-compare-products-table{
+    td{
+        width: 25%;
+    }
 }

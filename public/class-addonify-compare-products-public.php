@@ -112,18 +112,21 @@ class Addonify_Compare_Products_Public {
 		// required min version wordpress 4.9.0
 		wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery' ), $this->version, false );
-
 		// js cookie
 		wp_enqueue_script( 'js-cookie', '//cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js', array('jquery'), $this->version, true );
+
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery', 'jquery-ui-sortable' ), $this->version, false );
+
 
 		// localize ajax script
 		wp_localize_script( 
 			$this->plugin_name, 
 			'addonify_compare_ajax_object', 
 			array( 
-				'ajax_url' 	=> admin_url( 'admin-ajax.php' ), 
-				'action' 	=> 'get_products_thumbnails'
+				'ajax_url' 						=> admin_url( 'admin-ajax.php' ), 
+				'action_get_thumbnails' 		=> 'get_products_thumbnails',
+				'action_search_items' 			=> 'search_items',
+				'action_get_compare_contents' 	=> 'get_compare_contents'
 			) 
 		);
 
@@ -153,6 +156,67 @@ class Addonify_Compare_Products_Public {
 		}
 		
 		echo json_encode($return_data);
+		wp_die();
+
+	}
+
+
+	// ajax request
+	// callback function
+	// search for products
+	public function search_items_callback(){
+
+		// only ajax request is allowed
+		if( ! wp_doing_ajax() ) wp_die( 'Invalid Request' );
+
+		// search query is required
+		if( ! isset( $_GET['query'] )  ) wp_die( 'search query is required !' );
+		
+		$query = esc_attr($_GET['query']);
+		$items_in_cookie_ar = array();
+		$items_in_cookie = $_COOKIE['addonify_selected_product_ids'];
+
+		if( $items_in_cookie ){
+			$items_in_cookie_ar = explode(',', $items_in_cookie);
+		}
+
+		// skip products that are already in cookies
+		$wp_query = new WP_Query( array( 's' => $query, 'post__not_in' =>  $items_in_cookie_ar, 'post_type' => 'product' ) );
+
+		echo '<ul>';
+
+		if( $wp_query->have_posts() ){
+			$this->get_templates('addonify-compare-products-search-result', false, array('query' => $wp_query) );
+		}
+		else{
+			echo '<li>No results found for <strong>'. $query .' </strong></li>';
+		}
+		
+		echo '</ul>';
+		
+		wp_die();
+
+	}
+
+
+	// ajax request
+	// callback function
+	// get contents to compare
+	public function get_compare_contents_callback(){
+
+		// only ajax request is allowed
+		if( ! wp_doing_ajax() ) wp_die( 'Invalid Request' );
+
+		// product ids is required
+		if( ! isset( $_GET['ids'] ) ) wp_die( 'product ids are missing' );
+
+		$product_ids = explode( ',', $_GET['ids'] );
+		$compare_data = $this->generate_contents_data( $product_ids );
+
+		ob_start();
+		$this->get_templates( 'addonify-compare-products-content', true, array( 'data' => $compare_data ) );
+		echo ob_get_clean();
+		
 		wp_die();
 
 	}
@@ -223,7 +287,7 @@ class Addonify_Compare_Products_Public {
 	// add custom markup into footer
 	public function add_markup_into_footer_callback(){
 		ob_start();
-		$this->get_templates( 'addonify-compare-products-bottom-bar' );
+		$this->get_templates( 'addonify-compare-products-wrapper' );
 		echo ob_get_clean();
 	}
 
@@ -232,67 +296,51 @@ class Addonify_Compare_Products_Public {
 	// generate style tag according to options selected by user
 	public function generate_custom_styles_callback(){
 
-		return;
-
-		$load_styles_from_plugin = $this->get_db_values( 'load_styles_from_plugin', 1 );
+		$load_styles_from_plugin = $this->get_db_values( 'load_styles_from_plugin', 0 );
 
 		// do not continue if plugin styles are disabled by user
 		if( ! $load_styles_from_plugin ) return;
+
+
+		// add table styles into body class
+		add_filter( 'body_class', function( $classes ) {
+			return array_merge( $classes, array( 'addonify-compare-table-style-' . $this->get_db_values('table_style') ) );
+		} );
+
+
+
+		// generate style markups
 
 		$custom_css = $this->get_db_values('custom_css');
 		$custom_styles_output = '';
 
 		$style_args = array(
-			'.adfy-compare-products-overlay' => array(
+			'button.addonify-cp-button' => array(
+				'background' 	=> 'compare_btn_bck_color',
+				'color' 		=> 'compare_btn_text_color'
+			),
+			'#addonify-compare-modal, #addonify-compare-search-modal' => array(
 				'background' 	=> 'modal_overlay_bck_color'
 			),
-			'.adfy-compare-products-modal-content' => array(
+			'.addonify-compare-model-inner, .addonify-compare-search-model-inner' => array(
 				'background' 	=> 'modal_bck_color',
 			),
-			'.adfy-compare-products-modal-content .entry-title' => array(
-				'color'		 	=> 'title_color',
+			'#addonofy-compare-products-table th a' => array(
+				'color'		 	=> 'table_title_color',
 			),
-			'.star-rating::before' => array(
-				'color'		 	=> 'rating_color_empty',
-			),
-			'.star-rating span::before' => array(
-				'color'		 	=> 'rating_color_full',
-			),
-			'.adfy-compare-products-modal-content .price' => array(
-				'color' 		=> 'price_color_regular',
-			),
-			'.adfy-compare-products-modal-content .price.del' => array(
-				'background' 	=> 'price_color_sale',
-			),
-			'.adfy-compare-products-modal-content .woocommerce-product-details__short-description' => array(
-				'color' 		=> 'excerpt_color',
-			),
-			'.adfy-compare-products-modal-content .product_meta' => array(
-				'color' 		=> 'meta_color',
-			),
-			'.adfy-compare-products-modal-content .product_meta a:hover' => array(
-				'color' 		=> 'meta_color_hover',
-			),
-			'#addonify-qvm-close-button svg' => array(
+			'.addonify-compare-all-close-btn svg' => array(
 				'color' 		=> 'close_btn_text_color',
 			),
-			'#addonify-qvm-close-button' => array(
+			'.addonify-compare-all-close-btn' => array(
 				'background'	=> 'close_btn_bck_color',
 			),
-			'#addonify-qvm-close-button:hover svg' => array(
+			'.addonify-compare-all-close-btn:hover svg' => array(
 				'color'		 	=> 'close_btn_text_color_hover',
 			),
-			'#addonify-qvm-close-button:hover' => array(
+			'.addonify-compare-all-close-btn:hover' => array(
 				'background' 	=> 'close_btn_bck_color_hover',
 			),
-			'.adfy-compare-products-modal-content button, .adfy-compare-products-modal-content .button' => array(
-				'background' 	=> 'other_btn_bck_color',
-				'color' 		=> 'other_btn_text_color',
-			),
-			'.adfy-compare-products-modal-content button:hover, .adfy-compare-products-modal-content .button:hover' => array(
-				'background' 	=> 'other_btn_bck_color_hover',
-				'color'		 	=> 'other_btn_text_color_hover',
-			),
+			
 		);
 
 		foreach($style_args as $css_sel => $property_value){
@@ -330,94 +378,102 @@ class Addonify_Compare_Products_Public {
 
 	// generate contents dynamically to modal templates with hooks
 	// called by get_compare_products_contents()
-	private function generate_contents() {
+	private function generate_contents_data( $selected_product_ids ) {
 
-		return;
-		
-		// Show Hide Image according to user choices 
-		if( (int) $this->get_db_values( 'show_product_image' ) ) {
+		$selected_products_data = array();
+		$cookie_name = 'addonify_selected_product_ids';
 
-			// show or hide gallery thumbnails according to user choice
-			if( $this->get_db_values( 'product_image_display_type' ) == 'image_only' ) {
-				$this->disable_gallery_thumbnails();
+		if ( is_array( $selected_product_ids ) && ( count( $selected_product_ids ) > 0 ) ) {
+
+			foreach ( $selected_product_ids as $product_id ) {
+
+				$product = wc_get_product( $product_id );
+				$parent_product = false;
+
+				if ( ! $product )  continue;
+
+				if ( $product->is_type( 'variation' ) ) {
+					$parent_product = wc_get_product( $product->get_parent_id() );
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_title' ) ) {
+					$selected_products_data['title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>';
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_image' ) ) {
+					$selected_products_data['Image'][] =  '<a href="' . $product->get_permalink() . '" >' . $product->get_image( get_option( '_wooscp_image_size', 'wooscp-large' ), array( 'draggable' => 'false' ) ) . '</a>';
+				}
+
+
+				if( (int) $this->get_db_values( 'show_product_price' ) ) {
+					$selected_products_data['Price'][] =  $product->get_price_html();
+				}
+
+				if( (int) $this->get_db_values( 'show_product_excerpt' ) ) {
+					if ( $product->is_type( 'variation' ) ) {
+						$selected_products_data['Description'][] =  $product->get_description();
+					} else {
+						$selected_products_data['Description'][] =  $product->get_short_description();
+					}
+				}
+
+				if( (int) $this->get_db_values( 'show_product_rating' ) ) {
+					$selected_products_data['Rating'][] =  wc_get_rating_html( $product->get_average_rating() );
+				}
+
+
+				if( (int) $this->get_db_values( 'show_stock_info' ) ) {
+					$selected_products_data['Stock'][] =  wc_get_stock_html( $product );
+				}			
+
+
+				if( (int) $this->get_db_values( 'show_attributes' ) ) {
+
+					ob_start();
+						wc_display_product_attributes( $product );
+						$additional = ob_get_contents();
+					ob_end_clean();
+
+					$selected_products_data['Attributes'][] =  $additional;
+
+				}
+
+
+				if( (int) $this->get_db_values( 'show_add_to_cart_btn' ) ) {
+					$selected_products_data['Add To Cart'][] =   do_shortcode( '[add_to_cart id="' . $product_id . '" show_price="false" style="" ]' );
+				}
+
+			}
+
+		}
+
+		// craete atleast 3 <td> in frontend table
+		foreach( $selected_products_data as $key => $value){
+
+			if( $key == 'Image' ){
+				$key_placeholder = 'placeholder-image';
+			}
+			else{
+				$key_placeholder = 'placeholder-default';
+			}
+
+			if( count( $selected_products_data[$key] ) === 1){
+				$selected_products_data[$key][$key_placeholder . ' ' . $key_placeholder .'-1'] = '';
+				$selected_products_data[$key][$key_placeholder . ' ' . $key_placeholder .'-2'] = '';
+			}
+			if( count( $selected_products_data[$key] ) === 2){
+				$selected_products_data[$key][$key_placeholder] = '';
 			}
 			
-			// show images
-			add_action( 'addonify_cp_product_image', 'woocommerce_show_product_sale_flash', 10 );
-			add_action( 'addonify_cp_product_image', 'woocommerce_show_product_images', 20 );
-			
 		}
 
-		// show or hide title
-		if( (int) $this->get_db_values( 'show_product_title' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_title', 5 );
-		}
-
-		// show or hide product ratings
-		if( (int) $this->get_db_values( 'show_product_rating' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_rating', 10 );
-		}
-
-		// show or hide price
-		if( (int) $this->get_db_values( 'show_product_price' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_price', 15 );
-		}
-
-		// show or hide excerpt
-		if( (int) $this->get_db_values( 'show_product_excerpt' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_excerpt', 20 );
-		}
-
-		// show or hide add to cart button
-		if( (int) $this->get_db_values( 'show_add_to_cart_btn' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_add_to_cart', 25 );
-		}
-
-		// show or hide product meta
-		if( (int) $this->get_db_values( 'show_product_meta' ) ) {
-			add_action( 'addonify_cp_product_summary', 'woocommerce_template_single_meta', 30 );
-		}
-
-		// show  or hide view details button
-		if( (int) $this->get_db_values( 'show_view_detail_btn' ) && $this->get_db_values( 'view_detail_btn_label' ) ) {
-			add_action( 'addonify_cp_after_product_summary_content', array($this, 'view_details_btn_callback') );
-		}
-
-	}
-
-
-	// modify woocommerce_before_shop_loop_item
-	// wrap loop in custom container
-	// works only if compare_products_btn_position == overlay_on_image
-	public function modify_woocommerce_shop_loop(){
-		
-		if( $this->compare_products_btn_position == 'overlay_on_image' ){
-
-			// start session
-			// if( ! session_id() ) session_start();
-
-			// // check if overlay_container is already created by another addonify plugin
-			$is_overlay_added = isset( $_SESSION['is_overlay_added'] ) ? $_SESSION['is_overlay_added'] : 0;
-
-			// var_dump( $is_overlay_added );
-
-
-			// if( ! $is_overlay_added ){
-
-				// create overlay container
-
-				// $_SESSION['is_overlay_added'] = 1;
-				
-				add_action ( 'woocommerce_before_shop_loop_item' ,  function (){
-					echo '<div class="addonify-qvm-overlay-button">';
-				});
-					
-				add_action ( 'woocommerce_after_shop_loop_item' ,  function (){
-					echo '</div>';
-				});
-				
-			// }
-		}
+		// echo '<pre>';
+		// var_dump( $selected_products_data );
+		// die;
+	
+		return $selected_products_data;
 
 	}
 
@@ -426,12 +482,9 @@ class Addonify_Compare_Products_Public {
 	// print opening tag of overlay image container
 	public function addonify_overlay_container_start_callback(){
 		
-		global $overlay_opening_tag_is_added;
-		if( $overlay_opening_tag_is_added ) return;
-
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 			$overlay_opening_tag_is_added = 1;
-			echo '<div class="addonify-qvm-overlay-button">';
+			echo '<div class="addonify-compare-overlay-button">';
 		}
 
 	}
@@ -440,9 +493,6 @@ class Addonify_Compare_Products_Public {
 	// callback function
 	// print closing tag of overlay image container
 	public function addonify_overlay_container_end_callback(){
-
-		global $overlay_closing_tag_is_added;
-		if( $overlay_closing_tag_is_added ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 			$overlay_closing_tag_is_added = 1;
@@ -450,8 +500,6 @@ class Addonify_Compare_Products_Public {
 		}
 
 	}
-
-
 
 	// require proper templates for use in front end
 	private function get_templates( $template_name, $require_once = true, $args = array() ){

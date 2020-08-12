@@ -216,8 +216,18 @@ class Addonify_Compare_Products {
 
 
 		// ajax callback
+
+		// get product thumbnails
 		$this->loader->add_action( 'wp_ajax_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
 		$this->loader->add_action( 'wp_ajax_nopriv_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
+
+		// search items
+		$this->loader->add_action( 'wp_ajax_search_items', $plugin_public, 'search_items_callback' );
+		$this->loader->add_action( 'wp_ajax_nopriv_search_items', $plugin_public, 'search_items_callback' );
+
+		// get compare contents
+		$this->loader->add_action( 'wp_ajax_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
+		$this->loader->add_action( 'wp_ajax_nopriv_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
 
 	}
 
