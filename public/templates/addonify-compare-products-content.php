@@ -1,33 +1,35 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
 
-<table id="addonofy-compare-products-table">
-    <thead>
-        <?php
-            foreach($args['data'] as $key => $value){
-                echo '<tr>';
-                if($key == 'title'){
-                    echo '<th></th>';
-                    foreach($value as $key1 => $data){
-                        echo '<th>' . $data . '</th>';
+<div id="addonofy-compare-products-table-wrapper" >
+    <table id="addonofy-compare-products-table">
+        <thead>
+            <?php
+                foreach($data['data'] as $key => $value){
+                    echo '<tr>';
+                    if($key == 'title'){
+                        echo '<th></th>';
+                        foreach($value as $key1 => $value1){
+                            echo '<th>' . $value1 . '</th>';
+                        }
                     }
+                    echo '</tr>';
+                    break;
                 }
-                echo '</tr>';
-                break;
-            }
-        ?>
-    </thead>
-    <tbody>
-        <?php
-            foreach($args['data'] as $key => $value){
-                echo '<tr>';
-                if($key != 'title'){
-                    echo '<td>' . $key . '</td>';
-                    foreach($value as $key1 => $data){
-                        echo '<td  class="'. ( ( ! is_numeric( $key1 ) ? $key1 : '' ) ) .'" >' . $data . '</td>';
+            ?>
+        </thead>
+        <tbody>
+            <?php
+                foreach($data['data'] as $key => $value){
+                    echo '<tr>';
+                    if($key != 'title'){
+                        echo '<td>' . $key . '</td>';
+                        foreach($value as $key1 => $value1){
+                            echo '<td  class="'. ( ( ! is_numeric( $key1 ) ? $key1 : '' ) ) .'" >' . $value1 . '</td>';
+                        }
                     }
+                    echo '</tr>';
                 }
-                echo '</tr>';
-            }
-        ?>
-    </tbody>
-</table>
+            ?>
+        </tbody>
+    </table>
+</div>

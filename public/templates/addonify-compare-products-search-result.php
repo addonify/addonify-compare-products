@@ -3,7 +3,7 @@
     // direct access is disabled
     defined( 'ABSPATH' ) || exit;
 
-    $wp_query = $args['query'];
+    $wp_query = $data['query'];
     while($wp_query->have_posts()):
         $wp_query->the_post();
 ?>
