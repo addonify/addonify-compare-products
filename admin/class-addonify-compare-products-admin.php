@@ -49,6 +49,7 @@ class Addonify_Compare_Products_Admin {
 	 */
 	 private $settings_page_slug = 'addonify_compare_products';
 
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -139,6 +140,8 @@ class Addonify_Compare_Products_Admin {
 
 	}
 
+
+	
 	// check if woocommerce is active
 	private function is_woocommerce_active() {
 		if ( class_exists( 'woocommerce' ) )  return true; 
@@ -283,7 +286,7 @@ class Addonify_Compare_Products_Admin {
 						array(
 							'name'			 	=> ADDONIFY_CP_DB_INITIALS . 'compare_products_cookie_expires', 
 							'options' 			=> array(
-								'none' 			=> __('After Browser Close', 'addonify-compare-products' ),
+								'browser' 		=> __('After Browser Close', 'addonify-compare-products' ),
 								'1'				=> __('1 Day', 'addonify-compare-products' ),
 								'7'				=> __('1 Week', 'addonify-compare-products' ),
 								'14'			=> __('2 Weeks', 'addonify-compare-products' ),
@@ -313,18 +316,6 @@ class Addonify_Compare_Products_Admin {
 			'section_callback'		=> '',
 			'screen'				=> $this->settings_page_slug.'-settings-table-options',
 			'fields'				=> array(
-				array(
-					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'table_title',
-					'field_label'			=> __('Table Title', 'addonify-compare-products' ),
-					'field_callback'		=> array($this, "text_box"),
-					'field_callback_args'	=> array( 
-						array(
-							'name' 				=> ADDONIFY_CP_DB_INITIALS . 'table_title', 
-							'default'			=> __('Compare Products', 'addonify-compare-products' ),
-							'sanitize_callback'	=> 'sanitize_text_field'
-						),
-					),
-				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'fields_to_compare',
 					'field_label'			=> __('Fields To Compare', 'addonify-compare-products' ),
@@ -549,13 +540,14 @@ class Addonify_Compare_Products_Admin {
 
 		// create settings fields
 		$this->create_settings( $settings_args );
+
 		
 	}
 
 
 	// this function will create settings section, fields and register that settings in a database
 	private function create_settings($args){
-		
+
 		// define section ---------------------------
 		add_settings_section($args['section_id'], $args['section_label'], $args['section_callback'], $args['screen'] );
 
@@ -568,9 +560,11 @@ class Addonify_Compare_Products_Admin {
 				register_setting( $args['settings_group_name'],  $sub_field['name'], array(
         			'sanitize_callback' => $sub_field['sanitize_callback']
 				));
+
 			}
 
 		}
+
 		
 	}
 
@@ -651,21 +645,6 @@ class Addonify_Compare_Products_Admin {
 		}
 	}
 
-	// public function get_all_pages_to_select_field($arguments){
-
-	// 	$pages_ar = array();
-	// 	$pages = get_pages(); 
-
-	// 	foreach ( $pages as $page ) {
-	// 		$pages_ar[ $page->ID ] = $page->post_title;
-	// 	}
-
-	// 	$arguments[0]['options'] = $pages_ar;
-
-	// 	$this->select($arguments);
-	// }
-
-
 
 	// callback function
 	// show notification after form submission
@@ -677,7 +656,7 @@ class Addonify_Compare_Products_Admin {
 
 
 
-	// callback
+	// callback function
 	// show error message in dashboard if woocommerce is not active
 	public function addonify_cp_show_woocommerce_not_active_notice_callback(){
 

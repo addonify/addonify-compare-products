@@ -83,12 +83,14 @@ class Addonify_Compare_Products_Public {
 
 		if( ! is_admin() ){
 
-			$this->show_compare_btn = (int) $this->get_db_values('enable_compare_products', 1);
+			$this->show_compare_btn = (int) $this->get_db_values('enable_product_comparision', 1);
 
 			if( $this->show_compare_btn === 1 ){
 				$this->compare_products_btn_position =  $this->get_db_values('compare_products_btn_position', 'after_add_to_cart' );
-				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label' );
+				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label', __('Compare', 'addonify-compare-products') );
 			}
+
+			$this->register_shortcode();
 		}
 
 	}
@@ -99,6 +101,10 @@ class Addonify_Compare_Products_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
+		
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
+
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), $this->version, 'all' );
 	}
 
@@ -108,6 +114,9 @@ class Addonify_Compare_Products_Public {
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
+
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
 
 		// required min version wordpress 4.9.0
 		wp_enqueue_code_editor( array( 'type' => 'text/html' ) );
@@ -126,7 +135,10 @@ class Addonify_Compare_Products_Public {
 				'ajax_url' 						=> admin_url( 'admin-ajax.php' ), 
 				'action_get_thumbnails' 		=> 'get_products_thumbnails',
 				'action_search_items' 			=> 'search_items',
-				'action_get_compare_contents' 	=> 'get_compare_contents'
+				'action_get_compare_contents' 	=> 'get_compare_contents',
+				'cookie_expire'				 	=> $this->get_db_values( 'compare_products_cookie_expires', 'browser' ),
+				'display_type'				 	=> $this->get_db_values( 'compare_products_display_type', 'popup' ),
+				'comparision_page_url'			=> get_permalink( $this->get_db_values( 'page_id' ) )
 			) 
 		);
 
@@ -166,6 +178,10 @@ class Addonify_Compare_Products_Public {
 	// search for products
 	public function search_items_callback(){
 
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
+
+
 		// only ajax request is allowed
 		if( ! wp_doing_ajax() ) wp_die( 'Invalid Request' );
 
@@ -204,20 +220,29 @@ class Addonify_Compare_Products_Public {
 	// get contents to compare
 	public function get_compare_contents_callback(){
 
-		// only ajax request is allowed
-		if( ! wp_doing_ajax() ) wp_die( 'Invalid Request' );
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
 
-		// product ids is required
-		if( ! isset( $_GET['ids'] ) ) wp_die( 'product ids are missing' );
+		// get product ids from cookies
+		$product_ids = isset( $_COOKIE['addonify_selected_product_ids'] ) ? $_COOKIE['addonify_selected_product_ids'] : '';
 
-		$product_ids = explode( ',', $_GET['ids'] );
+		// convert into array
+		$product_ids = explode( ',', $product_ids );
+
+		// generate contents
 		$compare_data = $this->generate_contents_data( $product_ids );
 
 		ob_start();
+
 		$this->get_templates( 'addonify-compare-products-content', true, array( 'data' => $compare_data ) );
-		echo ob_get_clean();
 		
-		wp_die();
+		if( wp_doing_ajax() ) {
+			echo ob_get_clean();
+			wp_die();
+		}
+		else{
+			return ob_get_clean();
+		}
 
 	}
 
@@ -226,15 +251,14 @@ class Addonify_Compare_Products_Public {
 	// show compare product btn button before add to cart button
 	public function show_compare_products_btn_before_add_to_cart_btn_callback() {
 
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
+
 		global $product;
 		$product_id = $product->get_id();
 		
 		// show compare btn before add to cart button
-		if( 
-			$this->compare_products_btn_position == 'before_add_to_cart' &&
-			$this->show_compare_btn && 
-			$this->compare_products_btn_label 
-		) {
+		if( $this->compare_products_btn_position == 'before_add_to_cart' && $this->compare_products_btn_label ) {
 			ob_start();
 			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => '') );
 			echo ob_get_clean();
@@ -248,15 +272,14 @@ class Addonify_Compare_Products_Public {
 	// show compare product btn after add to cart button
 	public function show_compare_products_btn_after_add_to_cart_btn_callback() {
 
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
+
 		global $product;
 		$product_id = $product->get_id();
 		
 		// show compare btn after add to cart button
-		if( 
-			$this->compare_products_btn_position == 'after_add_to_cart' &&
-			$this->show_compare_btn && 
-			$this->compare_products_btn_label 
-		) {
+		if( $this->compare_products_btn_position == 'after_add_to_cart' && $this->compare_products_btn_label ) {
 			
 			ob_start();
 			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => '') );
@@ -271,10 +294,14 @@ class Addonify_Compare_Products_Public {
 	// show quick view button aside image
 	public function show_compare_products_btn_aside_image_callback(){
 
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
+
+
 		global $product;
 		$product_id = $product->get_id();
 		
-		if( $this->show_compare_btn && $this->compare_products_btn_position == 'overlay_on_image' ) {
+		if( $this->compare_products_btn_position == 'overlay_on_image' ) {
 			ob_start();
 			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => 'addonify-overlay-image') );
 			echo ob_get_clean();
@@ -286,8 +313,16 @@ class Addonify_Compare_Products_Public {
 	// callback function
 	// add custom markup into footer
 	public function add_markup_into_footer_callback(){
+
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
+
 		ob_start();
-		$this->get_templates( 'addonify-compare-products-wrapper' );
+		$this->get_templates( 'addonify-compare-products-wrapper', true, array( 'label' => $this->compare_products_btn_label  ) );
+
+		if( $this->get_db_values('display_type') == 'popup' ){
+			$this->get_templates( 'addonify-compare-products-compare-modal-wrapper' );
+		}
 		echo ob_get_clean();
 	}
 
@@ -295,6 +330,10 @@ class Addonify_Compare_Products_Public {
 	// callback function
 	// generate style tag according to options selected by user
 	public function generate_custom_styles_callback(){
+
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
+
 
 		$load_styles_from_plugin = $this->get_db_values( 'load_styles_from_plugin', 0 );
 
@@ -381,7 +420,6 @@ class Addonify_Compare_Products_Public {
 	private function generate_contents_data( $selected_product_ids ) {
 
 		$selected_products_data = array();
-		$cookie_name = 'addonify_selected_product_ids';
 
 		if ( is_array( $selected_product_ids ) && ( count( $selected_product_ids ) > 0 ) ) {
 
@@ -397,21 +435,21 @@ class Addonify_Compare_Products_Public {
 				}
 
 
-				if( (int) $this->get_db_values( 'show_product_title' ) ) {
+				if( (int) $this->get_db_values( 'show_product_title', 1 ) ) {
 					$selected_products_data['title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>';
 				}
 
 
-				if( (int) $this->get_db_values( 'show_product_image' ) ) {
+				if( (int) $this->get_db_values( 'show_product_image', 1 ) ) {
 					$selected_products_data['Image'][] =  '<a href="' . $product->get_permalink() . '" >' . $product->get_image( get_option( '_wooscp_image_size', 'wooscp-large' ), array( 'draggable' => 'false' ) ) . '</a>';
 				}
 
 
-				if( (int) $this->get_db_values( 'show_product_price' ) ) {
+				if( (int) $this->get_db_values( 'show_product_price', 1 ) ) {
 					$selected_products_data['Price'][] =  $product->get_price_html();
 				}
 
-				if( (int) $this->get_db_values( 'show_product_excerpt' ) ) {
+				if( (int) $this->get_db_values( 'show_product_excerpt', 1 ) ) {
 					if ( $product->is_type( 'variation' ) ) {
 						$selected_products_data['Description'][] =  $product->get_description();
 					} else {
@@ -419,17 +457,17 @@ class Addonify_Compare_Products_Public {
 					}
 				}
 
-				if( (int) $this->get_db_values( 'show_product_rating' ) ) {
+				if( (int) $this->get_db_values( 'show_product_rating', 1 ) ) {
 					$selected_products_data['Rating'][] =  wc_get_rating_html( $product->get_average_rating() );
 				}
 
 
-				if( (int) $this->get_db_values( 'show_stock_info' ) ) {
+				if( (int) $this->get_db_values( 'show_stock_info', 1 ) ) {
 					$selected_products_data['Stock'][] =  wc_get_stock_html( $product );
 				}			
 
 
-				if( (int) $this->get_db_values( 'show_attributes' ) ) {
+				if( (int) $this->get_db_values( 'show_attributes', 1 ) ) {
 
 					ob_start();
 						wc_display_product_attributes( $product );
@@ -441,7 +479,7 @@ class Addonify_Compare_Products_Public {
 				}
 
 
-				if( (int) $this->get_db_values( 'show_add_to_cart_btn' ) ) {
+				if( (int) $this->get_db_values( 'show_add_to_cart_btn', 1 ) ) {
 					$selected_products_data['Add To Cart'][] =   do_shortcode( '[add_to_cart id="' . $product_id . '" show_price="false" style="" ]' );
 				}
 
@@ -469,10 +507,6 @@ class Addonify_Compare_Products_Public {
 			
 		}
 
-		// echo '<pre>';
-		// var_dump( $selected_products_data );
-		// die;
-	
 		return $selected_products_data;
 
 	}
@@ -481,6 +515,9 @@ class Addonify_Compare_Products_Public {
 	// callback function
 	// print opening tag of overlay image container
 	public function addonify_overlay_container_start_callback(){
+
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 			$overlay_opening_tag_is_added = 1;
@@ -493,6 +530,9 @@ class Addonify_Compare_Products_Public {
 	// callback function
 	// print closing tag of overlay image container
 	public function addonify_overlay_container_end_callback(){
+
+		// do not continue if "Enable Product Comparision" is not checked
+		if( ! $this->show_compare_btn ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 			$overlay_closing_tag_is_added = 1;
@@ -501,8 +541,9 @@ class Addonify_Compare_Products_Public {
 
 	}
 
+
 	// require proper templates for use in front end
-	private function get_templates( $template_name, $require_once = true, $args = array() ){
+	private function get_templates( $template_name, $require_once = true, $data = array() ){
 
 		// first look for template in themes/addonify/templates
 		$theme_path = get_template_directory() . '/addonify/' . $template_name .'.php';
@@ -523,5 +564,12 @@ class Addonify_Compare_Products_Public {
 		}
 	
 	}
+
+
+	private function register_shortcode(){
+		add_shortcode( 'addonify-compare-products', array( $this, 'get_compare_contents_callback' ) );
+	}
+
+	
 
 }
