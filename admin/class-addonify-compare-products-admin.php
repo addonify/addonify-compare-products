@@ -175,7 +175,8 @@ class Addonify_Compare_Products_Admin {
 
 		// sub menu
 		// redirects to main plugin link
-		add_submenu_page(  'addonify_quick_view', 'Addonify Compare Products Settings', 'Compare Products', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
+		add_submenu_page(  'addonify_quick_view', 'Addonify Compare Products Settings', 'Compare', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
+
 
 	}
 
