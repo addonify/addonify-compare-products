@@ -3,7 +3,7 @@
 ?>
 
 <div id="addonify-compare-footer" class="hidden">
-    <div id="addonify-compare-footer-message">Please select 1 more item to compare</div>
+    <div id="addonify-compare-footer-message" class="hidden" >Please select 1 more item to compare</div>
 
     <div id="addonify-compare-footer-inner">
 

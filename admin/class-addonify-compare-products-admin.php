@@ -50,6 +50,7 @@ class Addonify_Compare_Products_Admin {
 	 private $settings_page_slug = 'addonify_compare_products';
 
 
+	 
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -541,7 +542,6 @@ class Addonify_Compare_Products_Admin {
 
 		// create settings fields
 		$this->create_settings( $settings_args );
-
 		
 	}
 
@@ -561,7 +561,6 @@ class Addonify_Compare_Products_Admin {
 				register_setting( $args['settings_group_name'],  $sub_field['name'], array(
         			'sanitize_callback' => $sub_field['sanitize_callback']
 				));
-
 			}
 
 		}

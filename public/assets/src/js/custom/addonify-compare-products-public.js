@@ -12,7 +12,7 @@
 		var $compare_modal_sel = $('#addonify-compare-modal');
 		var $compare_modal_content_sel = $('#addonify-compare-modal-content');
 		var search_input_timer;
-		var selected_items_has_changed = false;
+		var items_list_has_changed = false;
 		var compare_modal_is_open = false;
 		var first_boot = true;
 		var display_type = addonify_compare_ajax_object.display_type;
@@ -48,7 +48,7 @@
 			// prevent duplicates
 			if( ! selected_product_ids.includes( product_id ) ){
 
-				selected_items_has_changed = true;
+				items_list_has_changed = true;
 			
 				// store product ids into list
 				selected_product_ids.push( product_id );
@@ -59,37 +59,42 @@
 				// mark button as selected
 				$(this).addClass('selected');
 
-				// generate thumbnails with preloader
-				show_thumbnail_preloader( product_id.toString() );
-
-				// replace thumbnail preloader image with actual image
-				get_thumbnails_from_ajax( product_id.toString() );
-
 				// close modal, if it is open
 				$search_modal_sel.addClass('hidden');
 
-				// show footers bar 
-				$body.addClass('addonify-compare-footer-is-visible')
+				
+				if( display_type == 'popup' || selected_product_ids.length < 2 ){
 
-				// show hide footer message
-				show_hide_footer_message();
+					// generate thumbnails with preloader
+					show_thumbnail_preloader( product_id.toString() );
+
+					// replace thumbnail preloader image with actual image
+					get_thumbnails_from_ajax( product_id.toString() );
+
+					// show footers bar 
+					$body.addClass('addonify-compare-footer-is-visible')
+
+					// show hide footer message
+					show_hide_footer_message();
+				}
 				
 			}
 			else{
-				selected_items_has_changed = false;
+				items_list_has_changed = false;
 			}
 
 
 			if( first_boot ){
-				selected_items_has_changed = true;
+				items_list_has_changed = true;
 				first_boot = false;
 			}
 			
 
-			if( display_type == 'page' ){
+			if( display_type == 'page' && selected_product_ids.length > 1 ){
 				window.location.href = page_url;
 				return;
 			}
+
 
 			// following code will not be executed if display type is "page"
 
@@ -103,9 +108,14 @@
 			else{
 				// "add" button from search modal
 
-				// close and re-open modal
-				close_compare_modal();
-				show_compare_modal();
+				if( selected_product_ids.length > 1 ){
+
+					// close and re-open modal
+					close_compare_modal();
+					
+					items_list_has_changed = true;
+					show_compare_modal();
+				}
 			}
 
 		})
@@ -118,8 +128,8 @@
 
 			// product id is required
 			if( ! product_id ) return;
-
-			selected_items_has_changed = true;
+			
+			items_list_has_changed = true;
 
 
 			// mark button as not selected
@@ -183,7 +193,7 @@
 				window.location.href = page_url;
 				return;
 			}
-			
+
 
 			// following code will not be executed if display type is "page"
 
@@ -192,11 +202,11 @@
 			}
 			else{
 				if( first_boot ){
-					selected_items_has_changed = true;
+					items_list_has_changed = true;
 					first_boot = false;
 				}
+
 				show_compare_modal();
-				selected_items_has_changed = false;
 			}
 		})
 
@@ -299,13 +309,13 @@
 		
 		function show_hide_footer_message(){
 
-			// $message_sel.
-			if( selected_product_ids.length > 1 ){
-				$message_sel.fadeOut();
+			if( selected_product_ids.length < 2 ){
+				$message_sel.removeClass('hidden');
 			}
 			else{
-				$message_sel.fadeIn();
+				$message_sel.addClass('hidden');
 			}
+
 		}
 
 
@@ -339,11 +349,10 @@
 		function get_compare_contents_ajax(product_ids){
 
 			// do not continue if product ids is empty
-			if( ! product_ids || ! selected_items_has_changed ) return;
+			if( ! product_ids || ! items_list_has_changed ) return;
 
 			var data = {
-                'action': addonify_compare_ajax_object.action_get_compare_contents,
-                'ids': product_ids
+                'action': addonify_compare_ajax_object.action_get_compare_contents
             };
 	
             $.get(addonify_compare_ajax_object.ajax_url, data, function(response) {
@@ -355,7 +364,7 @@
 
 		function show_compare_modal(){
 
-			if( selected_items_has_changed ){
+			if( items_list_has_changed ){
 				// reset previous content
 				$compare_modal_content_sel.html('');
 			}
@@ -375,6 +384,7 @@
 		function close_compare_modal(){
 			$compare_modal_sel.addClass('hidden');
 			compare_modal_is_open = false;
+			items_list_has_changed = false;
 		}
 
 		
@@ -385,7 +395,7 @@
 				selected_product_ids.push( $(this).data('product_id') );
 			});
 
-			selected_items_has_changed = true;
+			items_list_has_changed = true;
 			setCookie(selected_product_ids);
 
 		}
