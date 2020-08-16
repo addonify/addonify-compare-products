@@ -55,8 +55,8 @@ class Addonify_Compare_Products_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of this plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param    string    $plugin_name       The name of this plugin.
+	 * @param    string    $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -64,6 +64,7 @@ class Addonify_Compare_Products_Admin {
 		$this->version = $version;
 
 	}
+
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -89,6 +90,9 @@ class Addonify_Compare_Products_Admin {
 			// admin css
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/addonify-compare-products-admin.css', array(), $this->version, 'all' );
 		}
+
+		// icon fix
+		wp_enqueue_style( 'addonify-compare-menu-icon-fix', plugin_dir_url( __FILE__ ) . 'css/addonify-icon-fix.css', array(), $this->version, 'all' );
 
 	}
 
@@ -159,26 +163,30 @@ class Addonify_Compare_Products_Admin {
 		if ( ! $this->is_woocommerce_active() )  return; 
 
 		global $menu;
-		$addonify_menu_exists = false;
-		
+		$parent_menu_slug = null;
+
 		foreach($menu as $item) {
 			if(strtolower($item[0]) == strtolower('Addonify')) {
-				$addonify_menu_exists = true;
+
+				$parent_menu_slug = $item[2];
 				break;
 			}
 		}
 
 
-		if( ! $addonify_menu_exists ){
+		if( ! $parent_menu_slug ){
 			add_menu_page( 'Addonify Settings', 'Addonify', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), plugin_dir_url( __FILE__ ) .'/templates/addonify-logo.svg', 76 );
+
+			add_submenu_page(  $this->settings_page_slug, 'Addonify Compare Products Settings', 'Compare', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
+
 		}
-		
+		else{
 
-		// sub menu
-		// redirects to main plugin link
-		add_submenu_page(  'addonify_quick_view', 'Addonify Compare Products Settings', 'Compare', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
-
-
+			// sub menu
+			// redirects to main plugin link
+			add_submenu_page(  $parent_menu_slug, 'Addonify Compare Products Settings', 'Compare', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
+			
+		}
 	}
 
 
