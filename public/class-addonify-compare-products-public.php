@@ -1,5 +1,7 @@
 <?php
 
+require_once dirname( __FILE__, 2 ) . '/includes/class-addonify-compare-products-helper.php';
+
 /**
  * The public-facing functionality of the plugin.
  *
@@ -20,7 +22,7 @@
  * @subpackage Addonify_Compare_Products/public
  * @author     Addonify <info@addonify.com>
  */
-class Addonify_Compare_Products_Public {
+class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 	/**
 	 * The ID of this plugin.
@@ -88,7 +90,7 @@ class Addonify_Compare_Products_Public {
 
 			if( $this->enable_plugin === 1 ){
 				$this->compare_products_btn_position =  $this->get_db_values('compare_products_btn_position', 'after_add_to_cart' );
-				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label', __('Compare', 'addonify-compare-products') );
+				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label', translate('Add to compare') );
 			}
 
 			$this->register_shortcode();
@@ -221,40 +223,38 @@ class Addonify_Compare_Products_Public {
 	}
 
 
+	
 	// callback function
-	// show compare product btn button before add to cart button
-	public function show_compare_products_btn_before_add_to_cart_btn_callback() {
+	// show compare btn after add to cart button
+	public function show_compare_products_btn_after_add_to_cart_btn_callback(){
 
-		// do not continue if "Enable Product Comparision" is not checked
-		if( ! $this->enable_plugin ) return;
-
-		global $product;
-		$product_id = $product->get_id();
-		
-		// show compare btn before add to cart button
-		if( $this->compare_products_btn_position == 'before_add_to_cart' && $this->compare_products_btn_label ) {
-			ob_start();
-			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => '') );
-			echo ob_get_clean();
-
+		if( $this->compare_products_btn_position == 'after_add_to_cart'  ) {
+			$this->show_compare_btn_aside_add_to_cart_btn_callback();
 		}
-
 	}
 
-
+	
 	// callback function
-	// show compare product btn after add to cart button
-	public function show_compare_products_btn_after_add_to_cart_btn_callback() {
+	// show compare btn before add to cart button
+	public function show_compare_products_btn_before_add_to_cart_btn_callback(){
+		if( $this->compare_products_btn_position == 'before_add_to_cart'  ) {
+			$this->show_compare_btn_aside_add_to_cart_btn_callback();
+		}
+	}
+
+	
+	// show template for comapre button
+	private function show_compare_btn_aside_add_to_cart_btn_callback() {
 
 		// do not continue if "Enable Product Comparision" is not checked
 		if( ! $this->enable_plugin ) return;
 
 		global $product;
 		$product_id = $product->get_id();
-		
+
 		// show compare btn after add to cart button
-		if( $this->compare_products_btn_position == 'after_add_to_cart' && $this->compare_products_btn_label ) {
-			
+		if( $this->compare_products_btn_label ) {
+
 			ob_start();
 			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => '') );
 			echo ob_get_clean();
@@ -265,7 +265,7 @@ class Addonify_Compare_Products_Public {
 
 
 	// callback function
-	// show quick view button aside image
+	// show compare button aside image
 	public function show_compare_products_btn_aside_image_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
@@ -292,7 +292,7 @@ class Addonify_Compare_Products_Public {
 		if( ! $this->enable_plugin ) return;
 
 		ob_start();
-		$this->get_templates( 'addonify-compare-products-wrapper', true, array( 'label' => $this->compare_products_btn_label  ) );
+		$this->get_templates( 'addonify-compare-products-wrapper', true, array( 'label' => translate('Compare')  ) );
 
 		if( $this->get_db_values('compare_products_display_type', 'popup') == 'popup' ){
 			$this->get_templates( 'addonify-compare-products-compare-modal-wrapper' );

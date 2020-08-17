@@ -200,7 +200,7 @@ class Addonify_Compare_Products {
 
 
 		// add "Compare" button before add to cart button
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item_title', $plugin_public, 'show_compare_products_btn_before_add_to_cart_btn_callback', 20 );
+		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_before_add_to_cart_btn_callback' );
 
 
 		// add "Compare Button" button aside image
