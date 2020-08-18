@@ -1,7 +1,5 @@
 <?php
 
-require_once dirname( __FILE__, 2 ) . '/includes/class-addonify-compare-products-helper.php';
-
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -22,6 +20,9 @@ require_once dirname( __FILE__, 2 ) . '/includes/class-addonify-compare-products
  * @subpackage Addonify_Compare_Products/admin
  * @author     Addonify <info@addonify.com>
  */
+
+require_once dirname ( __FILE__, 2 ) . '/includes/class-addonify-compare-products-helper.php';
+
 class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 
 	/**
@@ -262,41 +263,6 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 							'sanitize_callback'			=> 'sanitize_text_field'
 						),
 					) 
-				),
-				array(
-					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_overlay_position',
-					'field_label'			=> translate(''),
-					'field_callback'		=> array($this, 'overlay_btn_offset_group' ),
-					'field_callback_args'	=> array( 
-						array(
-							'label'				=> translate('Left Offset'),
-							'name'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_left_offset',
-							'extra_attr'		=> 'px',
-							'default'			=> '0',
-							'sanitize_callback'	=> 'sanitize_text_field'
-						),
-						array(
-							'label'				=> translate('Right Offset'),
-							'name'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_right_offset',
-							'extra_attr'		=> 'px',
-							'default'			=> '0',
-							'sanitize_callback'	=> 'sanitize_text_field'
-						),
-						array(
-							'label'				=> translate('Top Offset'),
-							'name'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_right_offset',
-							'extra_attr'		=> 'px',
-							'default'			=> '0',
-							'sanitize_callback'	=> 'sanitize_text_field'
-						),
-						array(
-							'label'				=> translate('Bottom Offset'),
-							'name'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_right_offset',
-							'extra_attr'		=> 'px',
-							'default'			=> '0',
-							'sanitize_callback'	=> 'sanitize_text_field'
-						),
-					), 
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_label',
@@ -649,7 +615,10 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		
 		foreach($arguments as $args){
 			$default = isset( $args['default'] ) ? $args['default'] : '';
-			$db_value = (int) get_option($args['name'], $default);
+			
+			$db_value = get_option($args['name'], $default);
+			if( !empty($db_value) ) $db_value =  (int) $db_value;
+
 			$css_class = isset( $args['css_class'] ) ? $args['css_class'] : '';
 			$extra_attr = isset( $args['extra_attr'] ) ? $args['extra_attr'] : '';
 		
@@ -659,9 +628,9 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 	}
 
 	public function overlay_btn_offset_group($arguments){
-		echo '<div id="addonify-image-overlay-btn-offset-wrapper" >';
-		$this->text_box_group($arguments);
-		echo '</div>';
+		ob_start();
+		require dirname( __FILE__ ) .'/templates/overlay_btn_offset_group.php';
+		echo ob_get_clean();
 	}
 
 	public function text_area($arguments){

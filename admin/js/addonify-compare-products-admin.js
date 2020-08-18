@@ -31,34 +31,6 @@
 		}
 
 
-		// show hide overlay btn offset position ------------------------------
-
-		let $button_position_sel = $('#addonify_cp_compare_products_btn_position');
-		let $overlay_btn_wrapper_sel = $('#addonify-image-overlay-btn-offset-wrapper');
-
-
-		// detect state change
-		$button_position_sel.change(function(){
-			show_hide_overlay_btn();
-		});
-
-		show_hide_overlay_btn();
-
-		
-		function show_hide_overlay_btn(){
-
-			let state = $button_position_sel.val();
-			let $parent = $overlay_btn_wrapper_sel.parents('tr');
-
-			if( state == 'overlay_on_image' ){
-				$parent.fadeIn();
-			}
-			else{
-				$parent.fadeOut();
-			}
-		}
-
-
 
 		// show hide content colors ------------------------------
 

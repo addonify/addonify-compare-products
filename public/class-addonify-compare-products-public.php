@@ -70,6 +70,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	private $compare_products_btn_label;
 
 
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -95,7 +96,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 			$this->register_shortcode();
 		}
-
+		
 	}
 
 	/**
@@ -271,13 +272,12 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// do not continue if "Enable Product Comparision" is not checked
 		if( ! $this->enable_plugin ) return;
 
-
 		global $product;
 		$product_id = $product->get_id();
-		
-		if( $this->compare_products_btn_position == 'overlay_on_image' ) {
+
+		if( $this->compare_products_btn_position == 'overlay_on_image') {
 			ob_start();
-			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => 'addonify-overlay-image') );
+			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => 'addonify-overlay-btn') );
 			echo ob_get_clean();
 		}
 
@@ -452,16 +452,17 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		} );
 
 
-
-		// generate style markups
-
 		$custom_css = $this->get_db_values('custom_css');
-		$custom_styles_output = '';
+		
 
 		$style_args = array(
 			'button.addonify-cp-button' => array(
 				'background' 	=> 'compare_btn_bck_color',
-				'color' 		=> 'compare_btn_text_color'
+				'color' 		=> 'compare_btn_text_color',
+				'left' 			=> 'compare_products_btn_left_offset',
+				'right' 		=> 'compare_products_btn_right_offset',
+				'top' 			=> 'compare_products_btn_top_offset',
+				'bottom'		=> 'compare_products_btn_bottom_offset'
 			),
 			'#addonify-compare-modal, #addonify-compare-search-modal' => array(
 				'background' 	=> 'modal_overlay_bck_color'
@@ -487,23 +488,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			
 		);
 
-		foreach($style_args as $css_sel => $property_value){
-
-			$properties = '';
-
-			foreach( $property_value as $property => $db_field){
-				$db_value = $this->get_db_values( $db_field );
-
-				if( $db_value ){
-					$properties .=  $property . ': ' . $db_value .'; ';
-				}
-			}
-			
-			if( $properties ){
-				$custom_styles_output .= $css_sel . '{' . $properties . '}';
-			}
-
-		}
+		$custom_styles_output = $this->generate_styles_markups( $style_args );
 
 		// avoid empty style tags
 		if( $custom_styles_output || $custom_css ){
@@ -512,16 +497,59 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 	}
 
+	private function generate_styles_markups( $style_args ){
+		$custom_styles_output = '';
+		foreach($style_args as $css_sel => $property_value){
+
+			$properties = '';
+
+			foreach( $property_value as $property => $db_field){
+
+				$css_unit = '';
+
+				if( is_array($db_field) ){
+					$db_value = $this->get_db_values( $db_field[0] );
+					$css_unit = $db_field[1];
+				}
+				else{
+					$db_value = $this->get_db_values( $db_field );
+				}
+					
+				if( $db_value ){
+					$properties .=  $property . ': ' . $db_value . $css_unit . '; ';
+				}
+
+			}
+			
+			if( $properties ){
+				$custom_styles_output .= $css_sel . '{' . $properties . '}';
+			}
+
+		}
+
+		return $custom_styles_output;
+	}
+
 
 	// callback function
 	// print opening tag of overlay image container
 	public function addonify_overlay_container_start_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
-		if( ! $this->enable_plugin ) return;
+		if( ! $this->enable_plugin) return;
+
+		if( defined('ADDONIFY_OVERLAY_IS_ADDED') && ADDONIFY_OVERLAY_ADDED_BY != 'compare_products' ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
-			echo '<div class="addonify-compare-overlay-button">';
+			if( ! defined('ADDONIFY_OVERLAY_IS_ADDED')) {
+				define('ADDONIFY_OVERLAY_IS_ADDED', 1);
+			}
+
+			if( ! defined('ADDONIFY_OVERLAY_ADDED_BY')) {
+				define('ADDONIFY_OVERLAY_ADDED_BY', 'compare_products' );
+			}
+
+			echo '<div class="addonify-overlay-buttons">';
 		}
 
 	}
@@ -533,7 +561,9 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	public function addonify_overlay_container_end_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
-		if( ! $this->enable_plugin ) return;
+		if( ! $this->enable_plugin  ) return;
+
+		if( defined('ADDONIFY_OVERLAY_IS_ADDED') && ADDONIFY_OVERLAY_ADDED_BY != 'compare_products' ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
 			echo '</div>';

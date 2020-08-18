@@ -98,6 +98,11 @@
     margin-top: -15px;
 }
 
+#addonify-image-overlay-btn-offset-wrapper .title{
+    margin-bottom: 10px; 
+    color: #673AB7;
+}
+
 .CodeMirror {
     border: solid 1px #e8e8e8;
     border-radius: 4px;

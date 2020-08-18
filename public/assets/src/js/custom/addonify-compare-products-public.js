@@ -222,6 +222,8 @@
 
 		function init(){
 
+			prepare_overlay_buttons();
+
 			// fetch items from cookies
 			fetch_items_from_cookies();
 
@@ -262,6 +264,50 @@
 				return parseInt(value);
 			});
 
+		}
+
+
+		function prepare_overlay_buttons(){
+
+			var overlay_btn_wrapper_class = 'addonify-overlay-btn-wrapper';
+			var overlay_btn_class = 'addonify-overlay-btn';
+
+			var $overlay_btn_wrapper_sel = $('.' + overlay_btn_wrapper_class);
+			var $overlay_parent_container = $('.addonify-overlay-buttons');
+
+			if( $overlay_btn_wrapper_sel.length ){
+
+				//  wrapper div already exists
+				$overlay_parent_container.each(function(){
+
+					// clone original button
+					var btn_clone = $('button.' + overlay_btn_class, this).clone();
+
+					// delete oroginal buttons
+					$('button.' + overlay_btn_class, this).remove();
+					
+					// append to wrapper class
+					$('.' + overlay_btn_wrapper_class, this).append( btn_clone );
+				})
+			}
+			else{
+				// wrap all buttons into a single div
+				$overlay_parent_container.each(function(){
+					$('button.' + overlay_btn_class, this).wrapAll('<div class=" '+ overlay_btn_wrapper_class + ' " />');
+				});
+			}
+
+
+			var img_height = $('img.attachment-woocommerce_thumbnail').height();
+			var padding_top = ( img_height - $('.' + overlay_btn_wrapper_class).height() ) / 2;
+
+			$('.' + overlay_btn_wrapper_class).css('height', img_height + 'px').css('padding-top', padding_top + 'px');
+
+			$('.' + overlay_btn_wrapper_class).hover(function(){
+				$(this).css('opacity', 1);
+			}, function(){
+				$(this).css('opacity', 0);
+			})
 		}
 
 
