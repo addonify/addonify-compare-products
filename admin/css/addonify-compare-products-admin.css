@@ -84,6 +84,25 @@
     margin-bottom: 3px;
 } 
 
+.addonify-content .textbox-group label.label {
+    width: 100px;
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.addonify-content .textbox-group input {
+    width: 60px;
+}
+
+#addonify-image-overlay-btn-offset-wrapper{
+    margin-top: -15px;
+}
+
+#addonify-image-overlay-btn-offset-wrapper .title{
+    margin-bottom: 10px; 
+    color: #673AB7;
+}
+
 .CodeMirror {
     border: solid 1px #e8e8e8;
     border-radius: 4px;

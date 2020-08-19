@@ -2,6 +2,25 @@ $bck_color: rgb(41, 42, 48);
 $padding: 15px;
 $thumbnail_height : 48px;
 
+.addonify-overlay-buttons{
+    position: relative;
+
+    .addonify-overlay-btn-wrapper{
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: #1010101a;
+        opacity: 0;
+        transition: 0.4s;
+
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 
 button.addonify-cp-button.selected{
     border: solid 2px #000;
