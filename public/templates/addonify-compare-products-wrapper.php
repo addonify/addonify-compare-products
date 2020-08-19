@@ -1,8 +1,10 @@
-<?php
-	defined( 'ABSPATH' ) || exit;
+<?php 
+    // direct access is disabled
+    defined( 'ABSPATH' ) || exit;
 ?>
 
-<div id="addonify-compare-footer" class="hidden">
+<div id="addonify-compare-footer" >
+
     <div id="addonify-compare-footer-message" class="hidden" >Please select 1 more item to compare</div>
 
     <div id="addonify-compare-footer-inner">
@@ -12,9 +14,8 @@
             <a href="#" id="addonify-footer-add" aria-label="Add product"></a>
         </div>
 
-        <!-- thumbnail will be added by javascript -->
+        <!-- thumbnails will be added here by javascript -->
         <div id="addonify-footer-thumbnails"></div>
-
 
         <!-- compare button -->
         <div class="addonify-footer-components">
@@ -37,12 +38,9 @@
             </svg>
         </button>
 
-
         <div class="addonify-compare-search-modal-content">
-
             <input type="text" name="query" value="" id="addonify-compare-search-query" placeholder="Search here">
             <div id="addonify-compare-search-results"></div>
-
         </div>
 
     </div>

@@ -10,10 +10,16 @@
     <div id="addonify-settings-wrapper">
             
         <ul id="addonify-settings-tabs">
-            <li><a href="<?php echo $tab_url;?>settings" class="<?php if( $current_tab == 'settings') echo 'active';?> " > 
-            <?php _e( 'Settings', 'addonify-quick-view' );?> </a></li>
-            <li><a href="<?php echo $tab_url;?>styles" class="<?php if( $current_tab == 'styles') echo 'active';?> " > 
-            <?php _e( 'Styles', 'addonify-quick-view' );?> </a></li>
+            <li>
+                <a href="<?php echo $tab_url;?>settings" class="<?php if( $current_tab == 'settings') echo 'active';?> " > 
+                    <?php echo translate( 'Settings' );?> 
+                </a>
+            </li>
+            <li>
+                <a href="<?php echo $tab_url;?>styles" class="<?php if( $current_tab == 'styles') echo 'active';?> " > 
+                    <?php echo translate( 'Styles' );?> 
+                </a>
+            </li>
         </ul>
 
         <?php if( $current_tab == 'settings' ):?>

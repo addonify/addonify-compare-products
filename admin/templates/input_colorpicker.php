@@ -6,7 +6,10 @@
     echo '<div class="colorpicker-group">';
     
     if( isset($arg['label']) ) {
-        echo '<p>'. $arg['label'].'</p>';
+        printf(
+            '<p>%s</p>',
+            esc_attr( $arg['label'] )
+        );
     }
 
     printf(

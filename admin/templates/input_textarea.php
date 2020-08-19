@@ -5,7 +5,7 @@
 
     printf(
         '<textarea name="%1$s" id="%1$s" %2$s >%3$s</textarea>',
-        $args['name'],
+        esc_attr( $args['name'] ),
         esc_textarea($attr),
-        $db_value
+        esc_attr( $db_value )
     );

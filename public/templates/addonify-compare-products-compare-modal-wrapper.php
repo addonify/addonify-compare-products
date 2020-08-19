@@ -1,3 +1,8 @@
+<?php 
+    // direct access is disabled
+    defined( 'ABSPATH' ) || exit;
+?>
+
 <!-- product display modal -->
 <div id="addonify-compare-modal" class="hidden" >
     <div class="addonify-compare-model-inner">
