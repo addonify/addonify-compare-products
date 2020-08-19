@@ -97,7 +97,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 			wp_enqueue_style( 'wp-color-picker' ); 
 
 			// admin css
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/addonify-compare-products-admin.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/addonify-compare-products-admin-min.css', array(), $this->version, 'all' );
 		}
 
 		if( ! isset($wp_styles->registered['addonify-icon-fix']) ){
@@ -128,7 +128,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 			wp_enqueue_script( 'lc_switch', plugin_dir_url( __FILE__ ) . 'js/lc_switch.min.js', array( 'jquery' ), '', false );
 
 			// use wp-color-picker-alpha as dependency
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin-min.js', array( 'jquery' ), $this->version, false );
 
 		}
 
