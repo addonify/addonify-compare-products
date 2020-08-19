@@ -10,18 +10,9 @@ require_once dirname( __FILE__, 2 ) . '/includes/class-addonify-compare-products
  *
  * @package    Addonify_Compare_Products
  * @subpackage Addonify_Compare_Products/public
- */
-
-/**
- * The public-facing functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
- *
- * @package    Addonify_Compare_Products
- * @subpackage Addonify_Compare_Products/public
  * @author     Addonify <info@addonify.com>
  */
+
 class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 	/**
@@ -43,11 +34,11 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	private $version;
 
 	/**
-	 * Enable Compare Product Plugin
+	 * State of the plugin
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string    $enable_plugin    The current state of the plugin
 	 */
 	private $enable_plugin;
 
@@ -56,7 +47,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string    $compare_products_btn_position    Display Position for the Compare button
 	 */
 	private $compare_products_btn_position;
 
@@ -65,7 +56,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string    $compare_products_btn_label    Label for the compare button
 	 */
 	private $compare_products_btn_label;
 
@@ -75,7 +66,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string    $display_type    Display comparision in popup or page
 	 */
 	private $display_type;
 
@@ -124,6 +115,8 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		
 	}
 
+
+
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
@@ -137,6 +130,8 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), $this->version, 'all' );
 	}
 
+
+	
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
@@ -167,7 +162,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			$localize_args['comparision_page_url'] = get_permalink( $this->get_db_values( 'page_id' ) );
 		}
 
-		// localize ajax script
+		// localize script
 		wp_localize_script( 
 			$this->plugin_name, 
 			'addonify_compare_ajax_object', 
@@ -178,9 +173,12 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 	
 	
-	// ajax request
-	// callback function
-	// get contents for quick view
+	/**
+	 * Get thumbnails from product ids.
+	 * Accepts only Ajax request
+	 *
+	 * @since    1.0.0
+	 */
 	public function get_products_thumbnails_callback(){
 
 		// only ajax request is allowed
@@ -208,9 +206,13 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 
-	// ajax request
-	// callback function
-	// search for products
+	
+	/**
+	 * Generate contents according to search query provided with ajax requests 
+	 * Accepts only Ajax requests
+	 *
+	 * @since    1.0.0
+	 */
 	public function search_items_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
@@ -250,8 +252,11 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 	
-	// callback function
-	// show compare btn after add to cart button
+	/**
+	 * Show compare button after "cart to cart" button
+	 *
+	 * @since    1.0.0
+	 */
 	public function show_compare_products_btn_after_add_to_cart_btn_callback(){
 
 		if( $this->compare_products_btn_position == 'after_add_to_cart'  ) {
@@ -260,8 +265,13 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 	
-	// callback function
-	// show compare btn before add to cart button
+
+	
+	/**
+	 * Show compare button before "add to cart" button
+	 *
+	 * @since    1.0.0
+	 */
 	public function show_compare_products_btn_before_add_to_cart_btn_callback(){
 		if( $this->compare_products_btn_position == 'before_add_to_cart'  ) {
 			$this->show_compare_btn_aside_add_to_cart_btn_callback();
@@ -269,7 +279,12 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 	
-	// show template for comapre button
+	
+	/**
+	 * Generating "Compare" button
+	 *
+	 * @since    1.0.0
+	 */
 	private function show_compare_btn_aside_add_to_cart_btn_callback() {
 
 		// do not continue if "Enable Product Comparision" is not checked
@@ -290,8 +305,12 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 
-	// callback function
-	// show compare button aside image
+	
+	/**
+	 * Show compare button on top of image
+	 *
+	 * @since    1.0.0
+	 */
 	public function show_compare_products_btn_aside_image_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
@@ -309,8 +328,12 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 
-	// callback function
-	// add custom markup into footer
+	
+	/**
+	 * Generate required markups and print it in footer of the website
+	 *
+	 * @since    1.0.0
+	 */
 	public function add_markup_into_footer_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
@@ -327,9 +350,14 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 
-	// ajax request
-	// callback function
-	// get contents to compare
+	
+	/**
+	 * Generate contents for compare and print it
+	 * Can be used in ajax requests or in shortcodes
+	 *
+	 * @since    1.0.0
+	 * @param      string    $product_ids       Get product ids from cookies
+	 */
 	public function get_compare_contents_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
@@ -359,8 +387,12 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 
-	// generate contents dynamically to modal templates with hooks
-	// called by get_compare_products_contents()
+	/**
+	 * Prepare data to be used in comparision table
+	 *
+	 * @since    1.0.0
+	 * @param      string    $selected_product_ids       Product ids
+	 */
 	private function generate_contents_data( $selected_product_ids ) {
 
 		$selected_products_data = array();
@@ -459,16 +491,17 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 	
-	// callback function
-	// generate style tag according to options selected by user
+	
+	/**
+	 * Generate custom style tag and print it in header of the website
+	 *
+	 * @since    1.0.0
+	 */
 	public function generate_custom_styles_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
-		if( ! $this->enable_plugin ) return;
-
-
 		// do not continue if plugin styles are disabled by user
-		if( ! $this->get_db_values( 'load_styles_from_plugin' ) ) return;
+		if( ! $this->enable_plugin || ! $this->get_db_values( 'load_styles_from_plugin' ) ) return;
 
 
 		// add table styles into body class
@@ -478,7 +511,6 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 		$custom_css = $this->get_db_values('custom_css');
-		
 
 		$style_args = array(
 			'button.addonify-cp-button' => array(
@@ -522,6 +554,13 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 	}
 
+
+	/**
+	 * Generate style markups
+	 *
+	 * @since    1.0.0
+	 * @param    $style_args    Style args to be processed
+	 */
 	private function generate_styles_markups( $style_args ){
 		$custom_styles_output = '';
 		foreach($style_args as $css_sel => $property_value){
@@ -556,16 +595,22 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 
-	// callback function
-	// print opening tag of overlay image container
+	
+	/**
+	 * Print opening tag of overlay container
+	 *
+	 * @since    1.0.0
+	 */
 	public function addonify_overlay_container_start_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
 		if( ! $this->enable_plugin) return;
 
+		// do not continue if overlay is already added by another addonify plugin
 		if( defined('ADDONIFY_OVERLAY_IS_ADDED') && ADDONIFY_OVERLAY_ADDED_BY != 'compare_products' ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
+
 			if( ! defined('ADDONIFY_OVERLAY_IS_ADDED')) {
 				define('ADDONIFY_OVERLAY_IS_ADDED', 1);
 			}
@@ -581,13 +626,17 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 
-	// callback function
-	// print closing tag of overlay image container
+	/**
+	 * Print closing tag of the overlay container
+	 *
+	 * @since    1.0.0
+	 */
 	public function addonify_overlay_container_end_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
 		if( ! $this->enable_plugin  ) return;
 
+		// do not continue of overlay is alrady added by another addonify plugin
 		if( defined('ADDONIFY_OVERLAY_IS_ADDED') && ADDONIFY_OVERLAY_ADDED_BY != 'compare_products' ) return;
 		
 		if( $this->compare_products_btn_position == 'overlay_on_image' ){
@@ -598,26 +647,33 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 
-	// helper function
-	// get db values for selected fields
+	/**
+	 * Get Database values for selected fields
+	 *
+	 * @since    1.0.0
+	 * @param    $field_name    Database Option Name
+	 * @param    $default		Default Value
+	 */
 	private function get_db_values($field_name, $default = NULL ){
 		return get_option( ADDONIFY_CP_DB_INITIALS . $field_name, $default );
 	}
 
 
-	// require proper templates for use in front end
+	
+	/**
+	 * Require proper templates for use in front end
+	 *
+	 * @since    1.0.0
+	 * @param    $template_name		Name of the template
+	 * @param    $require_once		Should use require_once or require ?
+	 * @param    $data				Data to pass to template
+	 */
 	private function get_templates( $template_name, $require_once = true, $data = array() ){
 
 		// first look for template in themes/addonify/templates
 		$theme_path = get_template_directory() . '/addonify/' . $template_name .'.php';
 		$plugin_path = dirname( __FILE__ ) .'/templates/' . $template_name .'.php';
-
-		if( file_exists( $theme_path ) ){
-			$template_path = $theme_path;
-		}
-		else{
-			$template_path = $plugin_path;
-		}
+		$template_path = file_exists( $theme_path ) ? $theme_path : $plugin_path;
 
 		if( $require_once ){
 			require_once $template_path;
@@ -629,7 +685,15 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	}
 
 	
-	// this is used to display compare table in comparision page
+
+	/**
+	 * Register shortcode to use in comparision page
+	 *
+	 * @since    1.0.0
+	 * @param    $template_name		Name of the template
+	 * @param    $require_once		Should use require_once or require ?
+	 * @param    $data				Data to pass to template
+	 */
 	private function register_shortcode(){
 		add_shortcode( 'addonify-compare-products', array( $this, 'get_compare_contents_callback' ) );
 	}

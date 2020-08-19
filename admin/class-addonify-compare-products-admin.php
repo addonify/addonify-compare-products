@@ -8,16 +8,6 @@
  *
  * @package    Addonify_Compare_Products
  * @subpackage Addonify_Compare_Products/admin
- */
-
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    Addonify_Compare_Products
- * @subpackage Addonify_Compare_Products/admin
  * @author     Addonify <info@addonify.com>
  */
 
@@ -44,13 +34,13 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 	private $version;
 
 	/**
-	 * Default settings_page_slug
+	 * Settings page slug
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
+	 * @var      string    $settings_page_slug    Default settings page slug for this plugin
 	 */
-	 private $settings_page_slug = 'addonify_compare_products';
+	private $settings_page_slug = 'addonify_compare_products';
 
 
 	 
@@ -61,6 +51,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 	 * @param    string    $plugin_name       The name of this plugin.
 	 * @param    string    $version    The version of this plugin.
 	 */
+
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
@@ -69,7 +60,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		if( is_admin() ){
 
 			// if display type is page but page id is not present or page is deleted by user
-			// change display type to popoup
+			// change display type to popup
 
 			if(  get_option( 'addonify_cp_compare_products_display_type' ) == 'page' ) {
 				$page_id = get_option( 'addonify_cp_page_id');
@@ -93,26 +84,26 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 	 */
 	public function enqueue_styles() {
 
-		// load styles in plugin page only
+		// load styles in this plugin page only
 		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug ){
+
+			global $wp_styles;
 
 			// toggle switch
 			wp_enqueue_style( 'lc_switch', plugin_dir_url( __FILE__ ) . 'css/lc_switch.css' );
 
-			
-			if( version_compare( get_bloginfo('version'),'3.5', '>=' ) ){
-				// features available from wordpress 3.5
-
-				// built in wp color picker
-				wp_enqueue_style( 'wp-color-picker' );
-			}
+			// built in wp color picker
+			// requires atleast wordpress 3.5
+			wp_enqueue_style( 'wp-color-picker' ); 
 
 			// admin css
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/addonify-compare-products-admin.css', array(), $this->version, 'all' );
 		}
 
-		// icon fix
-		wp_enqueue_style( 'addonify-compare-menu-icon-fix', plugin_dir_url( __FILE__ ) . 'css/addonify-icon-fix.css', array(), $this->version, 'all' );
+		if( ! isset($wp_styles->registered['addonify-icon-fix']) ){
+			// admin menu icon fix
+			wp_enqueue_style( 'addonify-icon-fix', plugin_dir_url( __FILE__ ) . 'css/addonify-icon-fix.css', array(), $this->version, 'all' );
+		}
 
 	}
 
@@ -123,60 +114,43 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 	 */
 	public function enqueue_scripts() {
 
-		// load scripts in plugin plage only
-		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug ){
+		// load scripts in plugin page only
+		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug  ){
 
-			$code_editor_is_available = 0;
-			$color_picker_is_available = 0;
-
-
-			if( version_compare( get_bloginfo('version'),'3.5', '>=' ) ){
-				$color_picker_is_available = 1;
-			}
-
-
-			if( version_compare( get_bloginfo('version'),'4.9', '>=' ) ){
-				$code_editor_is_available = 1;
-				
-				// features available from wordpress 4.9.0
+			if( isset( $_GET['tabs'] ) && $_GET['tabs'] == 'styles' ){
+				// requires atleast wordpress 4.9.0
 				wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
 
+				wp_enqueue_script( 'wp-color-picker-alpha', plugin_dir_url( __FILE__ ) . 'js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ) );
 			}
-			
+
 			// toggle switch
 			wp_enqueue_script( 'lc_switch', plugin_dir_url( __FILE__ ) . 'js/lc_switch.min.js', array( 'jquery' ), '', false );
 
-			wp_enqueue_script( 'wp-color-picker-alpha', plugin_dir_url( __FILE__ ) . 'js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ) );
-
 			// use wp-color-picker-alpha as dependency
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin.js', array( 'jquery', 'wp-color-picker-alpha' ), $this->version, false );
-
-
-			wp_localize_script( 
-				$this->plugin_name, 
-				'addonify_objects', 
-				array( 
-					'code_editor_is_available' 		=> $code_editor_is_available,
-					'color_picker_is_available' 	=> $color_picker_is_available
-				)
-			);
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin.js', array( 'jquery' ), $this->version, false );
 
 		}
 
 	}
 
-
 	
-	// check if woocommerce is active
+	/**
+	 * Check if woocommerce is active
+	 *
+	 * @since    1.0.0
+	 */
 	private function is_woocommerce_active() {
-		if ( class_exists( 'woocommerce' ) )  return true; 
-		return false;
+		return ( class_exists( 'woocommerce' ) ) ? true : false;
 	}
 
 
 
-	// callback function
-	// admin menu
+	/**
+	 * Generate admin menu for this plugin
+	 *
+	 * @since    1.0.0
+	 */
 	public function add_menu_callback(){
 
 		// do not show menu if woocommerce is not active
@@ -211,8 +185,11 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 
 
 
-	// callback function
-	// add custom "settings" link in the plugins.php page
+	/**
+	 * Print "settings" link in plugins.php admin page
+	 *
+	 * @since    1.0.0
+	 */
 	public function custom_plugin_link_callback( $links, $file ){
 		
 		if ( $file == plugin_basename(dirname(__FILE__, 2) . '/addonify-compare-products.php') ) {
@@ -225,8 +202,11 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 
 
 
-	// callback function
-	// get contents for settings page screen
+	/**
+	 * Get contents from settings page templates and print it
+	 *
+	 * @since    1.0.0
+	 */
 	public function get_settings_screen_contents(){
 		$current_tab = ( isset($_GET['tabs']) ) ? $_GET['tabs'] : 'settings';
 		$tab_url = "admin.php?page=$this->settings_page_slug&tabs=";
@@ -237,21 +217,13 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 
 	}
 
-	// public function custom_callback_function(){
-	// 	// $display_type = get_option( ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' );
-
-	// 	// $_POST['addonify_cp_compare_products_btn_label'] = 'testing';
-
-	// 	update_option( 'addonify_cp_compare_products_btn_label', 'testing');
-
-	// 	// echo '<pre>';
-	// 	// var_dump( $all_posts );
-	// 	// die;
-	// }
-
-
-	// callback function
-	// generate settings page form elements
+	
+	
+	/**
+	 * Generate form elements for settings page from array
+	 *
+	 * @since    1.0.0
+	 */
 	public function settings_page_ui() {
 
 		// ---------------------------------------------
@@ -305,22 +277,6 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 						)
 					), 
 				),
-				
-				// array(
-				// 	'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_behavior',
-				// 	'field_label'			=> translate('Compare Button On Click'),
-				// 	'field_callback'		=> array($this, 'select' ),
-				// 	'field_callback_args'	=> array( 
-				// 		array(
-				// 			'name'			 							=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_behavior', 
-				// 			'options' 									=> array(
-				// 				'add_to_list_only' 						=> translate('Add Item To Compare List'),
-				// 				'add_to_list_and_open_modal_or_page'	=> translate('Add Item To Compare List & Show Comparision Modal / Page'),
-				// 			),
-				// 			'sanitize_callback'	=> 'sanitize_text_field'
-				// 		)
-				// 	), 
-				// ),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type',
 					'field_label'			=> translate('Display Comparision in'),
@@ -332,7 +288,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 								'popup' 		=> translate('Popup Modal'),
 								'page'			=> translate('Comparision Page'),
 							),
-							'sanitize_callback'	=> array($this, 'form_submission_housekeeping_callback'), //'sanitize_text_field'
+							'sanitize_callback'	=> array($this, 'check_if_comparision_page_exists'), //'sanitize_text_field'
 						)
 					), 
 				),
@@ -601,7 +557,12 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 	}
 
 
-	// this function will create settings section, fields and register that settings in a database
+	
+	/**
+	 * This will create settings section, fields and register that settings in a database from the provided array data
+	 *
+	 * @since    1.0.0
+	 */
 	private function create_settings($args){
 
 		// define section ---------------------------
@@ -624,8 +585,73 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 	}
 
 
+	/**
+	 * Show notification after form submission
+	 *
+	 * @since    1.0.0
+	 */
+	public function addonify_cp_form_submission_notification_callback(){
+		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug ){
+			settings_errors();			
+		}
+	}
+
+
+	/**
+	 * Show error message if woocommerce is not active
+	 *
+	 * @since    1.0.0
+	 */
+	public function addonify_cp_show_woocommerce_not_active_notice_callback(){
+
+		if( ! $this->is_woocommerce_active() ){
+			add_action('admin_notices', 'addonify_cp_woocommerce_not_active_notice' );
+		}
+
+
+		function addonify_cp_woocommerce_not_active_notice() {
+			ob_start();
+			require dirname( __FILE__ ) .'/templates/woocommerce_not_active_notice.php';
+			echo ob_get_clean();
+		}
+
+	}
+
+
+	/**
+	 * Create comparision page if it was deleted by user.
+	 *
+	 * @since    1.0.0
+	 */
+	public function check_if_comparision_page_exists($string){
+
+		// if display type is "page" but page id is not present or page is deleted by user
+		// create new page and update database
+
+		$display_type = $_POST[ ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' ];
+
+		if(  $display_type == 'page' ) {
+
+			$page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'page_id');
+
+			if( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
+
+				require_once dirname ( __FILE__, 2 ) . '/includes/class-addonify-compare-products-activator.php';
+				
+				// generate new page
+				Addonify_Compare_Products_Activator::activate();
+
+			}
+
+		}
+
+		return sanitize_text_field($string);
+			
+	}
+
+
 	// -------------------------------------------------
-	// form element helpers 
+	// form helpers for admin setting screen
 	// -------------------------------------------------
 
 	public function text_box($arguments){
@@ -639,22 +665,6 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		echo ob_get_clean();
 	}
 
-	public function text_box_group($arguments){
-		ob_start();
-		
-		foreach($arguments as $args){
-			$default = isset( $args['default'] ) ? $args['default'] : '';
-			
-			$db_value = get_option($args['name'], $default);
-			if( !empty($db_value) ) $db_value =  (int) $db_value;
-
-			$css_class = isset( $args['css_class'] ) ? $args['css_class'] : '';
-			$extra_attr = isset( $args['extra_attr'] ) ? $args['extra_attr'] : '';
-		
-			require dirname( __FILE__ ) .'/templates/textbox_group.php';
-		}
-		echo ob_get_clean();
-	}
 
 	public function overlay_btn_offset_group($arguments){
 		ob_start();
@@ -723,63 +733,6 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		echo ob_get_clean();
 	}
 
-
-	// callback function
-	// show notification after form submission
-	public function addonify_cp_form_submission_notification_callback(){
-		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug ){
-			settings_errors();			
-		}
-	}
-
-
-
-	// callback function
-	// show error message in dashboard if woocommerce is not active
-	public function addonify_cp_show_woocommerce_not_active_notice_callback(){
-
-		if( ! $this->is_woocommerce_active() ){
-			add_action('admin_notices', 'addonify_cp_woocommerce_not_active_notice' );
-		}
-
-
-		function addonify_cp_woocommerce_not_active_notice() {
-			ob_start();
-			require dirname( __FILE__ ) .'/templates/woocommerce_not_active_notice.php';
-			echo ob_get_clean();
-		}
-
-	}
-
-
-	// callback function
-	// check if everthing in the plugin is in correct state
-	public function form_submission_housekeeping_callback($string){
-
-
-		// if display type is page but page id is not present or page is deleted by user
-		// create new page and update database
-
-		$display_type = $_POST[ ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' ];
-
-		if(  $display_type == 'page' ) {
-
-			$page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'page_id');
-
-			if( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
-
-				require_once dirname ( __FILE__, 2 ) . '/includes/class-addonify-compare-products-activator.php';
-				
-				// generate new page
-				Addonify_Compare_Products_Activator::activate();
-
-			}
-
-		}
-
-		return sanitize_text_field($string);
-			
-	}
 
 
 }

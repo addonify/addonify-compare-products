@@ -5,6 +5,6 @@
 
     printf(
         '<input type="text" class="regular-text" name="%1$s" id="%1$s" value="%2$s" />',
-        $args['name'],
-        $db_value
+        esc_attr( $args['name'] ),
+        esc_attr( $db_value )
     );

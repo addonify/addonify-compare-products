@@ -1,4 +1,7 @@
-<?php defined( 'ABSPATH' ) || exit; ?>
+<?php 
+    // direct access is disabled
+    defined( 'ABSPATH' ) || exit;
+?>
 
 <div id="addonofy-compare-products-table-wrapper" >
 
@@ -8,19 +11,19 @@
 
         <table id="addonofy-compare-products-table">
             <thead>
-                <?php
-                    foreach($data['data'] as $key => $value){
-                        echo '<tr>';
-                        if($key == 'title'){
-                            echo '<th></th>';
-                            foreach($value as $key1 => $value1){
-                                echo '<th>' . $value1 . '</th>';
+                <tr>
+                    <?php
+                        foreach($data['data'] as $key => $value){
+                            if($key == 'title'){
+                                echo '<th></th>';
+                                foreach($value as $key1 => $value1){
+                                    echo '<th>' . $value1 . '</th>';
+                                }
                             }
+                            break;
                         }
-                        echo '</tr>';
-                        break;
-                    }
-                ?>
+                    ?>
+                </tr>
             </thead>
             <tbody>
                 <?php

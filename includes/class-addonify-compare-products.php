@@ -190,11 +190,6 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 
-		// add overlay container in
-		$this->loader->add_action( 'woocommerce_before_shop_loop_item', $plugin_public, 'addonify_overlay_container_start_callback', 10 );
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'addonify_overlay_container_end_callback', 10 );
-
-
 		// add "Compare" button after add to cart button
 		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_after_add_to_cart_btn_callback', 20 );
 
@@ -205,6 +200,11 @@ class Addonify_Compare_Products {
 
 		// add "Compare Button" button aside image
 		$this->loader->add_action( 'woocommerce_shop_loop_item_title', $plugin_public, 'show_compare_products_btn_aside_image_callback' );
+
+		
+		// image overlay container 
+		$this->loader->add_action( 'woocommerce_before_shop_loop_item', $plugin_public, 'addonify_overlay_container_start_callback', 10 );
+		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'addonify_overlay_container_end_callback', 10 );
 		
 
 		// add custom markup into footer

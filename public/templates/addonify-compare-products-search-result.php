@@ -4,7 +4,7 @@
     defined( 'ABSPATH' ) || exit;
 
     $wp_query = $data['query'];
-    while($wp_query->have_posts()):
+    while( $wp_query->have_posts() ):
         $wp_query->the_post();
 ?>
 
@@ -20,7 +20,7 @@
         </div>
     </li>
 
-    <?php
-        endwhile; 
-        wp_reset_postdata();
-    ?>
+<?php
+    endwhile; 
+    wp_reset_postdata();
+?>
