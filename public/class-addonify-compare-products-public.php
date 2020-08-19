@@ -107,7 +107,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 			if( $this->enable_plugin === 1 ){
 				$this->compare_products_btn_position =  $this->get_db_values('compare_products_btn_position', 'after_add_to_cart' );
-				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label', translate('Compare') );
+				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label', __( 'Compare', 'addonify-compare-products' ) );
 			}
 
 			$this->register_shortcode();
@@ -340,7 +340,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		if( ! $this->enable_plugin ) return;
 
 		ob_start();
-		$this->get_templates( 'addonify-compare-products-wrapper', true, array( 'label' => translate('Compare')  ) );
+		$this->get_templates( 'addonify-compare-products-wrapper', true, array( 'label' => __( 'Compare', 'addonify-compare-products' ) ) );
 
 		if( $this->display_type == 'popup' ){
 			$this->get_templates( 'addonify-compare-products-compare-modal-wrapper' );

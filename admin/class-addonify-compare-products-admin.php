@@ -11,9 +11,8 @@
  * @author     Addonify <info@addonify.com>
  */
 
-require_once dirname ( __FILE__, 2 ) . '/includes/class-addonify-compare-products-helper.php';
 
-class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
+class Addonify_Compare_Products_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -194,7 +193,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		
 		if ( $file == plugin_basename(dirname(__FILE__, 2) . '/addonify-compare-products.php') ) {
 			// add "Settings" link
-			$links[] = '<a href="admin.php?page='. $this->settings_page_slug .'">' . translate('Settings','addonify-compare-products') . '</a>';
+			$links[] = '<a href="admin.php?page='. $this->settings_page_slug .'">' . __('Settings','addonify-compare-products') . '</a>';
 		}
 		
 		return $links;
@@ -233,13 +232,13 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		$settings_args = array(
 			'settings_group_name'	=> 'compare_products_settings',
 			'section_id' 			=> 'general_options',
-			'section_label'			=> translate('GENERAL OPTIONS'),
+			'section_label'			=> __('GENERAL OPTIONS', 'addonify-compare-products'),
 			'section_callback'		=> '',
 			'screen'				=> $this->settings_page_slug.'-settings',
 			'fields'				=> array(
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'enable_product_comparision',
-					'field_label'			=> translate('Enable Product Comparision'),
+					'field_label'			=> __('Enable Product Comparision', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "toggle_switch"),
 					'field_callback_args'	=> array( 
 						array(
@@ -251,15 +250,15 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_position',
-					'field_label'			=> translate('Compare Button Position'),
+					'field_label'			=> __('Compare Button Position', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "select"),
 					'field_callback_args'	=> array( 
 						array(
 							'name' 				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_position', 
 							'options' 			=> array(
-								'before_add_to_cart' 	=> translate('Before Add To Cart Button'),
-								'after_add_to_cart'		=> translate('After Add To Cart Button'),
-								'overlay_on_image'		=> translate('Overlay On The Product Image')
+								'before_add_to_cart' 	=> __('Before Add To Cart Button', 'addonify-compare-products'),
+								'after_add_to_cart'		=> __('After Add To Cart Button', 'addonify-compare-products'),
+								'overlay_on_image'		=> __('Overlay On The Product Image', 'addonify-compare-products')
 							),
 							'sanitize_callback'			=> 'sanitize_text_field'
 						),
@@ -267,26 +266,26 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_label',
-					'field_label'			=> translate('Compare Button Label'),
+					'field_label'			=> __('Compare Button Label', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "text_box"),
 					'field_callback_args'	=> array( 
 						array(
 							'name'			 	=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_label', 
-							'default'		 	=> translate('Compare'),
+							'default'		 	=> __('Compare', 'addonify-compare-products'),
 							'sanitize_callback'	=> 'sanitize_text_field'
 						)
 					), 
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type',
-					'field_label'			=> translate('Display Comparision in'),
+					'field_label'			=> __('Display Comparision in', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "select"),
 					'field_callback_args'	=> array( 
 						array(
 							'name'			 	=> ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type', 
 							'options' 			=> array(
-								'popup' 		=> translate('Popup Modal'),
-								'page'			=> translate('Comparision Page'),
+								'popup' 		=> __('Popup Modal', 'addonify-compare-products'),
+								'page'			=> __('Comparision Page', 'addonify-compare-products'),
 							),
 							'sanitize_callback'	=> array($this, 'check_if_comparision_page_exists'), //'sanitize_text_field'
 						)
@@ -294,18 +293,18 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_cookie_expires',
-					'field_label'			=> translate('Cookies Expire'),
+					'field_label'			=> __('Cookies Expire', 'addonify-compare-products'),
 					'field_callback'		=> array($this, 'select' ),
 					'field_callback_args'	=> array( 
 						array(
 							'name'			 	=> ADDONIFY_CP_DB_INITIALS . 'compare_products_cookie_expires', 
 							'options' 			=> array(
-								'browser' 		=> translate('After Browser Close'),
-								'1'				=> translate('1 Day'),
-								'7'				=> translate('1 Week'),
-								'14'			=> translate('2 Weeks'),
-								'21'			=> translate('3 Weeks'),
-								'28'			=> translate('4 Weeks'),
+								'browser' 		=> __('After Browser Close', 'addonify-compare-products'),
+								'1'				=> __('1 Day', 'addonify-compare-products'),
+								'7'				=> __('1 Week', 'addonify-compare-products'),
+								'14'			=> __('2 Weeks', 'addonify-compare-products'),
+								'21'			=> __('3 Weeks', 'addonify-compare-products'),
+								'28'			=> __('4 Weeks', 'addonify-compare-products'),
 							),
 							'sanitize_callback'	=> 'sanitize_text_field'
 						)
@@ -325,59 +324,59 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		$settings_args = array(
 			'settings_group_name'	=> 'compare_products_settings',
 			'section_id' 			=> 'table_options',
-			'section_label'			=> translate('TABLE OPTIONS'),
+			'section_label'			=> __('TABLE OPTIONS', 'addonify-compare-products'),
 			'section_callback'		=> '',
 			'screen'				=> $this->settings_page_slug.'-settings-table-options',
 			'fields'				=> array(
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'fields_to_compare',
-					'field_label'			=> translate('Fields To Compare'),
+					'field_label'			=> __('Fields To Compare', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "checkbox_with_label"),
 					'field_callback_args'	=> array( 
 						array(
-							'label'				=> translate('Product Image'),
+							'label'				=> __('Product Image', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_product_image',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Product Title'),
+							'label'				=> __('Product Title', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_product_title',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Product Rating'),
+							'label'				=> __('Product Rating', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_product_rating',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Product Price'),
+							'label'				=> __('Product Price', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_product_price',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Product Excerpt'),
+							'label'				=> __('Product Excerpt', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_product_excerpt',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Stock Info'),
+							'label'				=> __('Stock Info', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_stock_info',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Attributes'),
+							'label'				=> __('Attributes', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_attributes',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Add To Cart Button'),
+							'label'				=> __('Add To Cart Button', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'show_add_to_cart_btn',
 							'type'				=> 'number',
 							'sanitize_callback'	=> 'sanitize_text_field'
@@ -399,13 +398,13 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		$settings_args = array(
 			'settings_group_name'	=> 'compare_products_styles',
 			'section_id' 			=> 'style_options',
-			'section_label'			=> translate('STYLE OPTIONS'),
+			'section_label'			=> __('STYLE OPTIONS', 'addonify-compare-products'),
 			'section_callback'		=> '',
 			'screen'				=> $this->settings_page_slug.'-styles',
 			'fields'				=> array(
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'load_styles_from_plugin',
-					'field_label'			=> translate('Load Styles From Plugin'),
+					'field_label'			=> __('Load Styles From Plugin', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "toggle_switch"),
 					'field_callback_args'	=> array( 
 						array(
@@ -429,23 +428,23 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		$settings_args = array(
 			'settings_group_name'	=> 'compare_products_styles',
 			'section_id' 			=> 'content_colors',
-			'section_label'			=> translate('CONTENT COLORS'),
+			'section_label'			=> __('CONTENT COLORS', 'addonify-compare-products'),
 			'section_callback'		=> '',
 			'screen'				=> $this->settings_page_slug.'-content-colors',
 			'fields'				=> array(
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_btn_bck_color',
-					'field_label'			=> translate('Compare Button'),
+					'field_label'			=> __('Compare Button', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "color_picker_group"),
 					'field_callback_args'	=> array( 
 						array(
-							'label'				=> translate('Text Color'),
+							'label'				=> __('Text Color', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'compare_btn_text_color',
 							'default'			=> '#000000',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Background Color'),
+							'label'				=> __('Background Color', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'compare_btn_bck_color',
 							'default'			=> '#eeeeee',
 							'sanitize_callback'	=> 'sanitize_text_field'
@@ -454,17 +453,17 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'modal_box_color',
-					'field_label'			=> translate('Modal Box'),
+					'field_label'			=> __('Modal Box', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "color_picker_group"),
 					'field_callback_args'	=> array( 
 						array(
-							'label'				=> translate('Overlay Background Color'),
+							'label'				=> __('Overlay Background Color', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'modal_overlay_bck_color',
 							'default'			=> '#000000',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Background Color'),
+							'label'				=> __('Background Color', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'modal_bck_color',
 							'default'			=> '#ffffff',
 							'sanitize_callback'	=> 'sanitize_text_field'
@@ -474,7 +473,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'table_title_color',
-					'field_label'			=> translate('Table Title'),
+					'field_label'			=> __('Table Title', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "color_picker_group"),
 					'field_callback_args'	=> array( 
 						array(
@@ -487,29 +486,29 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'close_btn_color',
-					'field_label'			=> translate('Close Button'),
+					'field_label'			=> __('Close Button', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "color_picker_group"),
 					'field_callback_args'	=> array( 
 						array(
-							'label'				=> translate('Text Color'),
+							'label'				=> __('Text Color', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'close_btn_text_color',
 							'default'			=> '#d3ced2',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Background Color'),
+							'label'				=> __('Background Color', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'close_btn_bck_color',
 							'default'			=> '#f5c40e',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Text Color - On Hover'),
+							'label'				=> __('Text Color - On Hover', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'close_btn_text_color_hover',
 							'default'			=> '#d3ced2',
 							'sanitize_callback'	=> 'sanitize_text_field'
 						),
 						array(
-							'label'				=> translate('Background Color - On Hover'),
+							'label'				=> __('Background Color - On Hover', 'addonify-compare-products'),
 							'name'				=> ADDONIFY_CP_DB_INITIALS . 'close_btn_bck_color_hover',
 							'default'			=> '#f5c40e',
 							'sanitize_callback'	=> 'sanitize_text_field'
@@ -519,16 +518,16 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'table_style',
-					'field_label'			=> translate('Table Style'),
+					'field_label'			=> __('Table Style', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "select"),
 					'field_callback_args'	=> array( 
 						array(
 							'name'			 	=> ADDONIFY_CP_DB_INITIALS . 'table_style', 
 							'options' 			=> array(
-								'default' 		=> translate('Default'),
-								'dark'			=> translate('Dark'),
-								'light'			=> translate('Light'),
-								'stripped'		=> translate('Stripped'),
+								'default' 		=> __('Default', 'addonify-compare-products'),
+								'dark'			=> __('Dark', 'addonify-compare-products'),
+								'light'			=> __('Light', 'addonify-compare-products'),
+								'stripped'		=> __('Stripped', 'addonify-compare-products'),
 							),
 							'sanitize_callback'	=> 'sanitize_text_field'
 						)
@@ -536,7 +535,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 				),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'custom_css',
-					'field_label'			=> translate('Custom CSS'),
+					'field_label'			=> __('Custom CSS', 'addonify-compare-products'),
 					'field_callback'		=> array($this, "text_area"),
 					'field_callback_args'	=> array( 
 						array(
