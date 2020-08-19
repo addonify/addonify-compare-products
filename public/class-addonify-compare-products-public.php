@@ -70,6 +70,16 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	private $compare_products_btn_label;
 
 
+	/**
+	 * Display type of comparision table ( modal or page )
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $display_type;
+
+
 
 	/**
 	 * Initialize the class and set its properties.
@@ -87,11 +97,26 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// ajax action is also considered as admin action
 		$this->enable_plugin = (int) $this->get_db_values('enable_product_comparision', 1);
 
+		// get default display type of comparisoin table
+		$this->display_type = $this->get_db_values( 'compare_products_display_type', 'popup' );
+
+		
 		if( ! is_admin() ){
+			
+			// if display type is page but page id doesnot exist ( deleted by user)
+			// change display type to popup			
+			if( $this->display_type == 'page' ) {
+				$page_id = get_option( ADDONIFY_CP_DB_INITIALS .'page_id');
+				if( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
+					$this->display_type = 'popup';
+					update_option( ADDONIFY_CP_DB_INITIALS .'page_id');
+				}
+			}
+
 
 			if( $this->enable_plugin === 1 ){
 				$this->compare_products_btn_position =  $this->get_db_values('compare_products_btn_position', 'after_add_to_cart' );
-				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label', translate('Add to compare') );
+				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label', translate('Compare') );
 			}
 
 			$this->register_shortcode();
@@ -134,11 +159,11 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			'action_search_items' 			=> 'search_items',
 			'action_get_compare_contents' 	=> 'get_compare_contents',
 			'cookie_expire'				 	=> $this->get_db_values( 'compare_products_cookie_expires', 'browser' ),
-			'display_type'				 	=> $this->get_db_values( 'compare_products_display_type', 'popup' ),
+			'display_type'				 	=> $this->display_type,
 			'comparision_page_url'			=> ''
 		);
 
-		if( $this->get_db_values('compare_products_display_type') == 'page' ){
+		if( $this->display_type == 'page' ){
 			$localize_args['comparision_page_url'] = get_permalink( $this->get_db_values( 'page_id' ) );
 		}
 
@@ -275,7 +300,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		global $product;
 		$product_id = $product->get_id();
 
-		if( $this->compare_products_btn_position == 'overlay_on_image') {
+		if( $this->compare_products_btn_position == 'overlay_on_image' && $this->compare_products_btn_label ) {
 			ob_start();
 			$this->get_templates( 'addonify-compare-products-button', false, array( 'product_id' => $product_id, 'label' => $this->compare_products_btn_label, 'css_class' => 'addonify-overlay-btn') );
 			echo ob_get_clean();
@@ -294,7 +319,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		ob_start();
 		$this->get_templates( 'addonify-compare-products-wrapper', true, array( 'label' => translate('Compare')  ) );
 
-		if( $this->get_db_values('compare_products_display_type', 'popup') == 'popup' ){
+		if( $this->display_type == 'popup' ){
 			$this->get_templates( 'addonify-compare-products-compare-modal-wrapper' );
 		}
 
@@ -407,7 +432,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		}
 
 		// create atleast 3 <td> in frontend table if display type is popup
-		if( $this->get_db_values('compare_products_display_type', 'popup') == 'popup' ){
+		if( $this->display_type == 'popup' ){
 			foreach( $selected_products_data as $key => $value){
 
 				if( $key == 'Image' ){

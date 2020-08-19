@@ -13,6 +13,11 @@ $thumbnail_height : 48px;
         background: #1010101a;
         opacity: 0;
         transition: 0.4s;
+
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 

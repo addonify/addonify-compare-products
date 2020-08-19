@@ -11,6 +11,7 @@
 		var $search_result_container = $('#addonify-compare-search-results');
 		var $compare_modal_sel = $('#addonify-compare-modal');
 		var $compare_modal_content_sel = $('#addonify-compare-modal-content');
+		var $footer_compare_btn = $('#addonify-footer-compare-btn');
 		var search_input_timer;
 		var items_list_has_changed = false;
 		var compare_modal_is_open = false;
@@ -34,7 +35,9 @@
 
 		
 		// add item
-		$body.on('click', 'button.addonify-cp-button, #addonify-compare-search-results .item-add', function(){
+		$body.on('click', 'button.addonify-cp-button, #addonify-compare-search-results .item-add', function(event){
+
+			event.preventDefault();
 
 			var product_id = $(this).data('product_id');
 
@@ -82,6 +85,10 @@
 			else{
 				items_list_has_changed = false;
 			}
+
+			show_hide_footer_bar();
+
+			show_hide_footer_compare_button();
 
 
 			if( first_boot ){
@@ -148,6 +155,10 @@
 
 			$(this).parents('.addonify-footer-components').remove();
 
+			show_hide_footer_bar();
+
+			show_hide_footer_compare_button();
+
 			// show hide footer message
 			show_hide_footer_message();
 
@@ -189,6 +200,7 @@
 		// main compare button in footer
 		$body.on('click', '#addonify-footer-compare-btn', function(){
 
+
 			if( display_type == 'page' ){
 				window.location.href = page_url;
 				return;
@@ -226,6 +238,9 @@
 
 			// fetch items from cookies
 			fetch_items_from_cookies();
+			
+
+			show_hide_footer_compare_button();
 
 			// if selected_product_ids is not empty
 			if( selected_product_ids.length ){
@@ -242,7 +257,7 @@
 				get_thumbnails_from_ajax( product_ids );
 				
 				// show footers bar 
-				$body.addClass('addonify-compare-footer-is-visible')
+				show_hide_footer_bar();
 
 			}
 
@@ -295,19 +310,43 @@
 				$overlay_parent_container.each(function(){
 					$('button.' + overlay_btn_class, this).wrapAll('<div class=" '+ overlay_btn_wrapper_class + ' " />');
 				});
+
+				var img_height = $('img.attachment-woocommerce_thumbnail').height();
+
+				// set height of the button wrapper div
+				$('.' + overlay_btn_wrapper_class).css('height', img_height + 'px');
+
+
+				$('.' + overlay_btn_wrapper_class).hover(function(){
+					$(this).css('opacity', 1);
+				}, function(){
+					$(this).css('opacity', 0);
+				})
 			}
 
 
-			var img_height = $('img.attachment-woocommerce_thumbnail').height();
-			var padding_top = ( img_height - $('.' + overlay_btn_wrapper_class).height() ) / 2;
+		}
 
-			$('.' + overlay_btn_wrapper_class).css('height', img_height + 'px').css('padding-top', padding_top + 'px');
 
-			$('.' + overlay_btn_wrapper_class).hover(function(){
-				$(this).css('opacity', 1);
-			}, function(){
-				$(this).css('opacity', 0);
-			})
+		function show_hide_footer_compare_button(){
+			if( selected_product_ids.length > 1 ) {
+				$footer_compare_btn.fadeIn();
+			}
+			else{
+				$footer_compare_btn.fadeOut();
+			}
+
+		}
+
+
+		function show_hide_footer_bar(){
+			if( selected_product_ids.length ) {
+				$body.addClass('addonify-compare-footer-is-visible');
+			}
+			else{
+				$body.removeClass('addonify-compare-footer-is-visible');
+			}
+
 		}
 
 

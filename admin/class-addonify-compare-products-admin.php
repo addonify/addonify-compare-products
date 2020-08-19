@@ -66,7 +66,24 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		if( is_admin() ){
+
+			// if display type is page but page id is not present or page is deleted by user
+			// change display type to popoup
+
+			if(  get_option( 'addonify_cp_compare_products_display_type' ) == 'page' ) {
+				$page_id = get_option( 'addonify_cp_page_id');
+
+				if( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
+					update_option( 'addonify_cp_compare_products_display_type', 'popup' );
+				}
+
+			}
+			
+		}
+
 	}
+	
 
 
 	/**
@@ -220,6 +237,18 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 
 	}
 
+	// public function custom_callback_function(){
+	// 	// $display_type = get_option( ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' );
+
+	// 	// $_POST['addonify_cp_compare_products_btn_label'] = 'testing';
+
+	// 	update_option( 'addonify_cp_compare_products_btn_label', 'testing');
+
+	// 	// echo '<pre>';
+	// 	// var_dump( $all_posts );
+	// 	// die;
+	// }
+
 
 	// callback function
 	// generate settings page form elements
@@ -271,27 +300,27 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 					'field_callback_args'	=> array( 
 						array(
 							'name'			 	=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_label', 
-							'default'		 	=> translate('Add to compare'),
+							'default'		 	=> translate('Compare'),
 							'sanitize_callback'	=> 'sanitize_text_field'
 						)
 					), 
 				),
 				
-				array(
-					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_behavior',
-					'field_label'			=> translate('Compare Button On Click'),
-					'field_callback'		=> array($this, 'select' ),
-					'field_callback_args'	=> array( 
-						array(
-							'name'			 							=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_behavior', 
-							'options' 									=> array(
-								'add_to_list_only' 						=> translate('Add Item To Compare List'),
-								'add_to_list_and_open_modal_or_page'	=> translate('Add Item To Compare List & Show Comparision Modal / Page'),
-							),
-							'sanitize_callback'	=> 'sanitize_text_field'
-						)
-					), 
-				),
+				// array(
+				// 	'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_behavior',
+				// 	'field_label'			=> translate('Compare Button On Click'),
+				// 	'field_callback'		=> array($this, 'select' ),
+				// 	'field_callback_args'	=> array( 
+				// 		array(
+				// 			'name'			 							=> ADDONIFY_CP_DB_INITIALS . 'compare_products_btn_behavior', 
+				// 			'options' 									=> array(
+				// 				'add_to_list_only' 						=> translate('Add Item To Compare List'),
+				// 				'add_to_list_and_open_modal_or_page'	=> translate('Add Item To Compare List & Show Comparision Modal / Page'),
+				// 			),
+				// 			'sanitize_callback'	=> 'sanitize_text_field'
+				// 		)
+				// 	), 
+				// ),
 				array(
 					'field_id'				=> ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type',
 					'field_label'			=> translate('Display Comparision in'),
@@ -303,7 +332,7 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 								'popup' 		=> translate('Popup Modal'),
 								'page'			=> translate('Comparision Page'),
 							),
-							'sanitize_callback'	=> 'sanitize_text_field'
+							'sanitize_callback'	=> array($this, 'form_submission_housekeeping_callback'), //'sanitize_text_field'
 						)
 					), 
 				),
@@ -720,6 +749,36 @@ class Addonify_Compare_Products_Admin extends Compare_Products_Helper {
 			echo ob_get_clean();
 		}
 
+	}
+
+
+	// callback function
+	// check if everthing in the plugin is in correct state
+	public function form_submission_housekeeping_callback($string){
+
+
+		// if display type is page but page id is not present or page is deleted by user
+		// create new page and update database
+
+		$display_type = $_POST[ ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' ];
+
+		if(  $display_type == 'page' ) {
+
+			$page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'page_id');
+
+			if( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
+
+				require_once dirname ( __FILE__, 2 ) . '/includes/class-addonify-compare-products-activator.php';
+				
+				// generate new page
+				Addonify_Compare_Products_Activator::activate();
+
+			}
+
+		}
+
+		return sanitize_text_field($string);
+			
 	}
 
 
