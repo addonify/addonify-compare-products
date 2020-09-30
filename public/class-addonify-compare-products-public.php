@@ -71,6 +71,16 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	private $display_type;
 
 
+	/**
+	 * Page id for showing comparision shortcodes
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $display_type    Display comparision in popup or page
+	 */
+	 private $compare_page_id;
+
+
 
 	/**
 	 * Initialize the class and set its properties.
@@ -91,14 +101,17 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// get default display type of comparisoin table
 		$this->display_type = $this->get_db_values( 'compare_products_display_type', 'popup' );
 
+		$this->compare_page_id = get_option( ADDONIFY_CP_DB_INITIALS .'page_id');
+
 		
 		if( ! is_admin() ){
 			
 			// if display type is page but page id doesnot exist ( deleted by user)
 			// change display type to popup			
 			if( $this->display_type == 'page' ) {
-				$page_id = get_option( ADDONIFY_CP_DB_INITIALS .'page_id');
-				if( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
+				$this->compare_page_id = get_option( ADDONIFY_CP_DB_INITIALS .'page_id');
+
+				if( ! $this->compare_page_id || 'publish' != get_post_status( $this->compare_page_id ) ) {
 					$this->display_type = 'popup';
 					update_option( ADDONIFY_CP_DB_INITIALS .'page_id');
 				}
@@ -127,7 +140,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// should we load styles ?
 		if( ! $this->enable_plugin ) return;
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), time(), 'all' );
 	}
 
 
@@ -145,7 +158,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// js cookie
 		wp_enqueue_script( 'js-cookie', '//cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js', array('jquery'), $this->version, true );
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery', 'jquery-ui-sortable' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery', 'jquery-ui-sortable' ), time(), false );
 
 
 		$localize_args = array( 
@@ -155,7 +168,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			'action_get_compare_contents' 	=> 'get_compare_contents',
 			'cookie_expire'				 	=> $this->get_db_values( 'compare_products_cookie_expires', 'browser' ),
 			'display_type'				 	=> $this->display_type,
-			'comparision_page_url'			=> ''
+			'comparision_page_url'			=> '',
 		);
 
 		if( $this->display_type == 'page' ){
@@ -169,6 +182,12 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			$localize_args			
 		);
 
+	}
+
+
+	// tasks that needs to be done during "init"
+	public function init_callback(){
+		// do something
 	}
 
 	
@@ -339,7 +358,11 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// do not continue if "Enable Product Comparision" is not checked
 		if( ! $this->enable_plugin ) return;
 
+		// do not show following template if it is a shortcode display page
+		if( $this->display_type == 'page' && $this->compare_page_id == get_the_ID() ) return;
+
 		ob_start();
+
 		$this->get_templates( 'addonify-compare-products-wrapper', true, array( 'label' => __( 'Compare', 'addonify-compare-products' ) ) );
 
 		if( $this->display_type == 'popup' ){
@@ -371,6 +394,13 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 		// generate contents and return as array data
 		$compare_data = $this->generate_contents_data( $product_ids );
+
+		// echo '<pre>';
+		// var_dump( $title_data );
+		// die;
+
+
+		// $title_data = apply_filters( 'addonify_compare_products_table_title', );
 
 		ob_start();
 
@@ -412,56 +442,74 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 				if( (int) $this->get_db_values( 'show_product_title', 1 ) ) {
-					$selected_products_data['title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>';
+					$selected_products_data['a_title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>';
 				}
 
 
 				if( (int) $this->get_db_values( 'show_product_image', 1 ) ) {
-					$selected_products_data['Image'][] =  '<a href="' . $product->get_permalink() . '" >' . $product->get_image( get_option( '_wooscp_image_size', 'wooscp-large' ), array( 'draggable' => 'false' ) ) . '</a>';
+					$selected_products_data['b_Image'][] =  '<a href="' . $product->get_permalink() . '" >' . $product->get_image( get_option( '_wooscp_image_size', 'wooscp-large' ), array( 'draggable' => 'false' ) ) . '</a>';
 				}
 
 
 				if( (int) $this->get_db_values( 'show_product_price', 1 ) ) {
-					$selected_products_data['Price'][] =  $product->get_price_html();
+					$selected_products_data['c_Price'][] =  $product->get_price_html();
 				}
 
 				if( (int) $this->get_db_values( 'show_product_excerpt', 1 ) ) {
 					if ( $product->is_type( 'variation' ) ) {
-						$selected_products_data['Description'][] =  $product->get_description();
+						$selected_products_data['d_Description'][] =  $product->get_description();
 					} else {
-						$selected_products_data['Description'][] =  $product->get_short_description();
+						$selected_products_data['d_Description'][] =  $product->get_short_description();
 					}
 				}
 
 				if( (int) $this->get_db_values( 'show_product_rating', 1 ) ) {
-					$selected_products_data['Rating'][] =  wc_get_rating_html( $product->get_average_rating() );
+					$selected_products_data['e_Rating'][] =  wc_get_rating_html( $product->get_average_rating() );
 				}
 
 
 				if( (int) $this->get_db_values( 'show_stock_info', 1 ) ) {
-					$selected_products_data['Stock'][] =  wc_get_stock_html( $product );
+					$selected_products_data['f_Stock'][] =  wc_get_stock_html( $product );
 				}			
 
 
 				if( (int) $this->get_db_values( 'show_attributes', 1 ) ) {
 
-					ob_start();
-						wc_display_product_attributes( $product );
-						$additional = ob_get_contents();
-					ob_end_clean();
+					// ob_start();
+					// wc_display_product_attributes( $product );
+					// $additional = ob_get_clean();
 
-					$selected_products_data['Attributes'][] =  $additional;
+					// $selected_products_data['Attributes'][] =  $additional;
+
+					foreach( $this->cw_woo_attribute( $product ) as $attribute_key => $attribute_value ){
+						$selected_products_data[ 'g_' .$attribute_key ][] =  $attribute_value;
+					}
 
 				}
 
 
 				if( (int) $this->get_db_values( 'show_add_to_cart_btn', 1 ) ) {
-					$selected_products_data['Add To Cart'][] =   do_shortcode( '[add_to_cart id="' . $product_id . '" show_price="false" style="" ]' );
+					$selected_products_data['h_Add to Cart'][] =   do_shortcode( '[add_to_cart id="' . $product_id . '" show_price="false" style="" ]' );
 				}
 
 			}
 
 		}
+
+		ksort( $selected_products_data );
+
+		$selected_products_data_new = array();
+
+		foreach($selected_products_data as $key => $value){
+			$selected_products_data_new[ substr( $key, 2 ) ] = $value;
+		}
+
+
+		$selected_products_data = $selected_products_data_new;
+
+		// echo '<pre>';
+		// var_dump( $selected_products_data );
+		// die;
 
 		// create atleast 3 <td> in frontend table if display type is popup
 		if( $this->display_type == 'popup' ){
@@ -478,6 +526,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 					$selected_products_data[$key][$key_placeholder . ' ' . $key_placeholder .'-1'] = '';
 					$selected_products_data[$key][$key_placeholder . ' ' . $key_placeholder .'-2'] = '';
 				}
+
 				if( count( $selected_products_data[$key] ) === 2){
 					$selected_products_data[$key][$key_placeholder] = '';
 				}
@@ -487,6 +536,61 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 		return $selected_products_data;
 
+	}
+
+
+
+	private function cw_woo_attribute( $product ){
+
+		$attributes = $product->get_attributes();
+
+		// echo '<pre>';
+		// var_dump( $attributes );
+		// echo '</pre>';
+		// die;
+
+		$display_result = array();
+	
+		foreach ( $attributes as $attribute ) {
+	
+			$name = $attribute->get_name();
+			if ( $attribute->is_taxonomy() ) {
+	
+				$terms = wp_get_post_terms( $product->get_id(), $name, 'all' );
+	
+				$cwtax = $terms[0]->taxonomy;
+	
+				$cw_object_taxonomy = get_taxonomy($cwtax);
+	
+				if ( isset ($cw_object_taxonomy->labels->singular_name) ) {
+					$tax_label = $cw_object_taxonomy->labels->singular_name;
+				} elseif ( isset( $cw_object_taxonomy->label ) ) {
+					$tax_label = $cw_object_taxonomy->label;
+					if ( 0 === strpos( $tax_label, 'Product ' ) ) {
+						$tax_label = substr( $tax_label, 8 );
+					}
+				}
+				
+				$tax_terms = array();
+				foreach ( $terms as $term ) {
+					$single_term = esc_html( $term->name );
+					array_push( $tax_terms, $single_term );
+				}
+
+				$display_result[ $tax_label ] = implode(', ', $tax_terms);
+	
+			} else {
+				$display_result[ $name ] = esc_html( implode( ', ', $attribute->get_options() ) );
+			}
+		}
+
+		// echo '<pre>';
+		// var_dump( $display_result );
+		// echo '</pre>';
+		// die;
+
+
+		return ( ! empty( $display_result ) )  ? $display_result : array() ;
 	}
 
 
@@ -671,9 +775,11 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	private function get_templates( $template_name, $require_once = true, $data = array() ){
 
 		// first look for template in themes/addonify/templates
-		$theme_path = get_template_directory() . '/addonify/' . $template_name .'.php';
+		$theme_path = get_template_directory() . '/addonify/addonify-compare-products/' . $template_name .'.php';
 		$plugin_path = dirname( __FILE__ ) .'/templates/' . $template_name .'.php';
 		$template_path = file_exists( $theme_path ) ? $theme_path : $plugin_path;
+
+		extract($data);
 
 		if( $require_once ){
 			require_once $template_path;

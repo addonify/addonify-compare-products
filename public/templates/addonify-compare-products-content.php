@@ -5,7 +5,7 @@
 
 <div id="addonofy-compare-products-table-wrapper" >
 
-    <?php if( empty( $data['data'] ) ):?>
+    <?php if( empty( $data ) ):?>
         <p>Nothing to compare !</p>
     <?php else:?>
 
@@ -13,7 +13,7 @@
             <thead>
                 <tr>
                     <?php
-                        foreach($data['data'] as $key => $value){
+                        foreach($data as $key => $value){
                             if($key == 'title'){
                                 echo '<th></th>';
                                 foreach($value as $key1 => $value1){
@@ -27,7 +27,7 @@
             </thead>
             <tbody>
                 <?php
-                    foreach($data['data'] as $key => $value){
+                    foreach($data as $key => $value){
                         echo '<tr>';
                         if($key != 'title'){
                             echo '<td>' . $key . '</td>';
