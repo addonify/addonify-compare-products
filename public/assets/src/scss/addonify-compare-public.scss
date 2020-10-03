@@ -87,7 +87,7 @@ body.addonify-compare-footer-is-visible{
     border-radius: 2px;
 
     &:hover{
-        .addonify-footer-remove{
+        .addonify-footer-remove.addonify-footer-btn{
             display: block;
         }
     }
@@ -99,7 +99,7 @@ body.addonify-compare-footer-is-visible{
     background-position: center;
 }
 
-.addonify-footer-remove{
+.addonify-footer-remove.addonify-footer-btn{
     display: none;
     cursor: pointer;
     top: 2px;

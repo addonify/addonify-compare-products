@@ -17,7 +17,7 @@
                             if($key == 'title'){
                                 echo '<th></th>';
                                 foreach($value as $key1 => $value1){
-                                    echo '<th>' . $value1 . '</th>';
+                                    echo '<th>' . $value1 .  '</th>';
                                 }
                             }
                             break;
