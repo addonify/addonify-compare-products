@@ -229,9 +229,6 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'wp_ajax_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
 		$this->loader->add_action( 'wp_ajax_nopriv_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
 
-		// set cookies
-		// $this->loader->add_action( 'wp_ajax_addonify_set_cookies', $plugin_public, 'set_cookies_callback' );
-		// $this->loader->add_action( 'wp_ajax_nopriv_addonify_set_cookies', $plugin_public, 'set_cookies_callback' );
 
 		// init functions
 		$this->loader->add_action( 'init', $plugin_public, 'init_callback' );

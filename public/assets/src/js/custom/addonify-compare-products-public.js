@@ -102,7 +102,7 @@
 
 		
 		// remove item
-		$body.on('click', 'span.addonify-footer-remove', function(){
+		$body.on('click', '.addonify-footer-remove', function(){
 
 			var product_id = $(this).data('product_id');
 
@@ -126,8 +126,8 @@
 			// store product ids list into cookies, cookies will be deleted after browser close
 			setCookie(selected_product_ids);
 
-
-			$(this).parents('.addonify-footer-components').remove();
+			// remove thumbnail from footer
+			$('.addonify-footer-components[data-product_id="'+ product_id +'"]').remove();
 
 			show_hide_footer_bar();
 
@@ -245,7 +245,6 @@
 
 		function fetch_items_from_cookies(){
 
-			return; 
 			var items_from_cookies = Cookies.get('addonify_compare_product_selected_product_ids');
 
 			// do not continue if cookies is empty
@@ -477,36 +476,13 @@
 
 			ids = ids.join(',');
 
-			console.log( 'ids = ' + ids );
-
-			// we are not setting cookies with javascript
-			// b'cos php and javascript does not play well with cookies
-			// so set cookies with php through ajax
-
 			if( addonify_compare_ajax_object.cookie_expire == 'browser' ){
-				Cookies.set('addonify_compare_product_selected_product_ids', ids );
+				Cookies.set('addonify_compare_product_selected_product_ids', ids, { path: addonify_compare_ajax_object.cookie_path, domain: addonify_compare_ajax_object.cookie_domain } );
 			}
 			else{
-				Cookies.set('addonify_compare_product_selected_product_ids', ids, { expires: parseInt(addonify_compare_ajax_object.cookie_expire) } );
+				Cookies.set('addonify_compare_product_selected_product_ids', ids, { path: addonify_compare_ajax_object.cookie_path, domain: addonify_compare_ajax_object.cookie_domain, expires: parseInt(addonify_compare_ajax_object.cookie_expire) } );
 			}
 			
-
-			// return;
-
-			var data = {
-				'action'	: addonify_compare_ajax_object.action_set_cookies,
-				'ids'		: ids,
-				'nonce'		: addonify_compare_ajax_object.nonce
-			};
-
-			$.post( addonify_compare_ajax_object.ajax_url, data, function( response ) {
-				if( ! response.success ){
-					console.log( response.data);
-					// remove item
-				}
-
-			}, 'json' );
-
 		}
 
 	})
