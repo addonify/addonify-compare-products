@@ -78,7 +78,27 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	 * @access   private
 	 * @var      string    $display_type    Display comparision in popup or page
 	 */
-	 private $compare_page_id;
+	private $compare_page_id;
+
+
+	/**
+	 * Cookie expire time
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string
+	 */
+	private $cookie_expires;
+
+	
+	/**
+	 * Cookie name
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string
+	 */
+	private $cookie_name = 'addonify_compare_product_selected_product_ids';
 
 
 
@@ -99,9 +119,11 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		$this->enable_plugin = (int) $this->get_db_values('enable_product_comparision', 1);
 
 		// get default display type of comparisoin table
-		$this->display_type = $this->get_db_values( 'compare_products_display_type', 'popup' );
+		$this->display_type 	= $this->get_db_values( 'compare_products_display_type', 'popup' );
 
-		$this->compare_page_id = get_option( ADDONIFY_CP_DB_INITIALS .'page_id');
+		$this->compare_page_id 	= get_option( ADDONIFY_CP_DB_INITIALS .'page_id');
+
+		$this->cookie_expires	= $this->get_db_values( 'compare_products_cookie_expires', 'browser' );
 
 		
 		if( ! is_admin() ){
@@ -155,9 +177,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// do not continue if "Enable Product Comparision" is not checked
 		if( ! $this->enable_plugin ) return;
 
-		// js cookie
-		wp_enqueue_script( 'js-cookie', '//cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js', array('jquery'), $this->version, true );
-
+		// js-cookie is already loaded by woocommerce
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery', 'jquery-ui-sortable' ), time(), false );
 
 
@@ -165,11 +185,15 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			'ajax_url' 						=> admin_url( 'admin-ajax.php' ), 
 			'action_get_thumbnails' 		=> 'get_products_thumbnails',
 			'action_search_items' 			=> 'search_items',
+			'action_set_cookies' 			=> 'addonify_set_cookies',
 			'action_get_compare_contents' 	=> 'get_compare_contents',
-			'cookie_expire'				 	=> $this->get_db_values( 'compare_products_cookie_expires', 'browser' ),
+			'cookie_expire'				 	=> $this->cookie_expires,
 			'display_type'				 	=> $this->display_type,
 			'comparision_page_url'			=> '',
+			'cookie_path'					=> COOKIEPATH,
+			'cookie_domain'					=> COOKIE_DOMAIN
 		);
+
 
 		if( $this->display_type == 'page' ){
 			$localize_args['comparision_page_url'] = get_permalink( $this->get_db_values( 'page_id' ) );
@@ -187,7 +211,55 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 	// tasks that needs to be done during "init"
 	public function init_callback(){
-		// do something
+		
+		// ------------------------------------------------------------
+		// remove item from compare cookies
+		// ------------------------------------------------------------
+
+		$remove_item_id	= ( isset( $_GET['addonify_cp_remove_item'] ) ) ? $_GET['addonify_cp_remove_item'] 	: false;
+		$selected_items = ( isset( $_COOKIE[ $this->cookie_name ] ) ) ? $_COOKIE[ $this->cookie_name ] : false;
+		
+		if( $remove_item_id  && $selected_items ) {
+			
+			$nonce = ( isset( $_GET['token'] ) ) ? $_GET['token'] : '';
+			if( empty( $nonce ) || ! wp_verify_nonce( $nonce, $this->plugin_name ) ){
+				// show default woocommerce notice
+				wc_add_notice( 'Security token did not match. Please try again', 'error' );
+			}
+			else{
+
+				$selected_items = explode( ',', $selected_items );
+	
+				if ( ( $key = array_search( $remove_item_id, $selected_items ) ) !== false ) {
+					unset( $selected_items[ $key ] );
+				}
+	
+				$new_cookie_data = implode( ',', $selected_items );
+	
+	
+				if( $this->cookie_expires == 'browser' ){
+					$expire_time = 0;
+				}
+				else{
+					$expire_time = time() + ( intval( $this->cookie_expires ) * DAY_IN_SECONDS );
+				}
+				
+				if( empty( $new_cookie_data ) ){
+					unset( $_COOKIE[ $this->cookie_name ] ); 
+				}
+	
+				setcookie( $this->cookie_name, $new_cookie_data, $expire_time, COOKIEPATH, COOKIE_DOMAIN );
+				
+				$referrer = ! empty( wp_get_referer() ) ? wp_get_referer() : get_the_permalink( $this->compare_page_id );
+				$referrer = remove_query_arg( array( 'addonify_cp_remove_item', 'token' ), $referrer );
+		
+				wp_redirect( $referrer );
+				exit;
+			}
+
+			
+		}
+ 
 	}
 
 	
@@ -245,7 +317,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		
 		$query = esc_attr($_GET['query']);
 		$items_in_cookie_ar = array();
-		$items_in_cookie = $_COOKIE['addonify_selected_product_ids'];
+		$items_in_cookie = $_COOKIE[ $this->cookie_name ];
 
 		if( $items_in_cookie ){
 			$items_in_cookie_ar = explode(',', $items_in_cookie);
@@ -379,15 +451,15 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	 * Can be used in ajax requests or in shortcodes
 	 *
 	 * @since    1.0.0
-	 * @param      string    $product_ids       Get product ids from cookies
 	 */
 	public function get_compare_contents_callback(){
 
 		// do not continue if "Enable Product Comparision" is not checked
 		if( ! $this->enable_plugin ) return;
 
+
 		// get product ids from cookies
-		$product_ids = isset( $_COOKIE['addonify_selected_product_ids'] ) ? $_COOKIE['addonify_selected_product_ids'] : '';
+		$product_ids = isset( $_COOKIE[ $this->cookie_name ] ) ? $_COOKIE[ $this->cookie_name ] : '';
 
 		// convert into array
 		$product_ids = explode( ',', $product_ids );
@@ -395,12 +467,6 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		// generate contents and return as array data
 		$compare_data = $this->generate_contents_data( $product_ids );
 
-		// echo '<pre>';
-		// var_dump( $title_data );
-		// die;
-
-
-		// $title_data = apply_filters( 'addonify_compare_products_table_title', );
 
 		ob_start();
 
@@ -425,10 +491,36 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	 */
 	private function generate_contents_data( $selected_product_ids ) {
 
-		$selected_products_data = array();
+		global $wp;
 
+		$selected_products_data = array();
+		$all_attributes			= array();
+		$attribute_titles		= array();
+		
 		if ( is_array( $selected_product_ids ) && ( count( $selected_product_ids ) > 0 ) ) {
 
+			$show_attributes = (int) $this->get_db_values( 'show_attributes', 1 );
+			
+
+			// prepare array to fetch attributes easily later
+
+			if( $show_attributes ) {
+
+				foreach ( $selected_product_ids as $product_id ) {
+					$all_attributes[ $product_id ] = $this->get_product_attributes( wc_get_product( $product_id ) );
+				}
+
+				foreach( $all_attributes as $attr_key => $attr_val ){
+					if( is_array( $attr_val ) ) {
+						foreach( $attr_val as $attr_key1 => $attr_val1 ){
+							if( ! in_array( $attr_key1, $attribute_titles ) ) $attribute_titles[] = $attr_key1;
+						}
+					}
+				}
+			}
+
+			
+			// main loop --------------
 			foreach ( $selected_product_ids as $product_id ) {
 
 				$product = wc_get_product( $product_id );
@@ -442,7 +534,25 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 				if( (int) $this->get_db_values( 'show_product_title', 1 ) ) {
-					$selected_products_data['a_title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>';
+
+					
+					if( wp_doing_ajax() ) {
+						$delete_btn = '<a class="addonify-footer-remove" data-product_id="'. $product_id .'">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>X</button>' ) . '</a>';
+					}
+					else{
+						$action_url =  add_query_arg( 
+							array( 
+								'addonify_cp_remove_item' 	=> $product_id,
+								'token'										=> wp_create_nonce( $this->plugin_name )
+							),  
+							home_url( $wp->request )
+						);
+
+						$delete_btn = '<a href="'. $action_url .'">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>X</button>' ) . '</a>';
+					}
+
+								
+					$selected_products_data['a_title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>' . $delete_btn;
 				}
 
 
@@ -473,16 +583,10 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 				}			
 
 
-				if( (int) $this->get_db_values( 'show_attributes', 1 ) ) {
+				if( $show_attributes ) {
 
-					// ob_start();
-					// wc_display_product_attributes( $product );
-					// $additional = ob_get_clean();
-
-					// $selected_products_data['Attributes'][] =  $additional;
-
-					foreach( $this->cw_woo_attribute( $product ) as $attribute_key => $attribute_value ){
-						$selected_products_data[ 'g_' .$attribute_key ][] =  $attribute_value;
+					foreach( $attribute_titles as $attr ){
+						$selected_products_data[ 'g_' .$attr ][] =  ( isset( $all_attributes[$product_id][$attr] ) ) ? $all_attributes[$product_id][$attr] : '-';
 					}
 
 				}
@@ -496,6 +600,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 		}
 
+
 		ksort( $selected_products_data );
 
 		$selected_products_data_new = array();
@@ -507,9 +612,6 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 		$selected_products_data = $selected_products_data_new;
 
-		// echo '<pre>';
-		// var_dump( $selected_products_data );
-		// die;
 
 		// create atleast 3 <td> in frontend table if display type is popup
 		if( $this->display_type == 'popup' ){
@@ -540,14 +642,15 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 
 
-	private function cw_woo_attribute( $product ){
+	/**
+	 * Return product attributes array
+	 *
+	 * @since    1.0.0
+	 * @param      string    $product       woocommerce product object
+	 */
+	private function get_product_attributes( $product ){
 
 		$attributes = $product->get_attributes();
-
-		// echo '<pre>';
-		// var_dump( $attributes );
-		// echo '</pre>';
-		// die;
 
 		$display_result = array();
 	
@@ -584,15 +687,8 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			}
 		}
 
-		// echo '<pre>';
-		// var_dump( $display_result );
-		// echo '</pre>';
-		// die;
-
-
 		return ( ! empty( $display_result ) )  ? $display_result : array() ;
 	}
-
 
 	
 	
@@ -762,7 +858,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 		return get_option( ADDONIFY_CP_DB_INITIALS . $field_name, $default );
 	}
 
-
+	
 	
 	/**
 	 * Require proper templates for use in front end
@@ -796,9 +892,6 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 	 * Register shortcode to use in comparision page
 	 *
 	 * @since    1.0.0
-	 * @param    $template_name		Name of the template
-	 * @param    $require_once		Should use require_once or require ?
-	 * @param    $data				Data to pass to template
 	 */
 	private function register_shortcode(){
 		add_shortcode( 'addonify-compare-products', array( $this, 'get_compare_contents_callback' ) );

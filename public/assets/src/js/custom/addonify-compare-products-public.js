@@ -60,7 +60,7 @@
 				selected_product_ids.push( product_id );
 
 				// store product ids list into cookies, cookies will be deleted after browser close
-				setCookie(selected_product_ids);
+				setCookie(selected_product_ids, product_id );
 
 				// mark button as selected
 				$(this).addClass('selected');
@@ -68,21 +68,18 @@
 				// close modal, if it is open
 				$search_modal_sel.addClass('hidden');
 
-				
-				// if( display_type == 'popup' || selected_product_ids.length < 2 ){
 
-					// generate thumbnails with preloader
-					show_thumbnail_preloader( product_id.toString() );
+				// generate thumbnails with preloader
+				show_thumbnail_preloader( product_id.toString() );
 
-					// replace thumbnail preloader image with actual image
-					get_thumbnails_from_ajax( product_id.toString() );
+				// replace thumbnail preloader image with actual image
+				get_thumbnails_from_ajax( product_id.toString() );
 
-					// show footers bar 
-					$body.addClass( 'addonify-compare-footer-is-visible' );
+				// show footers bar 
+				$body.addClass( 'addonify-compare-footer-is-visible' );
 
-					// show hide footer message
-					show_hide_footer_message();
-				// }
+				// show hide footer message
+				show_hide_footer_message();
 
 				
 			}
@@ -105,7 +102,7 @@
 
 		
 		// remove item
-		$body.on('click', 'span.addonify-footer-remove', function(){
+		$body.on('click', '.addonify-footer-remove', function(){
 
 			var product_id = $(this).data('product_id');
 
@@ -129,8 +126,8 @@
 			// store product ids list into cookies, cookies will be deleted after browser close
 			setCookie(selected_product_ids);
 
-
-			$(this).parents('.addonify-footer-components').remove();
+			// remove thumbnail from footer
+			$('.addonify-footer-components[data-product_id="'+ product_id +'"]').remove();
 
 			show_hide_footer_bar();
 
@@ -247,7 +244,8 @@
 
 
 		function fetch_items_from_cookies(){
-			var items_from_cookies = Cookies.get('addonify_selected_product_ids');
+
+			var items_from_cookies = Cookies.get('addonify_compare_product_selected_product_ids');
 
 			// do not continue if cookies is empty
 			if( ! items_from_cookies ) return;
@@ -363,7 +361,7 @@
 
 			// add placeholder, while thumbnail image is being loaded
 			ids_ar.forEach(function(id){
-				template += '<div class="addonify-footer-components" data-product_id="' + id + '"><div class="sortable addonify-footer-thumbnail loading" data-product_id="' + id + '"><span class="addonify-footer-remove" data-product_id="' + id + '"></span></div></div>';
+				template += '<div class="addonify-footer-components" data-product_id="' + id + '"><div class="sortable addonify-footer-thumbnail loading" data-product_id="' + id + '"><span class="addonify-footer-remove addonify-footer-btn" data-product_id="' + id + '"></span></div></div>';
 			});
 
 			$footer_thumbnail_container.append(template);
@@ -475,13 +473,16 @@
 
 
 		function setCookie(ids){
+
+			ids = ids.join(',');
+
 			if( addonify_compare_ajax_object.cookie_expire == 'browser' ){
-				Cookies.set('addonify_selected_product_ids', ids );
+				Cookies.set('addonify_compare_product_selected_product_ids', ids, { path: addonify_compare_ajax_object.cookie_path, domain: addonify_compare_ajax_object.cookie_domain } );
 			}
 			else{
-				Cookies.set('addonify_selected_product_ids', ids, { expires: parseInt(addonify_compare_ajax_object.cookie_expire) } );
+				Cookies.set('addonify_compare_product_selected_product_ids', ids, { path: addonify_compare_ajax_object.cookie_path, domain: addonify_compare_ajax_object.cookie_domain, expires: parseInt(addonify_compare_ajax_object.cookie_expire) } );
 			}
-
+			
 		}
 
 	})

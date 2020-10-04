@@ -83,10 +83,11 @@ class Addonify_Compare_Products_Admin {
 	 */
 	public function enqueue_styles() {
 
+		global $wp_styles;
+
 		// load styles in this plugin page only
 		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug ){
 
-			global $wp_styles;
 
 			// toggle switch
 			wp_enqueue_style( 'lc_switch', plugin_dir_url( __FILE__ ) . 'css/lc_switch.css' );
@@ -120,7 +121,20 @@ class Addonify_Compare_Products_Admin {
 				// requires atleast wordpress 4.9.0
 				wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
 
-				wp_enqueue_script( 'wp-color-picker-alpha', plugin_dir_url( __FILE__ ) . 'js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ) );
+				// wp_enqueue_script( 'wp-color-picker-alpha', plugin_dir_url( __FILE__ ) . 'js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ) );
+				wp_register_script( 'wp-color-picker-alpha', plugin_dir_url( __FILE__ ) . 'js/wp-color-picker-alpha.min.js', array( 'wp-color-picker' ) );
+
+				$color_picker_strings = array(
+					'clear'            => __( 'Clear', 'addonify-compare-products' ),
+					'clearAriaLabel'   => __( 'Clear color', 'addonify-compare-products' ),
+					'defaultString'    => __( 'Default', 'addonify-compare-products' ),
+					'defaultAriaLabel' => __( 'Select default color', 'addonify-compare-products' ),
+					'pick'             => __( 'Select Color', 'addonify-compare-products' ),
+					'defaultLabel'     => __( 'Color value', 'addonify-compare-products' ),
+				);
+				wp_localize_script( 'wp-color-picker-alpha', 'wpColorPickerL10n', $color_picker_strings );
+				wp_enqueue_script( 'wp-color-picker-alpha' );
+
 			}
 
 			// toggle switch
