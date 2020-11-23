@@ -8,14 +8,14 @@
     if( isset($arg['label']) ) {
         printf(
             '<p>%s</p>',
-            esc_attr( $arg['label'] )
+            esc_html( $arg['label'] )
         );
     }
 
     printf(
         '<input type="text" value="%2$s" name="%1$s" id="%1$s" class="color-picker" data-alpha="true" />',
-        $arg['name'],
-        $db_value
+        esc_attr( $arg['name'] ),
+        esc_attr( $db_value )
     );
 
     echo '</div>';

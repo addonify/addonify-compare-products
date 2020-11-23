@@ -537,7 +537,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 
 					
 					if( wp_doing_ajax() ) {
-						$delete_btn = '<a class="addonify-footer-remove" data-product_id="'. $product_id .'">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>X</button>' ) . '</a>';
+						$delete_btn = '<a href="#" class="addonify-footer-remove" data-product_id="'. esc_attr( $product_id ) .'">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>x</button>' ) . '</a>';
 					}
 					else{
 						$action_url =  add_query_arg( 
@@ -548,11 +548,11 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 							home_url( $wp->request )
 						);
 
-						$delete_btn = '<a href="'. $action_url .'">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>X</button>' ) . '</a>';
+						$delete_btn = '<a href="'. $action_url .'" class="addonify-footer-remove">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>x</button>' ) . '</a>';
 					}
 
 								
-					$selected_products_data['a_title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>' . $delete_btn;
+					$selected_products_data['a_title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_title() ) . '</a>' . $delete_btn;
 				}
 
 
@@ -727,7 +727,7 @@ class Addonify_Compare_Products_Public extends Compare_Products_Helper {
 			'.addonify-compare-model-inner, .addonify-compare-search-model-inner' => array(
 				'background' 	=> 'modal_bck_color',
 			),
-			'#addonofy-compare-products-table th a' => array(
+			'#addonify-compare-products-table th a' => array(
 				'color'		 	=> 'table_title_color',
 			),
 			'.addonify-compare-all-close-btn svg' => array(

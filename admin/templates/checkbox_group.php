@@ -5,5 +5,5 @@
 
     echo '<div class="checkbox-group">';
     $this->checkbox($arg);
-    echo '<label>'.  $arg['label'] .'</label>';
+    echo '<label>'.  esc_html( $arg['label'] ) .'</label>';
     echo '</div>';

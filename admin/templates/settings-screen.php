@@ -5,19 +5,19 @@
 
 <div class="wrap">
 
-    <h1><?php _e( 'Compare Products Options', 'addonify-quick-view' );?></h1>
+    <h1><?php echo __( 'Compare Products Options', 'addonify-compare-products' );?></h1>
 
     <div id="addonify-settings-wrapper">
             
         <ul id="addonify-settings-tabs">
             <li>
-                <a href="<?php echo $tab_url;?>settings" class="<?php if( $current_tab == 'settings') echo 'active';?> " > 
-                    <?php _e( 'Settings', 'addonify-compare-products' );?> 
+                <a href="<?php echo esc_url( $tab_url );?>settings" class="<?php if( $current_tab == 'settings') echo 'active';?> " > 
+                    <?php echo __( 'Settings', 'addonify-compare-products' );?> 
                 </a>
             </li>
             <li>
-                <a href="<?php echo $tab_url;?>styles" class="<?php if( $current_tab == 'styles') echo 'active';?> " > 
-                    <?php _e( 'Styles', 'addonify-compare-products' );?> 
+                <a href="<?php echo esc_url( $tab_url );?>styles" class="<?php if( $current_tab == 'styles') echo 'active';?> " > 
+                    <?php echo __( 'Styles', 'addonify-compare-products' );?> 
                 </a>
             </li>
         </ul>

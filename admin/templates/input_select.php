@@ -12,7 +12,7 @@
             echo 'selected';
         } 
         
-        echo ' >' . $label . '</option>';
+        echo ' >' . esc_html( $label ) . '</option>';
     }
     
     echo '</select>';
