@@ -4,7 +4,9 @@
 ?>
 
 <!-- product display modal -->
-<div id="addonify-compare-modal" class="hidden" >
+<div id="addonify-compare-modal-overlay" class="addonify-compare-hidden"></div>
+
+<div id="addonify-compare-modal" class="addonify-compare-hidden" >
     <div class="addonify-compare-model-inner">
 
         <button id="addonify-compare-close-button" class="addonify-compare-all-close-btn" >
@@ -15,7 +17,7 @@
             </svg>
         </button>
 
-        <div id="addonify-compare-modal-content" style="height: 100%; overflow: scroll;"></div>
+        <div id="addonify-compare-modal-content"></div>
 
     </div>
 </div>

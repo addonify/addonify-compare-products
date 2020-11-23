@@ -18,6 +18,8 @@
 		var first_boot = true;
 		var display_type = addonify_compare_ajax_object.display_type;
 		var page_url = addonify_compare_ajax_object.comparision_page_url;
+		var modalOverlay = $('#addonify-compare-modal-overlay');
+		var searchModalOverlay = $('#addonify-compare-search-modal-overlay');
 
 
 		$( "#addonify-footer-thumbnails" ).sortable({
@@ -66,7 +68,7 @@
 				$(this).addClass('selected');
 
 				// close modal, if it is open
-				$search_modal_sel.addClass('hidden');
+				$search_modal_sel.addClass('addonify-compare-hidden');
 
 
 				// generate thumbnails with preloader
@@ -102,7 +104,9 @@
 
 		
 		// remove item
-		$body.on('click', '.addonify-footer-remove', function(){
+		$body.on('click', '.addonify-footer-remove', function(e){
+
+			e.preventDefault();
 
 			var product_id = $(this).data('product_id');
 
@@ -148,12 +152,16 @@
 
 		// show search modal
 		$body.on('click', '#addonify-footer-add', function(){
-			$search_modal_sel.removeClass('hidden');
+			$body.removeClass('addonify-compare-footer-is-visible');
+			searchModalOverlay.removeClass('addonify-compare-hidden');
+			$search_modal_sel.removeClass('addonify-compare-hidden');
 		})
 
 
 		// close search modal
-		$body.on('click', '#addonify-compare-search-close-button', function(){
+		$body.on('click', '#addonify-compare-search-close-button, #addonify-compare-search-modal-overlay', function(){
+			$body.addClass('addonify-compare-footer-is-visible');
+			searchModalOverlay.addClass('addonify-compare-hidden');
 			close_search_modal();
 		})
 
@@ -199,10 +207,9 @@
 
 
 		// close compare modal
-		$body.on('click', '#addonify-compare-close-button', function(){
+		$body.on('click', '#addonify-compare-close-button, #addonify-compare-modal-overlay', function(){
 			close_compare_modal();
-		})
-
+		});
 
 		// --------------------------------------------------------------------------------------
 
@@ -371,10 +378,10 @@
 		function show_hide_footer_message(){
 
 			if( selected_product_ids.length < 2 ){
-				$message_sel.removeClass('hidden');
+				$message_sel.removeClass('addonify-compare-hidden');
 			}
 			else{
-				$message_sel.addClass('hidden');
+				$message_sel.addClass('addonify-compare-hidden');
 			}
 
 		}
@@ -401,7 +408,7 @@
 
 		
 		function close_search_modal(){
-			$search_modal_sel.addClass('hidden');
+			$search_modal_sel.addClass('addonify-compare-hidden');
 			$search_result_container.html('');
 			$('#addonify-compare-search-query').val('');
 		}
@@ -425,6 +432,10 @@
 
 		function show_compare_modal(){
 
+			modalOverlay.removeClass('addonify-compare-hidden');
+
+			$body.removeClass('addonify-compare-footer-is-visible');
+
 			if( items_list_has_changed ){
 				// reset previous content
 				$compare_modal_content_sel.html('');
@@ -432,7 +443,7 @@
 
 			compare_modal_is_open = true;
 			
-			$compare_modal_sel.removeClass('hidden');
+			$compare_modal_sel.removeClass('addonify-compare-hidden');
 
 			// show loading animation
 			$compare_modal_content_sel.addClass('loading');
@@ -443,7 +454,12 @@
 
 
 		function close_compare_modal(){
-			$compare_modal_sel.addClass('hidden');
+
+			modalOverlay.addClass('addonify-compare-hidden');
+
+			$body.addClass('addonify-compare-footer-is-visible');
+
+			$compare_modal_sel.addClass('addonify-compare-hidden');
 			compare_modal_is_open = false;
 			items_list_has_changed = false;
 		}

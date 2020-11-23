@@ -182,16 +182,16 @@ class Addonify_Compare_Products_Admin {
 
 
 		if( ! $parent_menu_slug ){
-			add_menu_page( 'Addonify Settings', 'Addonify', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), plugin_dir_url( __FILE__ ) .'/templates/addonify-logo.svg', 76 );
+			add_menu_page( __( 'Addonify Settings', 'addonify-compare-products' ), 'Addonify', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), plugin_dir_url( __FILE__ ) .'/templates/addonify-logo.svg', 76 );
 
-			add_submenu_page(  $this->settings_page_slug, 'Addonify Compare Products Settings', 'Compare', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
+			add_submenu_page(  $this->settings_page_slug, __( 'Addonify Compare Products Settings', 'addonify-compare-products' ), __( 'Compare', 'addonify-compare-products' ), 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
 
 		}
 		else{
 
 			// sub menu
 			// redirects to main plugin link
-			add_submenu_page(  $parent_menu_slug, 'Addonify Compare Products Settings', 'Compare', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
+			add_submenu_page(  $parent_menu_slug, __( 'Addonify Compare Products Settings', 'addonify-compare-products' ), __( 'Compare', 'addonify-compare-products' ), 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 1 );
 			
 		}
 	}

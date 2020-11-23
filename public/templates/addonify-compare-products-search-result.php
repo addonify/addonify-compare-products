@@ -16,7 +16,7 @@
                 }
             ?>
             <div class="item-name"><?php the_title();?></div>
-            <div class="item-add " data-product_id="<?php echo get_the_ID();?>"><span>+</span></div>
+            <div class="item-add " data-product_id="<?php echo esc_attr( get_the_ID() );?>"><span>+</span></div>
         </div>
     </li>
 

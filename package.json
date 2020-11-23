@@ -1,5 +1,5 @@
 {
-  "name": "addonify-quick-view",
+  "name": "addonify-compare-products",
   "version": "1.0.0",
   "description": "Addonify WooCoomerce Quick View plugin adds functionality to have a WooCoomerce product quick view preview on a modal window.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/addonify/addonify-quick-view.git"
+    "url": "git+https://github.com/addonify/addonify-compare-products.git"
   },
   "keywords": [
     "woocommerce",
@@ -19,9 +19,9 @@
   "author": "Addonify",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/addonify/addonify-quick-view/issues"
+    "url": "https://github.com/addonify/addonify-compare-products/issues"
   },
-  "homepage": "https://github.com/addonify/addonify-quick-view#readme",
+  "homepage": "https://github.com/addonify/addonify-compare-products#readme",
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-wp-pot": "^2.4.3"
