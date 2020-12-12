@@ -121,7 +121,7 @@
 			
 			
 			// remove id from selected_product_ids
-			for( var i = 0; i < selected_product_ids.length; i++){
+			for ( var i = 0; i < selected_product_ids.length; i++ ) {
 				if( selected_product_ids[i] == product_id ){
 					selected_product_ids.splice(i, 1);
 				}

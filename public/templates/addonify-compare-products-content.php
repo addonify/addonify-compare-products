@@ -15,7 +15,7 @@
                     <?php
                         foreach($data as $key => $value){
                             if($key == 'title'){
-                                echo '<th></th>';
+                                echo '<th>Title</th>';
                                 foreach($value as $key1 => $value1){
                                     if ( $value1 ) {
                                         echo '<th>' . $value1 .  '</th>';
