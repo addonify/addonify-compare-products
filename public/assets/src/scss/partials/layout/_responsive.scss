@@ -1,0 +1,25 @@
+
+// media & responsive
+
+@media( max-width: 768px ) {
+
+    #addonify-compare-modal {
+
+        left: 15px;
+        right: 15px;
+        top: 15px;
+        bottom: 15px;
+    }
+
+    .addonify-footer-components button {
+
+        height: 45px;
+    }
+
+    #addonify-footer-add,
+    .addonify-footer-thumbnail {
+
+        height: 45px;
+        width: 45px;
+    }
+}

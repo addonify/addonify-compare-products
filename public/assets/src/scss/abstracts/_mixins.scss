@@ -1,0 +1,86 @@
+
+// flex 
+
+@mixin flex () {
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+// transation
+
+@mixin transation_delay () {
+
+    transition: all 0.5s ease;
+}
+
+@mixin transation_delay_none () {
+
+    transition: none;
+}
+
+// scale 
+
+@mixin scale () {
+
+    transform: scale(1.1);
+    @include transation_delay();
+}
+
+
+//  Mixins : Position  
+
+@mixin position ( $top, $bottom, $left, $right ) {
+	
+	 top:$top;
+	 bottom:$bottom;
+	 left:$left;
+	 right:$right;
+	 transform:translateY(-50%);
+}
+
+@mixin position_topnleft () {
+	
+	top:50%;
+	left:50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+// Mixins: border radius 
+
+@mixin border-radius ($border) {
+
+	border-radius:$border;
+}
+
+// Mixins : Overlay
+
+@mixin overlay () {
+
+	 top:0;
+	 bottom:0;
+	 left:0;
+	 right:0;
+	 background:rgba(0,0,0,0.8);
+	 @include transation_delay();
+}
+
+
+// Mixins : box shadow 
+
+@mixin drop_shadow () {
+
+	box-shadow: 0 2px 6px rgba(0,0,0,.2);
+}
+
+@mixin mild_drop_shadow() {
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.13);
+}
+
+@mixin large_drop_shadow () {
+
+    box-shadow: 0px 0px 65px rgba(0,0,0,0.1);
+}
+
