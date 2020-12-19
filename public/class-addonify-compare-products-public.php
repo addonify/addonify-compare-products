@@ -106,7 +106,6 @@ class Addonify_Compare_Products_Public {
 	private $cookie_name = 'addonify_compare_product_selected_product_ids';
 
 
-
 	/**
 	 * Initialize the class and set its properties.
 	 *
