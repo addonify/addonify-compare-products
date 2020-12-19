@@ -22,28 +22,29 @@
  */
 class Addonify_Compare_Products_Activator {
 
-	
 	public static function activate() {
 
-		$user_id = get_current_user_id();
+		// create page only once.
+		// do not regenerate even if plugin is deleted by user.
 
-		// Create page object
+		if ( get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' ) ) {
+			return;
+		}
+
+		// Create page object.
 		$new_page = array(
-			'post_title'    => __( 'Compare Products', 'addonify-compare-products' ),
-			'post_content'  => '[addonify-compare-products]',
-			'post_status'   => 'publish',
-			'post_author'   => $user_id,
-			'post_type'     => 'page',
+			'post_title' => __( 'Compare Products', 'addonify-compare-products' ),
+			'post_content' => '[addonify-compare-products]',
+			'post_status' => 'publish',
+			'post_author' => get_current_user_id(),
+			'post_type' => 'page',
 		);
 
-	
-		// Insert the post into the database
+		// Insert the post into the database.
 		$page_id = wp_insert_post( $new_page );
 
-		update_option( ADDONIFY_CP_DB_INITIALS .'page_id', $page_id );
+		update_option( ADDONIFY_CP_DB_INITIALS . 'page_id', $page_id );
 
 	}
-
-
 
 }

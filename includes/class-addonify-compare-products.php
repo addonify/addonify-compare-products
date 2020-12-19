@@ -103,7 +103,7 @@ class Addonify_Compare_Products {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-loader.php';
+		 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
