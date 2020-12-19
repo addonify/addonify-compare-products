@@ -99,10 +99,10 @@ gulp.task('dortlTask', function() {
 });
 
 // just hit the command "gulp" it will run the following tasks...
-gulp.task('default', gulp.series('scriptsTask', 'sassTask', 'dortlTask', (done) => {
+gulp.task('default', gulp.series('scriptsTask', 'sassTask', (done) => {
 
     gulp.watch(scriptpath.script_src, gulp.series('scriptsTask'));
     gulp.watch(sasspath.sass_src, gulp.series('sassTask'));
-    gulp.watch(rtlcsspath.rtlcss_src, gulp.series('dortlTask'));
+    // gulp.watch(rtlcsspath.rtlcss_src, gulp.series('dortlTask'));
     done();
 }));

@@ -163,14 +163,7 @@ class Addonify_Compare_Products_Public {
 			return;
 		}
 
-		if( is_rtl() ) {
-
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public-rtl.css', array(), time(), 'all' );
-
-		} else {
-
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), time(), 'all' );
-		}
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), time(), 'all' );
 	}
 
 
