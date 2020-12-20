@@ -2,12 +2,15 @@
 
     // direct access is disabled
     defined( 'ABSPATH' ) || exit;
-
-    $wp_query = $data['query'];
-    while( $wp_query->have_posts() ):
-        $wp_query->the_post();
 ?>
 
+<ul>
+
+<?php
+    if ( $wp_query->have_posts() ) :
+        while( $wp_query->have_posts() ):
+            $wp_query->the_post();
+?>
     <li>
         <div class="item">
             <?php 
@@ -23,4 +26,9 @@
 <?php
     endwhile; 
     wp_reset_postdata();
+    else :
 ?>
+    <li>No results found for <strong><?php echo $query; ?></strong></li>
+    <?php endif; ?>
+
+</ul>

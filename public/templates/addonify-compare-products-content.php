@@ -15,7 +15,7 @@
                     <?php
                         foreach($data as $key => $value){
                             if($key == 'title'){
-                                echo '<th></th>';
+                                echo '<th>Title</th>';
                                 foreach($value as $key1 => $value1){
                                     if ( $value1 ) {
                                         echo '<th>' . $value1 .  '</th>';
@@ -29,9 +29,9 @@
             </thead>
             <tbody>
                 <?php
-                    foreach($data as $key => $value){
+                    foreach ( $data as $key => $value ) {
                         
-                        if($key != 'title'){
+                        if ( 'title' !== $key ) {
                             echo '<tr>';
                             echo '<td class="acp-field-title">' . $key . '</td>';
                             foreach($value as $key1 => $value1) {

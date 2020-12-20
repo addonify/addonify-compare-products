@@ -37,6 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'ADDONIFY_COMPARE_PRODUCTS_VERSION', '1.0.0' );
 define( 'ADDONIFY_CP_DB_INITIALS', 'addonify_cp_' );
+define( 'ADDONIFY_CP_PLUGIN_PATH', dirname( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.

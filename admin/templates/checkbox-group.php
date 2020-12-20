@@ -4,6 +4,7 @@
     defined( 'ABSPATH' ) || exit;
 
     echo '<div class="checkbox-group">';
+    echo '<label>';
     $this->checkbox($arg);
-    echo '<label>'.  esc_html( $arg['label'] ) .'</label>';
+    echo esc_html( $arg['label'] ) .'</label>';
     echo '</div>';
