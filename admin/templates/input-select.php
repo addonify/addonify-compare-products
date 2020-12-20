@@ -5,10 +5,6 @@
 
     echo '<select  name="'. esc_attr( $args['name'] ) .'" id="'. esc_attr( $args['name'] ) .'" >';
 
-    echo '<pre>';
-    var_dump( $options ); 
-    echo '</pre>';
-
     foreach($options as $value => $label){
 
         echo '<option value="'. esc_attr( $value ) .'" ';

@@ -8,7 +8,9 @@
 
 
 		// initiate wp color picker
-		$('.color-picker').wpColorPicker();
+		if( $('.color-picker').length ) {
+			$('.color-picker').wpColorPicker();
+		}
 
 
 		// code editor
@@ -23,6 +25,29 @@
 				}
 			);
 			var editor = wp.codeEditor.initialize( $('#addonify_cp_custom_css'), editorSettings );
+		}
+
+
+		// show hide "select compare page" option if display type == comparision page
+		
+		var $compare_page_tr = $('#addonify_cp_compare_page').parents('tr');
+		var $compare_display_type = $('#addonify_cp_compare_products_display_type');
+
+		show_hide_select_compare_page_option();
+
+		$compare_display_type.change(function(){
+			show_hide_select_compare_page_option();
+		})
+
+		function show_hide_select_compare_page_option(){
+			
+			if( $compare_display_type.val() == 'page' ) {
+				$compare_page_tr.fadeIn();
+			}
+			else{
+				$compare_page_tr.fadeOut();
+			}
+
 		}
 
 

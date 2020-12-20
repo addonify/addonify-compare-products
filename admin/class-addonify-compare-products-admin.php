@@ -18,7 +18,7 @@
  * @subpackage Addonify_Compare_Products/admin
  * @author     Adodnify <info@addonify.com>
  */
-class Addonify_Compare_Products_Admin {
+class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers {
 
 	/**
 	 * Settings page slug
@@ -67,11 +67,12 @@ class Addonify_Compare_Products_Admin {
 			// if display type is page but page id is not present or page is deleted by user.
 			// change display type to popup.
 
-			if ( 'page' === get_option( 'addonify_cp_compare_products_display_type' ) ) {
-				$page_id = get_option( 'addonify_cp_page_id' );
+			if ( 'page' === get_option( ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' ) ) {
+				// $page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' );
+				$compare_page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'compare_page', get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' ) );
 
-				if ( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
-					update_option( 'addonify_cp_compare_products_display_type', 'popup' );
+				if ( ! $compare_page_id || 'publish' != get_post_status( $compare_page_id ) ) {
+					update_option( ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type', 'popup' );
 				}
 			}
 		}
@@ -111,6 +112,8 @@ class Addonify_Compare_Products_Admin {
 
 	}
 
+
+
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
@@ -145,20 +148,10 @@ class Addonify_Compare_Products_Admin {
 			wp_enqueue_script( 'lc_switch', plugin_dir_url( __FILE__ ) . 'js/lc_switch.min.js', array( 'jquery' ), $this->version, false );
 
 			// use wp-color-picker-alpha as dependency.
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin-min.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin.js', array( 'jquery' ), time(), false );
 
 		}
 
-	}
-
-
-	/**
-	 * Check if woocommerce is active
-	 *
-	 * @since    1.0.0
-	 */
-	private function is_woocommerce_active() {
-		return ( class_exists( 'woocommerce' ) ) ? true : false;
 	}
 
 
@@ -261,7 +254,7 @@ class Addonify_Compare_Products_Admin {
 					'field_callback_args' => array(
 						array(
 							'name' => ADDONIFY_CP_DB_INITIALS . 'enable_product_comparision',
-							'checked' => 1,
+							'default' => 1,
 						),
 					),
 				),
@@ -277,6 +270,7 @@ class Addonify_Compare_Products_Admin {
 								'after_add_to_cart' => __( 'After Add To Cart Button', 'addonify-compare-products' ),
 								'overlay_on_image' => __( 'Overlay On The Product Image', 'addonify-compare-products' ),
 							),
+							'default' => 'before_add_to_cart',
 						),
 					),
 				),
@@ -300,9 +294,20 @@ class Addonify_Compare_Products_Admin {
 							'name' => ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type',
 							'options' => array(
 								'popup' => __( 'Popup Modal', 'addonify-compare-products' ),
-								'page' => __( 'Comparision Page', 'addonify-compare-products' ),
+								'page' => __( 'Page', 'addonify-compare-products' ),
 							),
-							'sanitize_callback' => array( $this, 'check_if_comparision_page_exists' ),
+							'default' => 'popup',
+						),
+					),
+				),
+				array(
+					'field_id' => ADDONIFY_CP_DB_INITIALS . 'compare_page',
+					'field_label' => __( 'Select Compare Page', 'addonify-compare-products' ),
+					'field_callback' => array( $this, 'select_page' ),
+					'field_callback_args' => array(
+						array(
+							'name' => ADDONIFY_CP_DB_INITIALS . 'compare_page',
+							'default' => get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' ),
 						),
 					),
 				),
@@ -321,6 +326,7 @@ class Addonify_Compare_Products_Admin {
 								'21' => __( '3 Weeks', 'addonify-compare-products' ),
 								'28' => __( '4 Weeks', 'addonify-compare-products' ),
 							),
+							'default' => 'browser',
 						),
 					),
 				),
@@ -350,41 +356,49 @@ class Addonify_Compare_Products_Admin {
 							'label' => __( 'Product Image', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_product_image',
 							'type' => 'number',
+							'default' => 1,
 						),
 						array(
 							'label' => __( 'Product Title', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_product_title',
 							'type' => 'number',
+							'default' => 1,
 						),
 						array(
 							'label' => __( 'Product Rating', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_product_rating',
 							'type' => 'number',
+							'default' => 1,
 						),
 						array(
 							'label' => __( 'Product Price', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_product_price',
 							'type' => 'number',
+							'default' => 1,
 						),
 						array(
 							'label' => __( 'Product Excerpt', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_product_excerpt',
 							'type' => 'number',
+							'default' => 1,
 						),
 						array(
 							'label' => __( 'Stock Info', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_stock_info',
 							'type' => 'number',
+							'default' => 1,
 						),
 						array(
 							'label' => __( 'Attributes', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_attributes',
 							'type' => 'number',
+							'default' => 1,
 						),
 						array(
 							'label' => __( 'Add To Cart Button', 'addonify-compare-products' ),
 							'name' => ADDONIFY_CP_DB_INITIALS . 'show_add_to_cart_btn',
 							'type' => 'number',
+							'default' => 1,
 						),
 					),
 				),
@@ -412,8 +426,7 @@ class Addonify_Compare_Products_Admin {
 					'field_callback_args' => array(
 						array(
 							'name' => ADDONIFY_CP_DB_INITIALS . 'load_styles_from_plugin',
-							'checked' => 0,
-							'sanitize_callback' => 'sanitize_textarea_field',
+							'default' => 0,
 						),
 					),
 				),
@@ -476,7 +489,6 @@ class Addonify_Compare_Products_Admin {
 						array(
 							'name' => ADDONIFY_CP_DB_INITIALS . 'table_title_color',
 							'default' => '#000000',
-							'sanitize_callback' => 'sanitize_text_field',
 						),
 					),
 				),
@@ -520,7 +532,6 @@ class Addonify_Compare_Products_Admin {
 								'light' => __( 'Light', 'addonify-compare-products' ),
 								'stripped' => __( 'Stripped', 'addonify-compare-products' ),
 							),
-							'sanitize_callback' => 'sanitize_text_field',
 						),
 					),
 				),
@@ -532,7 +543,6 @@ class Addonify_Compare_Products_Admin {
 						array(
 							'name' => ADDONIFY_CP_DB_INITIALS . 'custom_css',
 							'attr' => 'rows="5" class="large-text code"',
-							'sanitize_callback' => 'sanitize_text_field',
 						),
 					),
 				),
@@ -542,37 +552,11 @@ class Addonify_Compare_Products_Admin {
 		// create settings fields.
 		$this->create_settings( $settings_args );
 
+		// save default values in db.
+		update_option( ADDONIFY_CP_DB_INITIALS . 'default_values', $this->default_input_values );
+
 	}
 
-
-
-	/**
-	 * This will create settings section, fields and register that settings in a database from the provided array data
-	 *
-	 * @since    1.0.0
-	 * @param    array $args Data required for this plugin to work.
-	 */
-	private function create_settings( $args ) {
-
-		// define section ---------------------------.
-		add_settings_section( $args['section_id'], $args['section_label'], $args['section_callback'], $args['screen'] );
-
-		foreach ( $args['fields'] as $field ) {
-
-			// create label.
-			add_settings_field( $field['field_id'], $field['field_label'], $field['field_callback'], $args['screen'], $args['section_id'], $field['field_callback_args'] );
-
-			foreach ( $field['field_callback_args'] as $sub_field ) {
-				register_setting(
-					$args['settings_group_name'],
-					$sub_field['name'],
-					array(
-						'sanitize_callback' => $sub_field['sanitize_callback'],
-					)
-				);
-			}
-		}
-	}
 
 
 	/**
@@ -580,7 +564,7 @@ class Addonify_Compare_Products_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function addonify_cp_form_submission_notification_callback() {
+	public function addonify_cp_form_submission_notification() {
 		if ( isset( $_GET['page'] ) && $_GET['page'] === $this->settings_page_slug ) {
 			settings_errors();
 		}
@@ -592,7 +576,7 @@ class Addonify_Compare_Products_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function addonify_cp_show_woocommerce_not_active_notice_callback() {
+	public function addonify_cp_show_woocommerce_not_active_notice() {
 		if ( ! $this->is_woocommerce_active() ) {
 			add_action(
 				'admin_notices',
@@ -600,161 +584,6 @@ class Addonify_Compare_Products_Admin {
 					require dirname( __FILE__ ) . '/templates/woocommerce_not_active_notice.php';
 				}
 			);
-		}
-	}
-
-
-	/**
-	 * Create comparision page if it was deleted by user.
-	 *
-	 * @since    1.0.0
-	 * @param    string $string Page to check.
-	 */
-	public function check_if_comparision_page_exists( $string ) {
-
-		// if display type is "page" but page id is not present or page is deleted by user.
-		// create new page and update database.
-
-		$display_type = isset( $_POST[ ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' ] ) ? sanitize_text_field( wp_unslash( $_POST[ ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' ] ) ) : '';
-
-		if ( 'page' === $display_type ) {
-
-			$page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' );
-
-			if ( ! $page_id || 'publish' != get_post_status( $page_id ) ) {
-
-				require_once dirname( __FILE__, 2 ) . '/includes/class-addonify-compare-products-activator.php';
-
-				// generate new page.
-				Addonify_Compare_Products_Activator::activate();
-
-			}
-		}
-
-		return sanitize_text_field( $string );
-
-	}
-
-
-	// -------------------------------------------------
-	// form helpers for admin setting screen
-	// -------------------------------------------------
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $arguments Data required to make this function work.
-	 */
-	public function text_box( $arguments ) {
-		foreach ( $arguments as $args ) {
-			$default = isset( $args['default'] ) ? $args['default'] : '';
-			$db_value = get_option( $args['name'], $default );
-
-			require dirname( __FILE__ ) . '/templates/input_textbox.php';
-		}
-	}
-
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $arguments Data required to make this function work.
-	 */
-	public function overlay_btn_offset_group( $arguments ) {
-		require dirname( __FILE__ ) . '/templates/overlay_btn_offset_group.php';
-	}
-
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $arguments Data required to make this function work.
-	 */
-	public function text_area( $arguments ) {
-		foreach ( $arguments as $args ) {
-			$placeholder = isset( $args['placeholder'] ) ? $args['placeholder'] : '';
-			$db_value = get_option( $args['name'], $placeholder );
-			$attr = isset( $args['attr'] ) ? $args['attr'] : '';
-
-			require dirname( __FILE__ ) . '/templates/input_textarea.php';
-		}
-	}
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $arguments Data required to make this function work.
-	 */
-	public function toggle_switch( $arguments ) {
-		foreach ( $arguments as $args ) {
-			$args['attr'] = ' class="lc_switch"';
-			$this->checkbox( $args );
-		}
-	}
-
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $args Data required to make this function work.
-	 */
-	public function color_picker_group( $args ) {
-		foreach ( $args as $arg ) {
-			$default = isset( $arg['default'] ) ? $arg['default'] : '';
-			$db_value = ( get_option( $arg['name'] ) ) ? get_option( $arg['name'] ) : $default;
-
-			require dirname( __FILE__ ) . '/templates/input_colorpicker.php';
-		}
-	}
-
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $args Data required to make this function work.
-	 */
-	public function checkbox_with_label( $args ) {
-		foreach ( $args as $arg ) {
-			require dirname( __FILE__ ) . '/templates/checkbox_group.php';
-		}
-	}
-
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $args Data required to make this function work.
-	 */
-	public function checkbox( $args ) {
-		$default_state = ( array_key_exists( 'checked', $args ) ) ? $args['checked'] : 1;
-		$db_value = get_option( $args['name'], $default_state );
-		$is_checked = ( $db_value ) ? 'checked' : '';
-		$attr = ( array_key_exists( 'attr', $args ) ) ? $args['attr'] : '';
-
-		require dirname( __FILE__ ) . '/templates/input_checkbox.php';
-	}
-
-
-	/**
-	 * Helper function to generate input fields for admin settings page.
-	 *
-	 * @since    1.0.0
-	 * @param    string $arguments Data required to make this function work.
-	 */
-	public function select( $arguments ) {
-		foreach ( $arguments as $args ) {
-
-			$db_value = get_option( $args['name'] );
-			$options = ( array_key_exists( 'options', $args ) ) ? $args['options'] : array();
-
-			require dirname( __FILE__ ) . '/templates/input_select.php';
 		}
 	}
 
