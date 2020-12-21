@@ -1,19 +1,36 @@
 <?php
-    
-    // direct access is disabled
-    defined( 'ABSPATH' ) || exit;
+/**
+ * Template for the admin part of the plugin.
+ *
+ * @link       https://www.addonify.com
+ * @since      1.0.0
+ *
+ * @package    Addonify_Compare_Products
+ * @subpackage Addonify_Compare_Products/admin/templates
+ */
 
-    echo '<select  name="'. esc_attr( $args['name'] ) .'" id="'. esc_attr( $args['name'] ) .'" >';
+/**
+ * Template for the admin part of the plugin.
+ *
+ * @package    Addonify_Compare_Products
+ * @subpackage Addonify_Compare_Products/admin/templates
+ * @author     Addodnify <info@addonify.com>
+ */
 
-    foreach($options as $value => $label){
+// direct access is disabled.
+defined( 'ABSPATH' ) || exit;
 
-        echo '<option value="'. esc_attr( $value ) .'" ';
+echo '<select  name="' . esc_attr( $args['name'] ) . '" id="' . esc_attr( $args['name'] ) . '" >';
 
-        if( $db_value == $value ) {
-            echo 'selected';
-        } 
-        
-        echo ' >' . esc_html( $label ) . '</option>';
-    }
-    
-    echo '</select>';
+foreach ( $options as $value => $label ) {
+
+	echo '<option value="' . esc_attr( $value ) . '" ';
+
+	if ( $db_value === $value ) {
+		echo 'selected';
+	}
+
+	echo ' >' . esc_html( $label ) . '</option>';
+}
+
+echo '</select>';

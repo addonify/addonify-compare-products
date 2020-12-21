@@ -397,10 +397,11 @@
 
 			var data = {
                 'action': addonify_compare_ajax_object.action_search_items,
-                'query': query
+                'query': query,
+				'nonce': addonify_compare_ajax_object.nonce
             };
 	
-            $.get(addonify_compare_ajax_object.ajax_url, data, function( response ) {
+            $.post(addonify_compare_ajax_object.ajax_url, data, function( response ) {
 				$search_result_container.removeClass('loading').html( response );
             })
 

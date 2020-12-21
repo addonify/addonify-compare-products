@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The file that defines the core plugin class
  *
@@ -104,13 +103,11 @@ class Addonify_Compare_Products {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-helpers.php';
 
-
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-loader.php';
-
 
 		/**
 		 * The class responsible for defining internationalization functionality
@@ -164,21 +161,20 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-
-		// admin menu
+		// admin menu.
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu_callback', 20 );
 
-		// custom link in plugins.php page in wp-admin
+		// custom link in plugins.php page in wp-admin.
 		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'custom_plugin_link_callback', 10, 2 );
 
-		// show settings page ui 
-		$this->loader->add_action("admin_init", $plugin_admin, 'settings_page_ui' );
-		
-		//show notice if woocommerce is not active
-		$this->loader->add_action('admin_init', $plugin_admin, 'addonify_cp_show_woocommerce_not_active_notice' );
+		// show settings page ui .
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'settings_page_ui' );
 
-		// show admin notices after form submission
-		$this->loader->add_action('admin_notices', $plugin_admin, 'addonify_cp_form_submission_notification' );
+		// show notice if woocommerce is not active.
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'addonify_cp_show_woocommerce_not_active_notice' );
+
+		// show admin notices after form submission.
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'addonify_cp_form_submission_notification' );
 
 		// add custom post status "Addonify Compare Products Page" after page name.
 		$this->loader->add_filter( 'display_post_states', $plugin_admin, 'display_custom_post_states_after_page_title', 10, 2 );
@@ -207,7 +203,7 @@ class Addonify_Compare_Products {
 
 		// add "Compare Button" button aside image.
 		$this->loader->add_action( 'woocommerce_shop_loop_item_title', $plugin_public, 'show_compare_products_btn_aside_image_callback' );
-		
+
 		// image overlay container.
 		$this->loader->add_action( 'woocommerce_before_shop_loop_item', $plugin_public, 'addonify_overlay_container_start_callback', 10 );
 		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'addonify_overlay_container_end_callback', 10 );
@@ -222,6 +218,7 @@ class Addonify_Compare_Products {
 
 		// get product thumbnails.
 		$this->loader->add_action( 'wp_ajax_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
+
 		$this->loader->add_action( 'wp_ajax_nopriv_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
 
 		// search items.

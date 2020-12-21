@@ -16,7 +16,7 @@
  *
  * @package    Addonify_Compare_Products
  * @subpackage Addonify_Compare_Products/admin
- * @author     Adodnify <info@addonify.com>
+ * @author     Addodnify <info@addonify.com>
  */
 class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers {
 
@@ -25,7 +25,7 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $settings_page_slug    Default settings page slug for this plugin
+	 * @var      string $settings_page_slug Default settings page slug for this plugin
 	 */
 	private $settings_page_slug = 'addonify_compare_products';
 
@@ -148,7 +148,7 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 			wp_enqueue_script( 'lc_switch', plugin_dir_url( __FILE__ ) . 'js/lc_switch.min.js', array( 'jquery' ), $this->version, false );
 
 			// use wp-color-picker-alpha as dependency.
-			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin.js', array( 'jquery' ), time(), false );
+			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/addonify-compare-products-admin.min.js', array( 'jquery' ), $this->version, false );
 
 		}
 
@@ -180,7 +180,7 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 		}
 
 		if ( ! $parent_menu_slug ) {
-			add_menu_page( __( 'Addonify Settings', 'addonify-compare-products' ), 'Addonify', 'manage_options', $this->settings_page_slug, array( $this, 'get_settings_screen_contents' ), plugin_dir_url( __FILE__ ) . '/templates/addonify-logo.svg', 76 );
+			add_menu_page( __( 'Addonify Settings', 'addonify-compare-products' ), 'Addonify', 'manage_options', $this->settings_page_slug, array( $this, 'get_settings_screen_contents' ), plugin_dir_url( __FILE__ ) . '/images/addonify-logo.svg', 76 );
 
 			add_submenu_page( $this->settings_page_slug, __( 'Addonify Compare Products Settings', 'addonify-compare-products' ), __( 'Compare', 'addonify-compare-products' ), 'manage_options', $this->settings_page_slug, array( $this, 'get_settings_screen_contents' ), 1 );
 
@@ -581,7 +581,7 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 			add_action(
 				'admin_notices',
 				function() {
-					require dirname( __FILE__ ) . '/templates/woocommerce_not_active_notice.php';
+					require dirname( __FILE__ ) . '/templates/woocommerce-not-active-notice.php';
 				}
 			);
 		}
