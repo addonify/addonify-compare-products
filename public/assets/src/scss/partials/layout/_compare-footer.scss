@@ -1,5 +1,6 @@
-
-// compare footer dock 
+/* -------------------------------------------------------------------------- 
+	Compare Footer
+  -------------------------------------------------------------------------- */
 
 .addonify-compare-hidden {
 
@@ -9,19 +10,23 @@
 #addonify-compare-footer {
 
 	display: none;
-
     position: fixed;
-    top:auto;
-    bottom: 0;
-    right: 0;
-    left:auto;
-    background: $bck_color;
+    top: auto;
+    bottom: 10px;
+    right: auto;
+    left: 50%;
+    width: auto;
+    min-width: 600px;
+    max-width: 95vw;
+    background-color: #0C001B;
     padding: 15px 20px;
     z-index: 9999991;
+    transform: translateX(-50%);
+    border-radius: 5px;
     @include transation_delay();
 }
 
-body.addonify-compare-footer-is-visible #addonify-compare-footer {
+.addonify-compare-footer-is-visible #addonify-compare-footer {
 
     @include flex();
 	align-items: center;
@@ -29,7 +34,6 @@ body.addonify-compare-footer-is-visible #addonify-compare-footer {
 
 #addonify-compare-footer-message {
 
-    float: left;
     color: #b9b9b9;
     margin-right:15px;
 }
@@ -37,33 +41,24 @@ body.addonify-compare-footer-is-visible #addonify-compare-footer {
 #addonify-footer-thumbnails,
 #addonify-compare-footer-inner {
 
-    float: right;
     overflow: hidden;
     height: 100%;
-}
-
-#addonify-compare-footer-inner .addonify-footer-components {
-
-	padding-left: 5px;
-	padding-right: 5px;
 }
 
 #addonify-compare-footer-inner {
 
 	@include flex();
-    justify-content: flex-end;
+    gap: 20px;
+    justify-content: center;
     align-items: center;
-
-    margin-left:-5px;
-    margin-right:-5px;
+    width: 100%;
 }
 
 #addonify-footer-thumbnails {
 
     @include flex();
-
-    margin-left:-5px;
-    margin-right:5px;
+    gap: 10px;
+    align-items: center;
 }
 
 .addonify-footer-components img {
@@ -77,15 +72,16 @@ body.addonify-compare-footer-is-visible #addonify-compare-footer {
 .addonify-footer-components button {
 
 	height: $thumbnail_height;
-	border:none;
-	font-weight:normal;
+    padding: 0 20px;
+	border: none;
+	font-weight: normal;
 	font-size: 15px;
 	@include border-radius(3px);
 }
 
 .addonify-footer-thumbnail {
 
-    position:relative;
+    position: relative;
     cursor: move;
     width: $thumbnail_height;
     height: $thumbnail_height;
@@ -130,8 +126,19 @@ body.addonify-compare-footer-is-visible #addonify-compare-footer {
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
-
     @include border-radius(3px);
+
+    &:hover {
+
+        text-decoration: none;
+        box-sizing: none;
+        border: none
+    }
+
+    &:focus {
+
+        outline: none;
+    }
 }
 
 .addonify-footer-settings {
@@ -147,5 +154,3 @@ body.addonify-compare-footer-is-visible #addonify-compare-footer {
     background-repeat: no-repeat;
     background-position: center;
 }
-
-

@@ -21,14 +21,14 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<ul>
+<ul id="adfy-compare-search-result">
 
 	<?php
 	if ( $wp_query->have_posts() ) :
 		while ( $wp_query->have_posts() ) :
 			$wp_query->the_post();
 			?>
-		<li>
+		<li class="adfy-compare-search-result-item">
 			<div class="item">
 				<?php
 				if ( has_post_thumbnail() ) {
@@ -36,7 +36,11 @@ defined( 'ABSPATH' ) || exit;
 				}
 				?>
 				<div class="item-name"><?php the_title(); ?></div>
-				<div class="item-add " data-product_id="<?php echo esc_attr( get_the_ID() ); ?>"><span>+</span></div>
+			</div>
+			<div class="item-add " data-product_id="<?php echo esc_attr( get_the_ID() ); ?>">
+				<span>
+					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="12" height="12"><path fill="none" d="M0 0h24v24H0z"/><path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/></svg>
+				</span>
 			</div>
 		</li>
 
