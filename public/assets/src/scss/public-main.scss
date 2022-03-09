@@ -1,0 +1,25 @@
+/*
+===========================================================
+
+# Pugin: Addonify WooCommerce Compare Products
+
+# Author: https://addonify.com/
+
+# Since: 12 Sept, 2020
+
+# Last updated: 
+
+# Current version: 1.0.0
+
+=====================================
+*/
+
+
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
+
+// partials
+@import 'partials/components/buttons';				// buttons
+@import 'partials/layout/compare-footer';			// footer
+@import 'partials/layout/compare-modal';			// modal
+@import 'partials/layout/compare-page';				// comparision page

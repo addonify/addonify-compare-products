@@ -44,6 +44,5 @@
             <div id="addonify-compare-search-results"></div>
 
         </div>
-
     </div>
 </div>

@@ -1,0 +1,159 @@
+
+/* -------------------------------------------------------------------------- 
+	Compare Footer
+  -------------------------------------------------------------------------- */
+
+.addonify-compare-hidden {
+
+    display: none;
+}
+
+#addonify-compare-footer {
+
+	display: none;
+    position: fixed;
+    top: auto;
+    bottom: 10px;
+    right: auto;
+    left: 50%;
+    width: auto;
+    min-width: 600px;
+    max-width: 95vw;
+    background-color: #0C001B;
+    padding: 15px 20px;
+    z-index: 9999991;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    @include transation_delay();
+}
+
+.addonify-compare-footer-is-visible #addonify-compare-footer {
+
+    @include flex();
+	align-items: center;
+}
+
+#addonify-compare-footer-message {
+
+    color: #b9b9b9;
+    margin-right:15px;
+}
+
+#addonify-footer-thumbnails,
+#addonify-compare-footer-inner {
+
+    overflow: hidden;
+    height: 100%;
+}
+
+#addonify-compare-footer-inner {
+
+	@include flex();
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#addonify-footer-thumbnails {
+
+    @include flex();
+    gap: 10px;
+    align-items: center;
+}
+
+.addonify-footer-components img {
+
+	height: 100%;
+    width: 100%;
+    @include border-radius(2px);
+    @include mild_drop_shadow();
+}
+
+.addonify-footer-components button {
+
+	height: $thumbnail_height;
+    padding: 0 20px;
+	border: none;
+	font-weight: normal;
+	font-size: 15px;
+	@include border-radius(3px);
+}
+
+.addonify-footer-thumbnail {
+
+    position: relative;
+    cursor: move;
+    width: $thumbnail_height;
+    height: $thumbnail_height;
+    background: #3c3c3c;
+}
+
+.addonify-footer-thumbnail:hover .addonify-footer-remove.addonify-footer-btn {
+
+	display: block;
+}
+
+.addonify-footer-thumbnail.loading {
+
+    background-image: url(../../images/loading-dots.gif);
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.addonify-footer-remove.addonify-footer-btn {
+
+    cursor: pointer;
+    top: 2px;
+    right: 2px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    background-image: url(../../images/remove.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 7;
+}
+
+#addonify-footer-add {
+
+    width: $thumbnail_height;
+    height: $thumbnail_height;
+    display: block;
+    position: relative;
+    background-color: #3c3c3c;
+    background-image: url(../../images/add.svg);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    @include border-radius(3px);
+
+    &:hover {
+
+        text-decoration: none;
+        box-sizing: none;
+        border: none
+    }
+
+    &:focus {
+
+        outline: none;
+    }
+}
+
+.addonify-footer-settings {
+
+    width: $thumbnail_height;
+    height: $thumbnail_height;
+    display: block;
+    position: relative;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: url(../../images/checkbox.svg);
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+

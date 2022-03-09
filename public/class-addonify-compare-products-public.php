@@ -434,11 +434,18 @@ class Addonify_Compare_Products_Public {
 					$parent_product = wc_get_product( $product->get_parent_id() );
 				}
 
+				if ( intval( $this->get_db_values( 'show_product_title' ) ) ) {
+
+					$selected_products_data['a_title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_title() ) . '</a>' . $delete_btn;
+				}
 
 				if( (int) $this->get_db_values( 'show_product_title', 1 ) ) {
 					$selected_products_data['title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_formatted_name() ) . '</a>';
 				}
 
+				if ( intval( $this->get_db_values( 'show_product_price' ) ) ) {
+					$selected_products_data['c_Price'][] = '<span class="price">' . $product->get_price_html() . '</span>';
+				}
 
 				if( (int) $this->get_db_values( 'show_product_image', 1 ) ) {
 					$selected_products_data['Image'][] =  '<a href="' . $product->get_permalink() . '" >' . $product->get_image( get_option( '_wooscp_image_size', 'wooscp-large' ), array( 'draggable' => 'false' ) ) . '</a>';
