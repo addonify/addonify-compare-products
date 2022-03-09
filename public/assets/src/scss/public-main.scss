@@ -7,31 +7,17 @@
 
 # Since: 12 Sept, 2020
 
-# Last updated: 
+# Last updated: 09 March 2022
 
 # Current version: 1.0.0
 
 =====================================
 */
 
-// import abstracts 
-
 @import 'abstracts/variables';
 @import 'abstracts/mixins';
-
-// import partials 
 
 @import 'partials/components/buttons';				// buttons
 @import 'partials/layout/compare-footer';			// footer
 @import 'partials/layout/compare-modal';			// modal
 @import 'partials/layout/compare-page';				// comparision page
-
-
-// media/responsive
-
-@import 'partials/layout/responsive';				// responsive
-
-
-// import keyframe 
-
-@import 'partials/components/keyframe';				// keyframe

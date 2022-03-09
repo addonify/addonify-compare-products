@@ -590,19 +590,19 @@ class Addonify_Compare_Products_Public {
 
 				if ( intval( $this->get_db_values( 'show_product_title' ) ) ) {
 
-					if ( wp_doing_ajax() ) {
-						$delete_btn = '<a href="#" class="addonify-footer-remove" data-product_id="' . esc_attr( $product_id ) . '">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>x</button>' ) . '</a>';
-					} else {
-						$action_url = add_query_arg(
-							array(
-								'addonify_cp_remove_item' => $product_id,
-								'token' => wp_create_nonce( $this->plugin_name ),
-							),
-							home_url( $wp->request )
-						);
+					//if ( wp_doing_ajax() ) {
+					//	$delete_btn = '<a href="#" class="addonify-footer-remove" data-product_id="' . esc_attr( $product_id ) . '">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>x</button>' ) . '</a>';
+					//} else {
+					//	$action_url = add_query_arg(
+					//		array(
+					//			'addonify_cp_remove_item' => $product_id,
+					//			'token' => wp_create_nonce( $this->plugin_name ),
+					//		),
+					//		home_url( $wp->request )
+					//	);
 
-						$delete_btn = '<a href="' . $action_url . '" class="addonify-footer-remove">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>x</button>' ) . '</a>';
-					}
+					//	$delete_btn = '<a href="' . $action_url . '" class="addonify-footer-remove">' . apply_filters( 'addonify_cp_remove_item_btn', '<button>x</button>' ) . '</a>';
+					//}
 
 					$selected_products_data['a_title'][] = '<a href="' . $product->get_permalink() . '" >' . wp_strip_all_tags( $product->get_title() ) . '</a>' . $delete_btn;
 				}
@@ -612,7 +612,7 @@ class Addonify_Compare_Products_Public {
 				}
 
 				if ( intval( $this->get_db_values( 'show_product_price' ) ) ) {
-					$selected_products_data['c_Price'][] = $product->get_price_html();
+					$selected_products_data['c_Price'][] = '<span class="price">' . $product->get_price_html() . '</span>';
 				}
 
 				if ( intval( $this->get_db_values( 'show_product_excerpt' ) ) ) {
