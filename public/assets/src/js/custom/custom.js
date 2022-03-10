@@ -183,6 +183,7 @@
 		// main compare button in footer
 		$body.on('click', '#addonify-footer-compare-btn', function () {
 
+			$body.addClass('addonify-compare-modal-is-visible');
 
 			if (display_type == 'page') {
 				window.location.href = page_url;
@@ -193,6 +194,7 @@
 			// following code will not be executed if display type is "page"
 
 			if (compare_modal_is_open) {
+
 				close_compare_modal();
 			}
 			else {
@@ -208,7 +210,9 @@
 
 		// close compare modal
 		$body.on('click', '#addonify-compare-close-button, #addonify-compare-modal-overlay', function () {
+
 			close_compare_modal();
+			$body.removeClass('addonify-compare-modal-is-visible');
 		});
 
 		// --------------------------------------------------------------------------------------

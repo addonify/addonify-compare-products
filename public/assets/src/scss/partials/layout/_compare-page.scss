@@ -20,6 +20,12 @@
             min-width: 200px;
             vertical-align: middle;
             text-align: left;
+            border-color: #F5F5F5;
+        }
+
+        th {
+
+            background-color: #F5F5F5;
         }
 
         td {
@@ -53,14 +59,25 @@
                 }
             }
 
-            .star-rating {
+        .star-rating {
 
-                float: left;
+            float: left;
+        }
+
+        .add_to_cart_inline {
+
+            margin-bottom: 0;
+        }
+    }
+
+     tbody {
+
+        tr {
+
+            td:first-child {
+
+                background-color: #F5F5F5;
             }
-
-            .add_to_cart_inline {
-
-                margin-bottom: 0;
-            }
+        }
     }
 }

@@ -1,4 +1,13 @@
 /* -------------------------------------------------------------------------- 
+	General
+  -------------------------------------------------------------------------- */
+
+body.addonify-compare-modal-is-visible {
+
+    overflow: hidden;
+}
+
+/* -------------------------------------------------------------------------- 
 	Overlay
   -------------------------------------------------------------------------- */
 
@@ -215,12 +224,14 @@
     top: 0;
     right: 0;
     bottom: 0;
-    margin: 40px;
+    margin: 20px;
     width: auto;
     height: auto;
-    z-index: 9999992;
+    z-index: 999999999;
     overflow: hidden;
     border-radius: 5px;
+    border-top-right-radius: 0;
+    @include drop_shadow();
 
     .addonify-compare-model-inner  {
 
@@ -234,24 +245,21 @@
             align-items: center;
             position: absolute;
             left: auto;
-            right: 7px;
-            top: 5px;
+            right: 0;
+            top: 0;
             height: 30px;
             width: 30px;
             padding: 0;
             margin: 0;
-            border-radius: 3px;
+            border-radius: 0;
+            border-bottom-left-radius: 3px;
+            box-shadow: none;
             z-index: 10;
 
             svg {
 
                 width: 14px;
                 height: 14px;
-            }
-
-            &:hover {
-
-
             }
         }
 
@@ -261,16 +269,12 @@
             display: block;
             margin: 0 auto;
             width: 100%;
-            height: calc( 100vh - 100px );
+            padding-bottom: 30px;
+            height: calc( 100vh - 20px );
             background-color: white;
-            border-radius: 5px;
+            border-radius: 0;
             overflow: hidden;
             overflow-y: auto;
-
-            #addonify-compare-products-table-wrapper {
-
-                padding: 30px;
-            }
         }
     }
 }
