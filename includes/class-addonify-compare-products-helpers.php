@@ -274,7 +274,7 @@ class Addonify_Compare_Products_Helpers {
 		}
 
 		if ( $db_value != $args['default'] ) {
-			$args['end_label'] = 'Please insert "[addonify_wishlist]" shortcode into the content area of the page';
+			$args['end_label'] = 'Please insert "[addonify_compare_products]" shortcode into the content area of the page';
 		}
 
 		require ADDONIFY_CP_PLUGIN_PATH . '/admin/templates/input-select.php';
