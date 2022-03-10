@@ -949,7 +949,7 @@ class Addonify_Compare_Products_Public {
 	 * @since    1.0.0
 	 */
 	private function register_shortcode() {
-		add_shortcode( 'addonify-compare-products', array( $this, 'get_compare_contents_callback' ) );
+		add_shortcode( 'addonify_compare_products', array( $this, 'get_compare_contents_callback' ) );
 	}
 
 
