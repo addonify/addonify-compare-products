@@ -1,4 +1,4 @@
-# Copyright (C) 2020 Addonify Compare Products
+# Copyright (C) 2022 Addonify Compare Products
 # This file is distributed under the same license as the Addonify Compare Products package.
 msgid ""
 msgstr ""
@@ -6,6 +6,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Econdig: 8bit\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"MIME-Version: 1.0\n"
+"Project-Id-Version: Addonify Compare Products\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -13,250 +17,262 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: admin/class-addonify-compare-products-admin.php:128
+#: admin/class-addonify-compare-products-admin.php:134
 msgid "Clear"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:129
+#: admin/class-addonify-compare-products-admin.php:135
 msgid "Clear color"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:130, admin/class-addonify-compare-products-admin.php:541
+#: admin/class-addonify-compare-products-admin.php:136, admin/class-addonify-compare-products-admin.php:530
 msgid "Default"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:131
+#: admin/class-addonify-compare-products-admin.php:137
 msgid "Select default color"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:132
+#: admin/class-addonify-compare-products-admin.php:138
 msgid "Select Color"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:133
+#: admin/class-addonify-compare-products-admin.php:139
 msgid "Color value"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:185
-msgid "Addonify Settings"
-msgstr ""
-
-#: admin/class-addonify-compare-products-admin.php:187, admin/class-addonify-compare-products-admin.php:194
+#: admin/class-addonify-compare-products-admin.php:191, admin/class-addonify-compare-products-admin.php:185
 msgid "Addonify Compare Products Settings"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:187, admin/class-addonify-compare-products-admin.php:194, admin/class-addonify-compare-products-admin.php:288, public/class-addonify-compare-products-public.php:145, public/class-addonify-compare-products-public.php:438
+#: admin/class-addonify-compare-products-admin.php:191, admin/class-addonify-compare-products-admin.php:185, admin/class-addonify-compare-products-admin.php:284, public/class-addonify-compare-products-public.php:493
 msgid "Compare"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:210, admin/templates/settings-screen.php:15
+#: admin/class-addonify-compare-products-admin.php:183
+msgid "Addonify Settings"
+msgstr ""
+
+#: admin/class-addonify-compare-products-admin.php:210, admin/templates/settings-screen.php:33
 msgid "Settings"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:249
+#: admin/class-addonify-compare-products-admin.php:246
 msgid "GENERAL OPTIONS"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:255
+#: admin/class-addonify-compare-products-admin.php:252
 msgid "Enable Product Comparision"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:267
+#: admin/class-addonify-compare-products-admin.php:263
 msgid "Compare Button Position"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:273
+#: admin/class-addonify-compare-products-admin.php:269
 msgid "Before Add To Cart Button"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:274
+#: admin/class-addonify-compare-products-admin.php:270
 msgid "After Add To Cart Button"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:275
+#: admin/class-addonify-compare-products-admin.php:271
 msgid "Overlay On The Product Image"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:283
+#: admin/class-addonify-compare-products-admin.php:279
 msgid "Compare Button Label"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:295
+#: admin/class-addonify-compare-products-admin.php:290
 msgid "Display Comparision in"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:301
+#: admin/class-addonify-compare-products-admin.php:296
 msgid "Popup Modal"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:302
-msgid "Comparision Page"
+#: admin/class-addonify-compare-products-admin.php:297
+msgid "Page"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:310
-msgid "Cookies Expire"
+#: admin/class-addonify-compare-products-admin.php:305
+msgid "Select Compare Page"
 msgstr ""
 
 #: admin/class-addonify-compare-products-admin.php:316
+msgid "Cookies Expire"
+msgstr ""
+
+#: admin/class-addonify-compare-products-admin.php:322
 msgid "After Browser Close"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:317
+#: admin/class-addonify-compare-products-admin.php:323
 msgid "1 Day"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:318
+#: admin/class-addonify-compare-products-admin.php:324
 msgid "1 Week"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:319
+#: admin/class-addonify-compare-products-admin.php:325
 msgid "2 Weeks"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:320
+#: admin/class-addonify-compare-products-admin.php:326
 msgid "3 Weeks"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:321
+#: admin/class-addonify-compare-products-admin.php:327
 msgid "4 Weeks"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:341
+#: admin/class-addonify-compare-products-admin.php:346
 msgid "TABLE OPTIONS"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:347
+#: admin/class-addonify-compare-products-admin.php:352
 msgid "Fields To Compare"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:351
+#: admin/class-addonify-compare-products-admin.php:356
 msgid "Product Image"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:357
+#: admin/class-addonify-compare-products-admin.php:362
 msgid "Product Title"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:363
+#: admin/class-addonify-compare-products-admin.php:368
 msgid "Product Rating"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:369
+#: admin/class-addonify-compare-products-admin.php:374
 msgid "Product Price"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:375
+#: admin/class-addonify-compare-products-admin.php:380
 msgid "Product Excerpt"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:381
+#: admin/class-addonify-compare-products-admin.php:386
 msgid "Stock Info"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:387
+#: admin/class-addonify-compare-products-admin.php:392
 msgid "Attributes"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:393
+#: admin/class-addonify-compare-products-admin.php:398
 msgid "Add To Cart Button"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:415
+#: admin/class-addonify-compare-products-admin.php:418
 msgid "STYLE OPTIONS"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:421
+#: admin/class-addonify-compare-products-admin.php:424
 msgid "Load Styles From Plugin"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:445
+#: admin/class-addonify-compare-products-admin.php:446
 msgid "CONTENT COLORS"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:451
+#: admin/class-addonify-compare-products-admin.php:452
 msgid "Compare Button"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:455, admin/class-addonify-compare-products-admin.php:507
+#: admin/class-addonify-compare-products-admin.php:456, admin/class-addonify-compare-products-admin.php:501
 msgid "Text Color"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:461, admin/class-addonify-compare-products-admin.php:480, admin/class-addonify-compare-products-admin.php:513
+#: admin/class-addonify-compare-products-admin.php:461, admin/class-addonify-compare-products-admin.php:478, admin/class-addonify-compare-products-admin.php:506
 msgid "Background Color"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:470
+#: admin/class-addonify-compare-products-admin.php:469
 msgid "Modal Box"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:474
+#: admin/class-addonify-compare-products-admin.php:473
 msgid "Overlay Background Color"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:490
+#: admin/class-addonify-compare-products-admin.php:486
 msgid "Table Title"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:503
+#: admin/class-addonify-compare-products-admin.php:497
 msgid "Close Button"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:519
+#: admin/class-addonify-compare-products-admin.php:511
 msgid "Text Color - On Hover"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:525
+#: admin/class-addonify-compare-products-admin.php:516
 msgid "Background Color - On Hover"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:535
+#: admin/class-addonify-compare-products-admin.php:524
 msgid "Table Style"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:542
+#: admin/class-addonify-compare-products-admin.php:531
 msgid "Dark"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:543
+#: admin/class-addonify-compare-products-admin.php:532
 msgid "Light"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:544
+#: admin/class-addonify-compare-products-admin.php:533
 msgid "Stripped"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:552
+#: admin/class-addonify-compare-products-admin.php:540
 msgid "Custom CSS"
 msgstr ""
 
-#: admin/templates/settings-screen.php:8
-msgid "Compare Products Options"
-msgstr ""
-
-#: admin/templates/settings-screen.php:20
-msgid "Styles"
-msgstr ""
-
-#: admin/templates/woocommerce_not_active_notice.php:9
-msgid "Addonify Compare Products is enabled but not effective. It requires WooCommerce plugin in order to work."
-msgstr ""
-
-#: includes/class-addonify-compare-products-activator.php:32
+#: includes/class-addonify-compare-products-activator.php:36
 msgid "Compare Products"
 msgstr ""
 
-#: public/templates/addonify-compare-products-content.php:9
+#: public/class-addonify-compare-products-public.php:632
+msgid "Yes"
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:632
+msgid "No"
+msgstr ""
+
+#: admin/templates/settings-screen.php:26
+msgid "Compare Products Options"
+msgstr ""
+
+#: admin/templates/settings-screen.php:38
+msgid "Styles"
+msgstr ""
+
+#: admin/templates/woocommerce-not-active-notice.php:25
+msgid "Addonify Compare Products is enabled but not effective. It requires WooCommerce plugin in order to work."
+msgstr ""
+
+#: public/templates/addonify-compare-products-content.php:27
 msgid "Nothing to compare !"
 msgstr ""
 
-#: public/templates/addonify-compare-products-wrapper.php:8
+#: public/templates/addonify-compare-products-wrapper.php:26
 msgid "Select more than one item for comparision."
 msgstr ""
 
-#: public/templates/addonify-compare-products-wrapper.php:17
+#: public/templates/addonify-compare-products-wrapper.php:35
 msgid "Add product"
 msgstr ""
 
-#: public/templates/addonify-compare-products-wrapper.php:43
+#: public/templates/addonify-compare-products-wrapper.php:61
 msgid "Search here"
 msgstr ""
