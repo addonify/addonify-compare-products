@@ -158,13 +158,14 @@ class Addonify_Compare_Products_Public {
 			return;
 		}
 
+		wp_enqueue_style( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/css/conditional/perfect-scrollbar.css', array(), $this->version );
+
 		if ( is_rtl() ) {
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public-rtl.css', array(), $this->version );
 		} else {
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/addonify-compare-public.css', array(), $this->version );
 		}
 	}
-
 
 
 	/**
@@ -179,8 +180,10 @@ class Addonify_Compare_Products_Public {
 			return;
 		}
 
+		wp_enqueue_script( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/perfect-scrollbar.min.js', null, $this->version, true );
+
 		// js-cookie is already loaded by woocommerce.
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery', 'jquery-ui-sortable' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/addonify-compare-public.min.js', array( 'jquery', 'jquery-ui-sortable' ), $this->version, true );
 
 		$localize_args = array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
