@@ -20,6 +20,43 @@
     justify-content: center;
     background: #444444;
     @include transitionDelay();
+    @include betterFontRendering();
+}
+
+.addonify-cp-fake-button,
+a.addonify-cp-fake-button,
+button.addonify-cp-fake-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-size: inherit;
+    font-weight: normal;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: none;
+    appearance: none;
+    text-decoration: none;
+    background: transparent;
+    background-color: transparent;
+    @include transitionDelay();
+    @include betterFontRendering();
+
+    &:focus {
+
+        text-decoration: none;
+        box-shadow: none;
+    }
+
+    &:hover {
+
+        text-decoration: none;
+        box-shadow: none;
+    }
 }
 
 /* -------------------------------------------------------------------------- 
