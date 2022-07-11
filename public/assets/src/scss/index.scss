@@ -14,10 +14,10 @@
 =====================================
 */
 
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
 
 @import 'components/buttons';
-@import 'layout/compare-footer';		
-@import 'layout/compare-modal';	
-@import 'layout/compare-page';	
+@import 'components/dock';		
+@import 'components/modal';	
+@import 'layout/page';	

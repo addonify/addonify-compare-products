@@ -23,7 +23,7 @@
     z-index: 9999991;
     transform: translateX(-50%);
     border-radius: 5px;
-    @include transactionDelay(0.5s);
+    @include transitionDelay(0.5s);
 }
 
 .addonify-compare-footer-is-visible #addonify-compare-footer {
