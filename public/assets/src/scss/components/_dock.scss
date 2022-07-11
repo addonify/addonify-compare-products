@@ -7,7 +7,7 @@
     display: none;
 }
 
-#addonify-compare-footer {
+#addonify-compare-dock {
 
 	display: none;
     position: fixed;
@@ -26,26 +26,26 @@
     @include transitionDelay();
 }
 
-.addonify-compare-footer-is-visible #addonify-compare-footer {
+.addonify-compare-dock-is-visible #addonify-compare-dock {
 
     @include flex();
 	align-items: center;
 }
 
-#addonify-compare-footer-message {
+#addonify-compare-dock-message {
 
     color: var(--adfy_compare_products_dock_text_color);
     margin-right: 15px;
 }
 
-#addonify-footer-thumbnails,
-#addonify-compare-footer-inner {
+#addonify-compare-dock-thumbnails,
+#addonify-compare-dock-inner {
 
     overflow: hidden;
     height: 100%;
 }
 
-#addonify-compare-footer-inner {
+#addonify-compare-dock-inner {
 
 	@include flex();
     gap: 20px;
@@ -54,14 +54,14 @@
     width: 100%;
 }
 
-#addonify-footer-thumbnails {
+#addonify-compare-dock-thumbnails {
 
     @include flex();
     gap: 10px;
     align-items: center;
 }
 
-.addonify-footer-components img {
+.addonify-compare-dock-components img {
 
 	height: 100%;
     width: 100%;
@@ -69,7 +69,7 @@
     @include mediumBoxShadow();
 }
 
-.addonify-footer-components button {
+.addonify-compare-dock-components button {
 
 	height: var(--adfy_compare_products_thumbnail_height);
     padding: 0 20px;
@@ -79,7 +79,7 @@
 	border-radius: 2px;
 }
 
-.addonify-footer-thumbnail {
+.addonify-compare-dock-thumbnail {
 
     position: relative;
     cursor: move;
@@ -88,19 +88,19 @@
     background: #3C3C3C;
 }
 
-.addonify-footer-thumbnail:hover .addonify-footer-remove.addonify-footer-btn {
+.addonify-compare-dock-thumbnail:hover .addonify-compare-dock-remove-item-btn {
 
 	display: block;
 }
 
-.addonify-footer-thumbnail.loading {
+.addonify-compare-dock-thumbnail.loading {
 
     background-image: url(../../images/loading-dots.gif);
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.addonify-footer-remove.addonify-footer-btn {
+.addonify-compare-dock-remove-item-btn {
 
     cursor: pointer;
     top: 2px;
@@ -112,7 +112,7 @@
     z-index: 10;
 }
 
-#addonify-footer-add {
+#addonify-compare-dock-add-item {
 
     width: var(--adfy_compare_products_thumbnail_height);
     height: var(--adfy_compare_products_thumbnail_height);
@@ -140,7 +140,7 @@
     }
 }
 
-.addonify-footer-settings {
+.addonify-compare-dock-settings {
 
     width: var(--adfy_compare_products_thumbnail_height);
     height: var(--adfy_compare_products_thumbnail_height);
