@@ -35,7 +35,7 @@
 #addonify-compare-footer-message {
 
     color: var(--adfy_compare_products_dock_text_color);
-    margin-right:15px;
+    margin-right: 15px;
 }
 
 #addonify-footer-thumbnails,
@@ -85,7 +85,7 @@
     cursor: move;
     width: var(--adfy_compare_products_thumbnail_height);
     height: var(--adfy_compare_products_thumbnail_height);
-    background: #3c3c3c;
+    background: #3C3C3C;
 }
 
 .addonify-footer-thumbnail:hover .addonify-footer-remove.addonify-footer-btn {
@@ -122,11 +122,13 @@
     display: block;
     position: relative;
     background-color: #3c3c3c;
-    background-image: url(../../images/add.svg);
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-position: center;
     border-radius: 3px;
+
+    svg {
+
+        height: 14px;
+        width: 14px;
+    }
 
     &:hover {
 

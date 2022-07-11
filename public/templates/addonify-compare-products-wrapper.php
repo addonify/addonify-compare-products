@@ -22,8 +22,9 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div id="addonify-compare-footer" >
-
-	<div id="addonify-compare-footer-message" class="hidden" ><?php echo esc_html__( 'Select more than one item for comparision.', 'addonify-compare-products' ); ?></div>
+	<div id="addonify-compare-footer-message" class="hidden" >
+		<?php echo esc_html__( 'Select more than one item for comparision.', 'addonify-compare-products' ); ?>
+	</div>
 
 	<div id="addonify-compare-footer-inner">
 
@@ -32,7 +33,11 @@ defined( 'ABSPATH' ) || exit;
 
 		<!-- add product button -->
 		<div class="addonify-footer-components">
-			<a href="#" id="addonify-footer-add" aria-label="<?php echo esc_attr__( 'Add product', 'addonify-compare-products' ); ?>"></a>
+			<button class="addonify-cp-fake-button" id="addonify-footer-add" aria-label="<?php echo esc_attr__( 'Add product', 'addonify-compare-products' ); ?>">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+					<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+				</svg>
+			</button>
 		</div>
 
 		<!-- compare button -->
@@ -40,7 +45,6 @@ defined( 'ABSPATH' ) || exit;
 			<button id="addonify-footer-compare-btn"><?php echo esc_html( $label ); ?></button>
 		</div>
 	</div>
-
 </div> 
 
 
