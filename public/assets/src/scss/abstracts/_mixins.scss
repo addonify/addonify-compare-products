@@ -64,15 +64,15 @@
 	Mixin: transaction
   -------------------------------------------------------------------------- */
 
-@mixin transactionDelay ($delay) {
+@mixin transitionDelay ($delay: null) {
 
-    @if $delay == '' {
+    @if ($delay) {
 
-		transition: all 0.5s ease;
+		transition: all $delay ease;
 
 	} @else {
 
-		transition: all $delay ease;
+		transition: all 0.5s ease;
 	}
 } 
 
@@ -84,7 +84,7 @@
 @mixin scale () {
 
     transform: scale(1.1);
-    @include transation_delay();
+    @include transitionDelay();
 }
 
 
