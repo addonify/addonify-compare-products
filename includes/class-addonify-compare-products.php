@@ -126,6 +126,12 @@ class Addonify_Compare_Products {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-addonify-compare-products-public.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/setting-functions/settings.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/setting-functions/helpers.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-rest-api.php';
+
 		$this->loader = new Addonify_Compare_Products_Loader();
 
 	}
