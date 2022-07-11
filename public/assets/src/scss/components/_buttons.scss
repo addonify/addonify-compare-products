@@ -1,4 +1,6 @@
-// button style
+/* -------------------------------------------------------------------------- 
+	General button style.
+  -------------------------------------------------------------------------- */
 
 .addonify-overlay-buttons {
 
@@ -16,11 +18,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #111111;
-    @include transation_delay();
+    background: #444444;
+    @include transactionDelay(0.5s);
 }
 
 button.addonify-cp-button.selected {
 
-    border: solid 2px #000;
+    border: solid 2px #444444;
 }
