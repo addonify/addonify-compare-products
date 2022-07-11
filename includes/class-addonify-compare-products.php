@@ -174,7 +174,7 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'custom_plugin_link_callback', 10, 2 );
 
 		// show settings page ui .
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'settings_page_ui' );
+		// $this->loader->add_action( 'admin_init', $plugin_admin, 'settings_page_ui' );
 
 		// show notice if woocommerce is not active.
 		$this->loader->add_action( 'admin_init', $plugin_admin, 'addonify_cp_show_woocommerce_not_active_notice' );
