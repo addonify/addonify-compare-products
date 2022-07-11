@@ -42,7 +42,9 @@ defined( 'ABSPATH' ) || exit;
 
 		<!-- compare button -->
 		<div class="addonify-footer-components">
-			<button id="addonify-footer-compare-btn"><?php echo esc_html( $label ); ?></button>
+			<button id="addonify-footer-compare-btn">
+				<?php echo esc_html( $label ); ?>
+			</button>
 		</div>
 	</div>
 </div> 
