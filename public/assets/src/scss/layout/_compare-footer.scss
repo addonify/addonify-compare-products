@@ -23,7 +23,7 @@
     z-index: 9999991;
     transform: translateX(-50%);
     border-radius: 5px;
-    @include transation_delay();
+    @include transactionDelay(0.5s);
 }
 
 .addonify-compare-footer-is-visible #addonify-compare-footer {
@@ -65,26 +65,26 @@
 
 	height: 100%;
     width: 100%;
-    @include border-radius(2px);
-    @include mild_drop_shadow();
+    border-radius: 2px;
+    @include mediumBoxShadow();
 }
 
 .addonify-footer-components button {
 
-	height: $thumbnail_height;
+	height: var(--adfy_compare_products_thumbnail_height);
     padding: 0 20px;
 	border: none;
 	font-weight: normal;
 	font-size: 15px;
-	@include border-radius(3px);
+	border-radius: 2px;
 }
 
 .addonify-footer-thumbnail {
 
     position: relative;
     cursor: move;
-    width: $thumbnail_height;
-    height: $thumbnail_height;
+    width: var(--adfy_compare_products_thumbnail_height);
+    height: var(--adfy_compare_products_thumbnail_height);
     background: #3c3c3c;
 }
 
@@ -111,14 +111,14 @@
     background-image: url(../../images/remove.svg);
     background-repeat: no-repeat;
     background-position: center;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 7;
 }
 
 #addonify-footer-add {
 
-    width: $thumbnail_height;
-    height: $thumbnail_height;
+    width: var(--adfy_compare_products_thumbnail_height);
+    height: var(--adfy_compare_products_thumbnail_height);
     display: block;
     position: relative;
     background-color: #3c3c3c;
@@ -126,7 +126,7 @@
     background-size: 20px 20px;
     background-repeat: no-repeat;
     background-position: center;
-    @include border-radius(3px);
+    border-radius: 3px;
 
     &:hover {
 
@@ -143,8 +143,8 @@
 
 .addonify-footer-settings {
 
-    width: $thumbnail_height;
-    height: $thumbnail_height;
+    width: var(--adfy_compare_products_thumbnail_height);
+    height: var(--adfy_compare_products_thumbnail_height);
     display: block;
     position: relative;
     cursor: pointer;

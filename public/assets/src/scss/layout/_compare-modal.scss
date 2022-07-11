@@ -38,7 +38,7 @@ body.addonify-compare-modal-is-visible {
     z-index: 999999999;
     background-color: white;
     border-radius: 5px;
-    @include drop_shadow();
+    @include boxShadow();
 }
 
 .addonify-compare-search-model-inner {
@@ -231,7 +231,7 @@ body.addonify-compare-modal-is-visible {
     overflow: hidden;
     border-radius: 5px;
     border-top-right-radius: 0;
-    @include drop_shadow();
+    @include boxShadow();
 
     .addonify-compare-model-inner  {
 
