@@ -368,7 +368,7 @@
 
 			// add placeholder, while thumbnail image is being loaded
 			ids_ar.forEach(function (id) {
-				template += '<div class="addonify-compare-dock-components" data-product_id="' + id + '"><div class="sortable addonify-compare-dock-thumbnail loading" data-product_id="' + id + '"><span class="addonify-compare-dock-remove-item-btn" data-product_id="' + id + '">' + removeButtonIcon + '</span></div></div>';
+				template += '<div class="addonify-compare-dock-components" data-product_id="' + id + '"><div class="sortable addonify-compare-dock-thumbnail loading" data-product_id="' + id + '"><span class="addonify-compare-dock-remove-item-btn" data-product_id="' + id + '">' + removeButtonIcon + '</span><span class="addonify-loading-wave"></span></div></div>';
 			});
 
 			$dock_thumbnail_container.append(template);

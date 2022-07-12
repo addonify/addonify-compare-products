@@ -27,6 +27,7 @@
     z-index: var(--adfy_compare_products_dock_zindex);
     transform: translateX(-50%);
     @include transitionDelay();
+    @include betterFontRendering();
     @include breakpoint(ipad) {
 
         min-width: 95vw;
@@ -42,25 +43,20 @@
 
     flex: auto 1;
     color: var(--adfy_compare_products_dock_text_color);
+    @include betterFontRendering();
     @include breakpoint(mobile) {
 
         width: 100%;
     }
-}
 
-#addonify-compare-dock-message:not(.addonify-compare-hidden) {
+    &:not(.addonify-compare-hidden) {
 
-     @include breakpoint(mobile) {
+        @include breakpoint(mobile) {
 
-        @include flex();
-        justify-content: center;
+            @include flex();
+            justify-content: center;
+        }
     }
-}
-
-#addonify-compare-dock-thumbnails {
-
-    overflow: hidden;
-    height: 100%;
 }
 
 #addonify-compare-dock-inner {
@@ -87,6 +83,8 @@
     @include flex();
     gap: 10px;
     align-items: center;
+    overflow: hidden;
+    height: 100%;
 }
 
 .addonify-compare-dock-components img {
@@ -99,29 +97,48 @@
 
 .addonify-compare-dock-components button {
 
-	height: var(--adfy_compare_products_thumbnail_height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+	width: auto;
     padding: 0 20px;
+    margin: 0;
+    line-height: 1;
 	border: none;
 	font-weight: normal;
 	font-size: 15px;
 	border-radius: 2px;
     cursor: pointer;
+    height: var(--adfy_compare_products_thumbnail_height);
+    @include betterFontRendering();
 }
 
 .addonify-compare-dock-thumbnail {
 
+    @include flex();
+    justify-content: center;
+    align-items: center;
     position: relative;
     cursor: move;
     width: var(--adfy_compare_products_thumbnail_height);
     height: var(--adfy_compare_products_thumbnail_height);
     background: #3C3C3C;
-}
+    border-radius: 3px;
 
-.addonify-compare-dock-thumbnail.loading {
+    img {
 
-    background-image: url(../../images/loading-dots.gif);
-    background-repeat: no-repeat;
-    background-position: center;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    &.loading {
+
+        .addonify-loading-wave  {
+
+            display: block;
+        }
+    }
 }
 
 .addonify-compare-dock-remove-item-btn {
@@ -213,18 +230,4 @@
         fill: var(--adfy_compare_products_dock_compare_button_color_hover);
         background-color: var(--adfy_compare_products_dock_compare_button_bg_color_hover);
     }
-}
-
-.addonify-compare-dock-settings {
-
-    width: var(--adfy_compare_products_thumbnail_height);
-    height: var(--adfy_compare_products_thumbnail_height);
-    display: block;
-    position: relative;
-    cursor: pointer;
-    background-color: transparent;
-    background-image: url(../../images/checkbox.svg);
-    background-size: 16px 16px;
-    background-repeat: no-repeat;
-    background-position: center;
 }
