@@ -162,11 +162,43 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 		// do not show menu if woocommerce is not active
 		if ( ! $this->is_woocommerce_active() )  return; 
 
-		add_menu_page( 'Addonify Settings', 'Addonify', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 'dashicons-superhero', 70 );
-		
-		// redirects to main plugin link
-		add_submenu_page(  $this->settings_page_slug, 'Addonify Compare Products Settings', 'Compare Products', 'manage_options', $this->settings_page_slug, array($this, 'get_settings_screen_contents'), 0 );
+		global $admin_page_hooks;
 
+		$parent_menu_slug = array_search( 'addonify', $admin_page_hooks, true );
+
+		if ( ! $parent_menu_slug ) {
+
+			add_menu_page( 
+				'Addonify Settings', 
+				'Addonify', 
+				'manage_options', 
+				$this->settings_page_slug, 
+				array( $this, 'get_settings_screen_contents' ), 
+				'dashicons-superhero', 
+				70 
+			);
+					
+			add_submenu_page( 
+				$this->settings_page_slug, 
+				'Compare Settings', 
+				'Compare', 
+				'manage_options', 
+				$this->settings_page_slug, 
+				array( $this, 'get_settings_screen_contents' ), 
+				0 
+			);
+		} else {
+
+			add_submenu_page(  
+				$parent_menu_slug, 
+				'Compare Settings', 
+				'Compare', 
+				'manage_options', 
+				$this->settings_page_slug, 
+				array( $this, 'get_settings_screen_contents' ), 
+				0 
+			);
+		}
 	}
 
 
@@ -188,7 +220,6 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 
 		return $links;
 	}
-
 
 
 	/**

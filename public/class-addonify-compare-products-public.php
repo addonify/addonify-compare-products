@@ -907,9 +907,9 @@ class Addonify_Compare_Products_Public {
 	 * @param    bool   $get_default_automatically Get default value if "$default" is empty.
 	 */
 	private function get_db_values( $field_name, $default = null, $get_default_automatically = true ) {
-		if ( empty( $default ) && true === $get_default_automatically ) {
-			$default = $this->get_default_values( $field_name );
-		}
+		// if ( empty( $default ) && true === $get_default_automatically ) {
+		// 	$default = $this->get_default_values( $field_name );
+		// }
 
 		return get_option( ADDONIFY_CP_DB_INITIALS . $field_name, $default );
 	}
