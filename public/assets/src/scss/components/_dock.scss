@@ -10,6 +10,9 @@
 #addonify-compare-dock {
 
 	display: none;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 10px;
     position: fixed;
     top: auto;
     bottom: 10px;
@@ -18,28 +21,43 @@
     width: auto;
     min-width: 600px;
     max-width: 95vw;
-    padding: 15px 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     background-color: var(--adfy_compare_products_dock_bg_color);
     z-index: var(--adfy_compare_products_dock_zindex);
     transform: translateX(-50%);
     @include transitionDelay();
+    @include breakpoint(ipad) {
+
+        min-width: 95vw;
+    }
 }
 
 .addonify-compare-dock-is-visible #addonify-compare-dock {
 
     @include flex();
-	align-items: center;
 }
 
 #addonify-compare-dock-message {
 
+    flex: auto 1;
     color: var(--adfy_compare_products_dock_text_color);
-    margin-right: 15px;
+    @include breakpoint(mobile) {
+
+        width: 100%;
+    }
 }
 
-#addonify-compare-dock-thumbnails,
-#addonify-compare-dock-inner {
+#addonify-compare-dock-message:not(.addonify-compare-hidden) {
+
+     @include breakpoint(mobile) {
+
+        @include flex();
+        justify-content: center;
+    }
+}
+
+#addonify-compare-dock-thumbnails {
 
     overflow: hidden;
     height: 100%;
@@ -47,11 +65,21 @@
 
 #addonify-compare-dock-inner {
 
+    flex: auto 1;
 	@include flex();
-    gap: 20px;
-    justify-content: center;
+    gap: 15px;
+    justify-content: flex-end;
     align-items: center;
-    width: 100%;
+    @include breakpoint(mobile) {
+
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+#addonify-compare-dock-inner.full {
+
+    justify-content: center;
 }
 
 #addonify-compare-dock-thumbnails {
@@ -77,6 +105,7 @@
 	font-weight: normal;
 	font-size: 15px;
 	border-radius: 2px;
+    cursor: pointer;
 }
 
 .addonify-compare-dock-thumbnail {
@@ -88,11 +117,6 @@
     background: #3C3C3C;
 }
 
-.addonify-compare-dock-thumbnail:hover .addonify-compare-dock-remove-item-btn {
-
-	display: block;
-}
-
 .addonify-compare-dock-thumbnail.loading {
 
     background-image: url(../../images/loading-dots.gif);
@@ -102,41 +126,92 @@
 
 .addonify-compare-dock-remove-item-btn {
 
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
     cursor: pointer;
+    color: white;
+    fill: white;
     top: 2px;
     right: 2px;
     width: 20px;
     height: 20px;
-    position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 10;
-}
-
-#addonify-compare-dock-add-item {
-
-    width: var(--adfy_compare_products_thumbnail_height);
-    height: var(--adfy_compare_products_thumbnail_height);
-    display: block;
-    position: relative;
-    background-color: #3c3c3c;
-    border-radius: 3px;
+    border-radius: 2px;
+    @include transitionDelay();
 
     svg {
 
-        height: 14px;
         width: 14px;
+        height: 14px;
     }
 
     &:hover {
 
+        color: #F5F5F5;
+        fill: #F5F5F5;
+        background-color: rgba(0, 0, 0, 1);
+    }
+}
+
+#addonify-compare-dock-add-item {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: var(--adfy_compare_products_thumbnail_height);
+    height: var(--adfy_compare_products_thumbnail_height);
+    color: var(--adfy_compare_products_dock_add_button_color);
+    fill: var(--adfy_compare_products_dock_add_button_color);
+    background-color: var(--adfy_compare_products_dock_add_button_bg_color);
+    border-radius: 3px;
+    cursor: pointer;
+    @include transitionDelay();
+
+    svg {
+
+        height: 16px;
+        width: 16px;
+    }
+
+    &:hover {
+
+        color: var(--adfy_compare_products_dock_add_button_color_hover);
+        fill: var(--adfy_compare_products_dock_add_button_color_hover);
         text-decoration: none;
-        box-sizing: none;
-        border: none
+        border: none;
+        background: none;
+        background-color: var(--adfy_compare_products_dock_add_button_bg_color_hover);
     }
 
     &:focus {
 
         outline: none;
+        text-decoration: none;
+    }
+}
+
+#addonify-compare-dock-compare-btn {
+
+    color: var(--adfy_compare_products_dock_compare_button_color);
+    fill: var(--adfy_compare_products_dock_compare_button_color);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    background-color: var(--adfy_compare_products_dock_compare_button_bg_color);
+    @include transitionDelay();
+
+    &:hover {
+
+        color: var(--adfy_compare_products_dock_compare_button_color_hover);
+        fill: var(--adfy_compare_products_dock_compare_button_color_hover);
+        background-color: var(--adfy_compare_products_dock_compare_button_bg_color_hover);
     }
 }
 

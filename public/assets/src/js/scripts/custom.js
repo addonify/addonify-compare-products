@@ -378,11 +378,12 @@
 
 			if (selected_product_ids.length < 2) {
 				$message_sel.removeClass('addonify-compare-hidden');
+				$('#addonify-compare-dock-inner').removeClass('full');
 			}
 			else {
 				$message_sel.addClass('addonify-compare-hidden');
+				$('#addonify-compare-dock-inner').addClass('full');
 			}
-
 		}
 
 		function search_items_ajax(query) {

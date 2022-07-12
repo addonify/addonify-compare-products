@@ -22,10 +22,10 @@
     --adfy_compare_products_search_modal_close_button_border_color_hover: rgba(255, 255, 255, 1);
 
     // Compare Dock
-    --adfy_compare_products_dock_bg_color: #0C001B;
-    --adfy_compare_products_dock_text_color: #F5F5F5;
+    --adfy_compare_products_dock_bg_color: #02030E;
+    --adfy_compare_products_dock_text_color: rgba(255, 255, 255, 0.7);
 
-    --adfy_compare_products_dock_add_button_color: rgba(255, 255, 255, 0.8);
+    --adfy_compare_products_dock_add_button_color: white;
     --adfy_compare_products_dock_add_button_color_hover: white;
     --adfy_compare_products_dock_add_button_bg_color: #343434;
     --adfy_compare_products_dock_add_button_bg_color_hover: #3765FA;
@@ -40,7 +40,7 @@
 
     // zindex
     --adfy_compare_products_dock_zindex: 10000000000000;
-    --adfy_compare_products_search_modal_zindex: 100000000000000;
-    --adfy_compare_products_search_modal_overlay_zindex: calc( var(--adfy_compare_products_search_modal_zindex) - 10 );
+    --adfy_compare_products_search_modal_zindex: 10000000000010;
+    --adfy_compare_products_search_modal_overlay_zindex: calc( var(--adfy_compare_products_search_modal_zindex) - 5 );
     --adfy_compare_products_comparision_table_zindex: calc( var(--adfy_compare_products_search_modal_zindex) + 100 );
 }
