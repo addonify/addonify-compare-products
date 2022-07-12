@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
 
 <div id="addonify-compare-modal" class="addonify-compare-hidden">
 	<div class="addonify-compare-model-inner">
-		<button id="addonify-compare-close-button" class="addonify-compare-all-close-btn" >
+		<button id="addonify-compare-close-button" class="addonify-cp-fake-button addonify-compare-all-close-btn">
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 				stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 				<line x1="18" y1="6" x2="6" y2="18"></line>

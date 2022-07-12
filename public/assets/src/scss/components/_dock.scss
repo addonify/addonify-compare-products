@@ -7,9 +7,12 @@
     display: none;
 }
 
-#addonify-compare-footer {
+#addonify-compare-dock {
 
 	display: none;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 10px;
     position: fixed;
     top: auto;
     bottom: 10px;
@@ -18,50 +21,73 @@
     width: auto;
     min-width: 600px;
     max-width: 95vw;
-    padding: 15px 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     background-color: var(--adfy_compare_products_dock_bg_color);
     z-index: var(--adfy_compare_products_dock_zindex);
     transform: translateX(-50%);
     @include transitionDelay();
+    @include betterFontRendering();
+    @include breakpoint(ipad) {
+
+        min-width: 95vw;
+    }
 }
 
-.addonify-compare-footer-is-visible #addonify-compare-footer {
+.addonify-compare-dock-is-visible #addonify-compare-dock {
 
     @include flex();
-	align-items: center;
 }
 
-#addonify-compare-footer-message {
+#addonify-compare-dock-message {
 
+    flex: auto 1;
     color: var(--adfy_compare_products_dock_text_color);
-    margin-right:15px;
+    @include betterFontRendering();
+    @include breakpoint(mobile) {
+
+        width: 100%;
+    }
+
+    &:not(.addonify-compare-hidden) {
+
+        @include breakpoint(mobile) {
+
+            @include flex();
+            justify-content: center;
+        }
+    }
 }
 
-#addonify-footer-thumbnails,
-#addonify-compare-footer-inner {
+#addonify-compare-dock-inner {
 
-    overflow: hidden;
-    height: 100%;
-}
-
-#addonify-compare-footer-inner {
-
+    flex: auto 1;
 	@include flex();
-    gap: 20px;
-    justify-content: center;
+    gap: 15px;
+    justify-content: flex-end;
     align-items: center;
-    width: 100%;
+    @include breakpoint(mobile) {
+
+        width: 100%;
+        justify-content: center;
+    }
 }
 
-#addonify-footer-thumbnails {
+#addonify-compare-dock-inner.full {
+
+    justify-content: center;
+}
+
+#addonify-compare-dock-thumbnails {
 
     @include flex();
     gap: 10px;
     align-items: center;
+    overflow: hidden;
+    height: 100%;
 }
 
-.addonify-footer-components img {
+.addonify-compare-dock-components img {
 
 	height: 100%;
     width: 100%;
@@ -69,88 +95,139 @@
     @include mediumBoxShadow();
 }
 
-.addonify-footer-components button {
+.addonify-compare-dock-components button {
 
-	height: var(--adfy_compare_products_thumbnail_height);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+	width: auto;
     padding: 0 20px;
+    margin: 0;
+    line-height: 1;
 	border: none;
 	font-weight: normal;
 	font-size: 15px;
 	border-radius: 2px;
+    cursor: pointer;
+    height: var(--adfy_compare_products_thumbnail_height);
+    @include betterFontRendering();
 }
 
-.addonify-footer-thumbnail {
+.addonify-compare-dock-thumbnail {
 
+    @include flex();
+    justify-content: center;
+    align-items: center;
     position: relative;
     cursor: move;
     width: var(--adfy_compare_products_thumbnail_height);
     height: var(--adfy_compare_products_thumbnail_height);
-    background: #3c3c3c;
+    background: #3C3C3C;
+    border-radius: 3px;
+
+    img {
+
+        width: 100%;
+        max-width: 100%;
+    }
+
+    &.loading {
+
+        .addonify-loading-wave  {
+
+            display: block;
+        }
+    }
 }
 
-.addonify-footer-thumbnail:hover .addonify-footer-remove.addonify-footer-btn {
+.addonify-compare-dock-remove-item-btn {
 
-	display: block;
-}
-
-.addonify-footer-thumbnail.loading {
-
-    background-image: url(../../images/loading-dots.gif);
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.addonify-footer-remove.addonify-footer-btn {
-
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
     cursor: pointer;
+    color: white;
+    fill: white;
     top: 2px;
     right: 2px;
     width: 20px;
     height: 20px;
-    position: absolute;
-    background-image: url(../../images/remove.svg);
-    background-repeat: no-repeat;
-    background-position: center;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 10;
-}
+    border-radius: 2px;
+    @include transitionDelay();
 
-#addonify-footer-add {
+    svg {
 
-    width: var(--adfy_compare_products_thumbnail_height);
-    height: var(--adfy_compare_products_thumbnail_height);
-    display: block;
-    position: relative;
-    background-color: #3c3c3c;
-    background-image: url(../../images/add.svg);
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 3px;
+        width: 14px;
+        height: 14px;
+    }
 
     &:hover {
 
+        color: #F5F5F5;
+        fill: #F5F5F5;
+        background-color: rgba(0, 0, 0, 1);
+    }
+}
+
+#addonify-compare-dock-add-item {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: var(--adfy_compare_products_thumbnail_height);
+    height: var(--adfy_compare_products_thumbnail_height);
+    color: var(--adfy_compare_products_dock_add_button_color);
+    fill: var(--adfy_compare_products_dock_add_button_color);
+    background-color: var(--adfy_compare_products_dock_add_button_bg_color);
+    border-radius: 3px;
+    cursor: pointer;
+    @include transitionDelay();
+
+    svg {
+
+        height: 16px;
+        width: 16px;
+    }
+
+    &:hover {
+
+        color: var(--adfy_compare_products_dock_add_button_color_hover);
+        fill: var(--adfy_compare_products_dock_add_button_color_hover);
         text-decoration: none;
-        box-sizing: none;
-        border: none
+        border: none;
+        background: none;
+        background-color: var(--adfy_compare_products_dock_add_button_bg_color_hover);
     }
 
     &:focus {
 
         outline: none;
+        text-decoration: none;
     }
 }
 
-.addonify-footer-settings {
+#addonify-compare-dock-compare-btn {
 
-    width: var(--adfy_compare_products_thumbnail_height);
-    height: var(--adfy_compare_products_thumbnail_height);
-    display: block;
-    position: relative;
+    color: var(--adfy_compare_products_dock_compare_button_color);
+    fill: var(--adfy_compare_products_dock_compare_button_color);
+    background: transparent;
+    border: none;
+    box-shadow: none;
     cursor: pointer;
-    background-color: transparent;
-    background-image: url(../../images/checkbox.svg);
-    background-size: 16px 16px;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: var(--adfy_compare_products_dock_compare_button_bg_color);
+    @include transitionDelay();
+
+    &:hover {
+
+        color: var(--adfy_compare_products_dock_compare_button_color_hover);
+        fill: var(--adfy_compare_products_dock_compare_button_color_hover);
+        background-color: var(--adfy_compare_products_dock_compare_button_bg_color_hover);
+    }
 }

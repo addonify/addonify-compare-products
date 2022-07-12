@@ -1,7 +1,7 @@
 === Addonify Compare Products ===
 
 Contributors: addonify
-Tags: addonify, woocommerce compare, products comparision, compare products, compare, compare woocommerce, compare products woocommerce
+Tags: compare, woocommerce compare, products comparision, compare products, compare woocommerce, addonify
 Requires at least: 5.0.0
 Tested up to: 6.0.0
 Stable tag: 1.0.0

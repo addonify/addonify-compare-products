@@ -5,13 +5,13 @@
 
 		var $body = $('body');
 		var selected_product_ids = [];
-		var $footer_thumbnail_container = $('#addonify-footer-thumbnails');
-		var $message_sel = $('#addonify-compare-footer-message');
+		var $dock_thumbnail_container = $('#addonify-compare-dock-thumbnails');
+		var $message_sel = $('#addonify-compare-dock-message');
 		var $search_modal_sel = $('#addonify-compare-search-modal');
 		var $search_result_container = $('#addonify-compare-search-results');
 		var $compare_modal_sel = $('#addonify-compare-modal');
 		var $compare_modal_content_sel = $('#addonify-compare-modal-content');
-		var $footer_compare_btn = $('#addonify-footer-compare-btn');
+		var $dock_compare_btn = $('#addonify-compare-dock-compare-btn');
 		var search_input_timer;
 		var items_list_has_changed = false;
 		var compare_modal_is_open = false;
@@ -22,13 +22,13 @@
 		var searchModalOverlay = $('#addonify-compare-search-modal-overlay');
 
 
-		$("#addonify-footer-thumbnails").sortable({
+		$("#addonify-compare-dock-thumbnails").sortable({
 			stop: function () { get_selected_product_ids_from_dom(); }
 		}).disableSelection();
 
 
 		// prevent default behavior
-		$('#addonify-compare-products-footer-bar a, button.addonify-cp-button').click(function (e) {
+		$('.addonify-cp-button').click(function (e) {
 			e.preventDefault();
 		})
 
@@ -77,11 +77,11 @@
 				// replace thumbnail preloader image with actual image
 				get_thumbnails_from_ajax(product_id.toString());
 
-				// show footers bar 
-				$body.addClass('addonify-compare-footer-is-visible');
+				// show docks bar 
+				$body.addClass('addonify-compare-dock-is-visible');
 
-				// show hide footer message
-				show_hide_footer_message();
+				// show hide dock message
+				show_hide_dock_message();
 
 
 			}
@@ -90,9 +90,9 @@
 			}
 
 
-			show_hide_footer_bar();
+			show_hide_dock_bar();
 
-			show_hide_footer_compare_button();
+			show_hide_dock_compare_button();
 
 
 			if (first_boot) {
@@ -104,7 +104,7 @@
 
 
 		// remove item
-		$body.on('click', '.addonify-footer-remove', function (e) {
+		$body.on('click', '.addonify-compare-dock-remove-item-btn', function (e) {
 
 			e.preventDefault();
 
@@ -130,15 +130,15 @@
 			// store product ids list into cookies, cookies will be deleted after browser close
 			setCookie(selected_product_ids);
 
-			// remove thumbnail from footer
-			$('.addonify-footer-components[data-product_id="' + product_id + '"]').remove();
+			// remove thumbnail from dock
+			$('.addonify-compare-dock-components[data-product_id="' + product_id + '"]').remove();
 
-			show_hide_footer_bar();
+			show_hide_dock_bar();
 
-			show_hide_footer_compare_button();
+			show_hide_dock_compare_button();
 
-			// show hide footer message
-			show_hide_footer_message();
+			// show hide dock message
+			show_hide_dock_message();
 
 			// if compare_modal is open, close and reopen with new data
 			if (compare_modal_is_open) {
@@ -151,8 +151,8 @@
 
 
 		// show search modal
-		$body.on('click', '#addonify-footer-add', function () {
-			$body.removeClass('addonify-compare-footer-is-visible');
+		$body.on('click', '#addonify-compare-dock-add-item', function () {
+			$body.removeClass('addonify-compare-dock-is-visible');
 			searchModalOverlay.removeClass('addonify-compare-hidden');
 			$search_modal_sel.removeClass('addonify-compare-hidden');
 		})
@@ -160,7 +160,7 @@
 
 		// close search modal
 		$body.on('click', '#addonify-compare-search-close-button, #addonify-compare-search-modal-overlay', function () {
-			$body.addClass('addonify-compare-footer-is-visible');
+			$body.addClass('addonify-compare-dock-is-visible');
 			searchModalOverlay.addClass('addonify-compare-hidden');
 			close_search_modal();
 		})
@@ -180,8 +180,8 @@
 		})
 
 
-		// main compare button in footer
-		$body.on('click', '#addonify-footer-compare-btn', function () {
+		// main compare button in dock
+		$body.on('click', '#addonify-compare-dock-compare-btn', function () {
 
 			$body.addClass('addonify-compare-modal-is-visible');
 
@@ -226,7 +226,7 @@
 			fetch_items_from_cookies();
 
 
-			show_hide_footer_compare_button();
+			show_hide_dock_compare_button();
 
 			// if selected_product_ids is not empty
 			if (selected_product_ids.length) {
@@ -242,15 +242,12 @@
 				// generate thumbnail and dump into dom
 				get_thumbnails_from_ajax(product_ids);
 
-				// show footers bar 
-				show_hide_footer_bar();
-
+				// show docks bar 
+				show_hide_dock_bar();
 			}
 
-
-			// show hide footer message
-			show_hide_footer_message();
-
+			// show hide dock message
+			show_hide_dock_message();
 		}
 
 
@@ -265,7 +262,6 @@
 			selected_product_ids = $.map(items_from_cookies.split(','), function (value) {
 				return parseInt(value);
 			});
-
 		}
 
 
@@ -315,23 +311,23 @@
 		}
 
 
-		function show_hide_footer_compare_button() {
+		function show_hide_dock_compare_button() {
 			if (selected_product_ids.length > 1) {
-				$footer_compare_btn.fadeIn();
+				$dock_compare_btn.fadeIn();
 			}
 			else {
-				$footer_compare_btn.fadeOut();
+				$dock_compare_btn.fadeOut();
 			}
 
 		}
 
 
-		function show_hide_footer_bar() {
+		function show_hide_dock_bar() {
 			if (selected_product_ids.length) {
-				$body.addClass('addonify-compare-footer-is-visible');
+				$body.addClass('addonify-compare-dock-is-visible');
 			}
 			else {
-				$body.removeClass('addonify-compare-footer-is-visible');
+				$body.removeClass('addonify-compare-dock-is-visible');
 			}
 
 		}
@@ -358,38 +354,37 @@
 
 			$.getJSON(addonify_compare_ajax_object.ajax_url, data, function (response) {
 				$.each(response, function (key, val) {
-					$('.addonify-footer-thumbnail[data-product_id="' + key + '"]').append('<img src="' + val + '">').removeClass('loading');
+					$('.addonify-compare-dock-thumbnail[data-product_id="' + key + '"]').append('<img src="' + val + '">').removeClass('loading');
 				});
 			})
 
 		}
 
-
 		function show_thumbnail_preloader(product_ids) {
 
 			var ids_ar = product_ids.split(',');
 			var template = '';
+			var removeButtonIcon = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z' /></svg>"
 
 			// add placeholder, while thumbnail image is being loaded
 			ids_ar.forEach(function (id) {
-				template += '<div class="addonify-footer-components" data-product_id="' + id + '"><div class="sortable addonify-footer-thumbnail loading" data-product_id="' + id + '"><span class="addonify-footer-remove addonify-footer-btn" data-product_id="' + id + '"></span></div></div>';
+				template += '<div class="addonify-compare-dock-components" data-product_id="' + id + '"><div class="sortable addonify-compare-dock-thumbnail loading" data-product_id="' + id + '"><span class="addonify-compare-dock-remove-item-btn" data-product_id="' + id + '">' + removeButtonIcon + '</span><span class="addonify-loading-wave"></span></div></div>';
 			});
 
-			$footer_thumbnail_container.append(template);
+			$dock_thumbnail_container.append(template);
 		}
 
-
-		function show_hide_footer_message() {
+		function show_hide_dock_message() {
 
 			if (selected_product_ids.length < 2) {
 				$message_sel.removeClass('addonify-compare-hidden');
+				$('#addonify-compare-dock-inner').removeClass('full');
 			}
 			else {
 				$message_sel.addClass('addonify-compare-hidden');
+				$('#addonify-compare-dock-inner').addClass('full');
 			}
-
 		}
-
 
 		function search_items_ajax(query) {
 
@@ -410,7 +405,6 @@
 			})
 
 		}
-
 
 		function close_search_modal() {
 			$search_modal_sel.addClass('addonify-compare-hidden');
@@ -439,7 +433,7 @@
 
 			modalOverlay.removeClass('addonify-compare-hidden');
 
-			$body.removeClass('addonify-compare-footer-is-visible');
+			$body.removeClass('addonify-compare-dock-is-visible');
 
 			if (items_list_has_changed) {
 				// reset previous content
@@ -462,7 +456,7 @@
 
 			modalOverlay.addClass('addonify-compare-hidden');
 
-			$body.addClass('addonify-compare-footer-is-visible');
+			$body.addClass('addonify-compare-dock-is-visible');
 
 			$compare_modal_sel.addClass('addonify-compare-hidden');
 			compare_modal_is_open = false;
@@ -474,7 +468,7 @@
 
 			selected_product_ids = [];
 
-			$footer_thumbnail_container.find('.addonify-footer-components').each(function () {
+			$dock_thumbnail_container.find('.addonify-compare-dock-components').each(function () {
 				selected_product_ids.push($(this).data('product_id'));
 			});
 
@@ -487,7 +481,6 @@
 				close_compare_modal();
 				items_list_has_changed = true;
 				show_compare_modal();
-
 			}
 
 		}
