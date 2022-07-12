@@ -26,6 +26,20 @@ if ( ! function_exists( 'addonify_compare_products_compare_modal_styles_settings
     function addonify_compare_products_compare_modal_styles_settings_fields() {
 
         return array(
+            'modal_overlay_bck_color' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Overlay Color', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'modal_overlay_bck_color' )
+            ),
+            'modal_bck_color' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Background Color', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'modal_bck_color' )
+            ),
             'close_btn_text_color' => array(
                 'type'                        => 'color',
                 'label'                       => __( 'Close Button Label Color', 'addonify-compare-products' ),

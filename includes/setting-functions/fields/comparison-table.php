@@ -1,8 +1,8 @@
 <?php 
 
-if ( ! function_exists( 'addonify_compare_products_comparision_table_settings_fields' ) ) {
+if ( ! function_exists( 'addonify_compare_products_comparison_table_settings_fields' ) ) {
 
-    function addonify_compare_products_comparision_table_settings_fields() {
+    function addonify_compare_products_comparison_table_settings_fields() {
 
         return array(
             'fields_to_compare' => array(
@@ -28,20 +28,20 @@ if ( ! function_exists( 'addonify_compare_products_comparision_table_settings_fi
 }
 
 
-if ( ! function_exists( 'addonify_compare_products_comparision_table_add_to_settings_fields' ) ) {
+if ( ! function_exists( 'addonify_compare_products_comparison_table_add_to_settings_fields' ) ) {
 
-    function addonify_compare_products_comparision_table_add_to_settings_fields( $settings_fields ) {
+    function addonify_compare_products_comparison_table_add_to_settings_fields( $settings_fields ) {
 
-        return array_merge( $settings_fields, addonify_compare_products_comparision_table_settings_fields() );
+        return array_merge( $settings_fields, addonify_compare_products_comparison_table_settings_fields() );
     }
 
-    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_comparision_table_add_to_settings_fields' );
+    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_comparison_table_add_to_settings_fields' );
 }
 
 
-if ( ! function_exists( 'addonify_compare_products_comparision_table_styles_settings_fields' ) ) {
+if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_settings_fields' ) ) {
 
-    function addonify_compare_products_comparision_table_styles_settings_fields() {
+    function addonify_compare_products_comparison_table_styles_settings_fields() {
 
         return array(
             'table_title_color' => array(
@@ -55,12 +55,12 @@ if ( ! function_exists( 'addonify_compare_products_comparision_table_styles_sett
     }
 }
 
-if ( ! function_exists( 'addonify_compare_products_comparision_table_styles_add_to_settings_fields' ) ) {
+if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_add_to_settings_fields' ) ) {
 
-    function addonify_compare_products_comparision_table_styles_add_to_settings_fields( $settings_fields ) {
+    function addonify_compare_products_comparison_table_styles_add_to_settings_fields( $settings_fields ) {
 
-        return array_merge( $settings_fields, addonify_compare_products_comparision_table_styles_settings_fields() );
+        return array_merge( $settings_fields, addonify_compare_products_comparison_table_styles_settings_fields() );
     }
     
-    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_comparision_table_styles_add_to_settings_fields' );
+    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_comparison_table_styles_add_to_settings_fields' );
 }

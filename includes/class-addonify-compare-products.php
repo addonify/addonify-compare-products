@@ -77,7 +77,7 @@ class Addonify_Compare_Products {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->rest_api();
 	}
 
 	/**
@@ -238,6 +238,18 @@ class Addonify_Compare_Products {
 		// init functions.
 		$this->loader->add_action( 'init', $plugin_public, 'init_callback' );
 
+	}
+
+
+	/**
+	 * Register rest api endpoints for admin settings page.
+	 *
+	 * @since    1.0.7
+	 * @access   private
+	 */
+	private function rest_api() {
+
+		$plugin_rest = new Addonify_Compare_Products_Rest_API();
 	}
 
 	/**

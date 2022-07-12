@@ -11,6 +11,8 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/compare-modal.php';
 
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/comparison-table.php';
+
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/custom-css.php';
 
 
@@ -185,7 +187,7 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                         'comparision_table' => array(
                             'title' => __( 'Comparision Table', 'addonify-compare-products' ),
                             'description' => '',
-                            'fields' => addonify_compare_products_comparision_table_settings_fields()
+                            'fields' => addonify_compare_products_comparison_table_settings_fields()
                         )
                     )
                 ),
@@ -205,7 +207,7 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                         'comparision_table_color' => array(
                             'title' => __( 'Comparision Table Colors', 'addonify-compare-products' ),
                             'description' => '',
-                            'fields' => addonify_compare_products_comparision_table_styles_settings_fields()
+                            'fields' => addonify_compare_products_comparison_table_styles_settings_fields()
                         ),
                         'compare_modal_color' => array(
                             'title' => __( 'Compare Modal Colors', 'addonify-compare-products' ),

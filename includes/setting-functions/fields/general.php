@@ -13,6 +13,19 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
                 'badge'           => 'Required',
                 'value' => addonify_compare_products_get_option( 'enable_product_comparision' )
             ),
+            'compare_products_display_type' => array(
+                'type' => 'select',
+                'className'      => '',
+                'placeholder'    => __('Select a page', 'addonify-compare-products'),
+                'label'          => __( 'Products Compare Page', 'addonify-compare-products' ),
+                'description'    => __( 'Select a page to display wishlist table.', 'addonify-compare-products'),
+                'dependent'      => array('enable_product_comparision'),
+                'choices'        => array(
+                    'popup'      => __( 'Popup Modal', 'addonify-compare-products' ),
+                    'page'       => __( 'Page', 'addonify-compare-products' ),
+                ),
+                'value'          => addonify_compare_products_get_option( 'compare_products_display_type' )
+            ),
             'compare_page' => array(
                 'type' => 'select',
                 'className'      => '',
