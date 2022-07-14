@@ -51,6 +51,13 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_setti
                 'className'                   => '',
                 'value'                       => addonify_compare_products_get_option( 'table_title_color' )
             ),
+            'table_title_color_hover' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Table Title Color on Hover', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'table_title_color' )
+            ),
         );
     }
 }

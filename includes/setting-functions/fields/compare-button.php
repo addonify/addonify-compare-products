@@ -53,12 +53,26 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_styles_setting
                 'className'                   => '',
                 'value'                       => addonify_compare_products_get_option( 'compare_btn_text_color' )
             ),
+            'compare_btn_text_color_hover' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Label Color on Hover', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'compare_btn_text_color_hover' )
+            ),
             'compare_btn_bck_color' => array(
                 'type'                        => 'color',
                 'label'                       => __( 'Background Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
                 'value'                       => addonify_compare_products_get_option( 'compare_btn_bck_color' )
+            ),
+            'compare_btn_bck_color_hover' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Background Color on Hover', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'compare_btn_bck_color_hover' )
             ),
         );
     }
