@@ -361,46 +361,65 @@ body.addonify-compare-modal-is-visible {
             border-radius: 0;
             overflow: hidden;
             overflow-y: auto;
+        }
+    }
+}
 
-            #addonify-compare-products-table {
+#addonify-compare-products-table {
 
-                tbody {
+    thead {
 
-                    tr {
+        tr {
 
-                        td {
+            th {
 
-                            .price {
+                a {
 
-                                del {
+                    color: var(--adfy_compare_products_table_title_color);
 
-                                    background: transparent;
-                                    background-color: transparent;
-                                }
+                    &:hover {
 
-                                ins {
-
-                                    background: transparent;
-                                    background-color: transparent;
-                                }
-                            }
-
-                            .add_to_cart_button,
-                            .woocommerce .button,
-                            .woocommerce.add_to_cart_inline .add_to_cart_button {
-
-                                display: inline-flex;
-                                align-items: center;
-                                justify-content: center;
-                                height: auto;
-                                width: auto;
-                                min-width: auto;
-                                margin: 0;
-                                padding: 10px 20px;
-                                border-radius: 3px;
-                            }
-                        }
+                        color: var(--adfy_compare_products_table_title_color_hover);
                     }
+                }
+            }
+        }
+    }
+
+    tbody {
+
+        tr {
+
+            td {
+
+                .price {
+
+                    del {
+
+                        background: transparent;
+                        background-color: transparent;
+                    }
+
+                    ins {
+
+                        background: transparent;
+                        background-color: transparent;
+                    }
+                }
+
+                .add_to_cart_button,
+                .woocommerce .button,
+                .woocommerce.add_to_cart_inline .add_to_cart_button {
+
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: auto;
+                    width: auto;
+                    min-width: auto;
+                    margin: 0;
+                    padding: 10px 20px;
+                    border-radius: 3px;
                 }
             }
         }

@@ -51,7 +51,7 @@ defined( 'ABSPATH' ) || exit;
 
 					if ( 'title' !== $key ) {
 						echo '<tr>';
-						echo '<td class="acp-field-title">' . esc_html( $key ) . '</td>';
+						echo '<td>' . esc_html( $key ) . '</td>';
 						foreach ( $value as $key1 => $value1 ) {
 							if ( $value1 ) {
 								echo '<td  class="' . ( ( ! is_numeric( $key1 ) ? esc_html( $key1 ) : '' ) ) . '" >' . wp_kses_post( $value1 ) . '</td>';

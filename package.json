@@ -12,6 +12,7 @@
     "hot": "mix watch --hot",
     "production": "mix --production",
     "public": "gulp assets",
+    "admin-public": "npm run watch && gulp assets",
     "zip": "mix --production && gulp zip"
   },
   "dependencies": {
