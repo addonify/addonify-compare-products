@@ -9,6 +9,7 @@
 	import Radio from "../inputs/Radio.vue";
 	import ColorPicker from "../inputs/ColorPicker.vue";
 	import InvalidControl from "../inputs/InvalidControl.vue";
+	import NumberToggleButton from "../inputs/NumberToggleButton.vue";
 	const props = defineProps({
 		field: Object,
 		fieldKey: String,
@@ -48,6 +49,13 @@
 		v-else-if="props.field.type == 'checkbox'"
 		v-model="props.reactiveState[props.fieldKey]"
 		:choices="props.field.choices"
+	/>
+	<NumberToggleButton
+		v-else-if="
+			props.field.type == 'number' && props.field.typeStyle == 'toggle'
+		"
+		v-model="props.reactiveState[props.fieldKey]"
+		:placeholder="props.field.placeholder"
 	/>
 	<Number
 		v-else-if="props.field.type == 'number'"

@@ -201,17 +201,20 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                         'compare_button_colors' => array(
                             'title' => __( 'Compare Button Colors', 'addonify-compare-products' ),
                             'description' => '',
+                            'type' => 'color-options-group',
                             'dependent'  => array('load_styles_from_plugin'),
                             'fields' => addonify_compare_products_compare_button_styles_settings_fields()
                         ),
                         'comparision_table_color' => array(
                             'title' => __( 'Comparision Table Colors', 'addonify-compare-products' ),
                             'description' => '',
+                            'type' => 'color-options-group',
                             'fields' => addonify_compare_products_comparison_table_styles_settings_fields()
                         ),
                         'compare_modal_color' => array(
                             'title' => __( 'Compare Modal Colors', 'addonify-compare-products' ),
                             'description' => '',
+                            'type' => 'color-options-group',
                             'fields' => addonify_compare_products_compare_modal_styles_settings_fields()
                         ),
                         'custom_css' => array(

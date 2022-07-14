@@ -6,7 +6,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
 
         return array(
             'enable_product_comparision' => array(
-                'label'			  => __( 'Enable wishlist', 'addonify-compare-products' ),
+                'label'			  => __( 'Enable products compare', 'addonify-compare-products' ),
                 'description'     => __( 'If disabled, addonify wishlist plugin functionality will not be functional.', 'addonify-compare-products' ),
                 'type'            => 'switch',
                 'className'       => '',

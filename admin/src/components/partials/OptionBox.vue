@@ -1,4 +1,5 @@
 <script setup>
+	import { useOptionsStore } from "../../stores/options";
 	import InputControl from "./InputControl.vue";
 	import { ElTag } from "element-plus";
 	const props = defineProps({
@@ -6,10 +7,19 @@
 		sectionKey: [String, Object],
 		reactiveState: Object,
 	});
+	const store = useOptionsStore();
 </script>
 <template>
 	<slot></slot>
-	<div class="adfy-options" v-for="(field, key) in props.section.fields">
+	<div
+		class="adfy-options"
+		v-for="(field, key) in props.section.fields"
+		v-show="
+			key == 'enable_product_comparision'
+				? true
+				: store.options.enable_product_comparision
+		"
+	>
 		<div class="adfy-option-columns option-box" :class="field.className">
 			<div class="adfy-col left">
 				<div class="label">

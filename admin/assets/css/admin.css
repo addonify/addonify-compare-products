@@ -87,19 +87,19 @@
 /* -------------------------------------------------------------------------- 
 	Forms
   -------------------------------------------------------------------------- */
-[class*=page_addonify_quick_view] input[type=date],
-[class*=page_addonify_quick_view] input[type=datetime-local],
-[class*=page_addonify_quick_view] input[type=datetime],
-[class*=page_addonify_quick_view] input[type=email],
-[class*=page_addonify_quick_view] input[type=month],
-[class*=page_addonify_quick_view] input[type=number],
-[class*=page_addonify_quick_view] input[type=password],
-[class*=page_addonify_quick_view] input[type=search],
-[class*=page_addonify_quick_view] input[type=tel],
-[class*=page_addonify_quick_view] input[type=text],
-[class*=page_addonify_quick_view] input[type=time],
-[class*=page_addonify_quick_view] input[type=url],
-[class*=page_addonify_quick_view] input[type=week] {
+[class*=page_addonify_compare_products] input[type=date],
+[class*=page_addonify_compare_products] input[type=datetime-local],
+[class*=page_addonify_compare_products] input[type=datetime],
+[class*=page_addonify_compare_products] input[type=email],
+[class*=page_addonify_compare_products] input[type=month],
+[class*=page_addonify_compare_products] input[type=number],
+[class*=page_addonify_compare_products] input[type=password],
+[class*=page_addonify_compare_products] input[type=search],
+[class*=page_addonify_compare_products] input[type=tel],
+[class*=page_addonify_compare_products] input[type=text],
+[class*=page_addonify_compare_products] input[type=time],
+[class*=page_addonify_compare_products] input[type=url],
+[class*=page_addonify_compare_products] input[type=week] {
   padding: 0;
   margin: 0;
   line-height: var(--el-input-inner-height);
@@ -112,26 +112,26 @@
   background-color: transparent;
   color: var(--el-input-text-color, var(--el-text-color-regular));
 }
-[class*=page_addonify_quick_view] input[type=date]:focus,
-[class*=page_addonify_quick_view] input[type=datetime-local]:focus,
-[class*=page_addonify_quick_view] input[type=datetime]:focus,
-[class*=page_addonify_quick_view] input[type=email]:focus,
-[class*=page_addonify_quick_view] input[type=month]:focus,
-[class*=page_addonify_quick_view] input[type=number]:focus,
-[class*=page_addonify_quick_view] input[type=password]:focus,
-[class*=page_addonify_quick_view] input[type=search]:focus,
-[class*=page_addonify_quick_view] input[type=tel]:focus,
-[class*=page_addonify_quick_view] input[type=text]:focus,
-[class*=page_addonify_quick_view] input[type=time]:focus,
-[class*=page_addonify_quick_view] input[type=url]:focus,
-[class*=page_addonify_quick_view] input[type=week]:focus {
+[class*=page_addonify_compare_products] input[type=date]:focus,
+[class*=page_addonify_compare_products] input[type=datetime-local]:focus,
+[class*=page_addonify_compare_products] input[type=datetime]:focus,
+[class*=page_addonify_compare_products] input[type=email]:focus,
+[class*=page_addonify_compare_products] input[type=month]:focus,
+[class*=page_addonify_compare_products] input[type=number]:focus,
+[class*=page_addonify_compare_products] input[type=password]:focus,
+[class*=page_addonify_compare_products] input[type=search]:focus,
+[class*=page_addonify_compare_products] input[type=tel]:focus,
+[class*=page_addonify_compare_products] input[type=text]:focus,
+[class*=page_addonify_compare_products] input[type=time]:focus,
+[class*=page_addonify_compare_products] input[type=url]:focus,
+[class*=page_addonify_compare_products] input[type=week]:focus {
   outline: none;
   box-shadow: none;
 }
-[class*=page_addonify_quick_view] input.readonly,
-[class*=page_addonify_quick_view] input[readonly],
-[class*=page_addonify_quick_view] textarea.readonly,
-[class*=page_addonify_quick_view] textarea[readonly] {
+[class*=page_addonify_compare_products] input.readonly,
+[class*=page_addonify_compare_products] input[readonly],
+[class*=page_addonify_compare_products] textarea.readonly,
+[class*=page_addonify_compare_products] textarea[readonly] {
   -el-input-inner-height: calc(var(--el-input-height, 40px) - 2px);
   background-color: transparent;
 }
@@ -270,7 +270,7 @@
   background-color: var(--addonify_primary_color);
 }
 
-#___adfy-quickview-app___ {
+#___adfy-compare-products-app___ {
   display: block;
   position: relative;
   margin: 0 0 0 -20px;
@@ -281,18 +281,18 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
-#___adfy-quickview-app___ * {
+#___adfy-compare-products-app___ * {
   box-sizing: border-box;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
-#___adfy-quickview-app___ .adfy-container {
+#___adfy-compare-products-app___ .adfy-container {
   margin: 0 auto;
   width: 100%;
   max-width: 1000px;
   min-height: 100vh;
 }
-#___adfy-quickview-app___ .main-content {
+#___adfy-compare-products-app___ .main-content {
   display: grid;
   grid-template-columns: 180px auto;
   -moz-column-gap: 60px;
@@ -301,7 +301,7 @@
   justify-content: stretch;
   margin: 120px 0 0 0;
 }
-#___adfy-quickview-app___ .main-content .end {
+#___adfy-compare-products-app___ .main-content .end {
   padding-left: 60px;
   border-left: 1px solid var(--addonify_border_color);
 }
@@ -584,19 +584,19 @@
   font-weight: normal;
 }
 
-#___adfy-quickview-app___ .error-404 {
+#___adfy-compare-products-app___ .error-404 {
   display: block;
   margin: 200px auto 0 auto;
   text-align: center;
   min-height: 80vh;
 }
-#___adfy-quickview-app___ .error-404 h3 {
+#___adfy-compare-products-app___ .error-404 h3 {
   text-transform: uppercase;
   font-size: 112px;
   font-weight: bold;
   margin: 0 0 60px 0;
 }
-#___adfy-quickview-app___ .error-404 p {
+#___adfy-compare-products-app___ .error-404 p {
   font-size: 13px;
   color: #8b8b8b;
   text-transform: uppercase;
@@ -604,7 +604,7 @@
   font-weight: normal;
   margin: 0 0 30px 0;
 }
-#___adfy-quickview-app___ .error-404 .adfy-button {
+#___adfy-compare-products-app___ .error-404 .adfy-button {
   padding: 20px 60px;
   border-radius: 30px;
 }
