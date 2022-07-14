@@ -1,3 +1,8 @@
+<script setup>
+	const { __ } = wp.i18n;
+	const versionNumber = ADDONIFY_COMPARE_PRODUCTS_LOCOLIZER.version_number;
+	const thisYear = new Date().getFullYear();
+</script>
 <template>
 	<footer class="adfy-colopon">
 		<div class="adfy-row">
@@ -32,8 +37,3 @@
 		</div>
 	</footer>
 </template>
-<script setup>
-	const { __ } = wp.i18n;
-	const versionNumber = ADDONIFY_COMPARE_PRODUCTS_LOCOLIZER.version_number;
-	const thisYear = new Date().getFullYear();
-</script>

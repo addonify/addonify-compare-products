@@ -1,11 +1,10 @@
 <script setup>
 	import { useOptionsStore } from "../../stores/options";
-	let props = defineProps({
+	const props = defineProps({
 		section: Object,
 		sectionkey: String,
 	});
-	let store = useOptionsStore();
-	console.log(props.sectionkey);
+	const store = useOptionsStore();
 </script>
 <template>
 	<h3

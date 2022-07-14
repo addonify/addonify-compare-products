@@ -1323,7 +1323,6 @@ __webpack_require__.r(__webpack_exports__);
     expose();
     var props = __props;
     var store = (0,_stores_options__WEBPACK_IMPORTED_MODULE_0__.useOptionsStore)();
-    console.log(props.sectionkey);
     var __returned__ = {
       props: props,
       store: store,

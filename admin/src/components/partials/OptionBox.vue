@@ -2,12 +2,12 @@
 	import { useOptionsStore } from "../../stores/options";
 	import InputControl from "./InputControl.vue";
 	import { ElTag } from "element-plus";
-	let props = defineProps({
+	const props = defineProps({
 		section: Object,
 		sectionKey: [String, Object],
 		reactiveState: Object,
 	});
-	let store = useOptionsStore();
+	const store = useOptionsStore();
 </script>
 <template>
 	<slot></slot>
