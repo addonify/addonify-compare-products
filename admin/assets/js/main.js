@@ -1118,9 +1118,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _OptionBox_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OptionBox.vue */ "./admin/src/components/partials/OptionBox.vue");
-/* harmony import */ var _design_ColorGroup_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./design/ColorGroup.vue */ "./admin/src/components/partials/design/ColorGroup.vue");
-/* harmony import */ var _SectionTitle_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SectionTitle.vue */ "./admin/src/components/partials/SectionTitle.vue");
+/* harmony import */ var _stores_options__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../stores/options */ "./admin/src/stores/options.js");
+/* harmony import */ var _OptionBox_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./OptionBox.vue */ "./admin/src/components/partials/OptionBox.vue");
+/* harmony import */ var _design_ColorGroup_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./design/ColorGroup.vue */ "./admin/src/components/partials/design/ColorGroup.vue");
+/* harmony import */ var _SectionTitle_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SectionTitle.vue */ "./admin/src/components/partials/SectionTitle.vue");
+
 
 
 
@@ -1128,17 +1130,21 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'HandleDesignOptions',
   props: {
     section: Object,
+    sectionKey: String,
     reactiveState: Object
   },
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
     var props = __props;
+    var store = (0,_stores_options__WEBPACK_IMPORTED_MODULE_0__.useOptionsStore)();
     var __returned__ = {
       props: props,
-      OptionBox: _OptionBox_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-      ColorGroup: _design_ColorGroup_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-      SectionTitle: _SectionTitle_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+      store: store,
+      useOptionsStore: _stores_options__WEBPACK_IMPORTED_MODULE_0__.useOptionsStore,
+      OptionBox: _OptionBox_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      ColorGroup: _design_ColorGroup_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      SectionTitle: _SectionTitle_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -2288,7 +2294,7 @@ var _hoisted_1 = {
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.props.section, function (section, sectionKey) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [section.type == 'color-options-group' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ColorGroup"], {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [section.type == 'color-options-group' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["ColorGroup"], {
       key: 0,
       section: section,
       reactiveState: $setup.props.reactiveState
@@ -2312,7 +2318,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     }, 1032
     /* PROPS, DYNAMIC_SLOTS */
-    , ["section", "reactiveState"]))]);
+    , ["section", "reactiveState"]))], 512
+    /* NEED_PATCH */
+    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, sectionKey == 'general' ? true : $setup.store.options.load_styles_from_plugin]]);
   }), 256
   /* UNKEYED_FRAGMENT */
   );
@@ -2798,6 +2806,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
             return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["HandleDesignOptions"], {
               section: section,
+              sectionKey: sectionKey,
               reactiveState: $setup.store.options
             }, {
               "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -2813,7 +2822,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
             }, 1032
             /* PROPS, DYNAMIC_SLOTS */
-            , ["section", "reactiveState"])];
+            , ["section", "sectionKey", "reactiveState"])];
           }),
           _: 2
           /* DYNAMIC */
