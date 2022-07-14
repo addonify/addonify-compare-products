@@ -285,7 +285,7 @@ body.addonify-compare-modal-is-visible {
     margin: 20px;
     width: auto;
     height: auto;
-    z-index: 999999999;
+    z-index: var(--adfy_compare_products_comparision_table_zindex);
     overflow: hidden;
     border-radius: 5px;
     border-top-right-radius: 0;
@@ -309,15 +309,26 @@ body.addonify-compare-modal-is-visible {
             width: 30px;
             padding: 0;
             margin: 0;
+            border: none;
             border-radius: 0;
             border-bottom-left-radius: 3px;
             box-shadow: none;
             z-index: 10;
+            color: #444444;
+            fill: #444444;
+            background: transparent;
+            background-color: #D5D5D5;
 
             svg {
 
                 width: 14px;
                 height: 14px;
+            }
+
+            &:hover {
+
+                background: transparent;
+                background-color: #A9A9A9;
             }
         }
 
@@ -333,6 +344,48 @@ body.addonify-compare-modal-is-visible {
             border-radius: 0;
             overflow: hidden;
             overflow-y: auto;
+
+            #addonify-compare-products-table {
+
+                tbody {
+
+                    tr {
+
+                        td {
+
+                            .price {
+
+                                del {
+
+                                    background: transparent;
+                                    background-color: transparent;
+                                }
+
+                                ins {
+
+                                    background: transparent;
+                                    background-color: transparent;
+                                }
+                            }
+
+                            .add_to_cart_button,
+                            .woocommerce .button,
+                            .woocommerce.add_to_cart_inline .add_to_cart_button {
+
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                height: auto;
+                                width: auto;
+                                min-width: auto;
+                                margin: 0;
+                                padding: 10px 20px;
+                                border-radius: 3px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
