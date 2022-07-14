@@ -1,8 +1,8 @@
 'use strict';
 
-function AddonifyPerfectScrollBar(addonifyScrollbarEle) {
+function AddonifyPerfectScrollBar(arg) {
 
-    new PerfectScrollbar(addonifyScrollbarEle, {
+    new PerfectScrollbar(arg, {
         wheelSpeed: 1,
         wheelPropagation: true,
         minScrollbarLength: 20
@@ -11,11 +11,13 @@ function AddonifyPerfectScrollBar(addonifyScrollbarEle) {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    var addonifyScrollbarEle = document.getElementById('addonify-compare-modal-content');
+    var addonifyCompareScrollbarEle = document.querySelectorAll('.addonify-compare-scrollbar');
 
-    if ((addonifyScrollbarEle !== null) && (addonifyScrollbarEle !== undefined)) {
+    addonifyCompareScrollbarEle.forEach((scrollbarEle) => {
 
-        AddonifyPerfectScrollBar(addonifyScrollbarEle);
-    }
+        if ((scrollbarEle !== null) && (scrollbarEle !== undefined)) {
 
+            AddonifyPerfectScrollBar(scrollbarEle);
+        }
+    })
 });

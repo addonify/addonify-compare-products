@@ -16,8 +16,8 @@
     transform: translateX(-50%)translateY(-50%);
 }
 
-.addonify-loading-wave:before, 
-.addonify-loading-wave:after  {
+.addonify-loading-wave::before, 
+.addonify-loading-wave::after  {
 
 	content: '';
     left: 0px;
@@ -28,18 +28,18 @@
 	height: 100%;
 }
 
-.addonify-loading-wave:before {
+.addonify-loading-wave::before {
 
     content: '';
-	transform: scale(1,1);
 	opacity: 1;
+	transform: scale( 1, 1 );
 	animation: addonifyCompareLoadingWaveBefore 0.6s infinite linear;
 }
 
 .addonify-loading-wave:after {
 
     content: '';
-	transform: scale(0,0);
 	opacity: 0;
+	transform: scale( 0, 0 );
 	animation: addonifyCompareLoadingWaveAfter 0.6s infinite linear;
 }

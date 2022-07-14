@@ -14,6 +14,7 @@ body.addonify-compare-modal-is-visible {
 #addonify-compare-modal-overlay,
 #addonify-compare-search-modal-overlay {
 
+    display: block;
     position: fixed;
     left: 0;
     right: 0;
@@ -21,9 +22,19 @@ body.addonify-compare-modal-is-visible {
     bottom: 0;
     width: 100%;
     height: 100%;
+    cursor: pointer;
     background-color: var(--adfy_compare_products_search_modal_overlay_bg_color);
     z-index: var(--adfy_compare_products_search_modal_overlay_zindex);
+    @include visibilityVisible();
+    @include transitionDelay();
 }
+
+#addonify-compare-modal-overlay.addonify-compare-hidden,
+#addonify-compare-search-modal-overlay.addonify-compare-hidden {
+
+    @include visibilityHidden();
+}
+
 
 /* -------------------------------------------------------------------------- 
 	Search modal box
@@ -33,21 +44,27 @@ body.addonify-compare-modal-is-visible {
 
     position: fixed;
     @include positionTopLeft();
+    width: 600px;
+    height: 450px;
     z-index: var(--adfy_compare_products_search_modal_zindex);
     background-color: var(--adfy_compare_products_search_modal_bg_color);
     border-radius: 5px;
     @include boxShadow();
+    @include breakpoint(ipad) {
+
+        width: 90vw;
+    }
 }
 
 .addonify-compare-search-model-inner {
 
 	position: relative;
     max-width: 100%;
-    width: 600px;
-    height: 450px;
     padding: 30px;
-    //background-color: white;
-    //border-radius: 5px;
+    @include breakpoint(mobile) {
+
+        padding: 20px;
+    }
 }
 
 .addonify-compare-search-head {
@@ -67,6 +84,7 @@ body.addonify-compare-modal-is-visible {
     margin: 0;
     width: 30px;
     height: 30px;
+    cursor: pointer;
     color: var(--adfy_compare_products_search_modal_close_button_color);
     fill: var(--adfy_compare_products_search_modal_close_button_color);
     border: 2px solid var(--adfy_compare_products_search_modal_close_button_border_color);
@@ -74,8 +92,13 @@ body.addonify-compare-modal-is-visible {
     background-color: transparent;
     border-radius: 100%;
     z-index: 10;
-    text-decoration: none;
     box-shadow: none;
+    text-decoration: none;
+    @include transitionDelay();
+    @include breakpoint(ipad) {
+
+        right: -20px;
+    }
 
     svg {
 
@@ -88,8 +111,8 @@ body.addonify-compare-modal-is-visible {
         fill: var(--adfy_compare_products_search_modal_close_button_color_hover);
         color: var(--adfy_compare_products_search_modal_close_button_color_hover);
         border-color: var(--adfy_compare_products_search_modal_close_button_border_color_hover);
-        text-decoration: none;
         box-shadow: none;
+        text-decoration: none;
         background: transparent;
         background-color: transparent;
     }
@@ -101,122 +124,165 @@ body.addonify-compare-modal-is-visible {
     }
 }
 
-#addonify-compare-search-query {
+.addonify-compare-search-modal-content {
 
-    @include flex();
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 2px solid #EEE;
-    border-radius: 4px;
-    box-shadow: inset 1px 1px 3px transparent;
+    input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
 
-    &:focus {
-
-        outline: none;
-        border-color: #3da6ff;
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
-    }
-}
-
-#addonify-compare-search-results {
-
-    margin: 20px 0 0 0;
-    height: 320px;
-    overflow: hidden;
-    overflow-y: auto;
-
-    &.loading {
-
-        background: url( ../../images/search.gif) no-repeat center;
-        min-height: 325px;
-    }
-
-    ul {
-        margin: 0;
-        padding: 0 10px 0 0;
-    }
-
-    li {
-
-        @include flex();
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        list-style: none;
-        overflow: hidden;
-        border-bottom: solid 1px #F5F5F5;
-        padding-bottom: 15px;
-        margin-bottom: 15px;
-    }
-
-    li:last-child {
-
-        border-bottom: 0;
-        padding-bottom: 0;
-        margin-bottom: 0;
-    }
-
-    .item {
-
-        @include flex();
-        align-items: center;
-        gap: 10px;
-
-        img {
-
-            display: inline-flex;
-            width: 42px;
-            height: 42px;
-        }
-
-        .item-name {
-
-            font-size: 14px;
-            font-weight: normal;
-            line-height: 1.3;
-            letter-spacing: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-    }
-
-    .item-add {
-
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        width: 30px;
-        height: 30px;
+        color: #9E9E9E;
+        opacity: 1; /* Firefox */
+        font-size: 13px;
         font-weight: normal;
-        line-height: 1;
-        text-align: center;
-        color: var(--adfy_compare_products_search_modal_add_button_color);
-        fill: var(--adfy_compare_products_search_modal_add_button_color);
-        background: transparent;
-        background-color: var(--adfy_compare_products_search_modal_add_button_bg_color);
-        cursor: pointer;
-        border: none;
+    }
+
+    input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+
+        color: #9E9E9E;
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    input::-ms-input-placeholder { /* Microsoft Edge */
+
+        color: #9E9E9E;
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    #addonify-compare-search-query {
+
+        @include flex();
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+        font-size: 15px;
+        font-weight: normal;
+        line-height: 21px;
+        color: #444444;
+        padding: 14px 15px;
+        height: 48px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #EEE;
+        background: white;
         box-shadow: none;
-        border-radius: 3px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 1px 1px 3px transparent;
+        -moz-box-shadow: inset 1px 1px 3px transparent;
+        box-shadow: inset 1px 1px 3px transparent;
         @include transitionDelay();
 
-        svg {
+        &:focus {
 
-            width: 13px;
-            height: 13px;
+            outline: none;
+            border-color: #3DA6FF;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+    }
+
+    #addonify-compare-search-results {
+
+        position: relative;
+        margin: 20px 0 0 0;
+        height: 320px;
+        overflow: hidden;
+        overflow-y: auto;
+
+        &.loading {
+
+            background: url( ../../images/search.gif) no-repeat center;
+            min-height: 325px;
         }
 
-        &:hover {
+        ul {
+            margin: 0;
+            padding: 0 10px 0 0;
+        }
 
-            color: var(--adfy_compare_products_search_modal_add_button_color_hover);
-            fill: var(--adfy_compare_products_search_modal_add_button_color_hover);
+        li {
+
+            @include flex();
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            list-style: none;
+            overflow: hidden;
+            border-bottom: solid 1px #F5F5F5;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        li:last-child {
+
+            border-bottom: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        .item {
+
+            @include flex();
+            align-items: center;
+            gap: 15px;
+
+            img {
+
+                display: inline-flex;
+                width: 42px;
+                height: 42px;
+            }
+
+            .item-name {
+
+                .product-title {
+
+                    margin: 0;
+                    font-size: 14px;
+                    font-weight: normal;
+                    line-height: 1.3;
+                    letter-spacing: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+
+        .item-add {
+
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            font-weight: normal;
+            line-height: 1;
+            text-align: center;
+            color: var(--adfy_compare_products_search_modal_add_button_color);
+            fill: var(--adfy_compare_products_search_modal_add_button_color);
             background: transparent;
-            background-color: var(--adfy_compare_products_search_modal_add_button_bg_color_hover);
-            box-shadow: none;
+            background-color: var(--adfy_compare_products_search_modal_add_button_bg_color);
+            cursor: pointer;
             border: none;
+            box-shadow: none;
+            border-radius: 3px;
+            @include transitionDelay();
+
+            svg {
+
+                width: 13px;
+                height: 13px;
+            }
+
+            &:hover {
+
+                color: var(--adfy_compare_products_search_modal_add_button_color_hover);
+                fill: var(--adfy_compare_products_search_modal_add_button_color_hover);
+                background: transparent;
+                background-color: var(--adfy_compare_products_search_modal_add_button_bg_color_hover);
+                box-shadow: none;
+                border: none;
+            }
         }
     }
 }
@@ -235,7 +301,7 @@ body.addonify-compare-modal-is-visible {
     margin: 20px;
     width: auto;
     height: auto;
-    z-index: 999999999;
+    z-index: var(--adfy_compare_products_comparision_table_zindex);
     overflow: hidden;
     border-radius: 5px;
     border-top-right-radius: 0;
@@ -245,6 +311,7 @@ body.addonify-compare-modal-is-visible {
 
         position: relative;
         max-width: 100%;
+        overflow: hidden;
 
         #addonify-compare-close-button {
 
@@ -259,15 +326,26 @@ body.addonify-compare-modal-is-visible {
             width: 30px;
             padding: 0;
             margin: 0;
+            border: none;
             border-radius: 0;
             border-bottom-left-radius: 3px;
             box-shadow: none;
             z-index: 10;
+            color: #444444;
+            fill: #444444;
+            background: transparent;
+            background-color: #D5D5D5;
 
             svg {
 
                 width: 14px;
                 height: 14px;
+            }
+
+            &:hover {
+
+                background: transparent;
+                background-color: #A9A9A9;
             }
         }
 
@@ -283,6 +361,48 @@ body.addonify-compare-modal-is-visible {
             border-radius: 0;
             overflow: hidden;
             overflow-y: auto;
+
+            #addonify-compare-products-table {
+
+                tbody {
+
+                    tr {
+
+                        td {
+
+                            .price {
+
+                                del {
+
+                                    background: transparent;
+                                    background-color: transparent;
+                                }
+
+                                ins {
+
+                                    background: transparent;
+                                    background-color: transparent;
+                                }
+                            }
+
+                            .add_to_cart_button,
+                            .woocommerce .button,
+                            .woocommerce.add_to_cart_inline .add_to_cart_button {
+
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                height: auto;
+                                width: auto;
+                                min-width: auto;
+                                margin: 0;
+                                padding: 10px 20px;
+                                border-radius: 3px;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -32,6 +32,6 @@ defined( 'ABSPATH' ) || exit;
 				<line x1="6" y1="6" x2="18" y2="18"></line>
 			</svg>
 		</button>
-		<div id="addonify-compare-modal-content"></div>
+		<div id="addonify-compare-modal-content" class="addonify-compare-scrollbar"></div>
 	</div>
 </div>
