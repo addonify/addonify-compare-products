@@ -65,7 +65,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<div class="addonify-compare-search-modal-content">
 			<input type="text" name="query" value="" id="addonify-compare-search-query" placeholder="<?php echo esc_attr__( 'Search here', 'addonify-compare-products' ); ?>">
-			<div id="addonify-compare-search-results"></div>
+			<div id="addonify-compare-search-results" class="addonify-compare-scrollbar"></div>
 		</div>
 
 	</div>

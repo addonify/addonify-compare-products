@@ -175,7 +175,6 @@
 				// ajax search
 				search_items_ajax(query);
 			}, 500);
-
 		})
 
 

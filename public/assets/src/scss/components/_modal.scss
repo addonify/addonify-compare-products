@@ -182,6 +182,7 @@ body.addonify-compare-modal-is-visible {
 
     #addonify-compare-search-results {
 
+        position: relative;
         margin: 20px 0 0 0;
         height: 320px;
         overflow: hidden;
@@ -222,7 +223,7 @@ body.addonify-compare-modal-is-visible {
 
             @include flex();
             align-items: center;
-            gap: 10px;
+            gap: 15px;
 
             img {
 
@@ -233,13 +234,17 @@ body.addonify-compare-modal-is-visible {
 
             .item-name {
 
-                font-size: 14px;
-                font-weight: normal;
-                line-height: 1.3;
-                letter-spacing: 0;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                .product-title {
+
+                    margin: 0;
+                    font-size: 14px;
+                    font-weight: normal;
+                    line-height: 1.3;
+                    letter-spacing: 0;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
         }
 
@@ -306,6 +311,7 @@ body.addonify-compare-modal-is-visible {
 
         position: relative;
         max-width: 100%;
+        overflow: hidden;
 
         #addonify-compare-close-button {
 
