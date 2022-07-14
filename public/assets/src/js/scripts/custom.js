@@ -69,6 +69,7 @@
 
 				// close modal, if it is open
 				$search_modal_sel.addClass('addonify-compare-hidden');
+				searchModalOverlay.addClass('addonify-compare-hidden');
 
 
 				// generate thumbnails with preloader
@@ -89,11 +90,9 @@
 				items_list_has_changed = false;
 			}
 
-
 			show_hide_dock_bar();
 
 			show_hide_dock_compare_button();
-
 
 			if (first_boot) {
 				items_list_has_changed = true;
@@ -310,7 +309,6 @@
 
 		}
 
-
 		function show_hide_dock_compare_button() {
 			if (selected_product_ids.length > 1) {
 				$dock_compare_btn.fadeIn();
@@ -321,7 +319,6 @@
 
 		}
 
-
 		function show_hide_dock_bar() {
 			if (selected_product_ids.length) {
 				$body.addClass('addonify-compare-dock-is-visible');
@@ -331,7 +328,6 @@
 			}
 
 		}
-
 
 		function mark_btn_as_selected(ids) {
 			var product_ids = ids.split(',');

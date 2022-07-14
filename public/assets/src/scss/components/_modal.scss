@@ -14,6 +14,7 @@ body.addonify-compare-modal-is-visible {
 #addonify-compare-modal-overlay,
 #addonify-compare-search-modal-overlay {
 
+    display: block;
     position: fixed;
     left: 0;
     right: 0;
@@ -21,9 +22,19 @@ body.addonify-compare-modal-is-visible {
     bottom: 0;
     width: 100%;
     height: 100%;
+    cursor: pointer;
     background-color: var(--adfy_compare_products_search_modal_overlay_bg_color);
     z-index: var(--adfy_compare_products_search_modal_overlay_zindex);
+    @include visibilityVisible();
+    @include transitionDelay();
 }
+
+#addonify-compare-modal-overlay.addonify-compare-hidden,
+#addonify-compare-search-modal-overlay.addonify-compare-hidden {
+
+    @include visibilityHidden();
+}
+
 
 /* -------------------------------------------------------------------------- 
 	Search modal box
@@ -155,7 +166,7 @@ body.addonify-compare-modal-is-visible {
         background: white;
         box-shadow: none;
         box-sizing: border-box;
-        border-radius: 3px;
+        border-radius: 4px;
         -webkit-box-shadow: inset 1px 1px 3px transparent;
         -moz-box-shadow: inset 1px 1px 3px transparent;
         box-shadow: inset 1px 1px 3px transparent;
