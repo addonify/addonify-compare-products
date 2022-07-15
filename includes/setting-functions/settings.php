@@ -1,6 +1,5 @@
 <?php
 
-
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/general.php';
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/compare-button.php';
@@ -16,6 +15,12 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/custom-css.php';
 
 
+/**
+ * Define default values for plugin's setting options.
+ * 
+ * @since 1.0.0
+ * @return array $defaults
+ */
 if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
 
     function addonify_compare_products_settings_defaults( $setting_id = '' ) {
@@ -24,7 +29,7 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
             'addonify_compare_products/setting_defaults',  
             array(
                 // Settings
-                'enable_product_comparision' => true,
+                'enable_product_comparison' => true,
                 'compare_products_btn_position' => 'after_add_to_cart',
                 'compare_products_btn_label' => __( 'Compare', 'addonify-compare-products' ),
                 'compare_products_display_type' => 'popup',
@@ -80,7 +85,12 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
     }
 }
 
-
+/**
+ * Get plugin's setting option's value.
+ * 
+ * @since 1.0.0
+ * @return mixed
+ */
 if ( ! function_exists( 'addonify_compare_products_get_option' ) ) {
 
     function addonify_compare_products_get_option( $setting_id ) {
@@ -90,38 +100,15 @@ if ( ! function_exists( 'addonify_compare_products_get_option' ) ) {
 }
 
 
-if ( ! function_exists( 'addonify_compare_products_get_settings_values' ) ) {
-
-    function addonify_compare_products_get_settings_values() {
-
-        if ( addonify_compare_products_settings_defaults() ) {
-
-            $settings_values = array();
-
-            $setting_fields = addonify_compare_products_settings_fields();
-
-            foreach ( addonify_compare_products_settings_defaults() as $id => $value ) {
-
-                $setting_type = $setting_fields[$id]['type'];
-
-                switch ( $setting_type ) {
-                    case 'switch':
-                        $settings_values[$id] = ( addonify_compare_products_get_option( $id ) == '1' ) ? true : false;
-                        break;
-                    case 'number':
-                        $settings_values[$id] = addonify_compare_products_get_option( $id );
-                        break;
-                    default:
-                        $settings_values[$id] = addonify_compare_products_get_option( $id );
-                }
-            }
-
-            return $settings_values;
-        }
-    }
-}
-
-
+/**
+ * Update plugin's setting options' values.
+ * 
+ * Checks the type of each setting options, sanitizes the value and updates the option's value.
+ * 
+ * @since 1.0.0
+ * @param array $settings array of options values.
+ * @return boolean true on successful update else false.
+ */
 if ( ! function_exists( 'addonify_compare_products_update_settings' ) ) {
 
     function addonify_compare_products_update_settings( $settings = '' ) {
@@ -181,6 +168,50 @@ if ( ! function_exists( 'addonify_compare_products_update_settings' ) ) {
 }
 
 
+/**
+ * Get plugin's all setting options values.
+ * 
+ * @since 1.0.0
+ * @return array
+ */
+if ( ! function_exists( 'addonify_compare_products_get_settings_values' ) ) {
+
+    function addonify_compare_products_get_settings_values() {
+
+        if ( addonify_compare_products_settings_defaults() ) {
+
+            $settings_values = array();
+
+            $setting_fields = addonify_compare_products_settings_fields();
+
+            foreach ( addonify_compare_products_settings_defaults() as $id => $value ) {
+
+                $setting_type = $setting_fields[$id]['type'];
+
+                switch ( $setting_type ) {
+                    case 'switch':
+                        $settings_values[$id] = ( addonify_compare_products_get_option( $id ) == '1' ) ? true : false;
+                        break;
+                    case 'checkbox':
+                        $settings_values[$id] = unserialize( addonify_compare_products_get_option( $id ) );
+                        break;
+                    case 'number':
+                        $settings_values[$id] = addonify_compare_products_get_option( $id );
+                        break;
+                    default:
+                        $settings_values[$id] = addonify_compare_products_get_option( $id );
+                }
+            }
+
+            return $settings_values;
+        }
+    }
+}
+
+
+
+
+
 if ( ! function_exists( 'addonify_compare_products_settings_fields' ) ) {
 
     function addonify_compare_products_settings_fields() {
@@ -216,8 +247,8 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                             'description' => '',
                             'fields' => addonify_compare_products_compare_button_settings_fields(),
                         ),
-                        'comparision_table' => array(
-                            'title' => __( 'Comparision Table', 'addonify-compare-products' ),
+                        'comparison_table' => array(
+                            'title' => __( 'comparison Table', 'addonify-compare-products' ),
                             'description' => '',
                             'fields' => addonify_compare_products_comparison_table_settings_fields()
                         )
@@ -250,8 +281,8 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                             'type' => 'color-options-group',
                             'fields' => addonify_compare_products_search_modal_styles_settings_fields()
                         ),
-                        'comparision_table_color' => array(
-                            'title' => __( 'Comparision Table Colors', 'addonify-compare-products' ),
+                        'comparison_table_color' => array(
+                            'title' => __( 'comparison Table Colors', 'addonify-compare-products' ),
                             'description' => '',
                             'type' => 'color-options-group',
                             'fields' => addonify_compare_products_comparison_table_styles_settings_fields()

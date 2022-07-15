@@ -72,14 +72,14 @@ class Addonify_Compare_Products_Helpers {
 
 
     /**
-	 * Create comparision page if it was deleted by user.
+	 * Create comparison page if it was deleted by user.
 	 *
 	 * @since    1.0.0
 	 * @param    string $string Page to check.
 	 */
-	public function check_if_comparision_page_exists( $string ) {
+	public function check_if_comparison_page_exists( $string ) {
 
-        die('check_if_comparision_page_exists called.');
+        die('check_if_comparison_page_exists called.');
 
 		// if display type is "page" but page id is not present or page is deleted by user.
 		// create new page and update database.

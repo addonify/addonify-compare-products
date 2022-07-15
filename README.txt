@@ -1,18 +1,18 @@
 === Addonify Compare Products ===
 
 Contributors: addonify
-Tags: compare, woocommerce compare, products comparision, compare products, compare woocommerce, addonify
+Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify
 Requires at least: 5.0.0
 Tested up to: 6.0.0
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Addonify Compare Products is an extension of WooCommerce plugin that adds products comparision functionality on your online store and allows users make comparision of products.
+Addonify Compare Products is an extension of WooCommerce plugin that adds products comparison functionality on your online store and allows users make comparison of products.
 
 == Description ==
 
-Addonify Compare Products is an extension of WooCommerce plugin that allows users compare products on your online shop or store. Users can see differences between different products listed in comparision table. Comparision table contains information such as price, rating, stock, attributes, etc. that are required for users to make comparision.
+Addonify Compare Products is an extension of WooCommerce plugin that allows users compare products on your online shop or store. Users can see differences between different products listed in comparison table. comparison table contains information such as price, rating, stock, attributes, etc. that are required for users to make comparison.
 
 == Installation ==
 

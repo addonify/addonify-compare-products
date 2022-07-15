@@ -5,13 +5,13 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
     function addonify_compare_products_general_setting_fields() {
 
         return array(
-            'enable_product_comparision' => array(
+            'enable_product_comparison' => array(
                 'label'			  => __( 'Enable products compare', 'addonify-compare-products' ),
                 'description'     => __( 'If disabled, addonify wishlist plugin functionality will not be functional.', 'addonify-compare-products' ),
                 'type'            => 'switch',
                 'className'       => '',
                 'badge'           => 'Required',
-                'value' => addonify_compare_products_get_option( 'enable_product_comparision' )
+                'value' => addonify_compare_products_get_option( 'enable_product_comparison' )
             ),
             'compare_products_display_type' => array(
                 'type' => 'select',
@@ -19,7 +19,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
                 'placeholder'    => __('Select a page', 'addonify-compare-products'),
                 'label'          => __( 'Products Compare Page', 'addonify-compare-products' ),
                 'description'    => __( 'Select a page to display wishlist table.', 'addonify-compare-products'),
-                'dependent'      => array('enable_product_comparision'),
+                'dependent'      => array('enable_product_comparison'),
                 'choices'        => array(
                     'popup'      => __( 'Popup Modal', 'addonify-compare-products' ),
                     'page'       => __( 'Page', 'addonify-compare-products' ),
@@ -32,7 +32,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
                 'placeholder'    => __('Select a page', 'addonify-compare-products'),
                 'label'          => __( 'Products Compare Page', 'addonify-compare-products' ),
                 'description'    => __( 'Select a page to display wishlist table.', 'addonify-compare-products'),
-                'dependent'      => array('enable_product_comparision'),
+                'dependent'      => array('enable_product_comparison'),
                 'choices'        => addonify_compare_products_get_pages(),
                 'value'          => addonify_compare_products_get_option( 'compare_page' )
             ),
@@ -41,7 +41,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
                 'className'     => '',
                 'typeStyle'    => 'toggle', // 'default', 'toggle' & slider
                 'label'         => __( 'Save compare Cookie for [ x ] days', 'addonify-compare-products' ),
-                'dependent'     => array('enable_product_comparision'),
+                'dependent'     => array('enable_product_comparison'),
                 'description'   => __( 'Set the number of days to save the compare products data in browser cookie.', 'addonify-wsihlist' ),
                 'value'         => addonify_compare_products_get_option( 'compare_products_cookie_expires' )
             ),

@@ -2507,7 +2507,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* CLASS */
     )], 512
     /* NEED_PATCH */
-    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, key == 'enable_product_comparision' ? true : $setup.store.options.enable_product_comparision]]);
+    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, key == 'enable_product_comparison' ? true : $setup.store.options.enable_product_comparison]]);
   }), 256
   /* UNKEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" // adfy-options ")], 64
@@ -2557,7 +2557,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "option-box-title"
   }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.section.title), 513
   /* TEXT, NEED_PATCH */
-  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.props.sectionkey == 'general' ? true : $setup.store.options.enable_product_comparision]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.props.sectionkey == 'general' ? true : $setup.store.options.enable_product_comparison]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),

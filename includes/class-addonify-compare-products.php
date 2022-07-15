@@ -115,6 +115,9 @@ class Addonify_Compare_Products {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-i18n.php';
 
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-helpers.php';
+
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
@@ -196,29 +199,28 @@ class Addonify_Compare_Products {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );
+		if ( 
+			! addonify_compare_products_is_woocommerce_active() ||
+			(int) addonify_compare_products_get_option( 'enable_product_comparison' ) != 1
+		) {
+			return;
+		}
+
+		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );		
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
-		// add "Compare" button after add to cart button.
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_after_add_to_cart_btn_callback', 20 );
-
-		// add "Compare" button before add to cart button.
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_before_add_to_cart_btn_callback' );
-
-		// add "Compare Button" button aside image.
-		$this->loader->add_action( 'woocommerce_shop_loop_item_title', $plugin_public, 'show_compare_products_btn_aside_image_callback' );
-
-		// image overlay container.
-		$this->loader->add_action( 'woocommerce_before_shop_loop_item', $plugin_public, 'addonify_overlay_container_start_callback', 10 );
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'addonify_overlay_container_end_callback', 10 );
+		switch ( addonify_compare_products_get_option( 'compare_products_btn_position' ) ) {
+			case 'before_add_to_cart' :
+				$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'render_compare_button', 5 );
+				break;
+			default :
+				$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'render_compare_button', 15 );
+		}
 
 		// add custom markup into footer.
 		$this->loader->add_action( 'wp_footer', $plugin_public, 'add_markup_into_footer_callback' );
-
-		// add custom styles into header.
-		$this->loader->add_action( 'wp_head', $plugin_public, 'generate_custom_styles_callback' );
 
 		// ajax callback.
 

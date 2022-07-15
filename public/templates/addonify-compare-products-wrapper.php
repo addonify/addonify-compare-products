@@ -23,7 +23,7 @@ defined( 'ABSPATH' ) || exit;
 
 <div id="addonify-compare-dock" >
 	<div id="addonify-compare-dock-message" class="hidden" >
-		<?php echo esc_html__( 'Select more than one item for comparision.', 'addonify-compare-products' ); ?>
+		<?php echo esc_html__( 'Select more than one item for comparison.', 'addonify-compare-products' ); ?>
 	</div>
 
 	<div id="addonify-compare-dock-inner">

@@ -14,7 +14,7 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_settings_field
                     'after_add_to_cart'     => __( 'After Add to Cart Button', 'addonify-compare-products' ),
                     'before_add_to_cart'    => __( 'Before Add to Cart Button', 'addonify-compare-products' ),
                 ),
-                'dependent'                 => array('enable_product_comparision'),
+                'dependent'                 => array('enable_product_comparison'),
                 'value'                     => addonify_compare_products_get_option( 'compare_products_btn_position' )
             ),
             'compare_products_btn_label' => array(
@@ -22,7 +22,7 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_settings_field
                 'className'                 => '',
                 'label'                     => __( 'Button Label', 'addonify-compare-products' ),
                 'description'               => __( 'Label for compare product button.', 'addonify-compare-products' ),
-                'dependent'                 => array('enable_product_comparision'),
+                'dependent'                 => array('enable_product_comparison'),
                 'value'                     => addonify_compare_products_get_option( 'compare_products_btn_label' )
             ),
         );

@@ -13,7 +13,7 @@
 		v-show="
 			props.sectionkey == 'general'
 				? true
-				: store.options.enable_product_comparision
+				: store.options.enable_product_comparison
 		"
 	>
 		{{ props.section.title }}
