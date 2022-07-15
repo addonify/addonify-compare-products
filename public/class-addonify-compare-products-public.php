@@ -75,20 +75,20 @@ class Addonify_Compare_Products_Public {
 	private $compare_products_btn_label;
 
 	/**
-	 * Display type of comparision table ( modal or page )
+	 * Display type of comparison table ( modal or page )
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $display_type    Display comparision in popup or page
+	 * @var      string    $display_type    Display comparison in popup or page
 	 */
 	private $display_type;
 
 	/**
-	 * Page id for showing comparision shortcodes
+	 * Page id for showing comparison shortcodes
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $display_type    Display comparision in popup or page
+	 * @var      string    $display_type    Display comparison in popup or page
 	 */
 	private $compare_page_id;
 
@@ -115,35 +115,35 @@ class Addonify_Compare_Products_Public {
 		$this->version = $version;
 
 		// ajax action is also considered as admin action.
-		$this->enable_plugin = intval( $this->get_db_values( 'enable_product_comparision' ) );
+
+		$this->enable_plugin = (int) addonify_compare_products_get_option( 'enable_product_comparison' );
 
 		// get default display type of comparisoin table.
-		$this->display_type = $this->get_db_values( 'compare_products_display_type' );
-		$this->compare_page_id = $this->get_db_values( 'compare_page', get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' ) );
-		$this->cookie_expires = $this->get_db_values( 'compare_products_cookie_expires' );
+		// $this->display_type = $this->get_db_values( 'compare_products_display_type' );
+		// $this->compare_page_id = $this->get_db_values( 'compare_page', get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' ) );
+		// $this->cookie_expires = $this->get_db_values( 'compare_products_cookie_expires' );
 
-		if ( ! is_admin() ) {
+		// if ( ! is_admin() ) {
 
-			// if display type is page but page id doesnot exist ( deleted by user).
-			// change display type to popup.
-			if ( 'page' === $this->display_type ) {
+		// 	// if display type is page but page id doesnot exist ( deleted by user).
+		// 	// change display type to popup.
+		// 	if ( 'page' === $this->display_type ) {
 
-				if ( ! $this->compare_page_id || 'publish' != get_post_status( $this->compare_page_id ) ) {
-					$this->display_type = 'popup';
-					update_option( ADDONIFY_CP_DB_INITIALS . 'page_id' );
-				}
-			}
+		// 		if ( ! $this->compare_page_id || 'publish' != get_post_status( $this->compare_page_id ) ) {
+		// 			$this->display_type = 'popup';
+		// 			update_option( ADDONIFY_CP_DB_INITIALS . 'page_id' );
+		// 		}
+		// 	}
 
-			if ( 1 === $this->enable_plugin ) {
-				$this->compare_products_btn_position = $this->get_db_values( 'compare_products_btn_position' );
-				$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label' );
-			}
+		// 	if ( 1 === $this->enable_plugin ) {
+		// 		$this->compare_products_btn_position = $this->get_db_values( 'compare_products_btn_position' );
+		// 		$this->compare_products_btn_label = $this->get_db_values( 'compare_products_btn_label' );
+		// 	}
 
-			$this->register_shortcode();
-		}
+		// 	$this->register_shortcode();
+		// }
 
 	}
-
 
 
 	/**
@@ -154,9 +154,9 @@ class Addonify_Compare_Products_Public {
 	public function enqueue_styles() {
 
 		// is plugin enabled ?.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
+		// if ( ! $this->enable_plugin ) {
+		// 	return;
+		// }
 
 		wp_enqueue_style( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/css/conditional/perfect-scrollbar.css', array(), $this->version );
 
@@ -190,10 +190,10 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function enqueue_scripts() {
 
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
+		// do not continue if "Enable Product comparison" is not checked.
+		// if ( ! $this->enable_plugin ) {
+		// 	return;
+		// }
 
 		wp_enqueue_script( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/perfect-scrollbar.min.js', null, $this->version, true );
 
@@ -208,14 +208,14 @@ class Addonify_Compare_Products_Public {
 			'action_get_compare_contents' => 'get_compare_contents',
 			'cookie_expire' => $this->cookie_expires,
 			'display_type' => $this->display_type,
-			'comparision_page_url' => '',
+			'comparison_page_url' => '',
 			'nonce' => wp_create_nonce( $this->plugin_name ),
 			'cookie_path' => COOKIEPATH,
 			'cookie_domain' => COOKIE_DOMAIN,
 		);
 
 		if ( 'page' === $this->display_type ) {
-			$localize_args['comparision_page_url'] = get_permalink( $this->compare_page_id );
+			$localize_args['comparison_page_url'] = get_permalink( $this->compare_page_id );
 		}
 
 		// localize script.
@@ -340,10 +340,10 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function search_items_callback() {
 
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
+		// do not continue if "Enable Product comparison" is not checked.
+		// if ( ! $this->enable_plugin ) {
+		// 	return;
+		// }
 
 		// only ajax request is allowed.
 		if ( ! wp_doing_ajax() ) {
@@ -393,96 +393,24 @@ class Addonify_Compare_Products_Public {
 	}
 
 
-
-	/**
-	 * Show compare button after "cart to cart" button
-	 *
-	 * @since    1.0.0
-	 */
-	public function show_compare_products_btn_after_add_to_cart_btn_callback() {
-
-		if ( 'after_add_to_cart' === $this->compare_products_btn_position ) {
-			$this->show_compare_btn_aside_add_to_cart_btn_callback();
-		}
-	}
-
-
-
-
-	/**
-	 * Show compare button before "add to cart" button
-	 *
-	 * @since    1.0.0
-	 */
-	public function show_compare_products_btn_before_add_to_cart_btn_callback() {
-		if ( 'before_add_to_cart' === $this->compare_products_btn_position ) {
-			$this->show_compare_btn_aside_add_to_cart_btn_callback();
-		}
-	}
-
-
-
 	/**
 	 * Generating "Compare" button
 	 *
 	 * @since    1.0.0
 	 */
-	private function show_compare_btn_aside_add_to_cart_btn_callback() {
-
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
+	public function render_compare_button() {
 
 		global $product;
-		$product_id = $product->get_id();
 
-		// show compare btn after add to cart button.
-		if ( $this->compare_products_btn_label ) {
-
-			$this->get_templates(
-				'addonify-compare-products-button',
-				false,
-				array(
-					'product_id' => $product_id,
-					'label' => $this->compare_products_btn_label,
-					'css_class' => '',
-				)
-			);
-
-		}
-
-	}
-
-
-
-	/**
-	 * Show compare button on top of image
-	 *
-	 * @since    1.0.0
-	 */
-	public function show_compare_products_btn_aside_image_callback() {
-
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
-
-		global $product;
-		$product_id = $product->get_id();
-
-		if ( 'overlay_on_image' === $this->compare_products_btn_position && $this->compare_products_btn_label ) {
-			$this->get_templates(
-				'addonify-compare-products-button',
-				false,
-				array(
-					'product_id' => $product_id,
-					'label' => $this->compare_products_btn_label,
-					'css_class' => 'addonify-overlay-btn',
-				)
-			);
-		}
-
+		$this->get_templates(
+			'addonify-compare-products-button',
+			false,
+			array(
+				'product_id' => $product->get_id(),
+				'label' => addonify_compare_products_get_option( 'compare_products_btn_label' ),
+				'css_class' => '',
+			)
+		);
 	}
 
 
@@ -494,10 +422,10 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function add_markup_into_footer_callback() {
 
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
+		// do not continue if "Enable Product comparison" is not checked.
+		// if ( ! $this->enable_plugin ) {
+		// 	return;
+		// }
 
 		// do not show following template if it is a shortcode display page.
 		if ( 'page' === $this->display_type && get_the_ID() === $this->compare_page_id ) {
@@ -528,10 +456,10 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function get_compare_contents_callback() {
 
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
+		// do not continue if "Enable Product comparison" is not checked.
+		// if ( ! $this->enable_plugin ) {
+		// 	return;
+		// }
 
 		// get product ids from cookies.
 		$product_ids = isset( $_COOKIE[ $this->cookie_name ] ) ? sanitize_text_field( wp_unslash( $_COOKIE[ $this->cookie_name ] ) ) : '';
@@ -622,7 +550,7 @@ class Addonify_Compare_Products_Public {
 	}
 
 	/**
-	 * Prepare data to be used in comparision table
+	 * Prepare data to be used in comparison table
 	 *
 	 * @since    1.0.0
 	 * @param    string $selected_product_ids Product ids.
@@ -814,190 +742,6 @@ class Addonify_Compare_Products_Public {
 
 
 	/**
-	 * Generate custom style tag and print it in header of the website
-	 *
-	 * @since    1.0.0
-	 */
-	public function generate_custom_styles_callback() {
-
-		// do not continue if "Enable Product Comparision" is not checked.
-		// do not continue if plugin styles are disabled by user.
-		if ( ! $this->enable_plugin || ! $this->get_db_values( 'load_styles_from_plugin' ) ) {
-			return;
-		}
-
-		// add table styles into body class.
-		add_filter(
-			'body_class',
-			function( $classes ) {
-				return array_merge( $classes, array( 'addonify-compare-table-style-' . $this->get_db_values( 'table_style' ) ) );
-			}
-		);
-
-		$custom_css = $this->get_db_values( 'custom_css' );
-
-		$style_args = array(
-			'button.addonify-cp-button' => array(
-				'background' => 'compare_btn_bck_color',
-				'color' => 'compare_btn_text_color',
-				'left' => 'compare_products_btn_left_offset',
-				'right' => 'compare_products_btn_right_offset',
-				'top' => 'compare_products_btn_top_offset',
-				'bottom' => 'compare_products_btn_bottom_offset',
-			),
-			'#addonify-compare-modal-overlay, #addonify-compare-search-modal-overlay, #addonify-compare-modal-overlay, #addonify-compare-modal' => array(
-				'background' => 'modal_overlay_bck_color',
-			),
-			'.addonify-compare-model-inner, .addonify-compare-search-model-inner' => array(
-				'background' => 'modal_bck_color',
-			),
-			'#addonify-compare-products-table th a' => array(
-				'color' => 'table_title_color',
-			),
-			'.addonify-compare-all-close-btn svg' => array(
-				'color' => 'close_btn_text_color',
-			),
-			'.addonify-compare-all-close-btn' => array(
-				'background' => 'close_btn_bck_color',
-			),
-			'.addonify-compare-all-close-btn:hover svg' => array(
-				'color' => 'close_btn_text_color_hover',
-			),
-			'.addonify-compare-all-close-btn:hover' => array(
-				'background' => 'close_btn_bck_color_hover',
-			),
-
-		);
-
-		$custom_styles_output = $this->generate_styles_markups( $style_args );
-
-		// avoid empty style tags.
-		if ( $custom_styles_output || $custom_css ) {
-			echo '<style id="addonify-compare-products-styles"  media="screen">';
-			echo wp_kses_post( $custom_styles_output . $custom_css );
-			echo '</style>';
-		}
-
-	}
-
-
-
-	/**
-	 * Generate style markups
-	 *
-	 * @since    1.0.0
-	 * @param    array $style_args Style args to be processed.
-	 */
-	private function generate_styles_markups( $style_args ) {
-		$custom_styles_output = '';
-		foreach ( $style_args as $css_sel => $property_value ) {
-
-			$properties = '';
-
-			foreach ( $property_value as $property => $db_field ) {
-
-				$css_unit = '';
-
-				if ( is_array( $db_field ) ) {
-					$db_value = $this->get_db_values( $db_field[0], null, false );
-					$css_unit = $db_field[1];
-				} else {
-					$db_value = $this->get_db_values( $db_field, null, false );
-				}
-
-				if ( $db_value ) {
-					$properties .= $property . ': ' . $db_value . $css_unit . '; ';
-				}
-			}
-
-			if ( $properties ) {
-				$custom_styles_output .= $css_sel . '{' . $properties . '}';
-			}
-		}
-
-		return $custom_styles_output;
-	}
-
-
-
-	/**
-	 * Print opening tag of overlay container
-	 *
-	 * @since    1.0.0
-	 */
-	public function addonify_overlay_container_start_callback() {
-
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
-
-		// do not continue if overlay is already added by another addonify plugin.
-		if ( defined( 'ADDONIFY_OVERLAY_IS_ADDED' ) && ADDONIFY_OVERLAY_ADDED_BY != 'compare_products' ) {
-			return;
-		}
-
-		if ( 'overlay_on_image' === $this->compare_products_btn_position ) {
-
-			if ( ! defined( 'ADDONIFY_OVERLAY_IS_ADDED' ) ) {
-				define( 'ADDONIFY_OVERLAY_IS_ADDED', 1 );
-			}
-
-			if ( ! defined( 'ADDONIFY_OVERLAY_ADDED_BY' ) ) {
-				define( 'ADDONIFY_OVERLAY_ADDED_BY', 'compare_products' );
-			}
-
-			echo '<div class="addonify-overlay-buttons">';
-		}
-
-	}
-
-
-
-	/**
-	 * Print closing tag of the overlay container
-	 *
-	 * @since    1.0.0
-	 */
-	public function addonify_overlay_container_end_callback() {
-
-		// do not continue if "Enable Product Comparision" is not checked.
-		if ( ! $this->enable_plugin ) {
-			return;
-		}
-
-		// do not continue of overlay is alrady added by another addonify plugin.
-		if ( defined( 'ADDONIFY_OVERLAY_IS_ADDED' ) && 'compare_products' !== ADDONIFY_OVERLAY_ADDED_BY ) {
-			return;
-		}
-
-		if ( 'overlay_on_image' === $this->compare_products_btn_position ) {
-			echo '</div>';
-		}
-
-	}
-
-
-
-	/**
-	 * Get Database values for selected fields
-	 *
-	 * @since    1.0.0
-	 * @param    string $field_name                Database Option Name.
-	 * @param    string $default                   Default Value.
-	 * @param    bool   $get_default_automatically Get default value if "$default" is empty.
-	 */
-	private function get_db_values( $field_name, $default = null, $get_default_automatically = true ) {
-		// if ( empty( $default ) && true === $get_default_automatically ) {
-		// 	$default = $this->get_default_values( $field_name );
-		// }
-
-		return get_option( ADDONIFY_CP_DB_INITIALS . $field_name, $default );
-	}
-
-
-
-	/**
 	 * Require proper templates for use in front end
 	 *
 	 * @since    1.0.0
@@ -1028,29 +772,11 @@ class Addonify_Compare_Products_Public {
 
 
 	/**
-	 * Register shortcode to use in comparision page
+	 * Register shortcode to use in comparison page
 	 *
 	 * @since    1.0.0
 	 */
 	private function register_shortcode() {
 		add_shortcode( 'addonify_compare_products', array( $this, 'get_compare_contents_callback' ) );
 	}
-
-
-
-	/**
-	 * Get Default values for selected options
-	 *
-	 * @since    1.0.0
-	 * @param    string $field_name Database Option Name.
-	 */
-	private function get_default_values( $field_name ) {
-
-		if ( empty( $this->default_input_values ) ) {
-			$this->default_input_values = get_option( ADDONIFY_CP_DB_INITIALS . 'default_values' );
-		}
-
-		return $this->default_input_values[ ADDONIFY_CP_DB_INITIALS . $field_name ];
-	}
-
 }

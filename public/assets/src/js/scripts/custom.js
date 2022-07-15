@@ -17,7 +17,7 @@
 		var compare_modal_is_open = false;
 		var first_boot = true;
 		var display_type = addonify_compare_ajax_object.display_type;
-		var page_url = addonify_compare_ajax_object.comparision_page_url;
+		var page_url = addonify_compare_ajax_object.comparison_page_url;
 		var modalOverlay = $('#addonify-compare-modal-overlay');
 		var searchModalOverlay = $('#addonify-compare-search-modal-overlay');
 

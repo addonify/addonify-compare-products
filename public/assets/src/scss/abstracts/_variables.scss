@@ -46,5 +46,5 @@
     --adfy_compare_products_dock_zindex: 10000000000000;
     --adfy_compare_products_search_modal_zindex: 10000000000010;
     --adfy_compare_products_search_modal_overlay_zindex: calc( var(--adfy_compare_products_search_modal_zindex) - 5 );
-    --adfy_compare_products_comparision_table_zindex: calc( var(--adfy_compare_products_search_modal_zindex) + 100 );
+    --adfy_compare_products_comparison_table_zindex: calc( var(--adfy_compare_products_search_modal_zindex) + 100 );
 }

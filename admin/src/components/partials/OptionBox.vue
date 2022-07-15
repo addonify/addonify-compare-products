@@ -15,9 +15,9 @@
 		class="adfy-options"
 		v-for="(field, key) in props.section.fields"
 		v-show="
-			key == 'enable_product_comparision'
+			key == 'enable_product_comparison'
 				? true
-				: store.options.enable_product_comparision
+				: store.options.enable_product_comparison
 		"
 	>
 		<div class="adfy-option-columns option-box" :class="field.className">
