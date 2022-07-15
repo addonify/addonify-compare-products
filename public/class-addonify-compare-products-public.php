@@ -165,6 +165,21 @@ class Addonify_Compare_Products_Public {
 		} else {
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/public.css', array(), $this->version );
 		}
+
+		if ( (int) addonify_compare_products_get_settings_values( 'load_styles_from_plugin' ) === 1 ) {
+
+			$inline_css = $this->dynamic_css();
+
+			$custom_css = addonify_compare_products_get_settings_values( 'custom_css' );
+
+			if ( $custom_css ) {
+				$inline_css .= $custom_css;
+			}
+			
+			$inline_css = $this->minify_css( $inline_css );
+
+			wp_add_inline_style( $this->plugin_name, $inline_css );
+		}
 	}
 
 
@@ -539,6 +554,71 @@ class Addonify_Compare_Products_Public {
 	}
 
 
+	/**
+	 * Print dynamic CSS generated from settings page.
+	 */
+	public function dynamic_css() {
+
+		$css_values = array(
+			'--adfy_compare_products_button_color' => addonify_quick_view_get_settings_fields_values( 'compare_btn_text_color' ),
+			'--adfy_compare_products_button_color_hover' => addonify_quick_view_get_settings_fields_values( 'compare_btn_text_color_hover' ),
+			'--adfy_compare_products_button_bg_color' => addonify_quick_view_get_settings_fields_values( 'compare_btn_bck_color' ),
+			'--adfy_compare_products_button_bg_color_hover' => addonify_quick_view_get_settings_fields_values( 'compare_btn_bck_color_hover' ),
+			'--adfy_compare_products_dock_bg_color' => addonify_quick_view_get_settings_fields_values( 'floating_bar_bck_color' ),
+			'--adfy_compare_products_dock_text_color' => addonify_quick_view_get_settings_fields_values( 'floating_bar_text_color' ),
+			'--adfy_compare_products_dock_add_button_color' => addonify_quick_view_get_settings_fields_values( 'floating_bar_add_button_text_color' ),
+			'--adfy_compare_products_dock_add_button_color_hover' => addonify_quick_view_get_settings_fields_values( 'floating_bar_add_button_text_color_hover' ),
+			'--adfy_compare_products_dock_add_button_bg_color' => addonify_quick_view_get_settings_fields_values( 'floating_bar_add_button_bck_color' ),
+			'--adfy_compare_products_dock_add_button_bg_color_hover' => addonify_quick_view_get_settings_fields_values( 'floating_bar_add_button_bck_color_hover' ),
+			'--adfy_compare_products_dock_compare_button_color' => addonify_quick_view_get_settings_fields_values( 'floating_bar_compare_button_text_color' ),
+			'--adfy_compare_products_dock_compare_button_color_hover' => addonify_quick_view_get_settings_fields_values( 'floating_bar_compare_button_text_color_hover' ),
+			'--adfy_compare_products_dock_compare_button_bg_color' => addonify_quick_view_get_settings_fields_values( 'floating_bar_compare_button_bck_color' ),
+			'--adfy_compare_products_dock_compare_button_bg_color_hover' => addonify_quick_view_get_settings_fields_values( 'floating_bar_compare_button_bck_color_hover' ),
+			'--adfy_compare_products_search_modal_overlay_bg_color' => addonify_quick_view_get_settings_fields_values( 'search_modal_overlay_bck_color' ),
+			'--adfy_compare_products_search_modal_bg_color' => addonify_quick_view_get_settings_fields_values( 'search_modal_bck_color' ),
+			'--adfy_compare_products_search_modal_add_button_color' => addonify_quick_view_get_settings_fields_values( 'search_modal_add_btn_text_color' ),
+			'--adfy_compare_products_search_modal_add_button_color_hover' => addonify_quick_view_get_settings_fields_values( 'search_modal_add_btn_text_color_hover' ),
+			'--adfy_compare_products_search_modal_add_button_bg_color' => addonify_quick_view_get_settings_fields_values( 'search_modal_add_btn_bck_color' ),
+			'--adfy_compare_products_search_modal_add_button_bg_color_hover' => addonify_quick_view_get_settings_fields_values( 'search_modal_add_btn_bck_color_hover' ),
+			'--adfy_compare_products_search_modal_close_button_color' => addonify_quick_view_get_settings_fields_values( 'search_modal_close_btn_text_color' ),
+			'--adfy_compare_products_search_modal_close_button_color_hover' => addonify_quick_view_get_settings_fields_values( 'search_modal_close_btn_text_color_hover' ),
+			'--adfy_compare_products_search_modal_close_button_border_color' => addonify_quick_view_get_settings_fields_values( 'search_modal_close_btn_border_color' ),
+			'--adfy_compare_products_search_modal_close_button_border_color_hover' => addonify_quick_view_get_settings_fields_values( 'search_modal_close_btn_border_color_hover' ),
+			'--adfy_compare_products_table_title_color' => addonify_quick_view_get_settings_fields_values( 'table_title_color' ),
+			'--adfy_compare_products_table_title_color_hover' => addonify_quick_view_get_settings_fields_values( 'table_title_color_hover' ),
+		);
+
+		$css = ':root {';
+
+		foreach ( $css_values as $key => $value ) {
+			if ( $value ) {
+				$css .= $key . ': ' . $value . ';';
+			}
+		}
+
+		$css .= '}';
+
+		return $css;
+	}
+
+
+	/**
+	 * Minify the dynamic css.
+	 * 
+	 * @param string $css css to minify.
+	 * @return string minified css.
+	 */
+	public function minify_css( $css ) {
+
+		$css = preg_replace( '/\s+/', ' ', $css );
+		$css = preg_replace( '/\/\*[^\!](.*?)\*\//', '', $css );
+		$css = preg_replace( '/(,|:|;|\{|}) /', '$1', $css );
+		$css = preg_replace( '/ (,|;|\{|})/', '$1', $css );
+		$css = preg_replace( '/(:| )0\.([0-9]+)(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}.${2}${3}', $css );
+		$css = preg_replace( '/(:| )(\.?)0(%|em|ex|px|in|cm|mm|pt|pc)/i', '${1}0', $css );
+
+		return trim( $css );
+	}
 
 	/**
 	 * Prepare data to be used in comparision table

@@ -9,7 +9,7 @@ require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/add-to-compare-modal.php';
 
-require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/compare-modal.php';
+require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/search-modal.php';
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'setting-functions/fields/comparison-table.php';
 
@@ -23,6 +23,7 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
         $defaults = apply_filters( 
             'addonify_compare_products/setting_defaults',  
             array(
+                // Settings
                 'enable_product_comparision' => true,
                 'compare_products_btn_position' => 'after_add_to_cart',
                 'compare_products_btn_label' => __( 'Compare', 'addonify-compare-products' ),
@@ -31,11 +32,14 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
                 'compare_products_cookie_expires' => 30,
                 'fields_to_compare' => serialize( array( 'image', 'title', 'price', 'add_to_cart', 'rating', 'excerpt' ) ),
                 'load_styles_from_plugin' => false,
+
+                // Design - add to compare button
                 'compare_btn_text_color' => '#FFFFFF',
                 'compare_btn_text_color_hover' => '#FFFFFF',
                 'compare_btn_bck_color' => '#444444',
                 'compare_btn_bck_color_hover' => '#3765FA',
 
+                // Design - Floating dock bar
                 'floating_bar_bck_color' => '#02030E',
                 'floating_bar_text_color' => 'rgba(255, 255, 255, 0.7)',
                 'floating_bar_add_button_text_color' => '#FFFFFF',
@@ -46,6 +50,8 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
                 'floating_bar_compare_button_text_color_hover' => '#FFFFFF',
                 'floating_bar_compare_button_bck_color' => '#FFFFFF',
                 'floating_bar_compare_button_bck_color_hover' => '#3765FA',
+
+                // Design - search modal
 
                 'search_modal_overlay_bck_color' => 'rgba(0, 0, 0, 0.8)',
                 'search_modal_bck_color' => '#FFFFFF',
@@ -60,8 +66,12 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
                 'search_modal_close_btn_border_color' => 'rgba(255, 255, 255, 0.3)',
                 'search_modal_close_btn_border_color_hover' => 'rgba(255, 255, 255, 1)',
 
+                // Design - Table
+
                 'table_title_color' => '#444444',
                 'table_title_color_hover' => '#3765FA',
+
+                // Design - Custom CSS
                 'custom_css' => ''
             )
         );
@@ -234,11 +244,11 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                             'dependent'  => array('load_styles_from_plugin'),
                             'fields' => addonify_compare_products_floating_bar_styles_settings_fields()
                         ),
-                        'compare_modal_color' => array(
+                        'search_modal_color' => array(
                             'title' => __( 'Search Modal Colors', 'addonify-compare-products' ),
                             'description' => '',
                             'type' => 'color-options-group',
-                            'fields' => addonify_compare_products_compare_modal_styles_settings_fields()
+                            'fields' => addonify_compare_products_search_modal_styles_settings_fields()
                         ),
                         'comparision_table_color' => array(
                             'title' => __( 'Comparision Table Colors', 'addonify-compare-products' ),

@@ -1,8 +1,8 @@
 <?php
 
-if ( ! function_exists( 'addonify_compare_products_compare_modal_settings_fields' ) ) {
+if ( ! function_exists( 'addonify_compare_products_search_modal_settings_fields' ) ) {
 
-    function addonify_compare_products_compare_modal_settings_fields() {
+    function addonify_compare_products_search_modal_settings_fields() {
 
         return array(
         );
@@ -14,16 +14,16 @@ if ( ! function_exists( 'addonify_compare_products_compare_modal_add_to_settings
 
     function addonify_compare_products_compare_modal_add_to_settings_fields( $settings_fields ) {
 
-        return array_merge( $settings_fields, addonify_compare_products_compare_modal_settings_fields() );
+        return array_merge( $settings_fields, addonify_compare_products_search_modal_settings_fields() );
     }
 
     add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_compare_modal_add_to_settings_fields' );
 }
 
 
-if ( ! function_exists( 'addonify_compare_products_compare_modal_styles_settings_fields' ) ) {
+if ( ! function_exists( 'addonify_compare_products_search_modal_styles_settings_fields' ) ) {
 
-    function addonify_compare_products_compare_modal_styles_settings_fields() {
+    function addonify_compare_products_search_modal_styles_settings_fields() {
 
         return array(
             'search_modal_overlay_bck_color' => array(
@@ -93,12 +93,12 @@ if ( ! function_exists( 'addonify_compare_products_compare_modal_styles_settings
     }
 }
 
-if ( ! function_exists( 'addonify_compare_products_compare_modal_styles_add_to_settings_fields' ) ) {
+if ( ! function_exists( 'addonify_compare_products_search_modal_styles_add_to_settings_fields' ) ) {
 
-    function addonify_compare_products_compare_modal_styles_add_to_settings_fields( $settings_fields ) {
+    function addonify_compare_products_search_modal_styles_add_to_settings_fields( $settings_fields ) {
 
-        return array_merge( $settings_fields, addonify_compare_products_compare_modal_styles_settings_fields() );
+        return array_merge( $settings_fields, addonify_compare_products_search_modal_styles_settings_fields() );
     }
     
-    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_compare_modal_styles_add_to_settings_fields' );
+    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_search_modal_styles_add_to_settings_fields' );
 }
