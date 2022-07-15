@@ -166,11 +166,11 @@ class Addonify_Compare_Products_Public {
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/public.css', array(), $this->version );
 		}
 
-		if ( (int) addonify_compare_products_get_settings_values( 'load_styles_from_plugin' ) === 1 ) {
+		if ( (int) addonify_compare_products_get_option( 'load_styles_from_plugin' ) === 1 ) {
 
 			$inline_css = $this->dynamic_css();
 
-			$custom_css = addonify_compare_products_get_settings_values( 'custom_css' );
+			$custom_css = addonify_compare_products_get_option( 'custom_css' );
 
 			if ( $custom_css ) {
 				$inline_css .= $custom_css;
@@ -560,37 +560,38 @@ class Addonify_Compare_Products_Public {
 	public function dynamic_css() {
 
 		$css_values = array(
-			'--adfy_compare_products_button_color' => addonify_compare_products_get_settings_values( 'compare_btn_text_color' ),
-			'--adfy_compare_products_button_color_hover' => addonify_compare_products_get_settings_values( 'compare_btn_text_color_hover' ),
-			'--adfy_compare_products_button_bg_color' => addonify_compare_products_get_settings_values( 'compare_btn_bck_color' ),
-			'--adfy_compare_products_button_bg_color_hover' => addonify_compare_products_get_settings_values( 'compare_btn_bck_color_hover' ),
-			'--adfy_compare_products_dock_bg_color' => addonify_compare_products_get_settings_values( 'floating_bar_bck_color' ),
-			'--adfy_compare_products_dock_text_color' => addonify_compare_products_get_settings_values( 'floating_bar_text_color' ),
-			'--adfy_compare_products_dock_add_button_color' => addonify_compare_products_get_settings_values( 'floating_bar_add_button_text_color' ),
-			'--adfy_compare_products_dock_add_button_color_hover' => addonify_compare_products_get_settings_values( 'floating_bar_add_button_text_color_hover' ),
-			'--adfy_compare_products_dock_add_button_bg_color' => addonify_compare_products_get_settings_values( 'floating_bar_add_button_bck_color' ),
-			'--adfy_compare_products_dock_add_button_bg_color_hover' => addonify_compare_products_get_settings_values( 'floating_bar_add_button_bck_color_hover' ),
-			'--adfy_compare_products_dock_compare_button_color' => addonify_compare_products_get_settings_values( 'floating_bar_compare_button_text_color' ),
-			'--adfy_compare_products_dock_compare_button_color_hover' => addonify_compare_products_get_settings_values( 'floating_bar_compare_button_text_color_hover' ),
-			'--adfy_compare_products_dock_compare_button_bg_color' => addonify_compare_products_get_settings_values( 'floating_bar_compare_button_bck_color' ),
-			'--adfy_compare_products_dock_compare_button_bg_color_hover' => addonify_compare_products_get_settings_values( 'floating_bar_compare_button_bck_color_hover' ),
-			'--adfy_compare_products_search_modal_overlay_bg_color' => addonify_compare_products_get_settings_values( 'search_modal_overlay_bck_color' ),
-			'--adfy_compare_products_search_modal_bg_color' => addonify_compare_products_get_settings_values( 'search_modal_bck_color' ),
-			'--adfy_compare_products_search_modal_add_button_color' => addonify_compare_products_get_settings_values( 'search_modal_add_btn_text_color' ),
-			'--adfy_compare_products_search_modal_add_button_color_hover' => addonify_compare_products_get_settings_values( 'search_modal_add_btn_text_color_hover' ),
-			'--adfy_compare_products_search_modal_add_button_bg_color' => addonify_compare_products_get_settings_values( 'search_modal_add_btn_bck_color' ),
-			'--adfy_compare_products_search_modal_add_button_bg_color_hover' => addonify_compare_products_get_settings_values( 'search_modal_add_btn_bck_color_hover' ),
-			'--adfy_compare_products_search_modal_close_button_color' => addonify_compare_products_get_settings_values( 'search_modal_close_btn_text_color' ),
-			'--adfy_compare_products_search_modal_close_button_color_hover' => addonify_compare_products_get_settings_values( 'search_modal_close_btn_text_color_hover' ),
-			'--adfy_compare_products_search_modal_close_button_border_color' => addonify_compare_products_get_settings_values( 'search_modal_close_btn_border_color' ),
-			'--adfy_compare_products_search_modal_close_button_border_color_hover' => addonify_compare_products_get_settings_values( 'search_modal_close_btn_border_color_hover' ),
-			'--adfy_compare_products_table_title_color' => addonify_compare_products_get_settings_values( 'table_title_color' ),
-			'--adfy_compare_products_table_title_color_hover' => addonify_compare_products_get_settings_values( 'table_title_color_hover' ),
+			'--adfy_compare_products_button_color' => addonify_compare_products_get_option( 'compare_btn_text_color' ),
+			'--adfy_compare_products_button_color_hover' => addonify_compare_products_get_option( 'compare_btn_text_color_hover' ),
+			'--adfy_compare_products_button_bg_color' => addonify_compare_products_get_option( 'compare_btn_bck_color' ),
+			'--adfy_compare_products_button_bg_color_hover' => addonify_compare_products_get_option( 'compare_btn_bck_color_hover' ),
+			'--adfy_compare_products_dock_bg_color' => addonify_compare_products_get_option( 'floating_bar_bck_color' ),
+			'--adfy_compare_products_dock_text_color' => addonify_compare_products_get_option( 'floating_bar_text_color' ),
+			'--adfy_compare_products_dock_add_button_color' => addonify_compare_products_get_option( 'floating_bar_add_button_text_color' ),
+			'--adfy_compare_products_dock_add_button_color_hover' => addonify_compare_products_get_option( 'floating_bar_add_button_text_color_hover' ),
+			'--adfy_compare_products_dock_add_button_bg_color' => addonify_compare_products_get_option( 'floating_bar_add_button_bck_color' ),
+			'--adfy_compare_products_dock_add_button_bg_color_hover' => addonify_compare_products_get_option( 'floating_bar_add_button_bck_color_hover' ),
+			'--adfy_compare_products_dock_compare_button_color' => addonify_compare_products_get_option( 'floating_bar_compare_button_text_color' ),
+			'--adfy_compare_products_dock_compare_button_color_hover' => addonify_compare_products_get_option( 'floating_bar_compare_button_text_color_hover' ),
+			'--adfy_compare_products_dock_compare_button_bg_color' => addonify_compare_products_get_option( 'floating_bar_compare_button_bck_color' ),
+			'--adfy_compare_products_dock_compare_button_bg_color_hover' => addonify_compare_products_get_option( 'floating_bar_compare_button_bck_color_hover' ),
+			'--adfy_compare_products_search_modal_overlay_bg_color' => addonify_compare_products_get_option( 'search_modal_overlay_bck_color' ),
+			'--adfy_compare_products_search_modal_bg_color' => addonify_compare_products_get_option( 'search_modal_bck_color' ),
+			'--adfy_compare_products_search_modal_add_button_color' => addonify_compare_products_get_option( 'search_modal_add_btn_text_color' ),
+			'--adfy_compare_products_search_modal_add_button_color_hover' => addonify_compare_products_get_option( 'search_modal_add_btn_text_color_hover' ),
+			'--adfy_compare_products_search_modal_add_button_bg_color' => addonify_compare_products_get_option( 'search_modal_add_btn_bck_color' ),
+			'--adfy_compare_products_search_modal_add_button_bg_color_hover' => addonify_compare_products_get_option( 'search_modal_add_btn_bck_color_hover' ),
+			'--adfy_compare_products_search_modal_close_button_color' => addonify_compare_products_get_option( 'search_modal_close_btn_text_color' ),
+			'--adfy_compare_products_search_modal_close_button_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_text_color_hover' ),
+			'--adfy_compare_products_search_modal_close_button_border_color' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color' ),
+			'--adfy_compare_products_search_modal_close_button_border_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color_hover' ),
+			'--adfy_compare_products_table_title_color' => addonify_compare_products_get_option( 'table_title_color' ),
+			'--adfy_compare_products_table_title_color_hover' => addonify_compare_products_get_option( 'table_title_color_hover' ),
 		);
 
 		$css = ':root {';
 
 		foreach ( $css_values as $key => $value ) {
+
 			if ( $value ) {
 				$css .= $key . ': ' . $value . ';';
 			}
