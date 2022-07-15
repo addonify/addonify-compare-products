@@ -3,7 +3,7 @@
 	import { ElColorPicker } from "element-plus";
 	const props = defineProps({
 		colorVal: String,
-		isAlpha: Boolean,
+		isAlphaPicker: Boolean,
 		label: String,
 	});
 	const emit = defineEmits(["update:colorVal"]); // Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
@@ -15,9 +15,13 @@
 			emit("update:colorVal", newValue);
 		},
 	});
+	console.log(props.isAlphaPicker);
 </script>
 <template>
-	<el-color-picker v-model="value" :show-alpha="props.isAlpha" />
+	<el-color-picker
+		v-model="value"
+		:show-alpha="props.isAlphaPicker ? props.isAlphaPicker : true"
+	/>
 	<span class="label" v-if="props.label">{{ props.label }}</span>
 </template>
 <style>
