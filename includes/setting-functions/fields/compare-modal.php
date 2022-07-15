@@ -26,47 +26,68 @@ if ( ! function_exists( 'addonify_compare_products_compare_modal_styles_settings
     function addonify_compare_products_compare_modal_styles_settings_fields() {
 
         return array(
-            'modal_overlay_bck_color' => array(
+            'search_modal_overlay_bck_color' => array(
                 'type'                        => 'color',
                 'label'                       => __( 'Overlay Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
-                'value'                       => addonify_compare_products_get_option( 'modal_overlay_bck_color' )
+                'value'                       => addonify_compare_products_get_option( 'search_modal_overlay_bck_color' )
             ),
-            'modal_bck_color' => array(
+            'search_modal_bck_color' => array(
                 'type'                        => 'color',
                 'label'                       => __( 'Background Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
-                'value'                       => addonify_compare_products_get_option( 'modal_bck_color' )
+                'value'                       => addonify_compare_products_get_option( 'search_modal_bck_color' )
             ),
-            'close_btn_text_color' => array(
+            'search_modal_add_btn_text_color' => array(
                 'type'                        => 'color',
                 'label'                       => __( 'Close Button Label Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
-                'value'                       => addonify_compare_products_get_option( 'close_btn_text_color' )
+                'value'                       => addonify_compare_products_get_option( 'search_modal_add_btn_text_color' )
             ),
-            'close_btn_text_color_hover' => array(
+            'search_modal_add_btn_text_color_hover' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Close Button Label Color', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'search_modal_add_btn_text_color_hover' )
+            ),
+            'search_modal_add_btn_bck_color' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Close Button Label Color', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'search_modal_add_btn_bck_color' )
+            ),
+            'search_modal_close_btn_text_color' => array(
+                'type'                        => 'color',
+                'label'                       => __( 'Close Button Label Color', 'addonify-compare-products' ),
+                'isAlphaPicker'               => true,
+                'className'                   => '',
+                'value'                       => addonify_compare_products_get_option( 'search_modal_close_btn_text_color' )
+            ),
+            'search_modal_close_btn_text_color_hover' => array(
                 'type'                        => 'color',
                 'label'                       => __( 'Close Button On Hover Label Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
-                'value'                       => addonify_compare_products_get_option( 'close_btn_text_color_hover' )
+                'value'                       => addonify_compare_products_get_option( 'search_modal_close_btn_text_color_hover' )
             ),
-            'close_btn_bck_color' => array(
+            'search_modal_close_btn_border_color' => array(
                 'type'                        => 'color',
-                'label'                       => __( 'Close Button Background Color', 'addonify-compare-products' ),
+                'label'                       => __( 'Close Button Border Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
-                'value'                       => addonify_compare_products_get_option( 'close_btn_bck_color' )
+                'value'                       => addonify_compare_products_get_option( 'search_modal_close_btn_border_color' )
             ),
-            'close_btn_bck_color_hover' => array(
+            'search_modal_close_btn_border_color_hover' => array(
                 'type'                        => 'color',
-                'label'                       => __( 'Close Button On Hover Background Color', 'addonify-compare-products' ),
+                'label'                       => __( 'Close Button On Hover Border Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
-                'value'                       => addonify_compare_products_get_option( 'close_btn_bck_color_hover' )
+                'value'                       => addonify_compare_products_get_option( 'search_modal_close_btn_border_color_hover' )
             ),
         );
     }

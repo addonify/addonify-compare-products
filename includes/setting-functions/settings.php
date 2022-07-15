@@ -35,14 +35,33 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
                 'compare_btn_text_color_hover' => '#FFFFFF',
                 'compare_btn_bck_color' => '#444444',
                 'compare_btn_bck_color_hover' => '#3765FA',
-                'modal_overlay_bck_color' => '',
-                'modal_bck_color' => '',
+
+                'floating_bar_bck_color' => '#02030E',
+                'floating_bar_text_color' => 'rgba(255, 255, 255, 0.7)',
+                'floating_bar_add_button_text_color' => '#FFFFFF',
+                'floating_bar_add_button_text_color_hover' => '#FFFFFF',
+                'floating_bar_add_button_bck_color' => '#343434',
+                'floating_bar_add_button_bck_color_hover' => '#3765FA',
+                'floating_bar_compare_button_text_color' => '#444444',
+                'floating_bar_compare_button_text_color_hover' => '#FFFFFF',
+                'floating_bar_compare_button_bck_color' => '#FFFFFF',
+                'floating_bar_compare_button_bck_color_hover' => '#3765FA',
+
+                'search_modal_overlay_bck_color' => 'rgba(0, 0, 0, 0.8)',
+                'search_modal_bck_color' => '#FFFFFF',
+
+                'search_modal_add_btn_text_color' => '#444444',
+                'search_modal_add_btn_text_color_hover' => '#444444',
+                'search_modal_add_btn_bck_color' => '#EEEEEE',
+                'search_modal_add_btn_bck_color_hover' => '#D4D4D4',
+
+                'search_modal_close_btn_text_color' => 'rgba(255, 255, 255, 0.7)',
+                'search_modal_close_btn_text_color_hover' => 'rgba(255, 255, 255, 1)',
+                'search_modal_close_btn_border_color' => 'rgba(255, 255, 255, 0.3)',
+                'search_modal_close_btn_border_color_hover' => 'rgba(255, 255, 255, 1)',
+
                 'table_title_color' => '#444444',
                 'table_title_color_hover' => '#3765FA',
-                'close_btn_text_color' => '',
-                'close_btn_bck_color' => '',
-                'close_btn_text_color_hover' => '',
-                'close_btn_bck_color_hover' => '',
                 'custom_css' => ''
             )
         );
@@ -208,17 +227,24 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                             'dependent'  => array('load_styles_from_plugin'),
                             'fields' => addonify_compare_products_compare_button_styles_settings_fields()
                         ),
+                        'floating_bar_colors' => array(
+                            'title' => __( 'Floating Dock Colors', 'addonify-compare-products' ),
+                            'description' => '',
+                            'type' => 'color-options-group',
+                            'dependent'  => array('load_styles_from_plugin'),
+                            'fields' => addonify_compare_products_floating_bar_styles_settings_fields()
+                        ),
+                        'compare_modal_color' => array(
+                            'title' => __( 'Search Modal Colors', 'addonify-compare-products' ),
+                            'description' => '',
+                            'type' => 'color-options-group',
+                            'fields' => addonify_compare_products_compare_modal_styles_settings_fields()
+                        ),
                         'comparision_table_color' => array(
                             'title' => __( 'Comparision Table Colors', 'addonify-compare-products' ),
                             'description' => '',
                             'type' => 'color-options-group',
                             'fields' => addonify_compare_products_comparison_table_styles_settings_fields()
-                        ),
-                        'compare_modal_color' => array(
-                            'title' => __( 'Compare Modal Colors', 'addonify-compare-products' ),
-                            'description' => '',
-                            'type' => 'color-options-group',
-                            'fields' => addonify_compare_products_compare_modal_styles_settings_fields()
                         ),
                         'custom_css' => array(
                             'title' => __( 'Developer', 'addonify-compare-products' ),
