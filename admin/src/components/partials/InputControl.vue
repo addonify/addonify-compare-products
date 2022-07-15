@@ -70,7 +70,7 @@
 	<ColorPicker
 		v-else-if="props.field.type == 'color'"
 		v-model:colorVal="props.reactiveState[props.fieldKey]"
-		:isAlpha="props.field.isAlpha"
+		:isAlphaPicker="props.field.isAlphaPicker"
 		:label="props.field.label"
 	/>
 	<InvalidControl v-else />

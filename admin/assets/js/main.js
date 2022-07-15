@@ -484,7 +484,7 @@ __webpack_require__.r(__webpack_exports__);
   __name: 'ColorPicker',
   props: {
     colorVal: String,
-    isAlpha: Boolean,
+    isAlphaPicker: Boolean,
     label: String
   },
   emits: ["update:colorVal"],
@@ -502,6 +502,7 @@ __webpack_require__.r(__webpack_exports__);
         emit("update:colorVal", newValue);
       }
     });
+    console.log(props.isAlphaPicker);
     var __returned__ = {
       props: props,
       emit: emit,
@@ -1674,7 +1675,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $setup.value = $event;
     }),
-    "show-alpha": $setup.props.isAlpha
+    "show-alpha": $setup.props.isAlphaPicker ? $setup.props.isAlphaPicker : true
   }, null, 8
   /* PROPS */
   , ["modelValue", "show-alpha"]), $setup.props.label ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.props.label), 1
@@ -2428,11 +2429,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:colorVal": _cache[9] || (_cache[9] = function ($event) {
       return $setup.props.reactiveState[$setup.props.fieldKey] = $event;
     }),
-    isAlpha: $setup.props.field.isAlpha,
+    isAlphaPicker: $setup.props.field.isAlphaPicker,
     label: $setup.props.field.label
   }, null, 8
   /* PROPS */
-  , ["colorVal", "isAlpha", "label"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["InvalidControl"], {
+  , ["colorVal", "isAlphaPicker", "label"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["InvalidControl"], {
     key: 10
   }));
 }

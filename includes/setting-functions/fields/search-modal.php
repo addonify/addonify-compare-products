@@ -42,28 +42,28 @@ if ( ! function_exists( 'addonify_compare_products_search_modal_styles_settings_
             ),
             'search_modal_add_btn_text_color' => array(
                 'type'                        => 'color',
-                'label'                       => __( 'Close Button Label Color', 'addonify-compare-products' ),
+                'label'                       => __( 'Add Button Label Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
                 'value'                       => addonify_compare_products_get_option( 'search_modal_add_btn_text_color' )
             ),
             'search_modal_add_btn_text_color_hover' => array(
                 'type'                        => 'color',
-                'label'                       => __( 'Close Button Label Color', 'addonify-compare-products' ),
+                'label'                       => __( 'Add Button Label Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
                 'value'                       => addonify_compare_products_get_option( 'search_modal_add_btn_text_color_hover' )
             ),
             'search_modal_add_btn_bck_color' => array(
                 'type'                        => 'color',
-                'label'                       => __( 'Close Button Background Color', 'addonify-compare-products' ),
+                'label'                       => __( 'Add Button Background Color', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
                 'value'                       => addonify_compare_products_get_option( 'search_modal_add_btn_bck_color' )
             ),
             'search_modal_add_btn_bck_color_hover' => array(
                 'type'                        => 'color',
-                'label'                       => __( 'Close Button Background Color on Hover', 'addonify-compare-products' ),
+                'label'                       => __( 'Add Button Background Color on Hover', 'addonify-compare-products' ),
                 'isAlphaPicker'               => true,
                 'className'                   => '',
                 'value'                       => addonify_compare_products_get_option( 'search_modal_add_btn_bck_color_hover' )
