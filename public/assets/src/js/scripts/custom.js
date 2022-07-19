@@ -14,6 +14,7 @@
 		var modalOverlay = $('#addonify-compare-modal-overlay');
 		var searchModalOverlay = $('#addonify-compare-search-modal-overlay');
 		var compareItemsCount = addonifyCompareProductsJSObject.compareItemsCount;
+		var docCompareButton = $('#addonify-compare-dock-compare-btn');
 
 
 		// run function that should be initialized first
@@ -104,6 +105,8 @@
 						
 						if(thisButton.hasClass('addonify-compare-docker-remove-button')) {
 
+							addonifyCompareProductsDockCompareButton();
+
 							// mark button as not selected
 							$('button.addonify-cp-button[data-product_id="' + productId + '"]').removeClass('selected').removeAttr('disabled');
 
@@ -118,8 +121,6 @@
 						addonifyCompareProductsComparisonTableMessage();
 						
 						addonifyCompareProductsDisplayDock();
-						
-						addonifyCompareProductsDockCompareButton();
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();
@@ -209,6 +210,8 @@
 
 			console.log( addonifyCompareProductsJSObject );
 
+			addonifyCompareProductsDockMessage();
+
 			addonifyCompareProductsDockCompareButton();
 
 			if( Number( compareItemsCount ) != 0 ){
@@ -230,9 +233,9 @@
 
 		function addonifyCompareProductsDockCompareButton(){
 			if(compareItemsCount > 1){
-				$('#addonify-compare-dock-compare-btn').fadeIn();
+				docCompareButton.show();
 			}else{
-				$('#addonify-compare-dock-compare-btn').fadeOut();
+				docCompareButton.hide();
 			}
 		}
 
@@ -267,7 +270,7 @@
 			$('#addonify-compare-search-results').html('').addClass('loading');
 
 			var data = {
-				'action': addonifyCompareProductsJSObject.action_search_items,
+				'action': addonifyCompareProductsJSObject.actionSearchProducts,
 				'query': searchVal,
 				'nonce': addonifyCompareProductsJSObject.nonce
 			};

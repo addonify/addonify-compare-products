@@ -69,10 +69,3 @@ function run_addonify_compare_products() {
 
 }
 run_addonify_compare_products();
-
-
-add_action( 'wp_body_open', function() {
-	// $product_attributes = get_terms( array( 'taxonomy' => 'pa_' ) );
-
-	var_dump( wc_get_attribute_taxonomies() );
-} );
