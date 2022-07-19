@@ -21,15 +21,39 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<div id="addonify-compare-dock" >
-	<div id="addonify-compare-dock-message" class="hidden" >
+<div id="addonify-compare-dock">	
+	<div id="addonify-compare-dock-message" class="<?php echo ( is_array( $product_ids ) && count( $product_ids ) > 0 ) ? 'addonify-compare-hidden' : ''; ?>" >
 		<?php echo esc_html__( 'Select more than one item for comparison.', 'addonify-compare-products' ); ?>
 	</div>
-
-	<div id="addonify-compare-dock-inner">
-
+	
+	<div id="addonify-compare-dock-inner" class="<?php echo ( is_array( $product_ids ) && count( $product_ids ) > 1 ) ? 'full' : ''; ?>">
 		<!-- thumbnails will be added here by javascript -->
-		<div id="addonify-compare-dock-thumbnails"></div>
+		<div id="addonify-compare-dock-thumbnails">
+			<?php
+			if ( 
+				is_array( $product_ids ) &&
+				count( $product_ids ) > 0
+			) {
+				foreach ( $product_ids as $product_id ) {
+					$product = wc_get_product( $product_id );
+					if ( $product ) {
+						?>
+						<div class="addonify-compare-dock-components" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>">
+							<div class="sortable addonify-compare-dock-thumbnail" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>">
+								<span class="addonify-compare-dock-remove-item-btn addonify-compare-docker-remove-button" data-product_id="<?php echo esc_attr( $product->get_id() ); ?>">
+									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg>
+								</span>
+								<?php echo wp_kses_post( $product->get_image() ); ?>
+							</div>
+						</div>
+						<?php
+					}
+				}
+				?>
+				<?php
+			}
+			?>
+		</div>
 
 		<!-- add product button -->
 		<div class="addonify-compare-dock-components">
@@ -42,9 +66,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<!-- compare button -->
 		<div class="addonify-compare-dock-components">
-			<button id="addonify-compare-dock-compare-btn">
-				<?php echo esc_html( $label ); ?>
-			</button>
+			<?php echo wp_kses_post( $compare_button ); ?>
 		</div>
 	</div>
 </div> 

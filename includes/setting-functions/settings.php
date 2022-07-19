@@ -35,7 +35,7 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
                 'compare_products_display_type' => 'popup',
                 'compare_page' => '',
                 'compare_products_cookie_expires' => 30,
-                'fields_to_compare' => serialize( array( 'image', 'title', 'price', 'add_to_cart', 'rating', 'excerpt' ) ),
+                'fields_to_compare' => json_encode( array( 'image', 'title', 'price', 'add_to_cart_button', 'rating', 'excerpt' ) ),
                 'load_styles_from_plugin' => false,
 
                 // Design - add to compare button
@@ -151,7 +151,7 @@ if ( ! function_exists( 'addonify_compare_products_update_settings' ) ) {
                             'values' => $value
                         );
                         $sanitized_value = addonify_compare_products_sanitize_multi_choices( $sanitize_args );
-                        $sanitized_value = serialize( $value );                     
+                        $sanitized_value = json_encode( $value );                     
                         break;
                     default:
                         $sanitized_value = sanitize_text_field( $value );
@@ -193,7 +193,7 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_values' ) ) {
                         $settings_values[$id] = ( addonify_compare_products_get_option( $id ) == '1' ) ? true : false;
                         break;
                     case 'checkbox':
-                        $settings_values[$id] = unserialize( addonify_compare_products_get_option( $id ) );
+                        $settings_values[$id] = json_decode( addonify_compare_products_get_option( $id ), true );
                         break;
                     case 'number':
                         $settings_values[$id] = addonify_compare_products_get_option( $id );

@@ -22,48 +22,23 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div id="addonify-compare-products-table-wrapper" >
-
-	<?php if ( empty( $data ) ) : ?>
-		<p><?php esc_html_e( 'Nothing to compare !', 'addonify-compare-products' ); ?></p>
-	<?php else : ?>
-		
-		<table id="addonify-compare-products-table">
-			<thead>
-				<tr>
-					<?php
-					foreach ( $data as $key => $value ) {
-						if ( 'title' === $key ) {
-							echo '<th>Title</th>';
-							foreach ( $value as $key1 => $value1 ) {
-								if ( $value1 ) {
-									echo '<th>' . wp_kses_post( $value1 ) . '</th>';
-								}
-							}
-						}
-						break;
-					}
-					?>
-				</tr>
-			</thead>
+	<p id="addonify-compare-products-notice" class="addonify-compare-products-notice <?php echo ( ! empty( $data ) ) ? 'addonify-compare-hidden' : ''; ?>"><?php esc_html_e( 'Sorry! There is nothing to compare.', 'addonify-compare-products' ); ?></p>
+	<?php if( $data ) { ?>
+		<table id="addonify-compare-products-table" class="<?php echo ( empty( $data ) ) ? 'addonify-compare-hidden' : ''; ?>">
 			<tbody>
 				<?php
-				foreach ( $data as $key => $value ) {
-
-					if ( 'title' !== $key ) {
+				foreach ( $data as $label => $content ) {
+					if ( $label != 'product_id' ) {
 						echo '<tr>';
-						echo '<td>' . esc_html( $key ) . '</td>';
-						foreach ( $value as $key1 => $value1 ) {
-							if ( $value1 ) {
-								echo '<td  class="' . ( ( ! is_numeric( $key1 ) ? esc_html( $key1 ) : '' ) ) . '" >' . wp_kses_post( $value1 ) . '</td>';
-							}
+						foreach ( $content as $key => $value ) {
+							echo '<td class="' . ( ( $key === 0 ) ? 'acp-table-head' : 'acp-table-row-' . $key . ' acp-table-field-' . $label ) . '" data-product_id="' . esc_attr( $data['product_id'][$key] ) . '">' . wp_kses_post( $value ) . '</td>';
 						}
-						echo '</tr>';
 					}
+					echo '</tr>';
 				}
 				?>
 			</tbody>
 		</table>
-
-	<?php endif; ?>
+	<?php } ?>
 	
 </div>

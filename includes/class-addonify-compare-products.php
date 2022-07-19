@@ -224,6 +224,13 @@ class Addonify_Compare_Products {
 
 		// ajax callback.
 
+		$this->loader->add_action( 'wp_ajax_add_product_to_compare', $plugin_public, 'add_product_into_compare_cookie' );
+		$this->loader->add_action( 'wp_ajax_nopriv_add_product_to_compare', $plugin_public, 'add_product_into_compare_cookie' );
+
+
+		$this->loader->add_action( 'wp_ajax_addonify_compare_products_remove_product', $plugin_public, 'remove_product_from_compare_cookie' );
+		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_remove_product', $plugin_public, 'remove_product_from_compare_cookie' );
+
 		// get product thumbnails.
 		$this->loader->add_action( 'wp_ajax_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
 
@@ -234,11 +241,16 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'wp_ajax_nopriv_search_items', $plugin_public, 'search_items_callback' );
 
 		// get compare contents.
+		$this->loader->add_action( 'wp_ajax_addonify_compare_products_compare_content', $plugin_public, 'get_compare_contents_callback' );
+		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_compare_content', $plugin_public, 'get_compare_contents_callback' );
+
 		$this->loader->add_action( 'wp_ajax_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
 		$this->loader->add_action( 'wp_ajax_nopriv_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
 
 		// init functions.
 		$this->loader->add_action( 'init', $plugin_public, 'init_callback' );
+
+		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'register_shortcode' );
 
 	}
 
