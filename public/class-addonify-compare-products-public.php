@@ -600,7 +600,7 @@ class Addonify_Compare_Products_Public {
 
 					$delete_button = '<button class="addonify-remove-compare-products addonify-compare-table-remove-btn" data-product_id="' . esc_attr( $product_id ) . '">x</button>';
 					
-					$selected_products_data['title'][] = '<a href="' . esc_url( $product->get_permalink() ) . '" >' . wp_kses_post( $product->get_title() ) . '</a>' . $delete_button;
+					$selected_products_data['title'][] = '<a class="product-title-link" href="' . esc_url( $product->get_permalink() ) . '" >' . wp_kses_post( $product->get_title() ) . '</a>' . $delete_button;
 				}
 
 				if ( in_array( 'image', $product_content ) ) {
