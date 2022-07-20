@@ -1,0 +1,163 @@
+/* -------------------------------------------------------------------------- 
+	Basic table style.
+  -------------------------------------------------------------------------- */
+
+#addonify-compare-products-table {
+
+    display: table;
+    table-layout: auto;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+
+    th,
+    td {
+
+        padding: 15px 15px;
+        vertical-align: middle;
+        text-align: left;
+        border-color: #F5F5F5;
+    }
+
+    th {
+
+        background-color: #F5F5F5;
+    }
+
+    td {
+
+        .price {
+
+            display: inline-flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            font-size: 16px;
+            color: #444444;
+            font-weight: bold;
+            margin-bottom: 0;
+
+            ins {
+
+                display: inline-flex;
+                font-weight: bold;
+                color: red;
+                background-color: transparent;
+            }
+
+            del {
+
+                display: inline-flex;
+                margin-right: 5px;
+                font-size: 13px;
+                color: #444444;
+                opacity: 0.8;
+            }
+        }
+
+        .star-rating {
+
+            float: left;
+        }
+
+        .add_to_cart_inline {
+
+            margin-bottom: 0;
+        }
+
+        .add_to_cart_button,
+        .woocommerce .button,
+        .woocommerce.add_to_cart_inline .add_to_cart_button {
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+            width: auto;
+            min-width: auto;
+            margin: 0;
+            font-weight: normal;
+            padding: 15px 20px;
+            border-radius: 3px;
+        }
+    }
+
+    td.acp-table-head {
+
+        width: 200px;
+
+        @include breakpoint(ipadpro) {
+
+            width: 100px;
+        }
+    }
+
+    tbody {
+
+        tr {
+
+            td:first-child {
+
+                background-color: #F5F5F5;
+            }
+        }
+    }
+}
+
+/* -------------------------------------------------------------------------- 
+	Table in modal.
+  -------------------------------------------------------------------------- */
+
+#addonify-compare-products-table-wrapper {
+
+    @include breakpoint(ipadpro) {
+
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    #addonify-compare-products-table {
+
+        tbody {
+
+            tr {
+
+                td {
+
+                    .product-title-link {
+
+                        display: inline-flex;
+                        color: var(--adfy_compare_products_table_title_color);
+                        line-height: 1.3;
+
+                        &:hover {
+
+                            color: var(--adfy_compare_products_table_title_color_hover);
+                        }
+                    }
+
+                    .addonify-compare-table-remove-btn {
+
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 14px;
+                        font-weight: normal;
+                        height: 25px;
+                        width: 25px;
+                        padding: 0;
+                        margin: 0 0 0 10px;
+                        line-height: inherit;
+                        cursor: pointer;
+                        box-shadow: none;
+                        appearance: none;
+                        text-decoration: none;
+                        border-radius: 2px;
+                        @include transitionDelay();
+                    }
+                }
+            }
+        }
+    } 
+}
