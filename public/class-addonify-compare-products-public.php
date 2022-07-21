@@ -419,7 +419,7 @@ class Addonify_Compare_Products_Public {
 			$docker_compare_button = '<button id="addonify-compare-dock-compare-btn">' . apply_filters( 'addonify_cp_footer_btn_label', __( 'Compare', 'addonify-compare-products' ) ) . '</button>';
 		} else {
 
-			$docker_compare_button = '<a href="' . esc_url( get_permalink( (int) addonify_compare_products_get_option( 'compare_page' ) ) ) . '"><button id="addonify-compare-dock-compare-btn">' . apply_filters( 'addonify_cp_footer_btn_label', __( 'Compare', 'addonify-compare-products' ) ) . '</button></a>';
+			$docker_compare_button = '<a href="' . esc_url( get_permalink( (int) addonify_compare_products_get_option( 'compare_page' ) ) ) . '"><button id="addonify-compare-dock-compare-btn-link">' . apply_filters( 'addonify_cp_footer_btn_label', __( 'Compare', 'addonify-compare-products' ) ) . '</button></a>';
 		}
 
 		
@@ -722,6 +722,6 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function register_shortcode() {
 
-		add_shortcode( 'addonify-compare-products', array( $this, 'comparison_content_callback' ) );
+		add_shortcode( 'addonify_compare_products', array( $this, 'comparison_content_callback' ) );
 	}
 }
