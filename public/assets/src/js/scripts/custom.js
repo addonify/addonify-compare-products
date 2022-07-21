@@ -21,7 +21,7 @@
 		addonifyCompareProductsInit();
 
 
-		body.on('click', 'button.addonify-cp-button, #addonify-compare-search-results .item-add', function(event){
+		body.on('click', 'button.addonify-cp-button, #addonify-compare-search-results .item-add', function (event) {
 
 			event.preventDefault();
 
@@ -30,7 +30,7 @@
 			var productId = thisButton.data('product_id');
 
 			console.log(productId);
-			
+
 			$.ajax({
 				url: addonifyCompareProductsJSObject.ajaxURL,
 				type: 'POST',
@@ -39,17 +39,17 @@
 					product_id: productId,
 					nonce: addonifyCompareProductsJSObject.nonce
 				},
-				success: function(response){
+				success: function (response) {
 
 					console.log(response);
 
-					if(response.success){
+					if (response.success) {
 
 						compareItemsCount = response.items_count;
 
-						thisButton.addClass('selected').attr('disabled','disabled');
+						thisButton.addClass('selected').attr('disabled', 'disabled');
 
-						if(thisButton.hasClass('item-add')){
+						if (thisButton.hasClass('item-add')) {
 							addonifyCompareProductsCloseSearchModal();
 						}
 
@@ -60,12 +60,12 @@
 						addonifyCompareProductsComparisonTableMessage();
 
 						addonifyCompareProductsDisplayDock();
-						
+
 						addonifyCompareProductsDockCompareButton();
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();
-					}else{
+					} else {
 						console.log(response.message);
 					}
 				}
@@ -73,7 +73,7 @@
 		});
 
 
-		
+
 
 
 		// remove item
@@ -93,17 +93,17 @@
 					product_id: productId,
 					nonce: addonifyCompareProductsJSObject.nonce
 				},
-				success: function(response){
+				success: function (response) {
 					console.log(response);
-					if(response.success){
+					if (response.success) {
 						compareItemsCount = response.items_count;
 						if (thisButton.hasClass('addonify-compare-table-remove-btn')) {
 							$('td[data-product_id="' + productId + '"]').remove();
 							// mark button as not selected
 							$('button.addonify-cp-button[data-product_id="' + productId + '"]').removeClass('selected').removeAttr('disabled');
 						}
-						
-						if(thisButton.hasClass('addonify-compare-docker-remove-button')) {
+
+						if (thisButton.hasClass('addonify-compare-docker-remove-button')) {
 
 							addonifyCompareProductsDockCompareButton();
 
@@ -114,17 +114,17 @@
 							$('.addonify-compare-dock-components[data-product_id="' + productId + '"]').remove();
 						}
 
-						if($('.addonify-compare-dock-components[data-product_id="' + productId + '"]')){
+						if ($('.addonify-compare-dock-components[data-product_id="' + productId + '"]')) {
 							$('.addonify-compare-dock-components[data-product_id="' + productId + '"]').remove();
-						}		
-						
+						}
+
 						addonifyCompareProductsComparisonTableMessage();
-						
+
 						addonifyCompareProductsDisplayDock();
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();
-					}else{
+					} else {
 						console.log(response.message);
 					}
 				}
@@ -132,8 +132,10 @@
 
 		});
 
-		body.on('click', '#addonify-compare-dock-compare-btn', function(event){
+		body.on('click', '#addonify-compare-dock-compare-btn', function (event) {
 			event.preventDefault();
+
+			body.addClass('addonify-compare-disable-scroll'); // CSS: body add overflow hidden.
 
 			modalOverlay.removeClass('addonify-compare-hidden');
 
@@ -150,8 +152,8 @@
 				data: {
 					action: addonifyCompareProductsJSObject.actionGetCompareContent,
 				},
-				success: function(response){
-					if( response ){
+				success: function (response) {
+					if (response) {
 						compareModalContent.removeClass('loading').html(response);
 						compareModal.removeClass('addonify-compare-hidden');
 					}
@@ -162,6 +164,7 @@
 
 		// show search modal
 		body.on('click', '#addonify-compare-dock-add-item', function () {
+			body.addClass('addonify-compare-disable-scroll');
 			body.removeClass('addonify-compare-dock-is-visible');
 			searchModalOverlay.removeClass('addonify-compare-hidden');
 			searchModal.removeClass('addonify-compare-hidden');
@@ -170,6 +173,8 @@
 
 		// close search modal
 		body.on('click', '#addonify-compare-search-close-button, #addonify-compare-search-modal-overlay', function () {
+
+			body.removeClass('addonify-compare-disable-scroll');
 			body.addClass('addonify-compare-dock-is-visible');
 			addonifyCompareProductsCloseSearchModal();
 		})
@@ -182,16 +187,18 @@
 
 			clearTimeout(searchInputTimer);
 
-			searchInputTimer = setTimeout( function () {
+			searchInputTimer = setTimeout(function () {
 				// ajax search
-				addonifyCompareProductsSearchProducts( searchVal );
-			}, 500 );
+				addonifyCompareProductsSearchProducts(searchVal);
+			}, 500);
 		})
 
 
 
 		// close compare modal
 		body.on('click', '#addonify-compare-close-button, #addonify-compare-modal-overlay', function () {
+
+			body.removeClass('addonify-compare-disable-scroll');
 
 			modalOverlay.addClass('addonify-compare-hidden');
 
@@ -208,40 +215,40 @@
 
 		function addonifyCompareProductsInit() {
 
-			console.log( addonifyCompareProductsJSObject );
+			console.log(addonifyCompareProductsJSObject);
 
 			addonifyCompareProductsDockMessage();
 
 			addonifyCompareProductsDockCompareButton();
 
-			if( Number( compareItemsCount ) != 0 ){
+			if (Number(compareItemsCount) != 0) {
 				body.addClass('addonify-compare-dock-is-visible');
-			}else{
+			} else {
 				body.removeClass('addonify-compare-dock-is-visible');
 			}
 		}
 
 
-		function addonifyCompareProductsDisplayDock(){
-			if(compareItemsCount === 0){
+		function addonifyCompareProductsDisplayDock() {
+			if (compareItemsCount === 0) {
 				body.removeClass('addonify-compare-dock-is-visible');
-			}else{
+			} else {
 				body.addClass('addonify-compare-dock-is-visible');
 			}
 		}
-		
 
-		function addonifyCompareProductsDockCompareButton(){
-			if(compareItemsCount > 1){
+
+		function addonifyCompareProductsDockCompareButton() {
+			if (compareItemsCount > 1) {
 				docCompareButton.show();
-			}else{
+			} else {
 				docCompareButton.hide();
 			}
 		}
 
 		function addonifyCompareProductsDockMessage() {
 
-			if(compareItemsCount < 2){
+			if (compareItemsCount < 2) {
 				dockMessage.removeClass('addonify-compare-hidden');
 				$('#addonify-compare-dock-inner').removeClass('full');
 			}
@@ -253,18 +260,18 @@
 
 		function addonifyCompareProductsComparisonTableMessage() {
 
-			if(compareItemsCount == 0){
+			if (compareItemsCount == 0) {
 				$('#addonify-compare-products-notice').removeClass('addonify-compare-hidden');
 				$('#addonify-compare-products-table').hide();
-			}else{
+			} else {
 				$('#addonify-compare-products-notice').addClass('addonify-compare-hidden');
 			}
 		}
 
-		function addonifyCompareProductsSearchProducts( searchVal ) {
+		function addonifyCompareProductsSearchProducts(searchVal) {
 
 			// Do not continue if search value is empty.
-			if ( ! searchVal.length ) return;
+			if (!searchVal.length) return;
 
 			// Show loading animation.
 			$('#addonify-compare-search-results').html('').addClass('loading');
@@ -276,9 +283,9 @@
 			};
 
 			$.post(
-				addonifyCompareProductsJSObject.ajaxURL, 
-				data, 
-				function(response) {
+				addonifyCompareProductsJSObject.ajaxURL,
+				data,
+				function (response) {
 					$('#addonify-compare-search-results').removeClass('loading').html(response);
 				}
 			);
@@ -287,6 +294,7 @@
 		function addonifyCompareProductsCloseSearchModal() {
 			searchResultsContainer.html('');
 			$('#addonify-compare-search-query').val('');
+			body.removeClass('addonify-compare-disable-scroll');
 			searchModal.addClass('addonify-compare-hidden');
 			searchModalOverlay.addClass('addonify-compare-hidden');
 		}

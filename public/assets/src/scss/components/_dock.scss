@@ -95,6 +95,7 @@
     @include mediumBoxShadow();
 }
 
+#addonify-compare-dock-compare-btn-link,
 .addonify-compare-dock-components button {
 
     display: inline-flex;
@@ -213,7 +214,8 @@
     }
 }
 
-#addonify-compare-dock-compare-btn {
+#addonify-compare-dock-compare-btn,
+#addonify-compare-dock-compare-btn-link {
 
     color: var(--adfy_compare_products_dock_compare_button_color);
     fill: var(--adfy_compare_products_dock_compare_button_color);
@@ -229,5 +231,23 @@
         color: var(--adfy_compare_products_dock_compare_button_color_hover);
         fill: var(--adfy_compare_products_dock_compare_button_color_hover);
         background-color: var(--adfy_compare_products_dock_compare_button_bg_color_hover);
+    }
+}
+
+#addonify-compare-dock-compare-btn-link {
+
+    position: relative;
+    text-decoration: none;
+    @include transitionDelay();
+
+    &:focus {
+
+        outline: none;
+        text-decoration: none;
+    }
+
+    &:hover {
+
+        text-decoration: none;
     }
 }
