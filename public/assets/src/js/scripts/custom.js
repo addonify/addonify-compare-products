@@ -14,7 +14,7 @@
 		var modalOverlay = $('#addonify-compare-modal-overlay');
 		var searchModalOverlay = $('#addonify-compare-search-modal-overlay');
 		var compareItemsCount = addonifyCompareProductsJSObject.compareItemsCount;
-		var docCompareButton = $('#addonify-compare-dock-compare-btn');
+		var docCompareButton = $('.addonify-dock-compare-button');
 
 
 		// run function that should be initialized first
@@ -105,8 +105,6 @@
 
 						if (thisButton.hasClass('addonify-compare-docker-remove-button')) {
 
-							addonifyCompareProductsDockCompareButton();
-
 							// mark button as not selected
 							$('button.addonify-cp-button[data-product_id="' + productId + '"]').removeClass('selected').removeAttr('disabled');
 
@@ -121,6 +119,8 @@
 						addonifyCompareProductsComparisonTableMessage();
 
 						addonifyCompareProductsDisplayDock();
+
+						addonifyCompareProductsDockCompareButton();
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();

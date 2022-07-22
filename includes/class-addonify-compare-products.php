@@ -116,12 +116,16 @@ class Addonify_Compare_Products {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-i18n.php';
 
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-helpers.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-helpers-functions.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-addonify-compare-products-admin.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-template-functions.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-template-hooks.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -170,23 +174,16 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		if ( ! addonify_compare_products_is_woocommerce_active() ) {
+
+			$this->loader->add_action( 'admin_notices', $plugin_admin, 'woocommerce_not_active_notice' ); 
+		}
+
 		// admin menu.
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu_callback', 20 );
 
 		// custom link in plugins.php page in wp-admin.
 		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'custom_plugin_link_callback', 10, 2 );
-
-		// show settings page ui .
-		// $this->loader->add_action( 'admin_init', $plugin_admin, 'settings_page_ui' );
-
-		// show notice if woocommerce is not active.
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'addonify_cp_show_woocommerce_not_active_notice' );
-
-		// show admin notices after form submission.
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'addonify_cp_form_submission_notification' );
-
-		// add custom post status "Addonify Compare Products Page" after page name.
-		$this->loader->add_filter( 'display_post_states', $plugin_admin, 'display_custom_post_states_after_page_title', 10, 2 );
 
 	}
 
@@ -236,8 +233,8 @@ class Addonify_Compare_Products {
 		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_search_products', $plugin_public, 'ajax_products_search_callback' );
 
 		// get compare contents.
-		$this->loader->add_action( 'wp_ajax_addonify_compare_products_compare_content', $plugin_public, 'comparison_content_callback' );
-		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_compare_content', $plugin_public, 'comparison_content_callback' );
+		$this->loader->add_action( 'wp_ajax_addonify_compare_products_compare_content', $plugin_public, 'render_comparison_content' );
+		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_compare_content', $plugin_public, 'render_comparison_content' );
 
 		// init functions.
 		$this->loader->add_action( 'init', $plugin_public, 'init_callback' );

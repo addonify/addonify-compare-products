@@ -31,6 +31,8 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
                 // Settings
                 'enable_product_comparison' => true,
                 'compare_products_btn_position' => 'after_add_to_cart',
+                'compare_products_btn_show_icon' => true,
+                'compare_products_btn_icon' => 'icon_one',
                 'compare_products_btn_label' => __( 'Compare', 'addonify-compare-products' ),
                 'compare_products_display_type' => 'popup',
                 'compare_page' => '',

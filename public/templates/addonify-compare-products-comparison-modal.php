@@ -20,8 +20,7 @@
 // direct access is disabled.
 defined( 'ABSPATH' ) || exit;
 ?>
-<!-- product display modal -->
-<div id="addonify-compare-modal-overlay" class="addonify-compare-hidden"></div>
+<div id="addonify-compare-modal-overlay" class="addonify-compare-hidden"></div><!-- #addonify-compare-modal-overlay.addonify-compare-hidden -->
 
 <div id="addonify-compare-modal" class="addonify-compare-hidden">
 	<div class="addonify-compare-model-inner">
@@ -31,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
 				<line x1="18" y1="6" x2="6" y2="18"></line>
 				<line x1="6" y1="6" x2="18" y2="18"></line>
 			</svg>
-		</button>
-		<div id="addonify-compare-modal-content"></div>
-	</div>
-</div>
+		</button><!-- #addonify-compare-close-button.addonify-cp-fake-button.addonify-compare-all-close-btn -->
+		<div id="addonify-compare-modal-content"></div><!-- #addonify-compare-modal-content -->
+	</div><!-- .addonify-compare-modal-inner -->
+</div><!-- #addonify-compare-modal.addonify-compare-hidden -->
