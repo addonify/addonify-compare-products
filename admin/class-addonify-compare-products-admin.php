@@ -61,22 +61,6 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
-		if ( is_admin() ) {
-
-			// if display type is page but page id is not present or page is deleted by user.
-			// change display type to popup.
-
-			if ( 'page' === get_option( ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type' ) ) {
-				// $page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' );
-				$compare_page_id = get_option( ADDONIFY_CP_DB_INITIALS . 'compare_page', get_option( ADDONIFY_CP_DB_INITIALS . 'page_id' ) );
-
-				if ( ! $compare_page_id || 'publish' != get_post_status( $compare_page_id ) ) {
-					update_option( ADDONIFY_CP_DB_INITIALS . 'compare_products_display_type', 'popup' );
-				}
-			}
-		}
-
 	}
 
 
@@ -159,9 +143,6 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 	 */
 	public function add_menu_callback(){
 
-		// do not show menu if woocommerce is not active
-		if ( ! $this->is_woocommerce_active() )  return; 
-
 		global $admin_page_hooks;
 
 		$parent_menu_slug = array_search( 'addonify', $admin_page_hooks, true );
@@ -233,32 +214,13 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 		<?php
 	}
 
-
-	/**
-	 * Show notification after form submission
-	 *
-	 * @since    1.0.0
-	 */
-	public function addonify_cp_form_submission_notification() {
-		if ( isset( $_GET['page'] ) && $_GET['page'] === $this->settings_page_slug ) {
-			settings_errors();
-		}
-	}
-
-
 	/**
 	 * Show error message if woocommerce is not active
 	 *
 	 * @since    1.0.0
 	 */
-	public function addonify_cp_show_woocommerce_not_active_notice() {
-		if ( ! $this->is_woocommerce_active() ) {
-			add_action(
-				'admin_notices',
-				function() {
-					require dirname( __FILE__ ) . '/templates/woocommerce-not-active-notice.php';
-				}
-			);
-		}
+	public function woocommerce_not_active_notice() {
+
+		require dirname( __FILE__ ) . '/templates/woocommerce-not-active-notice.php';
 	}
 }

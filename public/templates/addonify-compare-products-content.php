@@ -22,23 +22,29 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div id="addonify-compare-products-table-wrapper" >
-	<p id="addonify-compare-products-notice" class="addonify-compare-products-notice <?php echo ( ! empty( $data ) ) ? 'addonify-compare-hidden' : ''; ?>"><?php esc_html_e( 'Sorry! There is nothing to compare.', 'addonify-compare-products' ); ?></p>
-	<?php if( $data ) { ?>
-		<table id="addonify-compare-products-table" class="<?php echo ( empty( $data ) ) ? 'addonify-compare-hidden' : ''; ?>">
+
+	<p id="addonify-compare-products-notice" class="<?php echo esc_attr( implode( ' ', $message_css_classes ) ); ?>"><?php echo esc_html( $no_table_rows_message ); ?></p><!-- #addonify-compare-products-notice -->
+
+	<?php 
+	if ( $table_rows ) { 
+		?>
+		<table id="addonify-compare-products-table" class="<?php echo esc_attr( implode( ' ', $table_css_classes ) ); ?>">
 			<tbody>
 				<?php
-				foreach ( $data as $label => $content ) {
-					if ( $label != 'product_id' ) {
+				foreach ( $table_rows as $tablet_col => $col_content ) {
+					if ( $tablet_col != 'product_id' ) {
 						echo '<tr>';
-						foreach ( $content as $key => $value ) {
-							echo '<td class="' . ( ( $key === 0 ) ? 'acp-table-head' : 'acp-table-row-' . $key . ' acp-table-field-' . $label ) . '" data-product_id="' . esc_attr( $data['product_id'][$key] ) . '">' . wp_kses_post( $value ) . '</td>';
+						foreach ( $col_content as $key => $value ) {
+							echo '<td class="' . ( ( $key === 0 ) ? 'acp-table-head' : 'acp-table-row-' . $key . ' acp-table-field-' . $tablet_col ) . '" data-product_id="' . esc_attr( $table_rows['product_id'][$key] ) . '">' . wp_kses_post( $value ) . '</td>';
 						}
 					}
 					echo '</tr>';
 				}
 				?>
 			</tbody>
-		</table>
-	<?php } ?>
+		</table><!-- #addonify-compare-products-table -->
+		<?php 
+	} 
+	?>
 	
-</div>
+</div><!-- #addonify-compare-products-table-wrapper -->
