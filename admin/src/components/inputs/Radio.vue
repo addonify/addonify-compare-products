@@ -19,8 +19,6 @@
 	});
 
 	const { choices, renderChoices } = props;
-	console.log(renderChoices);
-	console.log(choices);
 </script>
 <template>
 	<div v-if="renderChoices == 'html'" class="adfy-radio-input">

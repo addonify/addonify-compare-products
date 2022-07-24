@@ -744,8 +744,6 @@ __webpack_require__.r(__webpack_exports__);
     });
     var choices = props.choices,
         renderChoices = props.renderChoices;
-    console.log(renderChoices);
-    console.log(choices);
     var __returned__ = {
       props: props,
       emit: emit,
