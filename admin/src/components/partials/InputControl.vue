@@ -66,6 +66,7 @@
 		v-else-if="props.field.type == 'radio'"
 		v-model="props.reactiveState[props.fieldKey]"
 		:choices="props.field.choices"
+		:renderChoices="props.field.renderChoices"
 	/>
 	<ColorPicker
 		v-else-if="props.field.type == 'color'"

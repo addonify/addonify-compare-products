@@ -35,8 +35,9 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_settings_field
             ),
             'compare_products_btn_icon' => array(
                 'type'                      => 'radio',
-                'typeStyle'                 => "radio_icon",
-                'className'                 => 'fullwidth radio-input-group',
+                //'typeStyle'                 => "radioIcon",
+                'renderChoices'             => "html",
+                'className'                 => 'fullwidth radio-input-group hide-label svg-icons-choices',
                 'label'                     => __( 'Select Icon', 'addonify-wishlist' ),
                 'description'               => __( 'Select icon to be displayed on compare button.', 'addonify-wishlist' ),
                 'choices'                   => addonify_compare_products_get_compare_button_icons(),
