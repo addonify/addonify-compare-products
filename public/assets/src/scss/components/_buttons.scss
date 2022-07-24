@@ -67,6 +67,7 @@ button.addonify-cp-fake-button {
 .woocommerce ul.products li.product .button.addonify-cp-button,
 .woocommerce-page ul.products li.product .button.addonify-cp-button {
 
+    fill: var(--adfy_compare_products_button_color);
     color: var(--adfy_compare_products_button_color);
     border: none;
     box-shadow: none;
@@ -76,13 +77,23 @@ button.addonify-cp-fake-button {
     background-color: var(--adfy_compare_products_button_bg_color);
     @include transitionDelay();
 
+    .addonify-cp-icon {
+
+        svg {
+
+            height: 14px;
+            width: 14px;
+        }
+    }
+
     &:hover {
 
         text-decoration: none;
         box-shadow: none;
+        fill: var(--adfy_compare_products_button_color_hover);
+        color: var(--adfy_compare_products_button_color_hover);
         background: transparent;
         background-color: var(--adfy_compare_products_button_bg_color_hover);
-        color: var(--adfy_compare_products_button_color_hover);
     }
 
     &:focus {
