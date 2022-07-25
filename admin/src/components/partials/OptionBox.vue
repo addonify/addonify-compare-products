@@ -1,5 +1,5 @@
 <script setup>
-	import { computed } from "vue";
+	//import { computed } from "vue";
 	import { useOptionsStore } from "../../stores/options";
 	import InputControl from "./InputControl.vue";
 	import { ElTag } from "element-plus";
@@ -8,11 +8,15 @@
 		section: Object,
 		sectionKey: [String, Object],
 		reactiveState: Object,
+		currentPage: String,
 	});
+
+	//console.log(props.currentPage);
 
 	const store = useOptionsStore();
 
-	const mainOption = "enable_product_comparison";
+	const enablePluginKey = "enable_product_comparison";
+	const enablePluginStyleKey = "load_styles_from_plugin";
 
 	function optionDependencyHandler(args) {
 		//console.log(args);
@@ -26,12 +30,17 @@
 	}
 
 	function optionVisibilityHandler(key, dependent) {
-		return key == mainOption ? true : optionDependencyHandler(dependent);
+		if (props.currentPage == "settings") {
+			return key == enablePluginKey
+				? true
+				: optionDependencyHandler(dependent);
+		}
+		if (props.currentPage == "design") {
+			return key == enablePluginStyleKey
+				? true
+				: optionDependencyHandler(dependent);
+		}
 	}
-
-	//function print(arg) {
-	//	console.log(arg);
-	//}
 </script>
 <template>
 	<slot></slot>
