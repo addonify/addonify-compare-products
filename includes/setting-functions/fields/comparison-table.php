@@ -9,7 +9,6 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_settings_fie
                 'label' => __( 'Content to Display', 'addonify-compare-products' ),
                 'description' => __( 'Choose content that you want to display in comparison table.', 'addonify-compare-products' ),
                 'type'  => 'checkbox',
-                'typeStyle' => 'buttons',
                 'className' => 'fullwidth',
                 'choices' => apply_filters(
                     'addonify_compare_products/comparison_table_content_choices',
@@ -19,8 +18,8 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_settings_fie
                         'price' => __( 'Price', 'addonify-compare-products' ),
                         'rating' => __( 'Rating', 'addonify-compare-products' ),
                         'description' => __( 'Description', 'addonify-compare-products' ),
+                        'in_stock' => __( 'Stock Info', 'addonify-compare-products' ),
                         'add_to_cart_button' => __( 'Add to Cart Button', 'addonify-compare-products' ),
-                        'in_stock' => __( 'Stock Info', 'addonify-compare-products' )
                     )
                 ),
                 'dependent' => array('enable_product_comparison'),

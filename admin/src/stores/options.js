@@ -41,7 +41,7 @@ export const useOptionsStore = defineStore({
                 this.options = settingsValues;
                 oldOptions = cloneDeep(settingsValues);
                 this.isLoading = false;
-                console.log(res.tabs);
+                //console.log(res.tabs);
             });
         },
 

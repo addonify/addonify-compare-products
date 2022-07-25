@@ -39,7 +39,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
             'compare_products_cookie_expires' => array(
                 'type'          => 'number',
                 'className'     => '',
-                'typeStyle'    => 'toggle', // 'default', 'toggle' & slider
+                'typeStyle'     => 'toggle', // 'default', 'toggle' & slider
                 'label'         => __( 'Save compare Cookie for [ x ] days', 'addonify-compare-products' ),
                 'dependent'     => array('enable_product_comparison'),
                 'description'   => __( 'Set the number of days to save the compare products data in browser cookie.', 'addonify-wsihlist' ),
