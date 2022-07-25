@@ -29,6 +29,7 @@
 			v-else
 			:section="section"
 			:reactiveState="props.reactiveState"
+			currentPage="design"
 		>
 			<SectionTitle :section="section" :sectionKey="sectionKey" />
 		</OptionBox>

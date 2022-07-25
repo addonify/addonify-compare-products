@@ -281,18 +281,19 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                             'title' => __( 'Search Modal Colors', 'addonify-compare-products' ),
                             'description' => '',
                             'type' => 'color-options-group',
+                            'dependent'  => array('load_styles_from_plugin'),
                             'fields' => addonify_compare_products_search_modal_styles_settings_fields()
                         ),
                         'comparison_table_color' => array(
                             'title' => __( 'Comparison Table Colors', 'addonify-compare-products' ),
                             'description' => '',
                             'type' => 'color-options-group',
+                            'dependent'  => array('load_styles_from_plugin'),
                             'fields' => addonify_compare_products_comparison_table_styles_settings_fields()
                         ),
                         'custom_css' => array(
                             'title' => __( 'Developer', 'addonify-compare-products' ),
                             'description' => '',
-                            'dependent'  => array('load_styles_from_plugin'),
                             'fields' => addonify_compare_products_custom_css_settings_fields()
                         )
                     )
