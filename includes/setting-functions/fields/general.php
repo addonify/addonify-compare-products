@@ -32,10 +32,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
                 'placeholder'    => __('Select a page', 'addonify-compare-products'),
                 'label'          => __( 'Products Compare Page', 'addonify-compare-products' ),
                 'description'    => __( 'Select a page to display wishlist table.', 'addonify-compare-products'),
-                'dependent'      => array(
-                    'enable_product_comparison' => true,
-                    'compare_products_display_type' => 'page'
-                ),
+                'dependent'      => array('enable_product_comparison'),
                 'choices'        => addonify_compare_products_get_pages(),
                 'value'          => addonify_compare_products_get_option( 'compare_page' )
             ),

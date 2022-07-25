@@ -278,7 +278,8 @@ var useOptionsStore = (0,pinia__WEBPACK_IMPORTED_MODULE_1__.defineStore)({
         _this.data = res.tabs;
         _this.options = settingsValues;
         oldOptions = cloneDeep(settingsValues);
-        _this.isLoading = false; //console.log(res.tabs);
+        _this.isLoading = false;
+        console.log(res.tabs);
       });
     },
     // ⚡️ Handle update options & map the values to the options object.
@@ -1263,10 +1264,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _stores_options__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../stores/options */ "./admin/src/stores/options.js");
-/* harmony import */ var _InputControl_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InputControl.vue */ "./admin/src/components/partials/InputControl.vue");
-/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/tag/index.mjs");
-/* harmony import */ var element_plus_es_components_tag_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! element-plus/es/components/tag/style/css */ "./node_modules/element-plus/es/components/tag/style/css.mjs");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _stores_options__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../stores/options */ "./admin/src/stores/options.js");
+/* harmony import */ var _InputControl_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./InputControl.vue */ "./admin/src/components/partials/InputControl.vue");
+/* harmony import */ var element_plus__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! element-plus */ "./node_modules/element-plus/es/components/tag/index.mjs");
+/* harmony import */ var element_plus_es_components_tag_style_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! element-plus/es/components/tag/style/css */ "./node_modules/element-plus/es/components/tag/style/css.mjs");
+
 
 
 
@@ -1285,13 +1288,37 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var store = (0,_stores_options__WEBPACK_IMPORTED_MODULE_0__.useOptionsStore)();
+    var store = (0,_stores_options__WEBPACK_IMPORTED_MODULE_1__.useOptionsStore)();
+    var mainOption = "enable_product_comparison";
+
+    function optionDependencyHandler(args) {
+      //console.log(args);
+      if (Array.isArray(args)) {
+        return args.every(function (key) {
+          return store.options[key];
+        });
+      } else {
+        return store.options[args];
+      }
+    }
+
+    function optionVisibilityHandler(key, dependent) {
+      return key == mainOption ? true : optionDependencyHandler(dependent);
+    } //function print(arg) {
+    //	console.log(arg);
+    //}
+
+
     var __returned__ = {
       props: props,
       store: store,
-      useOptionsStore: _stores_options__WEBPACK_IMPORTED_MODULE_0__.useOptionsStore,
-      InputControl: _InputControl_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-      ElTag: element_plus__WEBPACK_IMPORTED_MODULE_3__.ElTag
+      mainOption: mainOption,
+      optionDependencyHandler: optionDependencyHandler,
+      optionVisibilityHandler: optionVisibilityHandler,
+      computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
+      useOptionsStore: _stores_options__WEBPACK_IMPORTED_MODULE_1__.useOptionsStore,
+      InputControl: _InputControl_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+      ElTag: element_plus__WEBPACK_IMPORTED_MODULE_4__.ElTag
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -2568,7 +2595,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* CLASS */
     )], 512
     /* NEED_PATCH */
-    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, key == 'enable_product_comparison' ? true : $setup.store.options.enable_product_comparison]]);
+    )), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.optionVisibilityHandler(key, field.dependent)]]);
   }), 256
   /* UNKEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" // adfy-options ")], 64

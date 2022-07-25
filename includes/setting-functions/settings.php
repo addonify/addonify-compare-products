@@ -250,7 +250,7 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                             'fields' => addonify_compare_products_compare_button_settings_fields(),
                         ),
                         'comparison_table' => array(
-                            'title' => __( 'comparison Table', 'addonify-compare-products' ),
+                            'title' => __( 'Comparison Table', 'addonify-compare-products' ),
                             'description' => '',
                             'fields' => addonify_compare_products_comparison_table_settings_fields()
                         )
@@ -284,7 +284,7 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
                             'fields' => addonify_compare_products_search_modal_styles_settings_fields()
                         ),
                         'comparison_table_color' => array(
-                            'title' => __( 'comparison Table Colors', 'addonify-compare-products' ),
+                            'title' => __( 'Comparison Table Colors', 'addonify-compare-products' ),
                             'description' => '',
                             'type' => 'color-options-group',
                             'fields' => addonify_compare_products_comparison_table_styles_settings_fields()
