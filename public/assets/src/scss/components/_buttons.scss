@@ -67,6 +67,10 @@ button.addonify-cp-fake-button {
 .woocommerce ul.products li.product .button.addonify-cp-button,
 .woocommerce-page ul.products li.product .button.addonify-cp-button {
 
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
     fill: var(--adfy_compare_products_button_color);
     color: var(--adfy_compare_products_button_color);
     border: none;
@@ -79,10 +83,15 @@ button.addonify-cp-fake-button {
 
     .addonify-cp-icon {
 
+        display: inline-flex;
+        line-height: 1;
+
         svg {
 
-            height: 14px;
-            width: 14px;
+            display: inline-flex;
+            line-height: 1;
+            height: 16px;
+            width: 16px;
         }
     }
 
