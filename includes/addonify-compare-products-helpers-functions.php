@@ -27,17 +27,19 @@ if ( ! function_exists( 'addonify_compare_products_escape_svg' ) ) {
 
         $allowed_html = array(
             'svg' => array(
-                'xmlns' => array(),
-                'viewBox' => true,
-                'width' => true,
-                'height' => true,
+                'class'           => true,
+                'aria-hidden'     => true,
+                'aria-labelledby' => true,
+                'role'            => true,
+                'xmlns'           => true,
+                'width'           => true,
+                'height'          => true,
+                'viewbox'         => true, // <= Must be lower case!
             ),
+            
+            'g'     => array( 'fill' => true ),
             'title' => array( 'title' => true ),
-            'path' => array(
-                'd'=> array(),
-                'fill' => true,
-            ),
-            'g' => array( 'fill' => true ),
+            'path'  => array( 'd' => true, 'fill' => true,  ),
         );
 
         return wp_kses( $svg, $allowed_html );
