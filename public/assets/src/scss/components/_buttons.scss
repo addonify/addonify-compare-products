@@ -95,6 +95,14 @@ button.addonify-cp-fake-button {
         }
     }
 
+    &.icon-position-right {
+
+        .addonify-cp-icon {
+
+            order: 2;
+        }
+    }
+
     &:hover {
 
         text-decoration: none;

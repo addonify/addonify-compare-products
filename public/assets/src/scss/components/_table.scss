@@ -73,6 +73,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
             margin: 0;
             padding: 15px 20px;
             font-weight: normal;
@@ -90,6 +91,11 @@
         @include breakpoint(ipadpro) {
 
             width: 100px;
+        }
+
+        @include breakpoint(mobile) {
+
+            display: none;
         }
     }
 
