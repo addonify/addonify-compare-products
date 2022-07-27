@@ -94,11 +94,22 @@
 				success: function (response) {
 					//console.log(response);
 					if (response.success) {
+						
 						compareItemsCount = response.items_count;
+
 						if (thisButton.hasClass('addonify-compare-table-remove-btn')) {
 							$('td[data-product_id="' + productId + '"]').remove();
 							// mark button as not selected
 							$('button.addonify-cp-button[data-product_id="' + productId + '"]').removeClass('selected').removeAttr('disabled');
+
+							if (compareItemsCount < 2) {
+
+								body.removeClass('addonify-compare-disable-scroll'); // CSS: body add overflow hidden.
+
+								modalOverlay.addClass('addonify-compare-hidden');
+
+								compareModal.addClass('addonify-compare-hidden');
+							}
 						}
 
 						if (thisButton.hasClass('addonify-compare-docker-remove-button')) {
@@ -256,7 +267,7 @@
 
 		function addonifyCompareProductsComparisonTableMessage() {
 
-			if (compareItemsCount == 0) {
+			if (compareItemsCount < 2) {
 				$('#addonify-compare-products-notice').removeClass('addonify-compare-hidden');
 				$('#addonify-compare-products-table').hide();
 			} else {
