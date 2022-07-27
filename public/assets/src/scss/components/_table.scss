@@ -15,8 +15,8 @@
     td {
 
         padding: 15px 15px;
-        vertical-align: middle;
         text-align: left;
+        vertical-align: top;
         border-color: #F5F5F5;
     }
 
@@ -73,23 +73,36 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            margin: 0;
+            padding: 15px 20px;
+            font-weight: normal;
+            line-height: 1;
             height: auto;
             width: auto;
-            min-width: auto;
-            margin: 0;
-            font-weight: normal;
-            padding: 15px 20px;
             border-radius: 3px;
         }
     }
 
-    td.acp-table-head {
+    td.adfy-compare-table-head {
 
         width: 200px;
 
         @include breakpoint(ipadpro) {
 
             width: 100px;
+        }
+    }
+
+    td.adfy-compare-td-field-image {
+
+        > a {
+
+            display: inline-flex;
+
+            > img {
+
+                border-radius: 5px;
+            }
         }
     }
 
@@ -155,7 +168,7 @@
                         text-decoration: none;
                         fill: white;
                         color: white;
-                        border-radius: 100%;
+                        border-radius: 4px;
                         @include transitionDelay();
 
                         svg {
@@ -167,5 +180,13 @@
                 }
             }
         }
-    } 
+
+        &:not(.has-header) {
+
+            .adfy-compare-table-head {
+
+                display: none;
+            }
+        }
+    }
 }

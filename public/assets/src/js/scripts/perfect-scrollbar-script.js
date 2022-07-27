@@ -5,7 +5,8 @@ function AddonifyPerfectScrollBar(arg) {
     new PerfectScrollbar(arg, {
         wheelSpeed: 1,
         wheelPropagation: true,
-        minScrollbarLength: 20
+        minScrollbarLength: 20,
+        useBothWheelAxes: true,
     });
 }
 

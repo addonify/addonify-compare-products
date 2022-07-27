@@ -21,9 +21,11 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<div id="addonify-compare-products-table-wrapper" >
+<div id="addonify-compare-products-table-wrapper">
 
-	<p id="addonify-compare-products-notice" class="<?php echo esc_attr( implode( ' ', $message_css_classes ) ); ?>"><?php echo esc_html( $no_table_rows_message ); ?></p><!-- #addonify-compare-products-notice -->
+	<p id="addonify-compare-products-notice" class="<?php echo esc_attr( implode( ' ', $message_css_classes ) ); ?>">
+		<?php echo esc_html( $no_table_rows_message ); ?>
+	</p><!-- #addonify-compare-products-notice -->
 
 	<?php 
 	if ( $table_rows ) { 
@@ -35,7 +37,7 @@ defined( 'ABSPATH' ) || exit;
 					if ( $tablet_col != 'product_id' ) {
 						echo '<tr>';
 						foreach ( $col_content as $key => $value ) {
-							echo '<td class="acp-table-col-' . $key . ' acp-table-field-' . $tablet_col . '" data-product_id="' . esc_attr( $table_rows['product_id'][$key] ) . '">' . ( $value ) . '</td>';
+							echo '<td class="' . ( ( $key === 0 ) ? 'adfy-compare-table-head' : 'adfy-compare-table-row-' . $key . ' adfy-compare-td-field-' . $tablet_col ) . '" data-product_id="' . esc_attr( $table_rows['product_id'][$key] ) . '">' . ( $value ) . '</td>';
 						}
 					}
 					echo '</tr>';
