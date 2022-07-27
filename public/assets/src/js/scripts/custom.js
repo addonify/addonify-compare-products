@@ -29,7 +29,7 @@
 
 			var productId = thisButton.data('product_id');
 
-			console.log(productId);
+			//console.log(productId);
 
 			$.ajax({
 				url: addonifyCompareProductsJSObject.ajaxURL,
@@ -41,7 +41,7 @@
 				},
 				success: function (response) {
 
-					console.log(response);
+					//console.log(response);
 
 					if (response.success) {
 
@@ -65,8 +65,6 @@
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();
-					} else {
-						console.log(response.message);
 					}
 				}
 			});
@@ -94,7 +92,7 @@
 					nonce: addonifyCompareProductsJSObject.nonce
 				},
 				success: function (response) {
-					console.log(response);
+					//console.log(response);
 					if (response.success) {
 						compareItemsCount = response.items_count;
 						if (thisButton.hasClass('addonify-compare-table-remove-btn')) {
@@ -124,8 +122,6 @@
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();
-					} else {
-						console.log(response.message);
 					}
 				}
 			});
@@ -215,7 +211,7 @@
 
 		function addonifyCompareProductsInit() {
 
-			console.log(addonifyCompareProductsJSObject);
+			//console.log(addonifyCompareProductsJSObject);
 
 			addonifyCompareProductsDockMessage();
 

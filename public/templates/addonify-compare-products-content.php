@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
 					if ( $tablet_col != 'product_id' ) {
 						echo '<tr>';
 						foreach ( $col_content as $key => $value ) {
-							echo '<td class="' . ( ( $key === 0 ) ? 'acp-table-head' : 'acp-table-row-' . $key . ' acp-table-field-' . $tablet_col ) . '" data-product_id="' . esc_attr( $table_rows['product_id'][$key] ) . '">' . wp_kses_post( $value ) . '</td>';
+							echo '<td class="' . ( ( $key === 0 ) ? 'acp-table-head' : 'acp-table-row-' . $key . ' acp-table-field-' . $tablet_col ) . '" data-product_id="' . esc_attr( $table_rows['product_id'][$key] ) . '">' . ( $value ) . '</td>';
 						}
 					}
 					echo '</tr>';
