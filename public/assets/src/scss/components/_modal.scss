@@ -319,21 +319,26 @@
             align-items: center;
             position: absolute;
             left: auto;
-            right: 30px;
-            top: 10px;
-            height: 30px;
-            width: 30px;
-            padding: 0;
+            right: 0;
+            top: 0;
+            height: auto;
+            width: auto;
+            padding: 10px 20px;
             margin: 0;
             border: none;
-            border-radius: 100%;
             box-shadow: none;
+            font-size: 14px;
+            font-weight: normal;
             z-index: 10;
-            color: rgba(255, 255, 255, 0.6);
-            fill: rgba(255, 255, 255, 0.6);
-            border: 2px solid rgba(255, 255, 255, 0.6);
+            line-height: 1;
+            color: #8B8B8B;
+            fill: #8B8B8B;
+            border: none;
+            border-radius: 0;
+            border-top-right-radius: 5px;
+            border-bottom-left-radius: 4px;
             background: transparent;
-            background-color: transparent;
+            background-color: #DFDFDF;
 
             svg {
 
@@ -343,11 +348,11 @@
 
             &:hover {
 
-                color: rgba(255, 255, 255, 1);
-                fill: rgba(255, 255, 255, 1);
-                border-color: rgba(255, 255, 255, 1);
+                fill: #727272;
+                color: #727272;
+                border: none;
                 background: transparent;
-                background-color: transparent;
+                background-color: #C1C1C1;
             }
         }
 
@@ -359,13 +364,19 @@
             right: auto;
             left: 50%;
             top: 50%;
-            width: 90vw;
+            width: 95vw;
+            max-width: 1800px;
             height: 90vh;
             overflow: auto;
             transform: translate(-50%, -50%);
             border-radius: 5px;
             background-color: white;
             z-index: calc( var(--adfy_compare_products_comparison_table_zindex) + 10 );
+
+            @include breakpoint(mobile) {
+
+                height: 95vh;
+            }
 
             #addonify-compare-products-table-wrapper {
 
