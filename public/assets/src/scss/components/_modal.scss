@@ -294,23 +294,20 @@
 #addonify-compare-modal {
 
     position: fixed;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    margin: 20px;
-    width: auto;
-    height: auto;
+    top: 50%;
+    right: auto;
+    left: 50%;
+    width: 90vw;
+    height: 90vh;
     z-index: var(--adfy_compare_products_comparison_table_zindex);
     overflow: hidden;
+    transform: translate(-50%, -50%);
     border-radius: 5px;
-    border-top-right-radius: 0;
     @include boxShadow();
 
     .addonify-compare-model-inner  {
 
         position: relative;
-        max-width: 100%;
         overflow: hidden;
 
         #addonify-compare-close-button {
