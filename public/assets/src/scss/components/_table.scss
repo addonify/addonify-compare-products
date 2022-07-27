@@ -122,6 +122,11 @@
             }
         }
     }
+
+    &.addonify-compare-hidden {
+
+        display: none; // Hide table if only 1 product exists in the compare list.
+    }
 }
 
 /* -------------------------------------------------------------------------- 
