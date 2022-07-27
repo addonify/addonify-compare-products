@@ -291,6 +291,50 @@
 	Compare modal box [Compare table]
   -------------------------------------------------------------------------- */
 
+#addonify-compare-close-button {
+
+    display: none; // Hide the button on comparison page.
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: auto;
+    right: 0;
+    top: 0;
+    height: auto;
+    width: auto;
+    padding: 10px 20px;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    font-size: 14px;
+    font-weight: normal;
+    z-index: 10;
+    line-height: 1;
+    color: #8B8B8B;
+    fill: #8B8B8B;
+    border: none;
+    border-radius: 0;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 4px;
+    background: transparent;
+    background-color: #DFDFDF;
+
+    svg {
+
+        width: 14px;
+        height: 14px;
+    }
+
+    &:hover {
+
+        fill: #727272;
+        color: #727272;
+        border: none;
+        background: transparent;
+        background-color: #C1C1C1;
+    }
+}
+
 #addonify-compare-modal {
 
     position: fixed;
@@ -311,50 +355,6 @@
         overflow: hidden;
         height: 100%;
         width: 100%;
-
-        #addonify-compare-close-button {
-
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            left: auto;
-            right: 0;
-            top: 0;
-            height: auto;
-            width: auto;
-            padding: 10px 20px;
-            margin: 0;
-            border: none;
-            box-shadow: none;
-            font-size: 14px;
-            font-weight: normal;
-            z-index: 10;
-            line-height: 1;
-            color: #8B8B8B;
-            fill: #8B8B8B;
-            border: none;
-            border-radius: 0;
-            border-top-right-radius: 5px;
-            border-bottom-left-radius: 4px;
-            background: transparent;
-            background-color: #DFDFDF;
-
-            svg {
-
-                width: 14px;
-                height: 14px;
-            }
-
-            &:hover {
-
-                fill: #727272;
-                color: #727272;
-                border: none;
-                background: transparent;
-                background-color: #C1C1C1;
-            }
-        }
 
         #addonify-compare-modal-content {
 
@@ -383,6 +383,11 @@
                 position: relative;
                 height: 100%;
                 width: 100%;
+
+                #addonify-compare-close-button {
+
+                    display: inline-flex; // Display the button on comparison table modal.
+                }
             }
         }
     }
