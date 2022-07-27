@@ -24,7 +24,15 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_settings_fie
                 ),
                 'dependent' => array('enable_product_comparison'),
                 'value' => addonify_compare_products_get_option( 'fields_to_compare' )
-            )
+            ),
+            'display_comparison_table_fields_header' => array(
+                'type'                      => 'switch',
+                'className'                 => '',
+                'label'                     => __( 'Show Table Fields Header', 'addonify-compare-products' ),
+                'description'               => '',
+                'dependent'                 => array('enable_product_comparison'),
+                'value'                     => addonify_compare_products_get_option( 'display_comparison_table_fields_header' )
+            ),
         );
     }
 }

@@ -44,6 +44,18 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_settings_field
                 'dependent'                 => array('enable_product_comparison', 'compare_products_btn_show_icon'),
                 'value'                     => addonify_compare_products_get_option( 'compare_products_btn_icon' )
             ),
+            'compare_products_btn_icon_position' => array(
+                'type'                      => 'select',
+                'className'                 => '',
+                'label'                     => __( 'Icon Position', 'addonify-compare-products' ),
+                'description'               => __( 'Choose position for icon in the compare button.', 'addonify-compare-products' ),
+                'choices' => array(
+                    'left'     => __( 'Before Button Label', 'addonify-compare-products' ),
+                    'right'    => __( 'After Button Label', 'addonify-compare-products' ),
+                ),
+                'dependent'                 => array('enable_product_comparison'),
+                'value'                     => addonify_compare_products_get_option( 'compare_products_btn_icon_position' )
+            ),
         );
     }
 }
