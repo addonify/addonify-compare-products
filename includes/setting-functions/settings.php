@@ -34,9 +34,11 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
                 'compare_products_btn_show_icon' => true,
                 'compare_products_btn_icon' => 'icon_one',
                 'compare_products_btn_label' => __( 'Compare', 'addonify-compare-products' ),
+                'compare_products_btn_icon_position' => 'left',
                 'compare_products_display_type' => 'popup',
                 'compare_page' => '',
                 'compare_products_cookie_expires' => 30,
+                'display_comparison_table_fields_header' => true,
                 'fields_to_compare' => json_encode( array( 'image', 'title', 'price', 'add_to_cart_button', 'rating', 'description' ) ),
                 'load_styles_from_plugin' => false,
 
