@@ -74,6 +74,59 @@ class Addonify_Compare_Products_Public {
 		$this->compare_cookie_items_count = $this->get_compare_cookie_items_count();
 	}
 
+	/**
+	 * Initialize public hooks.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function public_init() {
+
+		if ( 
+			! class_exists( 'WooCommerce' ) ||
+			(int) addonify_compare_products_get_option( 'enable_product_comparison' ) != 1
+		) {
+			return;
+		}
+
+		// Initialize the compare cookie.
+		add_action( 'init', array( $this, 'init_callback' ) );
+
+		// Register scripts and styles for the frontend.
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		// Add the compare button to the product catalog.
+		switch ( addonify_compare_products_get_option( 'compare_products_btn_position' ) ) {
+			case 'before_add_to_cart' :
+				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'render_compare_button' ), 5 );
+				break;
+			default :
+				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'render_compare_button' ), 15 );
+		}
+
+		// Add custom markup into footer to display comparison modal.
+		add_action( 'wp_footer', array( $this, 'add_markup_into_footer_callback' ) );
+
+		// Ajax callback handler to add product into the comapre list.
+		add_action( 'wp_ajax_addonify_compare_products_add_product', array( $this, 'add_product_into_compare_cookie' ) );
+		add_action( 'wp_ajax_nopriv_addonify_compare_products_add_product', array( $this, 'add_product_into_compare_cookie' ) );
+
+		// Ajax callback handler to remove product from the comapre list.
+		add_action( 'wp_ajax_addonify_compare_products_remove_product', array( $this, 'remove_product_from_compare_cookie' ) );
+		add_action( 'wp_ajax_nopriv_addonify_compare_products_remove_product', array( $this, 'remove_product_from_compare_cookie' ) );
+
+		// Ajax callback handler to search products.
+		add_action( 'wp_ajax_addonify_compare_products_search_products', array( $this, 'ajax_products_search_callback' ) );
+		add_action( 'wp_ajax_nopriv_addonify_compare_products_search_products', array( $this, 'ajax_products_search_callback' ) );
+
+		// Ajax callback handler to render comparison table in the compare modal.
+		add_action( 'wp_ajax_addonify_compare_products_compare_content', array( $this, 'render_comparison_content' ) );
+		add_action( 'wp_ajax_nopriv_addonify_compare_products_compare_content', array( $this, 'render_comparison_content' ) );
+
+		// Register shortocode to display comparison table in the comparison page.
+		add_shortcode( 'addonify_compare_products', array( $this, 'render_comparison_content' ) );
+	}
+
 
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
@@ -140,7 +193,7 @@ class Addonify_Compare_Products_Public {
 
 
 	/**
-	 * Tasks that needs to be done during "init" hook.
+	 * Set cookie if cookie is not set.
 	 *
 	 * @since    1.0.0
 	 */
@@ -547,6 +600,6 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function register_shortcode() {
 
-		add_shortcode( 'addonify_compare_products', array( $this, 'render_comparison_content' ) );
+		
 	}
 }

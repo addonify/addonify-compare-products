@@ -99,11 +99,6 @@ class Addonify_Compare_Products {
 	private function load_dependencies() {
 
 		/**
-		 * Helper functions
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-helpers.php';
-
-		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
@@ -171,20 +166,7 @@ class Addonify_Compare_Products {
 
 		$plugin_admin = new Addonify_Compare_Products_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		if ( ! addonify_compare_products_is_woocommerce_active() ) {
-
-			$this->loader->add_action( 'admin_notices', $plugin_admin, 'woocommerce_not_active_notice' ); 
-		}
-
-		// admin menu.
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu_callback', 20 );
-
-		// custom link in plugins.php page in wp-admin.
-		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'custom_plugin_link_callback', 10, 2 );
-
+		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'admin_init');
 	}
 
 	/**
@@ -196,51 +178,9 @@ class Addonify_Compare_Products {
 	 */
 	private function define_public_hooks() {
 
-		if ( 
-			! addonify_compare_products_is_woocommerce_active() ||
-			(int) addonify_compare_products_get_option( 'enable_product_comparison' ) != 1
-		) {
-			return;
-		}
-
 		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );		
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
-		switch ( addonify_compare_products_get_option( 'compare_products_btn_position' ) ) {
-			case 'before_add_to_cart' :
-				$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'render_compare_button', 5 );
-				break;
-			default :
-				$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'render_compare_button', 15 );
-		}
-
-		// add custom markup into footer.
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'add_markup_into_footer_callback' );
-
-		// ajax callback.
-
-		$this->loader->add_action( 'wp_ajax_addonify_compare_products_add_product', $plugin_public, 'add_product_into_compare_cookie' );
-		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_add_product', $plugin_public, 'add_product_into_compare_cookie' );
-
-
-		$this->loader->add_action( 'wp_ajax_addonify_compare_products_remove_product', $plugin_public, 'remove_product_from_compare_cookie' );
-		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_remove_product', $plugin_public, 'remove_product_from_compare_cookie' );
-
-		// search items.
-		$this->loader->add_action( 'wp_ajax_addonify_compare_products_search_products', $plugin_public, 'ajax_products_search_callback' );
-		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_search_products', $plugin_public, 'ajax_products_search_callback' );
-
-		// get compare contents.
-		$this->loader->add_action( 'wp_ajax_addonify_compare_products_compare_content', $plugin_public, 'render_comparison_content' );
-		$this->loader->add_action( 'wp_ajax_nopriv_addonify_compare_products_compare_content', $plugin_public, 'render_comparison_content' );
-
-		// init functions.
-		$this->loader->add_action( 'init', $plugin_public, 'init_callback' );
-
-		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'register_shortcode' );
-
+		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'public_init');
 	}
 
 

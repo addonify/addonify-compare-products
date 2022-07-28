@@ -1,20 +1,5 @@
 <?php 
 /**
- * Checks if WooCommerce is active.
- * 
- * @since 1.0.0
- * @return boolean true if WooCommerce is active, false otherwise.
- */
-if ( ! function_exists( 'addonify_compare_products_is_woocommerce_active' ) ) {
-
-    function addonify_compare_products_is_woocommerce_active() {
-
-        return in_array( 'woocommerce/woocommerce.php', get_option('active_plugins') ) ? true : false;
-    }
-}
-
-
-/**
  * Sanitizes SVG when rendering in the frontend.
  * 
  * @since 1.0.0
