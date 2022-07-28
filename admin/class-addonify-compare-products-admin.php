@@ -18,7 +18,7 @@
  * @subpackage Addonify_Compare_Products/admin
  * @author     Addodnify <info@addonify.com>
  */
-class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers {
+class Addonify_Compare_Products_Admin {
 
 	/**
 	 * Settings page slug
@@ -63,7 +63,29 @@ class Addonify_Compare_Products_Admin extends Addonify_Compare_Products_Helpers 
 		$this->version = $version;
 	}
 
+	/**
+	 * Initialize admin hooks.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function admin_init() {
 
+		// Enqueue admin scripts and styles.
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		// Display admin notice if WooCommerce is not active.
+		if ( ! class_exists( 'WooCommerce' ) ) {
+
+			add_action( 'admin_notices', array( $this, 'woocommerce_not_active_notice' ) ); 
+		}
+
+		// Register admin menu in the dashboard.
+		add_action( 'admin_menu', array( $this, 'add_menu_callback' ), 20 );
+
+		// Add a custom link in plugins.php page in wp-admin.
+		add_action( 'plugin_action_links', array( $this, 'custom_plugin_link_callback' ), 10, 2 );
+	}
 
 	/**
 	 * Register the stylesheets for the admin area.
