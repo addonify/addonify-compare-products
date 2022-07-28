@@ -7,9 +7,9 @@
  * @package           Addonify_Compare_Products
  *
  * @wordpress-plugin
- * Plugin Name:       Addonify Compare Products
- * Plugin URI:        https://addonify.com/addonify-compare-products
- * Description:       <strong>Addonify Compare Products</strong> is an extension of WooCommerce plugin that adds products comparison functionality on your online store.
+ * Plugin Name:       Addonify - Compare Products For WooCommerce
+ * Plugin URI:        https://wordpress.org/plugins/addonify-compare-products/
+ * Description:       Addonify Compare Products is a WooCommerce extension that allows website visitors to compare multiple products on your online store.
  * Version:           1.0.0
  * Author:            Addonify
  * Author URI:        http://www.themebeez.com

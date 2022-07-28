@@ -1,18 +1,66 @@
-=== Addonify Compare Products ===
+=== Addonify - Compare Products For WooCommerce ===
 
 Contributors: addonify
-Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify
+Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.0.0
-Tested up to: 6.0.0
+Tested up to: 6.0.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Addonify Compare Products is an extension of WooCommerce plugin that adds products comparison functionality on your online store and allows users make comparison of products.
+Addonify Compare Products is a WooCommerce extension that allows website visitors to compare multiple products on your online store.
 
 == Description ==
 
-Addonify Compare Products is an extension of WooCommerce plugin that allows users compare products on your online shop or store. Users can see differences between different products listed in comparison table. comparison table contains information such as price, rating, stock, attributes, etc. that are required for users to make comparison.
+Addonify Compare Products is a WooCommerce extension that allows website visitors to compare multiple products on your online store. It enables functionality to let visitors add products to a comparison table which consists of product information like name, image, price, rating, description, attributes etc. 
+
+👉 [Demo one](https://demo.addonify.com/woo/01/compare/) 
+👉 [Documentation guide](https://docs.addonify.com/kb/woocommerce-compare-products/) 
+
+Addonify Compare Products helps your online visitors to make better buying decisions that will result in a better online shopping experience.
+
+#### ⏳ FEATURES: 
+
+- Light-weight & optimized.
+- Enable or disable product comparison.
+- Display the comparison table either in a modal window or a page.
+- Save the compare cookie in the visitor's web browser for specified days.
+- Add to compare button position.
+- Custom add to compare button label.
+- Hide/show icon in add to compare button.
+- Add to compare button icon position.
+- Contents to display in the comparison table.
+- Color option for add to compare button.
+- Color option for comparison dock.
+- Color option for the product search modal.
+- Color option for comparison table.
+- Additional CSS.
+- Media responsive.
+- Shortcode support. 
+- Ajax functionality while removing adding & removing products from comparison. (No page reload required).
+
+
+#### 🔐 GDPR COMPLIANT:
+
+Addonify Compare does not collect any personal or sensitive data from website visitors.  Hence, this plugin is fully GDPR compliant.
+
+
+#### ⚔️ DEVELOPER:
+
+Addonify Compare is developer friendly. We know that we have wonderful developers all around us and wish to customize our plugin’s functionality when using it in their projects. Keeping that in mind, we have built Addonify Compare to be developer friendly and customizable. If you are a developer willing to integrate Addonify Compare into your project do check out our [*developer documentation guide here.*](https://docs.addonify.com/kb/woocommerce-compare-products/developer/).
+
+
+#### 🐛 DISCUSSION & REPORTING A BUG:
+
+We are open to any kind of discussions on that can help improve our plugin. So, we would like to welcome you to be part of the discussions. Feel free to share your ideas, ask questions related to plugin, report bugs, ask for features, and participate in poll.
+
+👉 [Create a new discussion](https://github.com/addonify/addonify-compare-products/discussions)
+👉 [Report a bug](https://github.com/addonify/addonify-addonify-compare-products/issues)
+
+
+####  🎭 TRANSLATION GUIDELINES:
+
+If you wish Addonify Wishist to be translated in your language, feel free to contribute translating at [*transalte.wordpress.org*](https://translate.wordpress.org/projects/wp-plugins/addonify-compare-products) directly.
 
 == Installation ==
 
@@ -24,20 +72,21 @@ Addonify Compare Products is an extension of WooCommerce plugin that allows user
 
 == FAQs ==
 
-= Is it compatible with all WordPress themes? =
+= Does this plugin works in all themes? = 
 
-Since some WordPress themes might modify default features of WordPress or WooCommerce plugin, it might not be compatible with such modified themes.
+Yes, Addonify Product Compare should work with all themes if the theme authors haven't overridden the default WooCommerce template files. If you notice any issue with your theme, please let us know or ask your theme author to check the compatibility with our plugin.
+
+= Can I select what fields show inside the compare table? = 
+
+Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to display in the compare table.
 
 = I'm a developer, is it possible to customize frontend output? =
 
 Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://addonify.com/addonify-compare-products)
 
 
-== Screenshots ==
-
-
 == Changelog ==
 
-== 1.0.0 - ? July 2022 ==
+== 1.0.0 - 28 July 2022 ==
 
 - New: Initial release
