@@ -77,7 +77,7 @@ class Addonify_Compare_Products {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->rest_api();
 	}
 
 	/**
@@ -99,11 +99,6 @@ class Addonify_Compare_Products {
 	private function load_dependencies() {
 
 		/**
-		 * Helper functions
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-helpers.php';
-
-		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
@@ -115,16 +110,29 @@ class Addonify_Compare_Products {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-i18n.php';
 
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-helpers-functions.php';
+
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-addonify-compare-products-admin.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-template-functions.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-template-hooks.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-addonify-compare-products-public.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/setting-functions/settings.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/setting-functions/helpers.php';
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-rest-api.php';
 
 		$this->loader = new Addonify_Compare_Products_Loader();
 
@@ -158,27 +166,7 @@ class Addonify_Compare_Products {
 
 		$plugin_admin = new Addonify_Compare_Products_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		// admin menu.
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu_callback', 20 );
-
-		// custom link in plugins.php page in wp-admin.
-		$this->loader->add_action( 'plugin_action_links', $plugin_admin, 'custom_plugin_link_callback', 10, 2 );
-
-		// show settings page ui .
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'settings_page_ui' );
-
-		// show notice if woocommerce is not active.
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'addonify_cp_show_woocommerce_not_active_notice' );
-
-		// show admin notices after form submission.
-		$this->loader->add_action( 'admin_notices', $plugin_admin, 'addonify_cp_form_submission_notification' );
-
-		// add custom post status "Addonify Compare Products Page" after page name.
-		$this->loader->add_filter( 'display_post_states', $plugin_admin, 'display_custom_post_states_after_page_title', 10, 2 );
-
+		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'admin_init');
 	}
 
 	/**
@@ -190,48 +178,21 @@ class Addonify_Compare_Products {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );		
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'public_init');
+	}
 
-		// add "Compare" button after add to cart button.
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_after_add_to_cart_btn_callback', 20 );
 
-		// add "Compare" button before add to cart button.
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'show_compare_products_btn_before_add_to_cart_btn_callback' );
+	/**
+	 * Register rest api endpoints for admin settings page.
+	 *
+	 * @since    1.0.7
+	 * @access   private
+	 */
+	private function rest_api() {
 
-		// add "Compare Button" button aside image.
-		$this->loader->add_action( 'woocommerce_shop_loop_item_title', $plugin_public, 'show_compare_products_btn_aside_image_callback' );
-
-		// image overlay container.
-		$this->loader->add_action( 'woocommerce_before_shop_loop_item', $plugin_public, 'addonify_overlay_container_start_callback', 10 );
-		$this->loader->add_action( 'woocommerce_after_shop_loop_item', $plugin_public, 'addonify_overlay_container_end_callback', 10 );
-
-		// add custom markup into footer.
-		$this->loader->add_action( 'wp_footer', $plugin_public, 'add_markup_into_footer_callback' );
-
-		// add custom styles into header.
-		$this->loader->add_action( 'wp_head', $plugin_public, 'generate_custom_styles_callback' );
-
-		// ajax callback.
-
-		// get product thumbnails.
-		$this->loader->add_action( 'wp_ajax_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
-
-		$this->loader->add_action( 'wp_ajax_nopriv_get_products_thumbnails', $plugin_public, 'get_products_thumbnails_callback' );
-
-		// search items.
-		$this->loader->add_action( 'wp_ajax_search_items', $plugin_public, 'search_items_callback' );
-		$this->loader->add_action( 'wp_ajax_nopriv_search_items', $plugin_public, 'search_items_callback' );
-
-		// get compare contents.
-		$this->loader->add_action( 'wp_ajax_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
-		$this->loader->add_action( 'wp_ajax_nopriv_get_compare_contents', $plugin_public, 'get_compare_contents_callback' );
-
-		// init functions.
-		$this->loader->add_action( 'init', $plugin_public, 'init_callback' );
-
+		$plugin_rest = new Addonify_Compare_Products_Rest_API();
 	}
 
 	/**

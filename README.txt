@@ -1,41 +1,66 @@
-=== Plugin Name ===
+=== Addonify - Compare Products For WooCommerce ===
 
 Contributors: addonify
-Tags: addonify, woocommerce compare, products comparision, compare products, 
+Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.0.0
-Tested up to: 5.5.3
+Tested up to: 6.0.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Addonify Compare Products is an extension of WooCommerce plugin that adds products comparision functionality on your online store and allows users make comparision of products.
+Addonify Compare Products is a WooCommerce extension that allows website visitors to compare multiple products on your online store.
 
 == Description ==
 
-Addonify Compare Products is an extension of WooCommerce plugin that allows users compare products on your online shop or store. Users can see differences between different products listed in comparision table. Comparision table contains information such as price, rating, stock, attributes, etc. that are required for users to make comparision.
+Addonify Compare Products is a WooCommerce extension that allows website visitors to compare multiple products on your online store. It enables functionality to let visitors add products to a comparison table which consists of product information like name, image, price, rating, description, attributes etc. 
 
-= Features =
+👉 [Demo one](https://demo.addonify.com/woo/01/compare/) 
+👉 [Documentation guide](https://docs.addonify.com/kb/woocommerce-compare-products/) 
 
-* Selection of properties of product for comparision.
-* Display comparision table in a page or a pop-up modal.
-* Unlimited number of products can be compared.
-* Search and add a product in a comparision list for comparision.
-* Responsive and mobile friendly design.
-* Easy customization options.
+Addonify Compare Products helps your online visitors to make better buying decisions that will result in a better online shopping experience.
 
-= Plugin Links =
+#### ⏳ FEATURES: 
 
-* [Plugin Page](https://addonify.com/addonify-compare-products)
-* [Plugin Demo](https://addonify.com/addonify-compare-products)
-* [Plugin Documentation](https://addonify.com/addonify-compare-products)
+- Light-weight & optimized.
+- Enable or disable product comparison.
+- Display the comparison table either in a modal window or a page.
+- Save the compare cookie in the visitor's web browser for specified days.
+- Add to compare button position.
+- Custom add to compare button label.
+- Hide/show icon in add to compare button.
+- Add to compare button icon position.
+- Contents to display in the comparison table.
+- Color option for add to compare button.
+- Color option for comparison dock.
+- Color option for the product search modal.
+- Color option for comparison table.
+- Additional CSS.
+- Media responsive.
+- Shortcode support. 
+- Ajax functionality while removing adding & removing products from comparison. (No page reload required).
 
-= More WooCommerce Plugins =
 
-Looking for more WooCommerce plugins for your online store or shop? Here are some of them:
-* [Addonify WooCommerce Quick View](https://wordpress.org/plugins/addonify-quick-view/)
-* [Addonify WooCommerce Wishlist](https://wordpress.org/plugins/addonify-wishlist/)
-* [Addonify WooCommerce Variation Swatches](https://wordpress.org/plugins/addonify-variation-swatches/)
+#### 🔐 GDPR COMPLIANT:
 
+Addonify Compare does not collect any personal or sensitive data from website visitors.  Hence, this plugin is fully GDPR compliant.
+
+
+#### ⚔️ DEVELOPER:
+
+Addonify Compare is developer friendly. We know that we have wonderful developers all around us and wish to customize our plugin’s functionality when using it in their projects. Keeping that in mind, we have built Addonify Compare to be developer friendly and customizable. If you are a developer willing to integrate Addonify Compare into your project do check out our [*developer documentation guide here.*](https://docs.addonify.com/kb/woocommerce-compare-products/developer/).
+
+
+#### 🐛 DISCUSSION & REPORTING A BUG:
+
+We are open to any kind of discussions on that can help improve our plugin. So, we would like to welcome you to be part of the discussions. Feel free to share your ideas, ask questions related to plugin, report bugs, ask for features, and participate in poll.
+
+👉 [Create a new discussion](https://github.com/addonify/addonify-compare-products/discussions)
+👉 [Report a bug](https://github.com/addonify/addonify-addonify-compare-products/issues)
+
+
+####  🎭 TRANSLATION GUIDELINES:
+
+If you wish Addonify Wishist to be translated in your language, feel free to contribute translating at [*transalte.wordpress.org*](https://translate.wordpress.org/projects/wp-plugins/addonify-compare-products) directly.
 
 == Installation ==
 
@@ -44,30 +69,24 @@ Looking for more WooCommerce plugins for your online store or shop? Here are som
 3. On search bar, search for "Addonify Compare Products".
 4. Install and activate it.
 
-On your WordPress dashboard, you'll see "Addonify". Hover on it and click on "Compare". It takes you to setting page. Configure options and start using the plugin.
-
 
 == FAQs ==
 
-= Is it compatible with all WordPress themes? =
+= Does this plugin works in all themes? = 
 
-Since some WordPress themes might modify default features of WordPress or WooCommerce plugin, it might not be compatible with such modified themes.
+Yes, Addonify Product Compare should work with all themes if the theme authors haven't overridden the default WooCommerce template files. If you notice any issue with your theme, please let us know or ask your theme author to check the compatibility with our plugin.
+
+= Can I select what fields show inside the compare table? = 
+
+Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to display in the compare table.
 
 = I'm a developer, is it possible to customize frontend output? =
 
 Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://addonify.com/addonify-compare-products)
 
 
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
-
-
 == Changelog ==
 
-= 1.0.0 =
-* Initial release.
+== 1.0.0 - 28 July 2022 ==
+
+- New: Initial release

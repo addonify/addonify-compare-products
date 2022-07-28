@@ -19,10 +19,15 @@
 
 // direct access is disabled.
 defined( 'ABSPATH' ) || exit;
-
-printf(
-	'<button type="button" class="addonify-cp-button button %s" data-product_id="%s" >%s</button>',
-	esc_attr( $css_class ),
-	esc_attr( $product_id ),
-	esc_html( $label )
-);
+?>
+<button type="button" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-product_id="<?php echo esc_attr( $product_id ); ?>">
+	<?php
+	if ( ! empty( $button_icon ) ) {
+		?>
+		<span class="addonify-cp-icon"><?php echo addonify_compare_products_escape_svg( $button_icon ); ?></span>
+		<?php
+	}
+	?>
+	<?php echo esc_html( $label ); ?>
+</button>
+<?php

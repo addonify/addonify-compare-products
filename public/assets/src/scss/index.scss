@@ -1,0 +1,25 @@
+/*
+===========================================================
+
+# Pugin: Addonify Compare Products
+
+# Author: https://addonify.com/
+
+# Since: 12 Sept, 2020
+
+# Last updated: 
+
+# Current version: 1.0.0
+
+=====================================
+*/
+
+@use 'abstracts/variables' as *;
+@use 'abstracts/mixins' as *;
+
+@import 'helpers/class';
+@import 'components/buttons';
+@import 'components/dock';		
+@import 'components/modal';	
+@import 'components/table';	
+@import 'helpers/keyframes';	

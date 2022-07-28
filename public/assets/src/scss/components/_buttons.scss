@@ -1,0 +1,126 @@
+/* -------------------------------------------------------------------------- 
+	General button style.
+  -------------------------------------------------------------------------- */
+
+.addonify-overlay-buttons {
+
+    position: relative;
+}
+
+.addonify-overlay-buttons .addonify-overlay-btn-wrapper {
+
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #444444;
+    @include transitionDelay();
+    @include betterFontRendering();
+}
+
+.addonify-cp-fake-button,
+a.addonify-cp-fake-button,
+button.addonify-cp-fake-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-size: inherit;
+    font-weight: normal;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    box-shadow: none;
+    appearance: none;
+    text-decoration: none;
+    background: transparent;
+    background-color: transparent;
+    @include transitionDelay();
+    @include betterFontRendering();
+
+    &:focus {
+
+        text-decoration: none;
+        box-shadow: none;
+    }
+
+    &:hover {
+
+        text-decoration: none;
+        box-shadow: none;
+    }
+}
+
+/* -------------------------------------------------------------------------- 
+	Compare button.
+  -------------------------------------------------------------------------- */
+
+.addonify-cp-button,
+.woocommerce ul.products li.product .button.addonify-cp-button,
+.woocommerce-page ul.products li.product .button.addonify-cp-button {
+
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    fill: var(--adfy_compare_products_button_color);
+    color: var(--adfy_compare_products_button_color);
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+    text-decoration: none;
+    background: transparent;
+    background-color: var(--adfy_compare_products_button_bg_color);
+    @include transitionDelay();
+
+    .addonify-cp-icon {
+
+        display: inline-flex;
+        line-height: 1;
+
+        svg {
+
+            display: inline-flex;
+            line-height: 1;
+            height: 16px;
+            width: 16px;
+        }
+    }
+
+    &.icon-position-right {
+
+        .addonify-cp-icon {
+
+            order: 2;
+        }
+    }
+
+    &:hover {
+
+        text-decoration: none;
+        box-shadow: none;
+        fill: var(--adfy_compare_products_button_color_hover);
+        color: var(--adfy_compare_products_button_color_hover);
+        background: transparent;
+        background-color: var(--adfy_compare_products_button_bg_color_hover);
+    }
+
+    &:focus {
+
+        box-shadow: none;
+    }
+}
+
+.addonify-cp-button.selected {
+
+    opacity: 0.8;
+    cursor: not-allowed;
+}
