@@ -2,7 +2,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       http://www.themebeez.com
+ * @link       https://addonify.com/
  * @since      1.0.0
  *
  * @package    Addonify_Compare_Products

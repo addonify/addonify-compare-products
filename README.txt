@@ -4,7 +4,7 @@ Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.0.0
 Tested up to: 6.0.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,15 +62,8 @@ We are open to any kind of discussions on that can help improve our plugin. So, 
 
 If you wish Addonify Wishist to be translated in your language, feel free to contribute translating at [*transalte.wordpress.org*](https://translate.wordpress.org/projects/wp-plugins/addonify-compare-products) directly.
 
-== Installation ==
 
-1. Log into your WordPress dashboard and click on "Plugins".
-2. Click on "Add New" button.
-3. On search bar, search for "Addonify Compare Products".
-4. Install and activate it.
-
-
-== FAQs ==
+== Frequently Asked Questions ==
 
 = Does this plugin works in all themes? = 
 
@@ -85,7 +78,29 @@ Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to
 Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://addonify.com/addonify-compare-products)
 
 
+== Installation ==
+
+1. Log into your WordPress dashboard and click on "Plugins".
+2. Click on "Add New" button.
+3. On search bar, search for "Addonify Compare Products".
+4. Install and activate it.
+
+
+== Screenshots ==
+
+1. Compare button in front-end.
+2. Comparison table modal box.
+3. Compare setting page in dashboard - 1.
+4. Compare setting page in dashboard - 2.
+5. Compare setting page in dashboard - 3.
+
+
 == Changelog ==
+
+== 1.0.2 - 29 July 2022 ==
+
+- Updated: Readme.txt file.
+- Fixed: Author URL.
 
 == 1.0.1 - 29 July 2022 ==
 
