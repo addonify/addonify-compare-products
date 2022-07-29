@@ -29,7 +29,7 @@ mix.disableNotifications();
 */
 
 //mix.browserSync({
-//    proxy: 'http://xenial.local/wp-admin/admin.php?page=addonify_quick_view#/',
+//    proxy: 'http://xenial.local/wp-admin/admin.php?page=addonify_compare_products#/',
 //});
 
 /**

@@ -56,7 +56,7 @@
 			<div class="adfy-col end">
 				<div class="buttons">
 					<a
-						href="https://docs.addonify.com/kb/woocommerce-quick-view/"
+						href="https://docs.addonify.com/kb/woocommerce-compare-products/"
 						class="adfy-button fake-button has-underline"
 						target="_blank"
 					>
