@@ -8,7 +8,7 @@
 		<div class="adfy-row">
 			<div class="adfy-col left">
 				<p class="text">
-					© 2020 - {{ thisYear }} Addonify Quick View
+					© 2020 - {{ thisYear }} Addonify Products Compare
 					<span class="version"
 						>{{ __("Version", "addonify-compare-products") }}:
 						{{ versionNumber }}</span
