@@ -21,7 +21,7 @@
 		addonifyCompareProductsInit();
 
 
-		body.on('click', 'button.addonify-cp-button, #addonify-compare-search-results .item-add', function (event) {
+		body.on('click', '.addonify-cp-button, #addonify-compare-search-results .item-add', function (event) {
 
 			event.preventDefault();
 
