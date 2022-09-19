@@ -26,9 +26,10 @@
 		:placeholder="
 			props.placeholder
 				? props.placeholder
-				: __('Select', 'addonify-wishlist')
+				: __('Select', 'addonify-compare-products')
 		"
 		size="large"
+		filterable
 	>
 		<el-option
 			v-for="(label, key) in props.choices"
