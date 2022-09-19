@@ -23,7 +23,7 @@
 		:placeholder="
 			props.placeholder
 				? props.placeholder
-				: __('Enter text here...', 'addonify-wishlist')
+				: __('Enter text here...', 'addonify-compare-products')
 		"
 		size="large"
 	/>
