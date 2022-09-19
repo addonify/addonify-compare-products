@@ -7,6 +7,7 @@
 		section: Object,
 		sectionKey: String,
 		reactiveState: Object,
+		currentPage: String,
 	});
 	const store = useOptionsStore();
 </script>
@@ -29,9 +30,13 @@
 			v-else
 			:section="section"
 			:reactiveState="props.reactiveState"
-			currentPage="design"
+			:currentPage="props.currentPage"
 		>
-			<SectionTitle :section="section" :sectionKey="sectionKey" />
+			<SectionTitle
+				:section="section"
+				:sectionKey="sectionKey"
+				:currentPage="props.currentPage"
+			/>
 		</OptionBox>
 	</div>
 </template>

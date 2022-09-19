@@ -1,0 +1,404 @@
+# Copyright (C) 2022 Addonify
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: Addonify - Compare Products For WooCommerce 1.0.5\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/addonify-compare-products\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-09-19T14:22:58+05:45\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: addonify-compare-products\n"
+
+#. Plugin Name of the plugin
+msgid "Addonify - Compare Products For WooCommerce"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wordpress.org/plugins/addonify-compare-products/"
+msgstr ""
+
+#. Description of the plugin
+msgid "Addonify Compare Products is a WooCommerce extension that allows website visitors to compare multiple products on your online store."
+msgstr ""
+
+#. Author of the plugin
+msgid "Addonify"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://addonify.com/"
+msgstr ""
+
+#: admin/class-addonify-compare-products-admin.php:221
+#: includes/setting-functions/settings.php:242
+msgid "Settings"
+msgstr ""
+
+#: admin/templates/woocommerce-not-active-notice.php:25
+msgid "Addonify Compare Products is enabled but not effective. This plugin requires WooCommerce plugin in order to work."
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:195
+msgid "More than one item is needed for comparison."
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:233
+#: includes/setting-functions/fields/comparison-table.php:17
+msgid "Title"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:239
+#: includes/setting-functions/fields/comparison-table.php:16
+msgid "Image"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:245
+#: includes/setting-functions/fields/comparison-table.php:18
+msgid "Price"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:251
+#: includes/setting-functions/fields/comparison-table.php:20
+msgid "Description"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:257
+#: includes/setting-functions/fields/comparison-table.php:19
+msgid "Rating"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:263
+msgid "In Stock"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:269
+msgid "Action"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:313
+msgid "Yes"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:313
+msgid "No"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:346
+msgid "Select more than one item for comparison."
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:414
+#: includes/setting-functions/settings.php:36
+msgid "Compare"
+msgstr ""
+
+#: includes/class-addonify-compare-products-activator.php:34
+msgid "Compare Products"
+msgstr ""
+
+#: includes/class-addonify-compare-products-rest-api.php:90
+msgid "Ooops, error saving settings!!!"
+msgstr ""
+
+#: includes/class-addonify-compare-products-rest-api.php:97
+msgid "No settings values to update!!!"
+msgstr ""
+
+#: includes/class-addonify-compare-products-rest-api.php:104
+msgid "Settings saved successfully"
+msgstr ""
+
+#: includes/class-addonify-compare-products-rest-api.php:121
+msgid "Ooops, you are not allowed to manage options."
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:11
+msgid "Button Position"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:12
+msgid "Choose where to place the compare button."
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:14
+msgid "After Add to Cart Button"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:15
+msgid "Before Add to Cart Button"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:23
+msgid "Button Label"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:24
+msgid "Label for compare button."
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:31
+msgid "Show Icon"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:32
+msgid "Show icon on compare button."
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:50
+msgid "Icon Position"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:51
+msgid "Choose position for icon in the compare button."
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:53
+msgid "Before Button Label"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:54
+msgid "After Button Label"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:82
+msgid "Label Color"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:89
+msgid "Label Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:96
+#: includes/setting-functions/fields/floating-compare-bar.php:10
+#: includes/setting-functions/fields/search-modal.php:38
+msgid "Background Color"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:103
+msgid "Background Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:9
+msgid "Content to Display"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:10
+msgid "Choose content that you want to display in comparison table."
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:21
+msgid "Stock Info"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:22
+msgid "Add to Cart Button"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:31
+msgid "Show Table Fields Header"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:59
+msgid "Table Title Color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:66
+msgid "Table Title Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/custom-css.php:12
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/setting-functions/fields/custom-css.php:13
+msgid "If required, add your custom CSS code here."
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:17
+msgid "Text Color"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:24
+msgid "Add Button Text Color"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:31
+msgid "Add Button Text Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:38
+#: includes/setting-functions/fields/search-modal.php:59
+msgid "Add Button Background Color"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:45
+#: includes/setting-functions/fields/search-modal.php:66
+msgid "Add Button Background Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:52
+msgid "Compare Button Text Color"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:59
+msgid "Compare Button Text Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:66
+msgid "Compare Button Background Color"
+msgstr ""
+
+#: includes/setting-functions/fields/floating-compare-bar.php:73
+msgid "Compare Button Background Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:9
+msgid "Enable products compare"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:10
+msgid "If disabled, addonify wishlist plugin functionality will not be functional."
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:19
+#: includes/setting-functions/fields/general.php:32
+msgid "Select a page"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:20
+#: includes/setting-functions/fields/general.php:33
+msgid "Products Compare Page"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:21
+#: includes/setting-functions/fields/general.php:34
+msgid "Select a page to display wishlist table."
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:24
+msgid "Popup Modal"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:25
+msgid "Page"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:43
+msgid "Save compare Cookie for [ x ] days"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:71
+msgid "Enable Styles from Plugin"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:72
+msgid "Enable to apply styles and colors from the plugin."
+msgstr ""
+
+#: includes/setting-functions/fields/search-modal.php:31
+msgid "Overlay Color"
+msgstr ""
+
+#: includes/setting-functions/fields/search-modal.php:45
+#: includes/setting-functions/fields/search-modal.php:52
+msgid "Add Button Label Color"
+msgstr ""
+
+#: includes/setting-functions/fields/search-modal.php:73
+msgid "Close Button Label Color"
+msgstr ""
+
+#: includes/setting-functions/fields/search-modal.php:80
+msgid "Close Button On Hover Label Color"
+msgstr ""
+
+#: includes/setting-functions/fields/search-modal.php:87
+msgid "Close Button Border Color"
+msgstr ""
+
+#: includes/setting-functions/fields/search-modal.php:94
+msgid "Close Button On Hover Border Color"
+msgstr ""
+
+#: includes/setting-functions/settings.php:245
+msgid "General Options"
+msgstr ""
+
+#: includes/setting-functions/settings.php:250
+msgid "Compare Button Options"
+msgstr ""
+
+#: includes/setting-functions/settings.php:255
+msgid "Comparison Table"
+msgstr ""
+
+#: includes/setting-functions/settings.php:264
+msgid "General"
+msgstr ""
+
+#: includes/setting-functions/settings.php:269
+msgid "Compare Button Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:276
+msgid "Floating Dock Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:283
+msgid "Search Modal Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:290
+msgid "Comparison Table Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:297
+msgid "Developer"
+msgstr ""
+
+#: includes/setting-functions/settings.php:306
+msgid "Coming soon...."
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:275
+#: public/class-addonify-compare-products-public.php:330
+msgid "Invalid security token."
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:284
+#: public/class-addonify-compare-products-public.php:339
+msgid "Invalid product ID."
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:296
+msgid "Product could not be added into the compare list."
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:306
+msgid "Product added into the compare list."
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:355
+msgid "Product could not be removed from the compare list."
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:363
+msgid "Product removed from the compare list."
+msgstr ""
+
+#: public/templates/addonify-compare-products-search-modal.php:17
+msgid "Search here"
+msgstr ""
+
+#: public/templates/addonify-compare-products-search-result.php:56
+msgid "No results found for %s"
+msgstr ""
+
+#: public/templates/docker/add-button.php:24
+msgid "Add product"
+msgstr ""

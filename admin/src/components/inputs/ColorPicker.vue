@@ -15,7 +15,7 @@
 			emit("update:colorVal", newValue);
 		},
 	});
-	console.log(props.isAlphaPicker);
+	//console.log(props.isAlphaPicker);
 </script>
 <template>
 	<el-color-picker

@@ -30,10 +30,12 @@
 							:section="section"
 							:sectionKey="sectionKey"
 							:reactiveState="store.options"
+							currentPage="design"
 						>
 							<SectionTitle
 								:section="section"
 								:sectionkey="sectionKey"
+								currentPage="design"
 							/>
 						</HandleDesignOptions>
 					</OptionSection>
