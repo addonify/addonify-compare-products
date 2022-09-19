@@ -75,7 +75,7 @@ Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to
 
 = I'm a developer, is it possible to customize frontend output? =
 
-Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://addonify.com/addonify-compare-products)
+Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://docs.addonify.com/kb/woocommerce-compare-products/)
 
 
 == Installation ==
