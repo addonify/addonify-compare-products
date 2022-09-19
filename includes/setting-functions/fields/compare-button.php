@@ -38,8 +38,8 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_settings_field
                 'typeStyle'                 => "radioIcon", // Not used on Front-End Control. Only for Ref! 
                 'renderChoices'             => "html",
                 'className'                 => 'fullwidth radio-input-group hide-label svg-icons-choices',
-                'label'                     => __( 'Select Icon', 'addonify-wishlist' ),
-                'description'               => __( 'Select icon to be displayed on compare button.', 'addonify-wishlist' ),
+                'label'                     => __( 'Select Icon', 'addonify-compare-products' ),
+                'description'               => __( 'Select icon to be displayed on compare button.', 'addonify-compare-products' ),
                 'choices'                   => addonify_compare_products_get_compare_button_icons(),
                 'dependent'                 => array('enable_product_comparison', 'compare_products_btn_show_icon'),
                 'value'                     => addonify_compare_products_get_option( 'compare_products_btn_icon' )
