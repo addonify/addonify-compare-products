@@ -26,7 +26,7 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
     function addonify_compare_products_settings_defaults( $setting_id = '' ) {
 
         $defaults = apply_filters( 
-            'addonify_compare_products/setting_defaults',  
+            'addonify_compare_products_setting_defaults',  
             array(
                 // Settings
                 'enable_product_comparison' => true,
@@ -220,7 +220,7 @@ if ( ! function_exists( 'addonify_compare_products_settings_fields' ) ) {
 
     function addonify_compare_products_settings_fields() {
 
-        return apply_filters( 'addonify_compare_products/settings_fields', array() );
+        return apply_filters( 'addonify_compare_products_settings_fields', array() );
     }
 }
 

@@ -21,5 +21,5 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <div id="addonify-compare-dock-message" class="<?php echo esc_attr( implode( ' ', $css_classes ) ); ?>" >
-    <?php echo esc_html( $message ); ?>
+	<?php echo esc_html( $message ); ?>
 </div><!-- #addonify-compare-dock-message -->

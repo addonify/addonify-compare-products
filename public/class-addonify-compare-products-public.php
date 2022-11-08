@@ -67,23 +67,19 @@ class Addonify_Compare_Products_Public {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
-
-		$this->compare_cookie_items = $this->get_compare_cookie_items();
-
-		$this->compare_cookie_items_count = $this->get_compare_cookie_items_count();
+		$this->version     = $version;
 	}
 
 	/**
 	 * Initialize public hooks.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function public_init() {
 
-		if ( 
+		if (
 			! class_exists( 'WooCommerce' ) ||
-			(int) addonify_compare_products_get_option( 'enable_product_comparison' ) != 1
+			(int) addonify_compare_products_get_option( 'enable_product_comparison' ) !== 1
 		) {
 			return;
 		}
@@ -97,15 +93,19 @@ class Addonify_Compare_Products_Public {
 
 		// Add the compare button to the product catalog.
 		switch ( addonify_compare_products_get_option( 'compare_products_btn_position' ) ) {
-			case 'before_add_to_cart' :
+			case 'before_add_to_cart':
 				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'render_compare_button' ), 5 );
 				break;
-			default :
+			default:
 				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'render_compare_button' ), 15 );
 		}
 
 		// Add custom markup into footer to display comparison modal.
 		add_action( 'wp_footer', array( $this, 'add_markup_into_footer_callback' ) );
+
+		// Ajax callback handler to add product into the comapre list.
+		add_action( 'wp_ajax_addonify_compare_products_init', array( $this, 'initialize_adonify_compare_products' ) );
+		add_action( 'wp_ajax_nopriv_addonify_compare_products_init', array( $this, 'initialize_adonify_compare_products' ) );
 
 		// Ajax callback handler to add product into the comapre list.
 		add_action( 'wp_ajax_addonify_compare_products_add_product', array( $this, 'add_product_into_compare_cookie' ) );
@@ -124,7 +124,7 @@ class Addonify_Compare_Products_Public {
 		add_action( 'wp_ajax_nopriv_addonify_compare_products_compare_content', array( $this, 'render_comparison_content' ) );
 
 		// Register shortocode to display comparison table in the comparison page.
-		add_shortcode( 'addonify_compare_products', array( $this, 'render_comparison_content' ) );
+		add_shortcode( 'addonify_compare_products', array( $this, 'render_shortcode_content' ) );
 	}
 
 
@@ -152,7 +152,7 @@ class Addonify_Compare_Products_Public {
 			if ( $custom_css ) {
 				$inline_css .= $custom_css;
 			}
-			
+
 			$inline_css = $this->minify_css( $inline_css );
 
 			wp_add_inline_style( $this->plugin_name, $inline_css );
@@ -172,13 +172,15 @@ class Addonify_Compare_Products_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/public.min.js', array( 'jquery' ), $this->version, true );
 
 		$localize_args = array(
-			'ajaxURL' => admin_url( 'admin-ajax.php' ),
-			'compareItemsCount' => $this->compare_cookie_items_count,
-			'nonce' => wp_create_nonce( $this->plugin_name ),
-			'actionSearchProducts' => 'addonify_compare_products_search_products',
-			'actionRemoveProduct' => 'addonify_compare_products_remove_product',
-			'actionAddProduct' => 'addonify_compare_products_add_product',			
+			'ajaxURL'                 => admin_url( 'admin-ajax.php' ),
+			'compareItemsCount'       => $this->compare_cookie_items_count,
+			'nonce'                   => wp_create_nonce( $this->plugin_name ),
+			'actionInit'              => 'addonify_compare_products_init',
+			'actionSearchProducts'    => 'addonify_compare_products_search_products',
+			'actionRemoveProduct'     => 'addonify_compare_products_remove_product',
+			'actionAddProduct'        => 'addonify_compare_products_add_product',
 			'actionGetCompareContent' => 'addonify_compare_products_compare_content',
+			'localDataExpiresIn'      => (int) addonify_compare_products_get_option( 'compare_products_cookie_expires' ),
 		);
 
 		// localize script.
@@ -199,66 +201,42 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function init_callback() {
 
-		if ( ! array_key_exists( $this->plugin_name, $_COOKIE ) ) {
-
-			$this->set_compare_cookie();
-		} 
 	}
 
-
 	/**
-	 * Checks if compare cookie is set and get the compare cookie items.
-	 * 
-	 * @since 1.0.0
-	 * @return array
+	 * Returns initial html for plugin display.
 	 */
-	public function get_compare_cookie_items() {
+	public function initialize_adonify_compare_products() {
 
-		return ( array_key_exists( $this->plugin_name, $_COOKIE ) ) ? json_decode( stripslashes( $_COOKIE[$this->plugin_name] ), 1 ) : array();
-	}
+		$response_data = array(
+			'success' => false,
+		);
 
-
-	/**
-	 * Checks if compare cookie is array and number of items in the compare cookie.
-	 * 
-	 * @since 1.0.0
-	 * @return int
-	 */
-	public function get_compare_cookie_items_count() {
-
-		return is_array( $this->compare_cookie_items ) ? count( $this->compare_cookie_items ) : 0;
-	}
-
-
-	/**
-	 * Set the compare cookie with products.
-	 * 
-	 * @since 1.0.0
-	 * @return boolean true if cookie is set, false otherwise.
-	 */
-	private function set_compare_cookie( $product_ids = array() ) {
-
-		// Set browser cookie if there are products in the compare list.
-		$cookies_lifetime = (int) addonify_compare_products_get_option( 'compare_products_cookie_expires' ) * DAY_IN_SECONDS;
-
-		if ( 
-			is_array( $product_ids ) &&
-			count( $product_ids ) > 0 
+		if (
+			array_key_exists( 'nonce', $_POST ) ||
+			isset( $_POST['nonce'] ) ||
+			wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), $this->plugin_name )
 		) {
-			return setcookie( $this->plugin_name, json_encode( $product_ids ), time() + $cookies_lifetime, COOKIEPATH, COOKIE_DOMAIN );
+			ob_start();
+			addonify_compare_products_render_docker_content();
+			$response_data['html']['#addonify-compare-dock-thumbnails'] = ob_get_clean();
+
+			ob_start();
+			do_action( 'addonify_compare_products_comparison_content' );
+			$response_data['compareModalContent'] = ob_get_clean();
+
+			$response_data['success'] = true;
+
 		} else {
-
-			return setcookie( $this->plugin_name, '', time() - 3600, COOKIEPATH, COOKIE_DOMAIN );
+			$response_data['message'] = __( 'Invalid security token.', 'addonify-compare-products' );
 		}
+		wp_send_json( $response_data );
 	}
-
-
 
 	/**
 	 * Ajax call handler to add product into the compare cookie.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * @return array $response_data
 	 */
 	public function add_product_into_compare_cookie() {
 
@@ -267,41 +245,33 @@ class Addonify_Compare_Products_Public {
 			'message' => '',
 		);
 
-		if ( 
+		if (
 			! array_key_exists( 'nonce', $_POST ) ||
 			! isset( $_POST['nonce'] ) ||
-			! wp_verify_nonce( $_POST['nonce'], $this->plugin_name )
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), $this->plugin_name )
 		) {
-			$response_data['message'] = __( 'Invalid security token.', 'addonify-compare-products' );	
+			$response_data['message'] = __( 'Invalid security token.', 'addonify-compare-products' );
 			wp_send_json( $response_data );
-		} 
+		}
 
-		$product_id = (int) $_POST['product_id'];
+		$product_id = (int) $_POST['product_id']; //phpcs:ignore
 
 		$product = wc_get_product( $product_id );
 
 		if ( ! $product ) {
 			$response_data['message'] = __( 'Invalid product ID.', 'addonify-compare-products' );
-			wp_send_json( $response_data );  
-		}
-
-		if ( in_array( $product_id, $this->compare_cookie_items ) ) {
-			$response_data['message'] = __( 'Product ID is already in compare list.'. 'addonify-compare-products' );
 			wp_send_json( $response_data );
 		}
 
 		$this->compare_cookie_items[] = $product_id;
 
-		if ( ! $this->set_compare_cookie( $this->compare_cookie_items ) ) {
-			$response_data['message'] = __( 'Product could not be added into the compare list.', 'addonify-compare-products' );
-			wp_send_json( $response_data );
-		}
+		ob_start();
+		do_action( 'addonify_compare_products_comparison_content' );
+		$response_data['compareModalContent'] = ob_get_clean();
 
 		$response_data['success'] = true;
 
 		$response_data['product_image'] = $this->get_docker_product_image( $product );
-
-		$response_data['items_count'] = $this->get_compare_cookie_items_count();
 
 		$response_data['message'] = __( 'Product added into the compare list.', 'addonify-compare-products' );
 
@@ -311,9 +281,8 @@ class Addonify_Compare_Products_Public {
 
 	/**
 	 * Ajax call handler to remove product from the compare cookie.
-	 * 
+	 *
 	 * @since 1.0.0
-	 * @return array $response_data
 	 */
 	public function remove_product_from_compare_cookie() {
 
@@ -322,59 +291,57 @@ class Addonify_Compare_Products_Public {
 			'message' => '',
 		);
 
-		if ( 
+		if (
 			! array_key_exists( 'nonce', $_POST ) ||
 			! isset( $_POST['nonce'] ) ||
-			! wp_verify_nonce( $_POST['nonce'], $this->plugin_name )
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), $this->plugin_name )
 		) {
-			$response_data['message'] = __( 'Invalid security token.', 'addonify-compare-products' );	
+			$response_data['message'] = __( 'Invalid security token.', 'addonify-compare-products' );
 			wp_send_json( $response_data );
-		} 
+		}
 
-		$product_id = (int) $_POST['product_id'];
+		$product_id = (int) $_POST['product_id']; //phpcs:ignore
 
 		$product = wc_get_product( $product_id );
 
 		if ( ! $product ) {
 			$response_data['message'] = __( 'Invalid product ID.', 'addonify-compare-products' );
-			wp_send_json( $response_data );  
-		}
-
-		if ( ! in_array( $product_id, $this->compare_cookie_items ) ) {
-			$response_data['message'] = __( 'Product ID is not in the compare list.'. 'addonify-compare-products' );
 			wp_send_json( $response_data );
 		}
 
-		$product_id_index = array_search( $product_id, $this->compare_cookie_items );
+		if ( ! in_array( $product_id, $this->compare_cookie_items, true ) ) {
+			$response_data['message'] = __( 'Product ID is not in the compare list.', 'addonify-compare-products' );
+			wp_send_json( $response_data );
+		}
 
-		unset( $this->compare_cookie_items[$product_id_index] );
+		$product_id_index = array_search( $product_id, $this->compare_cookie_items, true );
+
+		unset( $this->compare_cookie_items[ $product_id_index ] );
 
 		$this->compare_cookie_items = array_values( $this->compare_cookie_items );
 
-		if ( ! $this->set_compare_cookie( $this->compare_cookie_items ) ) {
-			$response_data['message'] = __( 'Product could not be removed from the compare list.', 'addonify-compare-products' );
-			wp_send_json( $response_data );
-		}
-
 		$response_data['success'] = true;
-
-		$response_data['items_count'] = $this->get_compare_cookie_items_count();
 
 		$response_data['message'] = __( 'Product removed from the compare list.', 'addonify-compare-products' );
 
 		wp_send_json( $response_data );
 	}
 
-	
+
 	/**
 	 * Return product's image when product is added into the compare cookie.
-	 * 
+	 *
 	 * @since 1.0.0
+	 * @param object $product Product object.
 	 * @return string HTML markup for product image.
 	 */
 	public function get_docker_product_image( $product ) {
-		
-		return '<div class="addonify-compare-dock-components" data-product_id="' . esc_attr( $product->get_id() ) . '"><div class="sortable addonify-compare-dock-thumbnail" data-product_id="' . esc_attr( $product->get_id() ) . '"><span class="addonify-compare-dock-remove-item-btn addonify-compare-docker-remove-button" data-product_id="' . esc_attr( $product->get_id() ) . '"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg></span>' . wp_kses_post( $product->get_image() ) . '</div></div>';
+
+		return '<div class="addonify-compare-dock-components" data-product_id="' .
+			esc_attr( $product->get_id() ) . '"><div class="sortable addonify-compare-dock-thumbnail" data-product_id="' .
+			esc_attr( $product->get_id() ) . '"><span class="addonify-compare-dock-remove-item-btn addonify-compare-docker-remove-button" data-product_id="' .
+			esc_attr( $product->get_id() ) . '"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg></span>' .
+			wp_kses_post( $product->get_image() ) . '</div></div>';
 	}
 
 
@@ -404,19 +371,24 @@ class Addonify_Compare_Products_Public {
 			wp_die( 'nonce validation fail !' );
 		}
 
+		$products_not_in = isset( $_POST['product_ids'] ) ? json_decode( sanitize_text_field( wp_unslash( $_POST['product_ids'] ) ) ) : array();
+
 		// skip products that are already in cookies.
 		$wp_query = new WP_Query(
 			array(
-				's' => $query,
-				'post__not_in' => $this->get_compare_cookie_items(),
-				'post_type' => 'product',
+				's'            => $query,
+				'post__not_in' => $products_not_in,
+				'post_type'    => 'product',
 			)
 		);
 
-		do_action( 'addonify_compare_products/search_result', array( 
-			'wp_query' => $wp_query,
-			'query' => $query
-		 ) );
+		do_action(
+			'addonify_compare_products_search_result',
+			array(
+				'wp_query' => $wp_query,
+				'query'    => $query,
+			)
+		);
 
 		wp_die();
 	}
@@ -429,7 +401,7 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function render_compare_button() {
 
-		do_action( 'addonify_compare_products/compare_button' );
+		do_action( 'addonify_compare_products_compare_button' );
 	}
 
 
@@ -446,11 +418,11 @@ class Addonify_Compare_Products_Public {
 			return;
 		}
 
-		do_action( 'addonify_compare_products/docker_modal' );
+		do_action( 'addonify_compare_products_docker_modal' );
 
-		do_action( 'addonify_compare_products/search_modal' );
+		do_action( 'addonify_compare_products_search_modal' );
 
-		do_action( 'addonify_compare_products/comparison_modal' );
+		do_action( 'addonify_compare_products_comparison_modal' );
 	}
 
 
@@ -465,14 +437,26 @@ class Addonify_Compare_Products_Public {
 
 		if ( wp_doing_ajax() ) {
 
-			do_action( 'addonify_compare_products/comparison_content' );
+			do_action( 'addonify_compare_products_comparison_content' );
 			wp_die();
 		} else {
 
 			ob_start();
-			do_action( 'addonify_compare_products/comparison_content' );
+			do_action( 'addonify_compare_products_comparison_content' );
 			return ob_get_clean();
 		}
+	}
+
+	/**
+	 * For rendering shortcode.
+	 */
+	public function render_shortcode_content() {
+
+		ob_start();
+		?>
+		<div id="addonify-compare-products-comparison-table-on-page"></div>
+		<?php
+		return ob_get_clean();
 	}
 
 
@@ -482,12 +466,12 @@ class Addonify_Compare_Products_Public {
 	public function dynamic_css() {
 
 		$css_values = array(
-			'--adfy_compare_products_button_color' => addonify_compare_products_get_option( 'compare_btn_text_color' ),
+			'--adfy_compare_products_button_color'       => addonify_compare_products_get_option( 'compare_btn_text_color' ),
 			'--adfy_compare_products_button_color_hover' => addonify_compare_products_get_option( 'compare_btn_text_color_hover' ),
-			'--adfy_compare_products_button_bg_color' => addonify_compare_products_get_option( 'compare_btn_bck_color' ),
+			'--adfy_compare_products_button_bg_color'    => addonify_compare_products_get_option( 'compare_btn_bck_color' ),
 			'--adfy_compare_products_button_bg_color_hover' => addonify_compare_products_get_option( 'compare_btn_bck_color_hover' ),
-			'--adfy_compare_products_dock_bg_color' => addonify_compare_products_get_option( 'floating_bar_bck_color' ),
-			'--adfy_compare_products_dock_text_color' => addonify_compare_products_get_option( 'floating_bar_text_color' ),
+			'--adfy_compare_products_dock_bg_color'      => addonify_compare_products_get_option( 'floating_bar_bck_color' ),
+			'--adfy_compare_products_dock_text_color'    => addonify_compare_products_get_option( 'floating_bar_text_color' ),
 			'--adfy_compare_products_dock_add_button_color' => addonify_compare_products_get_option( 'floating_bar_add_button_text_color' ),
 			'--adfy_compare_products_dock_add_button_color_hover' => addonify_compare_products_get_option( 'floating_bar_add_button_text_color_hover' ),
 			'--adfy_compare_products_dock_add_button_bg_color' => addonify_compare_products_get_option( 'floating_bar_add_button_bck_color' ),
@@ -506,7 +490,7 @@ class Addonify_Compare_Products_Public {
 			'--adfy_compare_products_search_modal_close_button_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_text_color_hover' ),
 			'--adfy_compare_products_search_modal_close_button_border_color' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color' ),
 			'--adfy_compare_products_search_modal_close_button_border_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color_hover' ),
-			'--adfy_compare_products_table_title_color' => addonify_compare_products_get_option( 'table_title_color' ),
+			'--adfy_compare_products_table_title_color'  => addonify_compare_products_get_option( 'table_title_color' ),
 			'--adfy_compare_products_table_title_color_hover' => addonify_compare_products_get_option( 'table_title_color_hover' ),
 		);
 
@@ -527,7 +511,7 @@ class Addonify_Compare_Products_Public {
 
 	/**
 	 * Minify the dynamic css.
-	 * 
+	 *
 	 * @param string $css css to minify.
 	 * @return string minified css.
 	 */
@@ -548,9 +532,9 @@ class Addonify_Compare_Products_Public {
 	 * Return product attributes array
 	 *
 	 * Used for future purpose.
-	 * 
+	 *
 	 * @since    1.0.0
-	 * @param    string $product Woocommerce product object.
+	 * @param    object $product Woocommerce product object.
 	 */
 	private function get_product_attributes( $product ) {
 
@@ -563,8 +547,8 @@ class Addonify_Compare_Products_Public {
 			$name = $attribute->get_name();
 			if ( $attribute->is_taxonomy() ) {
 
-				$terms = wp_get_post_terms( $product->get_id(), $name, 'all' );
-				$cwtax = $terms[0]->taxonomy;
+				$terms              = wp_get_post_terms( $product->get_id(), $name, 'all' );
+				$cwtax              = $terms[0]->taxonomy;
 				$cw_object_taxonomy = get_taxonomy( $cwtax );
 
 				if ( isset( $cw_object_taxonomy->labels->singular_name ) ) {
@@ -599,7 +583,5 @@ class Addonify_Compare_Products_Public {
 	 * @since    1.0.0
 	 */
 	public function register_shortcode() {
-
-		
 	}
 }
