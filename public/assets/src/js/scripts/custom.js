@@ -261,18 +261,18 @@
 						} )
 
 						check_for_shortcode(response.compareModalContent);
+
+						addonifyCompareProductsDockMessage();
+			
+						addonifyCompareProductsDockCompareButton();
+			
+						if (Number(compareItemsCount) != 0) {
+							body.addClass('addonify-compare-dock-is-visible');
+						} else {
+							body.removeClass('addonify-compare-dock-is-visible');
+						}
 					}
 				});
-			}
-
-			addonifyCompareProductsDockMessage();
-
-			addonifyCompareProductsDockCompareButton();
-
-			if (Number(compareItemsCount) != 0) {
-				body.addClass('addonify-compare-dock-is-visible');
-			} else {
-				body.removeClass('addonify-compare-dock-is-visible');
 			}
 		}
 
