@@ -32,6 +32,11 @@
 
         min-width: 95vw;
     }
+
+    &.hidden {
+
+        bottom: -100vh; // Hide till the products are populated in the dock.
+    }
 }
 
 .addonify-compare-dock-is-visible #addonify-compare-dock {
