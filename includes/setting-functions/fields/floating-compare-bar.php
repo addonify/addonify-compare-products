@@ -86,5 +86,5 @@ if ( ! function_exists( 'addonify_compare_products_floating_bar_styles_add_to_se
         return array_merge( $settings_fields, addonify_compare_products_floating_bar_styles_settings_fields() );
     }
     
-    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_floating_bar_styles_add_to_settings_fields' );
+    add_filter( 'addonify_compare_products_settings_fields', 'addonify_compare_products_floating_bar_styles_add_to_settings_fields' );
 }

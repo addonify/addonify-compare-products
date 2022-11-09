@@ -56,7 +56,7 @@ if ( ! function_exists( 'addonify_compare_products_general_add_to_settings_field
         return array_merge( $settings_fields, addonify_compare_products_general_setting_fields() );
     }
     
-    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_general_add_to_settings_fields' );
+    add_filter( 'addonify_compare_products_settings_fields', 'addonify_compare_products_general_add_to_settings_fields' );
 }
 
 
@@ -84,5 +84,5 @@ if ( ! function_exists( 'addonify_compare_products_general_styles_add_to_setting
         return array_merge( $settings_fields, addonify_compare_products_general_styles_settings_fields() );
     }
     
-    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_general_styles_add_to_settings_fields' );
+    add_filter( 'addonify_compare_products_settings_fields', 'addonify_compare_products_general_styles_add_to_settings_fields' );
 }

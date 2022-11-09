@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Template for the front end part of the plugin.
  *
@@ -21,9 +21,9 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <div class="addonify-compare-dock-components">
-    <button class="addonify-cp-fake-button" id="addonify-compare-dock-add-item" aria-label="<?php echo esc_attr__( 'Add product', 'addonify-compare-products' ); ?>">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-        </svg>
-    </button><!-- #addonify-compare-dock-add-item.addonify-cp-fake-button -->
+	<button class="addonify-cp-fake-button" id="addonify-compare-dock-add-item" aria-label="<?php echo esc_attr__( 'Add product', 'addonify-compare-products' ); ?>">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+			<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+		</svg>
+	</button><!-- #addonify-compare-dock-add-item.addonify-cp-fake-button -->
 </div><!-- .addonify-compare-dock-components -->

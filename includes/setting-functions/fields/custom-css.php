@@ -27,5 +27,5 @@ if ( ! function_exists( 'addonify_compare_products_custom_css_add_to_settings_fi
         return array_merge( $settings_fields, addonify_compare_products_custom_css_settings_fields() );
     }
     
-    add_filter( 'addonify_compare_products/settings_fields', 'addonify_compare_products_custom_css_add_to_settings_fields' );
+    add_filter( 'addonify_compare_products_settings_fields', 'addonify_compare_products_custom_css_add_to_settings_fields' );
 }

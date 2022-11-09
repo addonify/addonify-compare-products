@@ -60,12 +60,12 @@ class Addonify_Compare_Products_Admin {
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 	}
 
 	/**
 	 * Initialize admin hooks.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function admin_init() {
@@ -77,7 +77,7 @@ class Addonify_Compare_Products_Admin {
 		// Display admin notice if WooCommerce is not active.
 		if ( ! class_exists( 'WooCommerce' ) ) {
 
-			add_action( 'admin_notices', array( $this, 'woocommerce_not_active_notice' ) ); 
+			add_action( 'admin_notices', array( $this, 'woocommerce_not_active_notice' ) );
 		}
 
 		// Register admin menu in the dashboard.
@@ -94,8 +94,7 @@ class Addonify_Compare_Products_Admin {
 	 */
 	public function enqueue_styles() {
 
-		if( isset($_GET['page']) && $_GET['page'] == $this->settings_page_slug ){
-
+		if ( isset( $_GET['page'] ) && $_GET['page'] == $this->settings_page_slug ) { //phpcs:ignore
 			global $wp_styles;
 
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', array(), $this->version, 'all' );
@@ -111,33 +110,33 @@ class Addonify_Compare_Products_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		wp_register_script( 
-			"{$this->plugin_name}-manifest", 
-			plugin_dir_url( __FILE__ ) . 'assets/js/manifest.js', 
-			null, 
-			$this->version, 
-			true 
+		wp_register_script(
+			"{$this->plugin_name}-manifest",
+			plugin_dir_url( __FILE__ ) . 'assets/js/manifest.js',
+			null,
+			$this->version,
+			true
 		);
 
-		wp_register_script( 
-			"{$this->plugin_name}-vendor", 
-			plugin_dir_url( __FILE__ ) . 'assets/js/vendor.js', 
-			array(  "{$this->plugin_name}-manifest" ), 
-			$this->version, 
-			true 
+		wp_register_script(
+			"{$this->plugin_name}-vendor",
+			plugin_dir_url( __FILE__ ) . 'assets/js/vendor.js',
+			array( "{$this->plugin_name}-manifest" ),
+			$this->version,
+			true
 		);
 
-		wp_register_script( 
-			"{$this->plugin_name}-main", 
-			plugin_dir_url( __FILE__ ) . 'assets/js/main.js', 
-			array( 'lodash', "{$this->plugin_name}-vendor", 'wp-i18n', 'wp-api-fetch' ), 
-			$this->version, 
-			true 
+		wp_register_script(
+			"{$this->plugin_name}-main",
+			plugin_dir_url( __FILE__ ) . 'assets/js/main.js',
+			array( 'lodash', "{$this->plugin_name}-vendor", 'wp-i18n', 'wp-api-fetch' ),
+			$this->version,
+			true
 		);
 
-		if( 
-			isset( $_GET['page'] ) && 
-			$_GET['page'] == $this->settings_page_slug 
+		if (
+			isset( $_GET['page'] ) && //phpcs:ignore
+			$_GET['page'] == $this->settings_page_slug //phpcs:ignore
 		) {
 			wp_enqueue_script( "{$this->plugin_name}-manifest" );
 
@@ -145,12 +144,16 @@ class Addonify_Compare_Products_Admin {
 
 			wp_enqueue_script( "{$this->plugin_name}-main" );
 
-			wp_localize_script( "{$this->plugin_name}-main", 'ADDONIFY_COMPARE_PRODUCTS_LOCOLIZER', array(
-				'admin_url'  						=> esc_url( admin_url( '/' ) ),
-				'ajax_url'   						=> esc_url( admin_url( 'admin-ajax.php' ) ),
-				'rest_namespace' 					=> 'addonify_compare_products_options_api',
-				'version_number' 					=> $this->version,
-			));
+			wp_localize_script(
+				"{$this->plugin_name}-main",
+				'ADDONIFY_COMPARE_PRODUCTS_LOCOLIZER',
+				array(
+					'admin_url'      => esc_url( admin_url( '/' ) ),
+					'ajax_url'       => esc_url( admin_url( 'admin-ajax.php' ) ),
+					'rest_namespace' => 'addonify_compare_products_options_api',
+					'version_number' => $this->version,
+				)
+			);
 		}
 
 		wp_set_script_translations( "{$this->plugin_name}-main", $this->plugin_name );
@@ -163,7 +166,7 @@ class Addonify_Compare_Products_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_menu_callback(){
+	public function add_menu_callback() {
 
 		global $admin_page_hooks;
 
@@ -171,35 +174,35 @@ class Addonify_Compare_Products_Admin {
 
 		if ( ! $parent_menu_slug ) {
 
-			add_menu_page( 
-				'Addonify Settings', 
-				'Addonify', 
-				'manage_options', 
-				$this->settings_page_slug, 
-				array( $this, 'get_settings_screen_contents' ), 
-				'dashicons-superhero', 
-				70 
+			add_menu_page(
+				'Addonify Settings',
+				'Addonify',
+				'manage_options',
+				$this->settings_page_slug,
+				array( $this, 'get_settings_screen_contents' ),
+				'dashicons-superhero',
+				70
 			);
-					
-			add_submenu_page( 
-				$this->settings_page_slug, 
-				'Compare Settings', 
-				'Compare', 
-				'manage_options', 
-				$this->settings_page_slug, 
-				array( $this, 'get_settings_screen_contents' ), 
-				0 
+
+			add_submenu_page(
+				$this->settings_page_slug,
+				'Compare Settings',
+				'Compare',
+				'manage_options',
+				$this->settings_page_slug,
+				array( $this, 'get_settings_screen_contents' ),
+				0
 			);
 		} else {
 
-			add_submenu_page(  
-				$parent_menu_slug, 
-				'Compare Settings', 
-				'Compare', 
-				'manage_options', 
-				$this->settings_page_slug, 
-				array( $this, 'get_settings_screen_contents' ), 
-				0 
+			add_submenu_page(
+				$parent_menu_slug,
+				'Compare Settings',
+				'Compare',
+				'manage_options',
+				$this->settings_page_slug,
+				array( $this, 'get_settings_screen_contents' ),
+				0
 			);
 		}
 	}
