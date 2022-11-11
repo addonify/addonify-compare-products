@@ -20,7 +20,6 @@
 // direct access is disabled.
 defined( 'ABSPATH' ) || exit;
 ?>
-
 <div class="notice notice-error is-dismissible">
 	<p><?php esc_html_e( 'Addonify Compare Products is enabled but not effective. This plugin requires WooCommerce plugin in order to work.', 'addonify-compare-products' ); ?></p>
 </div>

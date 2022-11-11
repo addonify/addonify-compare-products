@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) || exit;
 	</p><!-- #addonify-compare-products-notice -->
 
 	<?php
-	if ( $table_rows ) {
+	if ( $no_of_products > 1 ) {
 		?>
 		<table id="addonify-compare-products-table" class="<?php echo esc_attr( implode( ' ', $table_css_classes ) ); ?>">
 			<tbody>

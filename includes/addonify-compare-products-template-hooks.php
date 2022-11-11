@@ -1,4 +1,10 @@
 <?php
+/**
+ * Includes template actions.
+ *
+ * @package Addonify_Compare_Products
+ * @subpackage Addonify_Compare_Products/addonify-compare-products-template-functions
+ */
 
 add_action( 'addonify_compare_products_compare_button', 'addonify_compare_products_render_compare_button' );
 

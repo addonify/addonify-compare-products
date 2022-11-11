@@ -18,7 +18,7 @@ if ( ! function_exists( 'addonify_compare_products_escape_svg' ) ) {
 	function addonify_compare_products_escape_svg( $svg ) {
 
 		$allowed_html = array(
-			'svg' => array(
+			'svg'   => array(
 				'class'           => true,
 				'aria-hidden'     => true,
 				'aria-labelledby' => true,
@@ -42,65 +42,15 @@ if ( ! function_exists( 'addonify_compare_products_escape_svg' ) ) {
 
 
 
-if ( ! function_exists( 'addonify_compare_products_get_compare_cookie' ) ) {
+if ( ! function_exists( 'addonify_compare_products_get_compare_products_list' ) ) {
 	/**
 	 * Get the items from the compare cookie.
 	 *
 	 * @since 1.0.0
 	 * @return array $svg Sanitized SVG code.
 	 */
-	function addonify_compare_products_get_compare_cookie() {
-		return ( array_key_exists( 'product_ids', $_POST ) ) ? json_decode( stripslashes( $_POST[ 'product_ids' ] ), 1 ) : array(); //phpcs:ignore
-	}
-}
+	function addonify_compare_products_get_compare_products_list() {
 
-
-
-if ( ! function_exists( 'addonify_compare_products_get_compare_cookie_count' ) ) {
-	/**
-	 * Count the number of items in the compare cookie.
-	 *
-	 * @since 1.0.0
-	 * @return int number of items in the compare cookie.
-	 */
-	function addonify_compare_products_get_compare_cookie_count() {
-
-		$compare_cookie = addonify_compare_products_get_compare_cookie();
-
-		return ( is_array( $compare_cookie ) ) ? count( $compare_cookie ) : 0;
-	}
-}
-
-
-
-if ( ! function_exists( 'addonify_compare_products_is_product_in_compare_cookie' ) ) {
-	/**
-	 * Checks if there a product is in the compare cookie.
-	 *
-	 * @since 1.0.0
-	 * @param int $product_id Product ID.
-	 * @return boolean true if there is product in the compare cookie, false otherwise.
-	 */
-	function addonify_compare_products_is_product_in_compare_cookie( $product_id ) {
-
-		$compare_cookie = addonify_compare_products_get_compare_cookie();
-
-		return ( is_array( $compare_cookie ) && in_array( $product_id, $compare_cookie ) ) ? true : false;
-	}
-}
-
-
-
-if ( ! function_exists( 'addonify_compare_products_is_empty_compare_cookie' ) ) {
-	/**
-	 * Checks if there are items in the compare cookie.
-	 *
-	 * @since 1.0.0
-	 * @return boolean true if there are items in the compare cookie, false otherwise.
-	 */
-	function addonify_compare_products_is_empty_compare_cookie() {
-		$compare_cookie = addonify_compare_products_get_compare_cookie();
-
-		return ( is_array( $compare_cookie ) && count( $compare_cookie ) == 0 ) ? true : false;
+		return isset( $_POST['product_ids'] ) ? json_decode( wp_unslash( $_POST[ 'product_ids' ] ), 1 ) : array(); //phpcs:ignore
 	}
 }

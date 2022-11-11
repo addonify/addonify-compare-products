@@ -97,10 +97,13 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.0
+= 1.1.0 - 11 Nov, 2022 =
 
-- Updated: WPCS compatibility.
-- Updated: Managing Products for comparison moved to client-side. (server-side previously)
+- Updated: Codes to match WPCS.
+- Updated: Managing Products for comparison moved to client-side. It was done through server-side previously.
+- Updated: Used the function, 'wp_unslash', instead of 'stripslashes'.
+- Removed: Unwanted functions.
+- Updated: Settings levels and descriptions in the plugin settings page.
 
 = 1.0.5 - 19 Sept, 2022 =
 
