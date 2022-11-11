@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,8 +23,7 @@
  * @subpackage Addonify_Compare_Products/includes
  * @author     Addonify <info@addonify.com>
  */
-class Addonify_Compare_Products_i18n {
-
+class Addonify_Compare_Products_I18n {
 
 	/**
 	 * Load the plugin text domain for translation.
@@ -39,9 +37,5 @@ class Addonify_Compare_Products_i18n {
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
-
 	}
-
-
-
 }
