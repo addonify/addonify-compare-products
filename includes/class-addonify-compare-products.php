@@ -134,6 +134,9 @@ class Addonify_Compare_Products {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-rest-api.php';
 
+		// udp initialization with components .
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/udp/init.php';
+
 		$this->loader = new Addonify_Compare_Products_Loader();
 
 	}
