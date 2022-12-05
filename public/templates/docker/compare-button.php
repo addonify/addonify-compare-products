@@ -30,7 +30,7 @@ defined( 'ABSPATH' ) || exit;
 		<?php
 	} else {
 		?>
-		<a class="addonify-dock-compare-button" href="<?php echo esc_url( $compare_page_link ); ?>"><?php echo esc_html( $button_label ); ?></a>
+		<a id="addonify-compare-dock-compare-btn-link" class="addonify-dock-compare-button" href="<?php echo esc_url( $compare_page_link ); ?>"><?php echo esc_html( $button_label ); ?></a>
 		<?php
 	}
 	?>
