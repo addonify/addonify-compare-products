@@ -21,29 +21,28 @@
 
 		color: #0C942C;
 		border-color: #2EAf4C;
-		background-color: #a4ffb9;
+		background-color: #e2ffe9;
 	}
 
 	&.error {
 
-		color: #C3515D;
+		color: #b50215;
 		border-color: #FB6C7B;
-		background-color: #ffabb4;
+		background-color: #ffe1e4;
 	}
 
 	&.warning {
 
-		color: green;
 		color: #C38800;
 		border-color: #FBC00A;
-		background-color: #ffe9a5;
+		background-color: #fff6dc;
 	}
 
 	&.info {
 
-		color: #247ED6;
+		color: #0762bd;
 		border-color: #3E9AF7;
-		background-color: #72b9ff;
+		background-color: #d6ebff;
 	}
 
 	.addonify-compare-alert-content {
