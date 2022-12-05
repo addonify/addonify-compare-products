@@ -1,3 +1,60 @@
+
+/* -------------------------------------------------------------------------- 
+	Alerts
+  -------------------------------------------------------------------------- */
+
+.addonify-compare-alert {
+
+	display: block;
+	position: relative;
+	padding: 15px 20px;
+	margin: 0 0 30px 0;
+	font-size: 16px;
+	line-height: 1.6;
+	font-weight: normal;
+	color: #444444;
+	border-radius: 4px;
+	background-color: #EEEEEE;
+	border: 2px solid #DDDDDD;
+
+	&.success {
+
+		color: #0C942C;
+		border-color: #2EAf4C;
+		background-color: #a4ffb9;
+	}
+
+	&.error {
+
+		color: #C3515D;
+		border-color: #FB6C7B;
+		background-color: #ffabb4;
+	}
+
+	&.warning {
+
+		color: green;
+		color: #C38800;
+		border-color: #FBC00A;
+		background-color: #ffe9a5;
+	}
+
+	&.info {
+
+		color: #247ED6;
+		border-color: #3E9AF7;
+		background-color: #72b9ff;
+	}
+
+	.addonify-compare-alert-content {
+
+		p {
+
+			margin: 0;
+		}
+	}
+}
+
 /* -------------------------------------------------------------------------- 
 	Loading wave animation
   -------------------------------------------------------------------------- */
