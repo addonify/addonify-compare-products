@@ -4,7 +4,6 @@
 	$(document).ready(function () {
 
 		var body = $('body');
-		let dockThumbnailContainer = $('#addonify-compare-dock-thumbnails');
 		var dockMessage = $('#addonify-compare-dock-message');
 		var searchModal = $('#addonify-compare-search-modal');
 		var searchResultsContainer = $('#addonify-compare-search-results');
@@ -160,6 +159,8 @@
 			// show hide dock message
 			addonifyCompareProductsDockMessage();
 
+			check_for_shortcode();
+
 		});
 
 		// show compare modal
@@ -176,8 +177,6 @@
 
 			// show loading animation
 			compareModalContent.addClass('loading');
-
-			let product_ids = getLocalItem( 'product_ids' );
 		});
 
 
@@ -259,13 +258,12 @@
 						product_ids.forEach( function( val ) {
 							$('.addonify-cp-button[data-product_id=' + val + ']').addClass('selected');
 						} )
-
 						check_for_shortcode(response.compareModalContent);
 
 						addonifyCompareProductsDockMessage();
-			
+
 						addonifyCompareProductsDockCompareButton();
-			
+
 						if (Number(compareItemsCount) != 0) {
 							body.addClass('addonify-compare-dock-is-visible');
 						} else {
@@ -273,6 +271,8 @@
 						}
 					}
 				});
+			} else {
+				check_for_shortcode()
 			}
 		}
 
@@ -463,10 +463,35 @@
 		/**
 		 * Loads shortcode content if found on page.
 		 */
-		function check_for_shortcode( html ) {
+		function check_for_shortcode( html = '' ) {
 			if ( body.has('#addonify-compare-products-comparison-table-on-page').length > 0 ) {
-				$('#addonify-compare-products-comparison-table-on-page').html(html)
+				let product_ids = getLocalItem( 'product_ids' );
+				if(product_ids.length <= 1){
+					if(product_ids.length == 1) {
+						html = 'More than one products required for comparison.';
+					} else {
+						html = 'No products to compare';
+					}
+					$('#addonify-compare-products-comparison-table-on-page').html(getTemplate(html))
+				} else {
+					if( html !== '' ){
+						$('#addonify-compare-products-comparison-table-on-page').html(html)
+					}
+				}
 			}
+		}
+
+		/**
+		 * Alert template
+		 */
+		function getTemplate( msg ) {
+			return `
+			<div class="addonify-compare-alert info">
+				<div class="addonify-compare-alert-content">
+					<p>` + msg + `</p>
+				</div><!-- // addonify-compare-alert-content -->
+			</div><!-- // addonify-compare-modal-alert -->
+			`;
 		}
 
 	})
