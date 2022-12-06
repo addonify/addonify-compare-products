@@ -1,23 +1,17 @@
 <?php
 /**
- * This plugin gathers users anonymous data and send to engine.
+ * UDP Agent collects non-sensitive data.
  *
- * @link       #
+ * @link       https://creamcode.org/user-data-processing/
  * @since      1.0.0
- *
- * @package    Udp_21cc_Engine_Agent
+ * @author     CreamCode <contact@creamcode.org>
+ * @package    Udp_Agent
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
- * This plugin gathers users anonymous data and send to engine.
- *
- * @package    Udp_21cc_Engine_Agent
- * @author     Cream Code Technology <info@creamcodetechnology.com>
- */
 class Udp_Agent {
 
 	/**
@@ -163,7 +157,7 @@ class Udp_Agent {
 			echo ' checked';
 		}
 		echo '/>';
-		echo wp_kses_data( 'Become a super contributor by sharing your non-sensitive WordPress data. We guarantee no sensitive data is collected. <a href="https://creamcode.org/user-data-processing-engine/" target="_blank" >What data do we collect?</a>' ) . ' </p>';
+		echo wp_kses_data( 'Become a super contributor by sharing your non-sensitive WordPress data. We guarantee no sensitive data is collected. <a href="https://creamcode.org/user-data-processing/" target="_blank" >What data do we collect?</a>' ) . ' </p>';
 	}
 
 
