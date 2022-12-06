@@ -191,7 +191,7 @@ class Udp_Agent {
 
 			$tracking_msg_last_shown_at = intval( get_option( 'udp_agent_tracking_msg_last_shown_at' ) );
 
-			if ( $tracking_msg_last_shown_at > ( time() - DAY_IN_SECONDS ) ) {
+			if ( $tracking_msg_last_shown_at > ( time() - ( DAY_IN_SECONDS * 3 ) ) ) {
 				// do not show,
 				// if last admin notice was shown less than 1 day ago.
 				$show_admin_notice = false;
@@ -310,8 +310,13 @@ class Udp_Agent {
 
 		$data = array();
 
+		$site        = wp_parse_url( get_site_url() );
+		$site_scheme = array_key_exists( 'scheme', $site ) ? $site['scheme'] . '://' : '';
+		$site_host   = array_key_exists( 'host', $site ) ? $site['host'] : '';
+		$site_port   = array_key_exists( 'port', $site ) ? ':' . $site['port'] : '';
+
 		$data['data']            = WP_Debug_Data::debug_data();
-		$data['site_url']        = wp_parse_url( get_site_url() )['scheme'] . '://' . wp_parse_url( get_site_url() )['host'] . ( wp_parse_url( get_site_url() )['port'] ? ':' . wp_parse_url( get_site_url() )['port'] : '' );
+		$data['site_url']        = $site_scheme . $site_host . $site_port;
 		$data['site_user_email'] = get_bloginfo( 'admin_email' );
 		$dir_names               = explode( '/', dirname( dirname( dirname( __FILE__ ) ) ) );
 		$plugin_name             = $dir_names[ count( $dir_names ) - 1 ];

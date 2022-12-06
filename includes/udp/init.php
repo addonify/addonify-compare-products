@@ -43,15 +43,13 @@ if ( $this_agent_is_latest && isset( $all_installed_agents[ basename( $root_dir 
 	new Udp_Agent( $this_agent_ver, $root_dir, $engine_url );
 }
 
-// -------------------------------------------
-// Agent Activation
-// -------------------------------------------
-
-// for plugin.
-register_activation_hook(
-	$root_dir . DIRECTORY_SEPARATOR . basename( $root_dir ) . '.php',
-	function() use ( $root_dir ) {
+if ( ! function_exists( 'cc_udp_agent_initial_handshake' ) ) {
+	/**
+	 * Does Initial handshake with udp engine.
+	 */
+	function cc_udp_agent_initial_handshake() {
 		global $this_agent_ver, $engine_url;
+		$root_dir = dirname( dirname( __DIR__ ) );
 
 		// authorize this agent with engine.
 		if ( ! class_exists( 'Udp_Agent' ) ) {
@@ -76,15 +74,29 @@ register_activation_hook(
 			}
 		}
 	}
+}
+
+if ( empty( (array)$all_installed_agents ) ) { //phpcs:ignore
+	cc_udp_agent_initial_handshake();
+}
+
+// -------------------------------------------
+// Agent Activation
+// -------------------------------------------
+
+// for plugin.
+register_activation_hook(
+	$root_dir . DIRECTORY_SEPARATOR . basename( $root_dir ) . '.php',
+	'cc_udp_agent_initial_handshake'
 );
 
-if ( ! function_exists( 'cc_udp_agent_send_data_on_theme_switch' ) ) {
+if ( ! function_exists( 'cc_udp_agent_send_data_on_action' ) ) {
 	/**
-	 * Send data on theme switch.
+	 * Send data on theme/plugin activation and plugin deactivation.
 	 *
 	 * @param string $root_dir Root Directory Path.
 	 */
-	function cc_udp_agent_send_data_on_theme_switch( $root_dir ) {
+	function cc_udp_agent_send_data_on_action( $root_dir ) {
 		global $this_agent_ver, $engine_url;
 
 		// authorize this agent with engine.
@@ -96,7 +108,7 @@ if ( ! function_exists( 'cc_udp_agent_send_data_on_theme_switch' ) ) {
 	}
 }
 
-add_action( 'cc_udp_agent_send_data', 'cc_udp_agent_send_data_on_theme_switch' );
+add_action( 'cc_udp_agent_send_data', 'cc_udp_agent_send_data_on_action' );
 
 /**
  * Schedule data send on theme switch & update agent basename
