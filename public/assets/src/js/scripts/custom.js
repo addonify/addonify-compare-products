@@ -468,9 +468,9 @@
 				let product_ids = getLocalItem( 'product_ids' );
 				if(product_ids.length <= 1){
 					if(product_ids.length == 1) {
-						html = 'More than one products required for comparison.';
+						html = addonifyCompareProductsJSObject.messageOnOneProduct;
 					} else {
-						html = 'No products to compare';
+						html = addonifyCompareProductsJSObject.messageOnNoProducts;
 					}
 					$('#addonify-compare-products-comparison-table-on-page').html(getTemplate(html))
 				} else {
