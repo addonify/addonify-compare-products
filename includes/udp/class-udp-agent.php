@@ -7,11 +7,14 @@
  * @author     CreamCode <contact@creamcode.org>
  * @package    Udp_Agent
  */
- 
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * UDP Agent class.
+ */
 class Udp_Agent {
 
 	/**
