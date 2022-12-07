@@ -1,13 +1,12 @@
 <?php
 /**
- * This plugin gathers users anonymous data and send to engine.
+ * UDP Agent collects non-sensitive data.
  *
- * @link       #
+ * @link       https://creamcode.org/user-data-processing/
  * @since      1.0.0
- *
- * @package    Udp_21cc_Engine_Agent
+ * @author     Cream Code <contact@creamcode.org>
+ * @package    Udp_Agent
  */
-
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
