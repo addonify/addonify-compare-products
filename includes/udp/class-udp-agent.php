@@ -318,10 +318,14 @@ class Udp_Agent {
 		$data['data']            = WP_Debug_Data::debug_data();
 		$data['site_url']        = $site_scheme . $site_host . $site_port;
 		$data['site_user_email'] = get_bloginfo( 'admin_email' );
-		$dir_names               = explode( '/', dirname( dirname( dirname( __FILE__ ) ) ) );
-		$plugin_name             = $dir_names[ count( $dir_names ) - 1 ];
-		$this_plugin_data        = get_plugin_data( dirname( dirname( dirname( __FILE__ ) ) ) . '/' . $plugin_name . '.php' );
-		$data['sender_client']   = $this_plugin_data['Name'];
+		$plugin_directory        = untrailingslashit( dirname( __FILE__, 3 ) );
+		$dir_names               = explode( '/', $plugin_directory );
+		if ( strpos( $dir_names[ count( $dir_names ) - 1 ], '\\' ) ) {
+			$dir_names = explode( '\\', $dir_names[ count( $dir_names ) - 1 ] );
+		}
+		$plugin_name           = array_pop( $dir_names );
+		$this_plugin_data      = get_plugin_data( $plugin_directory . '/' . $plugin_name . '.php' );
+		$data['sender_client'] = $this_plugin_data['Name'];
 
 		return $data;
 
