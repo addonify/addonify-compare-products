@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Template for the front end part of the plugin.
  *
@@ -21,17 +21,17 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 <div class="addonify-compare-dock-components">
-    <?php
-    if ( empty( $compare_page_link ) ) {
-        ?>
-        <button id="addonify-compare-dock-compare-btn" class="addonify-dock-compare-button">
-            <?php echo esc_html( $button_label ); ?>
-        </button>
-        <?php
-    } else {
-        ?>
-        <a class="addonify-dock-compare-button" href="<?php echo esc_url( $compare_page_link ); ?>"><?php echo esc_html( $button_label ); ?></a>
-        <?php
-    }
-    ?>
+	<?php
+	if ( empty( $compare_page_link ) ) {
+		?>
+		<button id="addonify-compare-dock-compare-btn" class="addonify-dock-compare-button">
+			<?php echo esc_html( $button_label ); ?>
+		</button>
+		<?php
+	} else {
+		?>
+		<a id="addonify-compare-dock-compare-btn-link" class="addonify-dock-compare-button" href="<?php echo esc_url( $compare_page_link ); ?>"><?php echo esc_html( $button_label ); ?></a>
+		<?php
+	}
+	?>
 </div><!-- .addonify-compare-dock-components -->

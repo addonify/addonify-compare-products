@@ -1,4 +1,22 @@
 <?php
+/**
+ * Template for the front end part of the plugin.
+ *
+ * @link       https://www.addonify.com
+ * @since      1.0.0
+ *
+ * @package    Addonify_Compare_Products
+ * @subpackage Addonify_Compare_Products/public/templates
+ */
+
+/**
+ * Template for the front end part of the plugin.
+ *
+ * @package    Addonify_Compare_Products
+ * @subpackage Addonify_Compare_Products/public/templates
+ * @author     Addodnify <info@addonify.com>
+ */
+
 ?>
 <div id="addonify-compare-search-modal-overlay" class="addonify-compare-hidden"></div><!-- #addonify-compare-search-modal-overlay.addonify-compare-hidden -->
 

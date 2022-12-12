@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
 	<?php
 	if ( ! empty( $button_icon ) ) {
 		?>
-		<span class="addonify-cp-icon"><?php echo addonify_compare_products_escape_svg( $button_icon ); ?></span>
+		<span class="addonify-cp-icon"><?php echo addonify_compare_products_escape_svg( $button_icon ); //phpcs:ignore ?></span>
 		<?php
 	}
 	?>

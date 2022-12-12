@@ -66,6 +66,7 @@ class Addonify_Compare_Products {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
+
 		if ( defined( 'ADDONIFY_COMPARE_PRODUCTS_VERSION' ) ) {
 			$this->version = ADDONIFY_COMPARE_PRODUCTS_VERSION;
 		} else {
@@ -110,7 +111,6 @@ class Addonify_Compare_Products {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-i18n.php';
 
-
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/addonify-compare-products-helpers-functions.php';
 
 		/**
@@ -134,6 +134,9 @@ class Addonify_Compare_Products {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-addonify-compare-products-rest-api.php';
 
+		// udp initialization with components .
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/udp/init.php';
+
 		$this->loader = new Addonify_Compare_Products_Loader();
 
 	}
@@ -149,7 +152,7 @@ class Addonify_Compare_Products {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Addonify_Compare_Products_i18n();
+		$plugin_i18n = new Addonify_Compare_Products_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -166,7 +169,7 @@ class Addonify_Compare_Products {
 
 		$plugin_admin = new Addonify_Compare_Products_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'admin_init');
+		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'admin_init' );
 	}
 
 	/**
@@ -178,9 +181,9 @@ class Addonify_Compare_Products {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );		
+		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'public_init');
+		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'public_init' );
 	}
 
 
@@ -201,6 +204,7 @@ class Addonify_Compare_Products {
 	 * @since    1.0.0
 	 */
 	public function run() {
+
 		$this->loader->run();
 	}
 
@@ -212,6 +216,7 @@ class Addonify_Compare_Products {
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
+
 		return $this->plugin_name;
 	}
 
@@ -222,6 +227,7 @@ class Addonify_Compare_Products {
 	 * @return    Addonify_Compare_Products_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
+
 		return $this->loader;
 	}
 
@@ -232,6 +238,7 @@ class Addonify_Compare_Products {
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {
+
 		return $this->version;
 	}
 

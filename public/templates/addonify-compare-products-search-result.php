@@ -52,11 +52,12 @@ defined( 'ABSPATH' ) || exit;
 	} else {
 		?>
 		<li class="no-result">
-			<?php 
-			printf( __( "No results found for %s", "addonify-compare-products" ), "<strong>" . esc_html( $query ) . "</strong>" ); 
+			<?php
+			/* translators: %s: product search query. */
+			printf( __( 'No results found for %s', 'addonify-compare-products' ), '<strong>' . esc_html( $query ) . '</strong>' ); //phpcs:ignore
 			?>
 		</li><!-- .no-result -->
-		<?php 
-	} 
+		<?php
+	}
 	?>
 </ul><!-- #adfy-compare-search-result -->
