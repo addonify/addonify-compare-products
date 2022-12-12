@@ -4,7 +4,7 @@ Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.5
 Tested up to: 6.1.1
-Stable tag: 1.1.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,17 +97,14 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.1 - 18 Nov, 2022 =
-
-- Improvement: Color Picker in settings page.
-
 = 1.1.0 - 11 Nov, 2022 =
 
-- Updated: Codes to match WPCS.
-- Updated: Managing Products for comparison moved to client-side. It was done through server-side previously.
-- Updated: Used the function, 'wp_unslash', instead of 'stripslashes'.
+- Tweak: Managing Products for comparison moved to client-side. It was done through server-side previously.
+- Tweak: Used the function, 'wp_unslash', instead of 'stripslashes'.
 - Removed: Unwanted functions.
 - Updated: Settings levels and descriptions in the plugin settings page.
+- Improvement: Color Picker in settings page.
+- Improvement: Implemented WPCS.
 
 = 1.0.5 - 19 Sept, 2022 =
 
