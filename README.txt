@@ -97,8 +97,9 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.0 - 11 Nov, 2022 =
+= 1.1.0 - 12 December, 2022 =
 
+- Added: UDP Agent https://creamcode.org/user-data-processing.
 - Tweak: Managing Products for comparison moved to client-side. It was done through server-side previously.
 - Tweak: Used the function, 'wp_unslash', instead of 'stripslashes'.
 - Removed: Unwanted functions.
