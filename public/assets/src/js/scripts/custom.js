@@ -91,6 +91,10 @@
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();
+
+						// Triggering custom event when product is added to compare list. 
+                        // 'addonify_added_to_comparelist' custom event can be used to perform desired actions.
+						$(document).trigger('addonify_added_to_comparelist', [{ productID: productId }]);
 					}
 				}
 			});
@@ -161,6 +165,9 @@
 
 			check_for_shortcode();
 
+			// Triggering custom event when product is removed from compare list. 
+            // 'addonify_removed_from_comparelist' custom event can be used to perform desired actions.
+			$(document).trigger('addonify_removed_from_comparelist', [{ productID: productId }]);
 		});
 
 		// show compare modal
