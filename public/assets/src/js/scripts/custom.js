@@ -386,7 +386,7 @@
 			setLocalItem( 'product_ids', val );
 		}
 
-		/**
+        /**
 		 * Store item in localstorage.
 		 * 
 		 * @param {int} productId Product ID.
@@ -396,11 +396,12 @@
 			if ( typeof val === 'object' ) {
 				val = JSON.stringify( val )
 			}
+            let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
 			const d = new Date();
 			d.setTime( d.getTime() + (localDataExpiration * 24 * 60 * 60 * 1000) );
 			let expires = d.getTime();
-			localStorage.setItem( plugin_name + '_' + name, val )
-			localStorage.setItem( plugin_name + '_deadline', expires )
+			localStorage.setItem( hostname + '_' + plugin_name + '_' + name, val )
+			localStorage.setItem( hostname + '_' + plugin_name + '_' + name +  '_deadline', expires )
 		}
 
 		/**
@@ -426,14 +427,15 @@
 		 * @returns {array|false}
 		 */
 		function getLocalItem( name ) {
-			let localDeadline = localStorage.getItem( plugin_name + '_deadline' )
+            let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
+			let localDeadline = localStorage.getItem( hostname + '_' + plugin_name + '_' + name +  '_deadline' )
 			if ( null !== localDeadline ) {
 				const d = new Date();
 				if ( d.getTime() < parseInt( localDeadline ) ) {
-					return jsonToArray( parseJson( localStorage.getItem( plugin_name + '_' + name ) ) )
+					return jsonToArray( parseJson( localStorage.getItem( hostname + '_' + plugin_name + '_' + name ) ) )
 				} else {
-					localStorage.removeItem( plugin_name + '_' + name )
-					localStorage.removeItem( plugin_name + '_deadline' )
+					localStorage.removeItem( hostname + '_' + plugin_name + '_' + name )
+					localStorage.removeItem( hostname + '_' + plugin_name + '_' + name + '_deadline' );
 				}
 			}
 			return [];
