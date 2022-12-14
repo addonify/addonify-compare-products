@@ -97,17 +97,19 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.1 - 18 Nov, 2022 =
+= 1.1.1 - 13 December, 2022 =
 
-- Improvement: Color Picker in settings page.
+- Added: Custom JS events, `addonify_added_to_comparelist` and `addonify_removed_from_comparelist` when a product is added and removed from the compare list respectively.
 
-= 1.1.0 - 11 Nov, 2022 =
+= 1.1.0 - 12 December, 2022 =
 
-- Updated: Codes to match WPCS.
-- Updated: Managing Products for comparison moved to client-side. It was done through server-side previously.
-- Updated: Used the function, 'wp_unslash', instead of 'stripslashes'.
+- Added: UDP Agent https://creamcode.org/user-data-processing.
+- Tweak: Managing Products for comparison moved to client-side. It was done through server-side previously.
+- Tweak: Used the function, 'wp_unslash', instead of 'stripslashes'.
 - Removed: Unwanted functions.
 - Updated: Settings levels and descriptions in the plugin settings page.
+- Improvement: Color Picker in settings page.
+- Improvement: Implemented WPCS.
 
 = 1.0.5 - 19 Sept, 2022 =
 
