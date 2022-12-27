@@ -97,7 +97,7 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.1 - 26 December, 2022 =
+= 1.1.1 - 28 December, 2022 =
 
 - Added: Custom JS events, `addonify_added_to_comparelist` and `addonify_removed_from_comparelist` when a product is added and removed from the compare list respectively.
 - Added: Support for multisite.
