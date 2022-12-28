@@ -156,6 +156,7 @@ class Addonify_Compare_Products_Public {
 			'localDataExpiresIn'      => (int) addonify_compare_products_get_option( 'compare_products_cookie_expires' ),
 			'messageOnNoProducts'     => esc_html__( 'No products to compare' ),
 			'messageOnOneProduct'     => esc_html__( 'More than one products required for comparison.' ),
+			'thisSiteUrl'             => get_bloginfo( 'url' ),
 		);
 
 		// localize script.

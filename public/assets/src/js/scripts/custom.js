@@ -91,6 +91,10 @@
 
 						// show hide dock message
 						addonifyCompareProductsDockMessage();
+
+						// Triggering custom event when product is added to compare list. 
+                        // 'addonify_added_to_comparelist' custom event can be used to perform desired actions.
+						$(document).trigger('addonify_added_to_comparelist', [{ productID: productId }]);
 					}
 				}
 			});
@@ -161,6 +165,9 @@
 
 			check_for_shortcode();
 
+			// Triggering custom event when product is removed from compare list. 
+            // 'addonify_removed_from_comparelist' custom event can be used to perform desired actions.
+			$(document).trigger('addonify_removed_from_comparelist', [{ productID: productId }]);
 		});
 
 		// show compare modal
@@ -386,7 +393,7 @@
 			setLocalItem( 'product_ids', val );
 		}
 
-		/**
+        /**
 		 * Store item in localstorage.
 		 * 
 		 * @param {int} productId Product ID.
@@ -396,11 +403,12 @@
 			if ( typeof val === 'object' ) {
 				val = JSON.stringify( val )
 			}
+            let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
 			const d = new Date();
 			d.setTime( d.getTime() + (localDataExpiration * 24 * 60 * 60 * 1000) );
 			let expires = d.getTime();
-			localStorage.setItem( plugin_name + '_' + name, val )
-			localStorage.setItem( plugin_name + '_deadline', expires )
+			localStorage.setItem(plugin_name + '_' + name + '_' + hostname, val )
+			localStorage.setItem(plugin_name + '_' + name + '_deadline' + '_' + hostname, expires )
 		}
 
 		/**
@@ -426,14 +434,15 @@
 		 * @returns {array|false}
 		 */
 		function getLocalItem( name ) {
-			let localDeadline = localStorage.getItem( plugin_name + '_deadline' )
+            let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
+			let localDeadline = localStorage.getItem( plugin_name + '_' + name + '_deadline' + '_' + hostname )
 			if ( null !== localDeadline ) {
 				const d = new Date();
 				if ( d.getTime() < parseInt( localDeadline ) ) {
-					return jsonToArray( parseJson( localStorage.getItem( plugin_name + '_' + name ) ) )
+					return jsonToArray( parseJson( localStorage.getItem( plugin_name + '_' + name + '_' + hostname ) ) )
 				} else {
-					localStorage.removeItem( plugin_name + '_' + name )
-					localStorage.removeItem( plugin_name + '_deadline' )
+					localStorage.removeItem( plugin_name + '_' + name + '_' + hostname )
+					localStorage.removeItem( plugin_name + '_' + name + '_deadline' + '_' + hostname );
 				}
 			}
 			return [];

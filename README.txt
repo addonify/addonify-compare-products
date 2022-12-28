@@ -4,7 +4,7 @@ Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.5
 Tested up to: 6.1.1
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,11 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 
 == Changelog ==
+
+= 1.1.1 - 28 December, 2022 =
+
+- Added: Custom JS events, `addonify_added_to_comparelist` and `addonify_removed_from_comparelist` when a product is added and removed from the compare list respectively.
+- Added: Support for multisite.
 
 = 1.1.0 - 12 December, 2022 =
 
