@@ -97,6 +97,10 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
+= 1.1.3 - ? = 
+
+- Updated: UDP updated.
+
 = 1.1.2 - 24 January, 2023 =
 
 - Added: Recommended products in compare setting page.
