@@ -6,14 +6,31 @@
 	import { useProductStore } from "../stores/product";
 
 	const proStore = useProductStore();
-	//const { __ } = wp.i18n;
 
 	onBeforeMount(() => {
-		proStore.fetchInstalledAddons();
+		/**
+		 *
+		 * Check product store state in memory before fetching data from server.
+		 *
+		 * @since: 1.1.6
+		 */
+
+		if (!proStore.haveAddonStateInMemory) {
+			proStore.fetchInstalledAddons();
+		}
 	});
 
 	onMounted(() => {
-		proStore.fetchGithubRepo();
+		/**
+		 *
+		 * Check product store state in memory before fetching data from github repo.
+		 *
+		 * @since: 1.1.6
+		 */
+
+		if (!proStore.haveAddonStateInMemory) {
+			proStore.fetchGithubRepo();
+		}
 	});
 </script>
 
