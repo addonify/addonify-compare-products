@@ -10,7 +10,16 @@
 	const store = useOptionsStore();
 
 	onMounted(() => {
-		store.fetchOptions();
+		/**
+		 *
+		 * Fetch options from server if we do not have state in meomory.
+		 *
+		 * @since: 1.1.6
+		 */
+
+		if (!store.haveStateInMemory) {
+			store.fetchOptions();
+		}
 	});
 </script>
 

@@ -1,35 +1,47 @@
 <script setup>
 	import { computed } from "vue";
 	import { ElSelect, ElOption } from "element-plus";
-	const { __ } = wp.i18n;
 
 	const props = defineProps({
-		modelValue: [Number, String, Array],
-		choices: [Object, Array],
-		placeholder: String,
+		modelValue: {
+			type: [Number, String, Array, Object],
+			required: true,
+		},
+		choices: {
+			type: [Object, Array],
+			required: false,
+		},
+		placeholder: {
+			type: String,
+			required: false,
+		},
 	});
 
-	// Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
+	/**
+	 *
+	 * Define emits for v-model usage.
+	 * Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
+	 *
+	 */
 	const emit = defineEmits(["update:modelValue"]);
 	const value = computed({
 		get() {
-			return props.modelValue;
+			return props.modelValue.toString();
 		},
 		set(newValue) {
 			emit("update:modelValue", newValue);
 		},
 	});
+
+	const { __ } = wp.i18n;
+	const defPlaceholder = __("Select", "addonify-compare-products");
 </script>
 <template>
 	<el-select
 		v-model="value"
-		:placeholder="
-			props.placeholder
-				? props.placeholder
-				: __('Select', 'addonify-compare-products')
-		"
 		size="large"
 		filterable
+		:placeholder="props.placeholder ? props.placeholder : defPlaceholder"
 	>
 		<el-option
 			v-for="(label, key) in props.choices"

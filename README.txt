@@ -3,8 +3,8 @@
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.5
-Tested up to: 6.1.1
-Stable tag: 1.1.5
+Tested up to: 6.2.2
+Stable tag: 1.1.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,10 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 
 == Changelog ==
+
+= 1.1.6 - ?, 2023 =
+
+- Tweak: How reactive state on plugin setting's page is managed (vue js).
 
 = 1.1.5 - 09 March, 2023 =
 
