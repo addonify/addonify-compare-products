@@ -97,7 +97,7 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.6 - ?, 2023 =
+= 1.1.6 - 01 June, 2023 =
 
 - Tweak: How reactive state on plugin setting's page is managed (vue js).
 
