@@ -44,7 +44,7 @@
 
 			let product_ids = getProductids();
 
-			if ( product_ids instanceof Array &&  product_ids.indexOf(productId) > -1 ) {
+			if (product_ids instanceof Array && product_ids.indexOf(productId) > -1) {
 				console.log('Product already exists in compare list.')
 				return;
 			}
@@ -59,7 +59,7 @@
 				data: {
 					action: addonifyCompareProductsJSObject.actionAddProduct,
 					product_id: productId,
-					product_ids: JSON.stringify( product_ids ),
+					product_ids: JSON.stringify(product_ids),
 					nonce: addonifyCompareProductsJSObject.nonce
 				},
 				success: function (response) {
@@ -93,7 +93,7 @@
 						addonifyCompareProductsDockMessage();
 
 						// Triggering custom event when product is added to compare list. 
-                        // 'addonify_added_to_comparelist' custom event can be used to perform desired actions.
+						// 'addonify_added_to_comparelist' custom event can be used to perform desired actions.
 						$(document).trigger('addonify_added_to_comparelist', [{ productID: productId }]);
 					}
 				}
@@ -113,18 +113,18 @@
 
 			let index = product_ids.indexOf(productId)
 
-			if ( index === -1 ) {
+			if (index === -1) {
 				console.log('Product does not exist in compare list.')
 				return;
 			}
 
-			product_ids.splice( index, 1 )
+			product_ids.splice(index, 1)
 
-			setProductids( product_ids )
+			setProductids(product_ids)
 
 			compareItemsCount = compareItemsCount - 1;
 
-			$( '#addonify-compare-products-table tbody ' ).find( 'td[data-product_id=' + productId + ']' ).remove();
+			$('#addonify-compare-products-table tbody ').find('td[data-product_id=' + productId + ']').remove();
 
 			if (thisButton.hasClass('addonify-compare-table-remove-btn')) {
 				$('td[data-product_id="' + productId + '"]').remove();
@@ -166,7 +166,7 @@
 			check_for_shortcode();
 
 			// Triggering custom event when product is removed from compare list. 
-            // 'addonify_removed_from_comparelist' custom event can be used to perform desired actions.
+			// 'addonify_removed_from_comparelist' custom event can be used to perform desired actions.
 			$(document).trigger('addonify_removed_from_comparelist', [{ productID: productId }]);
 		});
 
@@ -186,7 +186,6 @@
 			compareModalContent.addClass('loading');
 		});
 
-
 		// show search modal
 		body.on('click', '#addonify-compare-dock-add-item', function () {
 			body.addClass('addonify-compare-disable-scroll');
@@ -196,7 +195,6 @@
 			$('#addonify-compare-search-query').focus();
 		})
 
-
 		// close search modal
 		body.on('click', '#addonify-compare-search-close-button, #addonify-compare-search-modal-overlay', function () {
 
@@ -204,7 +202,6 @@
 			body.addClass('addonify-compare-dock-is-visible');
 			addonifyCompareProductsCloseSearchModal();
 		})
-
 
 		// on search
 		body.on('keyup', '#addonify-compare-search-query', function () {
@@ -218,8 +215,6 @@
 				addonifyCompareProductsSearchProducts(searchVal);
 			}, 500);
 		})
-
-
 
 		// close compare modal
 		body.on('click', '#addonify-compare-close-button, #addonify-compare-modal-overlay', function () {
@@ -241,30 +236,30 @@
 
 		function addonifyCompareProductsInit() {
 
-			let product_ids = getLocalItem( 'product_ids' );
+			let product_ids = getLocalItem('product_ids');
 
 			// only do ajax call if localstorage is not empty
-			if ( product_ids instanceof Array && product_ids.length > 0 ) {
+			if (product_ids instanceof Array && product_ids.length > 0) {
 				$.ajax({
-					url : addonifyCompareProductsJSObject.ajaxURL,
+					url: addonifyCompareProductsJSObject.ajaxURL,
 					type: 'POST',
 					data: {
 						action: addonifyCompareProductsJSObject.actionInit,
-						product_ids: JSON.stringify( product_ids ),
+						product_ids: JSON.stringify(product_ids),
 						nonce: addonifyCompareProductsJSObject.nonce
 					},
-					success: function ( response ) {
+					success: function (response) {
 						// update compare modal.
 						compareModalContent.html(response.compareModalContent);
 
 						// update other required divs.
-						$.each( response.html, function ( i, val ) {
+						$.each(response.html, function (i, val) {
 							$(i).replaceWith(val);
 						})
 
-						product_ids.forEach( function( val ) {
+						product_ids.forEach(function (val) {
 							$('.addonify-cp-button[data-product_id=' + val + ']').addClass('selected');
-						} )
+						})
 						check_for_shortcode(response.compareModalContent);
 
 						addonifyCompareProductsDockMessage();
@@ -352,7 +347,7 @@
 				'action': addonifyCompareProductsJSObject.actionSearchProducts,
 				'query': searchVal,
 				'nonce': addonifyCompareProductsJSObject.nonce,
-				'product_ids' : JSON.stringify( product_ids ),
+				'product_ids': JSON.stringify(product_ids),
 			};
 
 			$.post(
@@ -381,7 +376,7 @@
 		 * @returns {array|false} product ids.
 		 */
 		function getProductids() {
-			return getLocalItem( 'product_ids' );
+			return getLocalItem('product_ids');
 		}
 
 		/**
@@ -389,26 +384,26 @@
 		 *
 		 * @param {Object|string} val Value to be inserted.
 		 */
-		function setProductids( val ) {
-			setLocalItem( 'product_ids', val );
+		function setProductids(val) {
+			setLocalItem('product_ids', val);
 		}
 
-        /**
+		/**
 		 * Store item in localstorage.
 		 * 
 		 * @param {int} productId Product ID.
 		 * @param {mixed} val Value to be stored in localstorage.
 		 */
-		function setLocalItem( name, val ) {
-			if ( typeof val === 'object' ) {
-				val = JSON.stringify( val )
+		function setLocalItem(name, val) {
+			if (typeof val === 'object') {
+				val = JSON.stringify(val)
 			}
-            let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
+			let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
 			const d = new Date();
-			d.setTime( d.getTime() + (localDataExpiration * 24 * 60 * 60 * 1000) );
+			d.setTime(d.getTime() + (localDataExpiration * 24 * 60 * 60 * 1000));
 			let expires = d.getTime();
-			localStorage.setItem(plugin_name + '_' + name + '_' + hostname, val )
-			localStorage.setItem(plugin_name + '_' + name + '_deadline' + '_' + hostname, expires )
+			localStorage.setItem(plugin_name + '_' + name + '_' + hostname, val)
+			localStorage.setItem(plugin_name + '_' + name + '_deadline' + '_' + hostname, expires)
 		}
 
 		/**
@@ -417,11 +412,11 @@
 		 * @param {string} json_str Json string.
 		 * @return {object|false} Json object
 		 */
-		function parseJson( json_str ) {
+		function parseJson(json_str) {
 			let json_val
 			try {
 				json_val = JSON.parse(json_str)
-			} catch(e) {
+			} catch (e) {
 				return false;
 			}
 			return json_val
@@ -433,16 +428,16 @@
 		 * @param {int} productId Product Id.
 		 * @returns {array|false}
 		 */
-		function getLocalItem( name ) {
-            let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
-			let localDeadline = localStorage.getItem( plugin_name + '_' + name + '_deadline' + '_' + hostname )
-			if ( null !== localDeadline ) {
+		function getLocalItem(name) {
+			let hostname = addonifyCompareProductsJSObject.thisSiteUrl;
+			let localDeadline = localStorage.getItem(plugin_name + '_' + name + '_deadline' + '_' + hostname)
+			if (null !== localDeadline) {
 				const d = new Date();
-				if ( d.getTime() < parseInt( localDeadline ) ) {
-					return jsonToArray( parseJson( localStorage.getItem( plugin_name + '_' + name + '_' + hostname ) ) )
+				if (d.getTime() < parseInt(localDeadline)) {
+					return jsonToArray(parseJson(localStorage.getItem(plugin_name + '_' + name + '_' + hostname)))
 				} else {
-					localStorage.removeItem( plugin_name + '_' + name + '_' + hostname )
-					localStorage.removeItem( plugin_name + '_' + name + '_deadline' + '_' + hostname );
+					localStorage.removeItem(plugin_name + '_' + name + '_' + hostname)
+					localStorage.removeItem(plugin_name + '_' + name + '_deadline' + '_' + hostname);
 				}
 			}
 			return [];
@@ -454,13 +449,13 @@
 		 * @param {object} json Json object
 		 * @returns {object|false} An array
 		 */
-		function jsonToArray(json){
-			if ( json !== null && typeof json === 'object' ) {
+		function jsonToArray(json) {
+			if (json !== null && typeof json === 'object') {
 				let result = new Array;
 				let keys = Object.keys(json);
 				if (keys.length > 0) {
-					keys.forEach(function(key){
-						result[key]= json[key];
+					keys.forEach(function (key) {
+						result[key] = json[key];
 					});
 				}
 				return result;
@@ -472,18 +467,18 @@
 		/**
 		 * Loads shortcode content if found on page.
 		 */
-		function check_for_shortcode( html = '' ) {
-			if ( body.has('#addonify-compare-products-comparison-table-on-page').length > 0 ) {
-				let product_ids = getLocalItem( 'product_ids' );
-				if(product_ids.length <= 1){
-					if(product_ids.length == 1) {
+		function check_for_shortcode(html = '') {
+			if (body.has('#addonify-compare-products-comparison-table-on-page').length > 0) {
+				let product_ids = getLocalItem('product_ids');
+				if (product_ids.length <= 1) {
+					if (product_ids.length == 1) {
 						html = addonifyCompareProductsJSObject.messageOnOneProduct;
 					} else {
 						html = addonifyCompareProductsJSObject.messageOnNoProducts;
 					}
 					$('#addonify-compare-products-comparison-table-on-page').html(getTemplate(html))
 				} else {
-					if( html !== '' ){
+					if (html !== '') {
 						$('#addonify-compare-products-comparison-table-on-page').html(html)
 					}
 				}
@@ -493,7 +488,7 @@
 		/**
 		 * Alert template
 		 */
-		function getTemplate( msg ) {
+		function getTemplate(msg) {
 			return `
 			<div class="addonify-compare-alert info">
 				<div class="addonify-compare-alert-content">
@@ -502,7 +497,6 @@
 			</div><!-- // addonify-compare-modal-alert -->
 			`;
 		}
-
 	})
 
 })(jQuery);

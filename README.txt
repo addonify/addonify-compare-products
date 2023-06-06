@@ -4,7 +4,7 @@ Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.5
 Tested up to: 6.2.2
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,11 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 
 == Changelog ==
+
+= 1.1.7 - 06 June, 2023 =
+
+- Tweak: Calculating the height of the comparison model using JavaScript.
+- Enhancement: Console warn if perfect scroll bar couldn't be initialized.
 
 = 1.1.6 - 01 June, 2023 =
 
