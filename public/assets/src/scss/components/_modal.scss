@@ -351,6 +351,10 @@
 
     .addonify-compare-model-inner  {
 
+        @include flex();
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         position: relative;
         overflow: hidden;
         height: 100%;
@@ -358,31 +362,31 @@
 
         #addonify-compare-modal-content {
 
-            position: absolute;
+            position: relative;
             margin: 0;
             padding: 0;
-            right: auto;
-            left: 50%;
-            top: 50%;
             width: 95vw;
             max-width: 1800px;
-            height: 90vh;
             overflow: auto;
-            transform: translate(-50%, -50%);
             border-radius: 5px;
             background-color: white;
             z-index: calc( var(--adfy_compare_products_comparison_table_zindex) + 10 );
 
-            @include breakpoint(mobile) {
-
-                height: 95vh;
-            }
-
             #addonify-compare-products-table-wrapper {
 
-                position: relative;
+                display: block;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 0;
+                bottom: 0;
                 height: 100%;
                 width: 100%;
+
+                #addonify-compare-products-notice {
+
+                    display: none;
+                }
 
                 #addonify-compare-close-button {
 
