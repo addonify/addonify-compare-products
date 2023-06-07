@@ -97,7 +97,7 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.7 - 06 June, 2023 =
+= 1.1.7 - 07 June, 2023 =
 
 - Tweak: Calculating the height of the comparison model using JavaScript.
 - Enhancement: Console warn if perfect scroll bar couldn't be initialized.
