@@ -70,6 +70,7 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
 				'compare_products_cookie_expires'              => 30,
 				'display_comparison_table_fields_header'       => true,
 				'fields_to_compare'                            => json_encode( array( 'image', 'title', 'price', 'add_to_cart_button', 'rating', 'description' ) ),
+				'product_attributes_to_compare'                => json_encode( array() ),
 				'load_styles_from_plugin'                      => false,
 
 				// Design - add to compare button
