@@ -100,9 +100,11 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 = 1.1.9 - ? June, 2023 =
 
+- Fixed: Issue of product image getting rendered twice in comparison docker. [GitHub Issue#159](https://github.com/addonify/addonify-compare-products/issues/159)
 - Added: Product attributes, weight, dimensions, and additional information can now be selected for comparison.
 - Added: Option to select product attributes for comparison.
 - Updated: Ratings count has been added after the rating in comparison table.
+-
 
 = 1.1.8 - 07 June, 2023 =
 

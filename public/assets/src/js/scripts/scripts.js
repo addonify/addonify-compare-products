@@ -64,7 +64,7 @@
 				},
 				success: function (response) {
 
-					//console.log(response);
+					// console.log(response);
 
 					if (response.success) {
 
@@ -81,7 +81,7 @@
 						}
 						$('#addonify-compare-dock-thumbnails').append(response.product_image);
 
-						$('.addonify-compare-dock-thumbnail[data-product_id="' + productId + '"]').append(response.product_image).removeClass('loading');
+						$('.addonify-compare-dock-thumbnail[data-product_id="' + productId + '"]').removeClass('loading');
 
 						addonifyCompareProductsComparisonTableMessage();
 
