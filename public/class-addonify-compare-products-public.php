@@ -253,7 +253,7 @@ class Addonify_Compare_Products_Public {
 	public function get_docker_product_image( $product ) {
 
 		return '<div class="addonify-compare-dock-components" data-product_id="' .
-			esc_attr( $product->get_id() ) . '"><div class="sortable addonify-compare-dock-thumbnail" data-product_id="' .
+			esc_attr( $product->get_id() ) . '"><div class="addonify-compare-dock-thumbnail" data-product_id="' .
 			esc_attr( $product->get_id() ) . '"><span class="addonify-compare-dock-remove-item-btn addonify-compare-docker-remove-button" data-product_id="' .
 			esc_attr( $product->get_id() ) . '"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path></svg></span>' .
 			wp_kses_post( $product->get_image() ) . '</div></div>';
