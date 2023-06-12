@@ -70,6 +70,65 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
 				'compare_products_cookie_expires'              => 30,
 				'display_comparison_table_fields_header'       => true,
 				'fields_to_compare'                            => json_encode( array( 'image', 'title', 'price', 'add_to_cart_button', 'rating', 'description' ) ),
+				'compare_table_fields'                         => wp_json_encode(
+					array(
+						array(
+							'name'    => esc_html__( 'Title', 'addonify-compare-products' ),
+							'id'      => 'title',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Image', 'addonify-compare-products' ),
+							'id'      => 'image',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Price', 'addonify-compare-products' ),
+							'id'      => 'price',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Description', 'addonify-compare-products' ),
+							'id'      => 'description',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Rating', 'addonify-compare-products' ),
+							'id'      => 'rating',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Avaibility', 'addonify-compare-products' ),
+							'id'      => 'in_stock',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Weight', 'addonify-compare-products' ),
+							'id'      => 'weight',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Dimensions', 'addonify-compare-products' ),
+							'id'      => 'dimensions',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Attributes', 'addonify-compare-products' ),
+							'id'      => 'attributes',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Additional Information', 'addonify-compare-products' ),
+							'id'      => 'additional_information',
+							'enabled' => true,
+						),
+						array(
+							'name'    => esc_html__( 'Add to Cart', 'addonify-compare-products' ),
+							'id'      => 'add_to_cart_button',
+							'enabled' => true,
+						),
+					)
+				),
 				'product_attributes_to_compare'                => json_encode( array() ),
 				'load_styles_from_plugin'                      => false,
 
