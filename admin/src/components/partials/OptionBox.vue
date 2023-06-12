@@ -7,7 +7,6 @@
 		section: Object,
 		sectionKey: [String, Object],
 		reactiveState: Object,
-		sortableState: [Object, Array],
 		currentPage: String,
 	});
 
@@ -72,7 +71,6 @@
 						:field="field"
 						:fieldKey="key"
 						:reactiveState="props.reactiveState"
-						:sortableState="props.sortableState"
 					/>
 				</div>
 			</div>

@@ -40,7 +40,6 @@
 							:section="section"
 							:sectionKey="sectionKey"
 							:reactiveState="store.options"
-							:sortableState="store.sortable"
 							currentPage="settings"
 						>
 							<SectionTitle

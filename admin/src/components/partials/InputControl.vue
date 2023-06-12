@@ -17,7 +17,6 @@
 		fieldKey: String,
 		label: String,
 		reactiveState: Object,
-		sortableState: [Object, Array],
 	});
 
 	//console.log(props.field);
@@ -81,7 +80,7 @@
 	/>
 	<Sortable
 		v-else-if="props.field.type == 'sortable'"
-		v-model:elements="props.sortableState"
+		v-model="props.reactiveState[props.fieldKey]"
 	/>
 	<InvalidControl v-else />
 </template>

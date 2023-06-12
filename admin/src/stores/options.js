@@ -18,33 +18,6 @@ export const useOptionsStore = defineStore({
         isLoading: true,
         isSaving: false,
         errors: "",
-        sortable: [
-            {
-                "name": "Image", // Display name.
-                "id": "image", // ID of the field.
-                "enabled": true, // For enabling/disabling the field.
-            },
-            {
-                "name": "Title",
-                "id": "title",
-                "enabled": false,
-            },
-            {
-                "name": "Price",
-                "id": "price",
-                "enabled": true,
-            },
-            {
-                "name": "Description",
-                "id": "description",
-                "enabled": true,
-            },
-            {
-                "name": "Add to cart button",
-                "id": "add_to_cart_button",
-                "enabled": true,
-            },
-        ]
     }),
     getters: {
 
