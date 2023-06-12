@@ -62,7 +62,7 @@
 		? props.fallbackText
 		: __("No choices found.", "addonify-compare-products");
 
-	console.log(props.choices);
+	//console.log(props.choices);
 </script>
 <template>
 	<template v-if="Object.keys(props.choices).length !== 0">

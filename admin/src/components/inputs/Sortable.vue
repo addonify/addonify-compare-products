@@ -41,9 +41,12 @@
 	<div class="adfy-draggable-elements">
 		<draggable
 			v-model="value"
+			animation="400"
+			easing="ease-in-out"
+			item-key="id"
+			direction="vertical"
 			@start="drag = true"
 			@end="drag = false"
-			item-key="id"
 		>
 			<template #item="{ element }">
 				<div class="adfy-draggable-element" :key="element.id">

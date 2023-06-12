@@ -67,7 +67,9 @@
                 background-color: transparent;
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0);
                 border-bottom: 1px solid var(--addonify_border_color);
-                overflow: auto !important;
+                overflow: auto;
+                opacity: 1;
+                visibility: visible;
 
                 &:last-child {
 
