@@ -129,7 +129,7 @@ class Addonify_Compare_Products_Admin {
 		wp_register_script(
 			"{$this->plugin_name}-main",
 			plugin_dir_url( __FILE__ ) . 'assets/js/main.js',
-			array( 'lodash', "{$this->plugin_name}-vendor", 'wp-i18n', 'wp-api-fetch' ),
+			array( 'lodash', "{$this->plugin_name}-vendor", 'wp-i18n', 'wp-api-fetch'),
 			$this->version,
 			true
 		);

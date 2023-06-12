@@ -2,69 +2,57 @@
 	import { computed, watch } from "vue";
 	import { useOptionsStore } from "../../stores/options";
 	import draggable from "vuedraggable";
-	//import { Sortable } from "sortablejs-vue3";
 	import { ElSwitch } from "element-plus";
 	import { Check, Close } from "@element-plus/icons-vue";
-	const store = useOptionsStore();
 
+	/**
+	 *
+	 * Define props.
+	 * Props are reactive.
+	 *
+	 * @since: 1.1.9
+	 */
 	const props = defineProps({
-		elements: {
-			type: [Object, Array, String],
+		modelValue: {
+			type: [String, Array, Object], // Loose type checking.
 			required: true,
 		},
 	});
 
 	/**
 	 *
-	 * Emit the model value by using get & set methods.
+	 * Define emits for v-model usage.
 	 * Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
+	 *
 	 */
-
-	const emit = defineEmits(["update:elements"]);
+	const emit = defineEmits(["update:modelValue"]);
 	const value = computed({
 		get() {
-			return props.elements;
+			//console.log(typeof props.modelValue);
+			//console.log(props.modelValue);
+			return props.modelValue;
 		},
 		set(newValue) {
-			emit("update:elements", newValue);
+			emit("update:modelValue", newValue);
 		},
 	});
 
-	const options = {
-		ghostClass: "sortable-ghost", // Class name for the drop placeholder.
-		chosenClass: "sortable-chosen", // Class name for the chosen item.
-		dragClass: "sortable-drag", // Class name for the dragging item.
-		animation: 300,
-		group: {
-			name: "shared",
-			pull: "clone",
-		},
-	};
-
-	watch(
-		() => store.sortable,
-		(newValue, oldValue) => {
-			console.log(newValue);
-			console.log(oldValue);
-		},
-		{ deep: true }
-	);
+	console.log(value);
 </script>
 <template>
 	<div class="adfy-draggable-elements">
 		<draggable
-			v-model="store.sortable"
+			v-model="value"
 			@start="drag = true"
 			@end="drag = false"
 			item-key="id"
-			@change="handleChange"
 		>
 			<template #item="{ element }">
 				<div class="adfy-draggable-element" :key="element.id">
 					<div class="adfy-draggable-box">
 						<div class="draggable-switch">
 							<el-switch
-								v-model="element.enabled"
+								v-model="element.status"
 								size="large"
 								inline-prompt
 								:active-icon="Check"

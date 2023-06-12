@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Addonify - Compare Products For WooCommerce 1.1.6\n"
+"Project-Id-Version: Addonify - Compare Products For WooCommerce 1.1.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/addonify-compare-products\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-05-30T08:10:57+00:00\n"
+"POT-Creation-Date: 2023-06-12T08:19:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: addonify-compare-products\n"
@@ -35,8 +35,8 @@ msgid "https://addonify.com/"
 msgstr ""
 
 #: admin/class-addonify-compare-products-admin.php:224
-#: includes/setting-functions/settings.php:275
-#: admin/assets/js/main.js:2953
+#: includes/setting-functions/settings.php:336
+#: admin/assets/js/main.js:3134
 msgid "Settings"
 msgstr ""
 
@@ -44,62 +44,77 @@ msgstr ""
 msgid "Addonify Compare Products is enabled but not effective. This plugin requires WooCommerce plugin in order to work."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:227
-#: includes/setting-functions/fields/comparison-table.php:31
+#: includes/addonify-compare-products-template-functions.php:231
+#: includes/setting-functions/settings.php:77
 msgid "Title"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:233
-#: includes/setting-functions/fields/comparison-table.php:30
+#: includes/addonify-compare-products-template-functions.php:237
+#: includes/setting-functions/settings.php:82
 msgid "Image"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:239
-#: includes/setting-functions/fields/comparison-table.php:32
+#: includes/addonify-compare-products-template-functions.php:243
+#: includes/setting-functions/settings.php:87
 msgid "Price"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:245
-#: includes/setting-functions/fields/comparison-table.php:34
+#: includes/addonify-compare-products-template-functions.php:249
+#: includes/setting-functions/settings.php:92
 msgid "Description"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:251
-#: includes/setting-functions/fields/comparison-table.php:33
+#: includes/addonify-compare-products-template-functions.php:255
+#: includes/setting-functions/settings.php:97
 msgid "Rating"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:257
-msgid "In Stock"
+#: includes/addonify-compare-products-template-functions.php:261
+msgid "Stock Status"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:263
+#: includes/addonify-compare-products-template-functions.php:267
+#: includes/setting-functions/settings.php:107
+msgid "Weight"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:273
+#: includes/setting-functions/settings.php:112
+msgid "Dimensions"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:293
+#: includes/setting-functions/settings.php:122
+msgid "Additional Information"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:299
 msgid "Action"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:311
-msgid "Yes"
-msgstr ""
-
-#: includes/addonify-compare-products-template-functions.php:311
-msgid "No"
-msgstr ""
-
-#: includes/addonify-compare-products-template-functions.php:320
+#: includes/addonify-compare-products-template-functions.php:381
 msgid "At least two products are needed for comparison. There is only one product in the comparison list."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:324
+#: includes/addonify-compare-products-template-functions.php:385
 msgid "There are no products to compare."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:351
+#: includes/addonify-compare-products-template-functions.php:412
 msgid "Select more than one item for comparison."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:410
+#: includes/addonify-compare-products-template-functions.php:471
 #: includes/setting-functions/settings.php:66
 msgid "Compare"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:648
+msgid "In stock"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:651
+msgid "Out of stock"
 msgstr ""
 
 #: includes/class-addonify-compare-products-activator.php:39
@@ -197,30 +212,30 @@ msgid "Background Color on Hover"
 msgstr ""
 
 #: includes/setting-functions/fields/comparison-table.php:23
-msgid "Content to Display"
+msgid "Compare Table Fields"
 msgstr ""
 
 #: includes/setting-functions/fields/comparison-table.php:24
-msgid "Choose content that you want to display in comparison table."
+msgid "Choose content that you want to display in comparison table. The position of the content are sortable if you wish to re-arrange how they are displayed."
 msgstr ""
 
-#: includes/setting-functions/fields/comparison-table.php:35
-msgid "Stock Info"
+#: includes/setting-functions/fields/comparison-table.php:31
+msgid "Products attributes to compare"
 msgstr ""
 
-#: includes/setting-functions/fields/comparison-table.php:36
-msgid "Add to Cart Button"
+#: includes/setting-functions/fields/comparison-table.php:32
+msgid "Select product attributes that you want to compare."
 msgstr ""
 
-#: includes/setting-functions/fields/comparison-table.php:45
+#: includes/setting-functions/fields/comparison-table.php:42
 msgid "Show Table Fields Header"
 msgstr ""
 
-#: includes/setting-functions/fields/comparison-table.php:67
+#: includes/setting-functions/fields/comparison-table.php:64
 msgid "Table Title Color"
 msgstr ""
 
-#: includes/setting-functions/fields/comparison-table.php:74
+#: includes/setting-functions/fields/comparison-table.php:71
 msgid "Table Title Color on Hover"
 msgstr ""
 
@@ -344,43 +359,55 @@ msgstr ""
 msgid "Close Button On Hover Border Color"
 msgstr ""
 
-#: includes/setting-functions/settings.php:278
-msgid "General Options"
+#: includes/setting-functions/settings.php:102
+msgid "Avaibility"
 msgstr ""
 
-#: includes/setting-functions/settings.php:283
-msgid "Compare Button Options"
+#: includes/setting-functions/settings.php:117
+msgid "Attributes"
 msgstr ""
 
-#: includes/setting-functions/settings.php:288
-msgid "Comparison Table"
-msgstr ""
-
-#: includes/setting-functions/settings.php:297
-msgid "General"
-msgstr ""
-
-#: includes/setting-functions/settings.php:302
-msgid "Compare Button Colors"
-msgstr ""
-
-#: includes/setting-functions/settings.php:309
-msgid "Floating Dock Colors"
-msgstr ""
-
-#: includes/setting-functions/settings.php:316
-msgid "Search Modal Colors"
-msgstr ""
-
-#: includes/setting-functions/settings.php:323
-msgid "Comparison Table Colors"
-msgstr ""
-
-#: includes/setting-functions/settings.php:330
-msgid "Developer"
+#: includes/setting-functions/settings.php:127
+msgid "Add to Cart"
 msgstr ""
 
 #: includes/setting-functions/settings.php:339
+msgid "General Options"
+msgstr ""
+
+#: includes/setting-functions/settings.php:344
+msgid "Compare Button Options"
+msgstr ""
+
+#: includes/setting-functions/settings.php:349
+msgid "Comparison Table"
+msgstr ""
+
+#: includes/setting-functions/settings.php:358
+msgid "General"
+msgstr ""
+
+#: includes/setting-functions/settings.php:363
+msgid "Compare Button Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:370
+msgid "Floating Dock Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:377
+msgid "Search Modal Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:384
+msgid "Comparison Table Colors"
+msgstr ""
+
+#: includes/setting-functions/settings.php:391
+msgid "Developer"
+msgstr ""
+
+#: includes/setting-functions/settings.php:400
 msgid "Coming soon...."
 msgstr ""
 
@@ -488,71 +515,71 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: admin/assets/js/main.js:1650
+#: admin/assets/js/main.js:1749
 msgid "Activate now"
 msgstr ""
 
-#: admin/assets/js/main.js:1651
+#: admin/assets/js/main.js:1750
 msgid "Activating..."
 msgstr ""
 
-#: admin/assets/js/main.js:1652
+#: admin/assets/js/main.js:1751
 msgid "Install now"
 msgstr ""
 
-#: admin/assets/js/main.js:1653
+#: admin/assets/js/main.js:1752
 msgid "Installing..."
 msgstr ""
 
-#: admin/assets/js/main.js:1654
+#: admin/assets/js/main.js:1753
 msgid "Installed"
 msgstr ""
 
-#: admin/assets/js/main.js:2488
+#: admin/assets/js/main.js:2596
 msgid "Input is not supported."
 msgstr ""
 
-#: admin/assets/js/main.js:2488
+#: admin/assets/js/main.js:2596
 msgid "Check docs"
 msgstr ""
 
-#: admin/assets/js/main.js:2689
-#: admin/assets/js/main.js:2717
+#: admin/assets/js/main.js:2870
+#: admin/assets/js/main.js:2898
 msgid "Enter text here..."
 msgstr ""
 
-#: admin/assets/js/main.js:2765
+#: admin/assets/js/main.js:2946
 msgid "Version"
 msgstr ""
 
-#: admin/assets/js/main.js:2765
+#: admin/assets/js/main.js:2946
 msgid "Rate"
 msgstr ""
 
-#: admin/assets/js/main.js:2857
+#: admin/assets/js/main.js:3038
 msgid "Documentation"
 msgstr ""
 
-#: admin/assets/js/main.js:2865
+#: admin/assets/js/main.js:3046
 msgid "Save Options"
 msgstr ""
 
-#: admin/assets/js/main.js:2961
+#: admin/assets/js/main.js:3142
 msgid "Design"
 msgstr ""
 
-#: admin/assets/js/main.js:2969
+#: admin/assets/js/main.js:3150
 msgid "Products"
 msgstr ""
 
-#: admin/assets/js/main.js:3395
+#: admin/assets/js/main.js:3582
 msgid "404"
 msgstr ""
 
-#: admin/assets/js/main.js:3395
+#: admin/assets/js/main.js:3582
 msgid "Oops, page not found!"
 msgstr ""
 
-#: admin/assets/js/main.js:3400
+#: admin/assets/js/main.js:3587
 msgid "Go Back"
 msgstr ""
