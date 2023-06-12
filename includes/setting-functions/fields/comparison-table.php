@@ -21,8 +21,8 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_general_fiel
 		return array(
 			'fields_to_compare'                      => array(
 				'label'       => __( 'Content to Display', 'addonify-compare-products' ),
-				'description' => __( 'Choose content that you want to display in comparison table.', 'addonify-compare-products' ),
-				'type'        => 'checkbox',
+				'description' => __( 'Choose content that you want to display in comparison table. The position of the content are also sortable if you wish to change the order.', 'addonify-compare-products' ),
+				'type'        => 'sortable',
 				'className'   => 'fullwidth',
 				'choices'     => apply_filters(
 					'addonify_compare_products_comparison_table_content_choices',
