@@ -1,7 +1,7 @@
 /**
 =======================================================
 
-= Project : Addonify Quick View
+= Project : Addonify compare products
 =
 = Since : 24 May 2022
 =
@@ -17,6 +17,7 @@
 @use 'abstract/mixins' as *;
 
 @import 'base/form';
+@import 'base/alerts';
 
 @import 'helpers/class';
 

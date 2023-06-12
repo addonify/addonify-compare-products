@@ -53,6 +53,7 @@
 		v-else-if="props.field.type == 'checkbox'"
 		v-model="props.reactiveState[props.fieldKey]"
 		:choices="props.field.choices"
+		:fallbackText="props.field.fallback_text"
 	/>
 	<NumberToggleButton
 		v-else-if="

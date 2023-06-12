@@ -1,11 +1,39 @@
 <script setup>
 	import { computed } from "vue";
+	import Notice from "../layouts/Notice.vue";
+
+	/**
+	 *
+	 * Define props.
+	 * Props are reactive.
+	 *
+	 * @since: 1.0.0
+	 */
 	const props = defineProps({
-		modelValue: [Array, Boolean, String],
-		label: String,
-		choices: Object,
+		modelValue: {
+			type: [String, Array, Object], // Loose type checking.
+			required: true,
+		},
+		label: {
+			type: String,
+			required: false,
+		},
+		choices: {
+			type: Object,
+			required: false,
+		},
+		fallbackText: {
+			type: String,
+			required: false,
+		},
 	});
-	// Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
+
+	/**
+	 *
+	 * Define emits for v-model usage.
+	 * Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
+	 *
+	 */
 	const emit = defineEmits(["update:modelValue"]);
 	const value = computed({
 		get() {
@@ -15,15 +43,39 @@
 			emit("update:modelValue", newValue);
 		},
 	});
-	//console.log(props.modelValue);
+
+	/**
+	 *
+	 * Import i18n.
+	 *
+	 */
+
+	const { __ } = wp.i18n;
+
+	/**
+	 *
+	 * Fall back text for fallbackText prop.
+	 *
+	 */
+
+	let fallbackText = props.fallbackText
+		? props.fallbackText
+		: __("No choices found.", "addonify-compare-products");
+
+	console.log(props.choices);
 </script>
 <template>
-	<div class="adfy-checkbox-group">
-		<span v-for="(name, key) in props.choices" class="input-checkbox">
-			<input type="checkbox" :id="key" :value="key" v-model="value" />
-			<label :for="key"> {{ name }}</label>
-		</span>
-	</div>
+	<template v-if="Object.keys(props.choices).length !== 0">
+		<div class="adfy-checkbox-group">
+			<span v-for="(name, key) in props.choices" class="input-checkbox">
+				<input type="checkbox" :id="key" :value="key" v-model="value" />
+				<label :for="key"> {{ name }}</label>
+			</span>
+		</div>
+	</template>
+	<template v-else>
+		<Notice type="info" :content="fallbackText" />
+	</template>
 </template>
 <style lang="scss">
 	.adfy-checkbox-group {

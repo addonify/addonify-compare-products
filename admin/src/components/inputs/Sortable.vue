@@ -36,8 +36,6 @@
 			emit("update:modelValue", newValue);
 		},
 	});
-
-	console.log(value);
 </script>
 <template>
 	<div class="adfy-draggable-elements">

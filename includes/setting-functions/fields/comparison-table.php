@@ -30,6 +30,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_general_fiel
 			'product_attributes_to_compare'         => array(
 				'label'       => __( 'Products attributes to compare', 'addonify-compare-products' ),
 				'description' => __( 'Select product attributes that you want to compare.', 'addonify-compare-products' ),
+				'fallback_text' => __( 'You do not have product attributes.', 'addonify-compare-products' ),
 				'type'        => 'checkbox',
 				'className'   => 'fullwidth',
 				'choices'     => addonify_compare_products_get_all_product_attributes(),
