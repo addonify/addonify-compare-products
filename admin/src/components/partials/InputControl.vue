@@ -1,4 +1,5 @@
 <script setup>
+	import { reactive } from "vue";
 	import Switch from "../inputs/Switch.vue";
 	import Text from "../inputs/Text.vue";
 	import Textarea from "../inputs/Textarea.vue";
@@ -10,12 +11,16 @@
 	import ColorPicker from "../inputs/ColorPicker.vue";
 	import InvalidControl from "../inputs/InvalidControl.vue";
 	import NumberToggleButton from "../inputs/NumberToggleButton.vue";
+	import Sortable from "../inputs/Sortable.vue";
 	const props = defineProps({
 		field: Object,
 		fieldKey: String,
 		label: String,
 		reactiveState: Object,
+		sortableState: [Object, Array],
 	});
+
+	//console.log(props.field);
 </script>
 <template>
 	<Switch
@@ -73,6 +78,10 @@
 		v-model:colorVal="props.reactiveState[props.fieldKey]"
 		:isAlphaPicker="props.field.isAlphaPicker"
 		:label="props.field.label"
+	/>
+	<Sortable
+		v-else-if="props.field.type == 'sortable'"
+		v-model:elements="props.sortableState"
 	/>
 	<InvalidControl v-else />
 </template>
