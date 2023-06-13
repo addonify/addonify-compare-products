@@ -81,6 +81,7 @@
 	/>
 	<Sortable
 		v-else-if="props.field.type == 'sortable'"
+		:fallbackText="props.field.fallback_text"
 		v-model="props.reactiveState[props.fieldKey]"
 	/>
 	<InvalidControl v-else />
