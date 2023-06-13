@@ -155,6 +155,58 @@ if ( ! function_exists( 'addonify_compare_products_get_all_product_attributes_id
 }
 
 
+if ( ! function_exists( 'addonify_compare_products_sortable_setting_value' ) ) {
+	/**
+	 * Filters value for sortable controls.
+	 * Checks for consistency of saved values.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param string $setting_id Setting ID.
+	 * @return string
+	 */
+	function addonify_compare_products_sortable_setting_value( $setting_id ) {
+
+		$saved_values = json_decode( addonify_compare_products_get_option( $setting_id ), true );
+
+		$actual_values = addonify_compare_products_get_actual_values_of_sortable_setting( $setting_id );
+
+		$filtered = array();
+		$extras   = array();
+
+		if ( empty( $actual_values ) ) {
+			return wp_json_encode( $filtered );
+		}
+
+		if ( empty( $saved_values ) ) {
+			$filtered = $actual_values;
+			return wp_json_encode( $filtered );
+		}
+
+		foreach ( $saved_values as $index_1 => $saved_value ) {
+
+			$in_array = false;
+
+			foreach ( $actual_values as $index_2 => $actual_value ) {
+
+				if ( $saved_value['id'] === $actual_value['id'] ) {
+					$filtered[ $index_2 ] = $saved_value;
+					$in_array             = true;
+				}
+			}
+
+			if ( ! $in_array ) {
+				$extras[ $index_1 ] = $actual_value;
+			}
+		}
+
+		$filtered = array_merge( $filtered, $extras );
+
+		return wp_json_encode( $filtered );
+	}
+}
+
+
 if ( ! function_exists( 'addonify_compare_products_get_default_value_for_compare_table_fields_setting' ) ) {
 	/**
 	 * Generate default values for `compare_table_fields` setting.
@@ -251,5 +303,32 @@ if ( ! function_exists( 'addonify_compare_products_get_compare_table_fields' ) )
 				'add_to_cart_button'     => esc_html__( 'Action', 'addonify-compare-products' ),
 			)
 		);
+	}
+}
+
+
+if ( ! function_exists( 'addonify_compare_products_get_actual_values_of_sortable_setting' ) ) {
+	/**
+	 * Gets actual values of sortable setting.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param string $setting_id Setting ID.
+	 */
+	function addonify_compare_products_get_actual_values_of_sortable_setting( $setting_id ) {
+
+		$actual_values = array();
+
+		switch ( $setting_id ) {
+			case 'compare_table_fields':
+				$actual_values = addonify_compare_products_get_default_value_for_compare_table_fields_setting();
+				break;
+			case 'product_attributes_to_compare':
+				$actual_values = addonify_compare_products_get_default_value_for_product_attributes_to_compare_setting();
+				break;
+			default:
+		}
+
+		return apply_filters( 'addonify_compare_products_filter_actual_values_of_sortable_setting', $actual_values, $setting_id );
 	}
 }
