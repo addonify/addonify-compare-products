@@ -41,10 +41,10 @@ defined( 'ABSPATH' ) || exit;
 			<tbody>
 				<?php
 				foreach ( $table_rows as $tablet_col => $col_content ) {
-					if ( 'product_id' !== $tablet_col ) {
-						echo '<tr>';
-						foreach ( $col_content as $key => $value ) {
-							echo '<td class="' . ( ( 0 === $key ) ? 'adfy-compare-table-head' : 'adfy-compare-table-row-' . $key . ' adfy-compare-td-field-' . $tablet_col ) . '" data-product_id="' . esc_attr( $table_rows['product_id'][ $key ] ) . '">' . ( $value ) . '</td>'; //phpcs:ignore
+					echo '<tr>';
+					foreach ( $col_content as $key => $value ) {
+						if ( 'product_id' !== $tablet_col ) {
+							echo '<td class="' . 'adfy-compare-table-row-' . $key . ' adfy-compare-td-field-' . $tablet_col . '" data-product_id="' . esc_attr( $table_rows['product_id'][ $key ] ) . '">' . ( $value ) . '</td>'; //phpcs:ignore
 						}
 					}
 					echo '</tr>';
