@@ -114,7 +114,16 @@ if ( ! function_exists( 'addonify_compare_products_get_all_product_attributes' )
 		if ( $wc_attribute_taxonomies ) {
 
 			foreach ( $wc_attribute_taxonomies as $wc_attribute_taxonomy ) {
-				$attributes[ $wc_attribute_taxonomy->attribute_id ] = $wc_attribute_taxonomy->attribute_label;
+
+				$attribute = array();
+
+				$attribute['name']   = $wc_attribute_taxonomy->attribute_label;
+				$attribute['id']     = $wc_attribute_taxonomy->attribute_id;
+				$attribute['status'] = false;
+
+				$attributes[] = $attribute;
+
+				// $attributes[ $wc_attribute_taxonomy->attribute_id ] = $wc_attribute_taxonomy->attribute_label;
 			}
 		}
 
