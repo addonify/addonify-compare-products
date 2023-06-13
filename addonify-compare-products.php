@@ -69,13 +69,3 @@ function run_addonify_compare_products() {
 
 }
 run_addonify_compare_products();
-
-
-// add_action( 'wp_body_open', function() {
-
-// 	$product_attributes = addonify_compare_products_get_option( 'product_attributes_to_compare' );
-
-// 	echo '<pre>';
-// 	var_dump( json_decode( $product_attributes ), addonify_compare_products_get_all_product_attributes() );
-// 	echo '</pre>';
-// } );

@@ -71,67 +71,8 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
 				'compare_page'                             => '',
 				'compare_products_cookie_expires'          => 30,
 				'display_comparison_table_fields_header'   => true,
-				'fields_to_compare'                        => wp_json_encode( array( 'image', 'title', 'price', 'add_to_cart_button', 'rating', 'description' ) ),
-				'compare_table_fields'                     => wp_json_encode(
-					array(
-						array(
-							'name'   => esc_html__( 'Title', 'addonify-compare-products' ),
-							'id'     => 'title',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Image', 'addonify-compare-products' ),
-							'id'     => 'image',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Price', 'addonify-compare-products' ),
-							'id'     => 'price',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Description', 'addonify-compare-products' ),
-							'id'     => 'description',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Rating', 'addonify-compare-products' ),
-							'id'     => 'rating',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Avaibility', 'addonify-compare-products' ),
-							'id'     => 'in_stock',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Weight', 'addonify-compare-products' ),
-							'id'     => 'weight',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Dimensions', 'addonify-compare-products' ),
-							'id'     => 'dimensions',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Attributes', 'addonify-compare-products' ),
-							'id'     => 'attributes',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Additional Information', 'addonify-compare-products' ),
-							'id'     => 'additional_information',
-							'status' => true,
-						),
-						array(
-							'name'   => esc_html__( 'Add to Cart', 'addonify-compare-products' ),
-							'id'     => 'add_to_cart_button',
-							'status' => true,
-						),
-					)
-				),
-				'product_attributes_to_compare'            => wp_json_encode( array() ),
+				'compare_table_fields'                     => wp_json_encode( addonify_compare_products_get_default_value_for_compare_table_fields_setting() ),
+				'product_attributes_to_compare'            => wp_json_encode( addonify_compare_products_get_default_value_for_product_attributes_to_compare_setting() ),
 				'load_styles_from_plugin'                  => false,
 
 				// Design - add to compare button.
@@ -216,6 +157,8 @@ if ( ! function_exists( 'addonify_compare_products_update_settings' ) ) {
 		) {
 			$setting_fields = addonify_compare_products_settings_fields();
 
+			$setting_defaults = addonify_compare_products_settings_defaults();
+
 			foreach ( $settings as $id => $value ) {
 
 				$sanitized_value = null;
@@ -244,14 +187,31 @@ if ( ! function_exists( 'addonify_compare_products_update_settings' ) ) {
 						break;
 					case 'checkbox':
 						$sanitize_args   = array(
-							'choices' => $settings_fields[ $key ]['choices'],
+							'choices' => $setting_fields[ $id ]['choices'],
 							'values'  => $value,
 						);
 						$sanitized_value = addonify_compare_products_sanitize_multi_choices( $sanitize_args );
 						$sanitized_value = wp_json_encode( $value );
 						break;
 					case 'sortable':
-						$sanitized_value = wp_json_encode( $value );
+						$sortable_values = $value;
+
+						if ( empty( $sortable_values ) ) {
+							$sanitized_value = $setting_defaults[ $id ];
+							break;
+						}
+
+						$choices = $setting_fields[ $id ]['choices'];
+						$matched = true;
+
+						if ( $choices && $sortable_values ) {
+							foreach ( $sortable_values as $sortable_value ) {
+								if ( ! array_key_exists( $sortable_value['id'], $choices ) ) {
+									$matched = false;
+								}
+							}
+						}
+						$sanitized_value = ( true === $matched ) ? wp_json_encode( $value ) : $setting_defaults[ $id ];
 						break;
 					default:
 						$sanitized_value = sanitize_text_field( $value );
@@ -286,25 +246,21 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_values' ) ) {
 
 			foreach ( addonify_compare_products_settings_defaults() as $id => $value ) {
 
-				if ( isset( $setting_fields[ $id ]['type'] ) ) {
-					$setting_type = $setting_fields[ $id ]['type'];
+				$setting_type = $setting_fields[ $id ]['type'];
 
-					switch ( $setting_type ) {
-						case 'switch':
-							$settings_values[ $id ] = ( addonify_compare_products_get_option( $id ) === '1' ) ? true : false;
-							break;
-						case 'checkbox':
-						case 'sortable':
-							$settings_values[ $id ] = json_decode( addonify_compare_products_get_option( $id ), true );
-							break;
-						case 'number':
-							$settings_values[ $id ] = addonify_compare_products_get_option( $id );
-							break;
-						default:
-							$settings_values[ $id ] = addonify_compare_products_get_option( $id );
-					}
-				} else {
-					continue;
+				switch ( $setting_type ) {
+					case 'switch':
+						$settings_values[ $id ] = ( addonify_compare_products_get_option( $id ) === '1' ) ? true : false;
+						break;
+					case 'checkbox':
+					case 'sortable':
+						$settings_values[ $id ] = json_decode( addonify_compare_products_get_option( $id ), true );
+						break;
+					case 'number':
+						$settings_values[ $id ] = addonify_compare_products_get_option( $id );
+						break;
+					default:
+						$settings_values[ $id ] = addonify_compare_products_get_option( $id );
 				}
 			}
 
