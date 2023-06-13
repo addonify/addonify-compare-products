@@ -19,23 +19,36 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_general_fiel
 	function addonify_compare_products_comparison_table_general_fields() {
 
 		return array(
-			'compare_table_fields'                      => array(
+			'compare_table_fields'                   => array(
 				'label'       => __( 'Compare Table Fields', 'addonify-compare-products' ),
 				'description' => __( 'Choose content that you want to display in comparison table. The position of the content are sortable if you wish to re-arrange how they are displayed.', 'addonify-compare-products' ),
 				'type'        => 'sortable',
 				'className'   => 'fullwidth',
+				'choices'     => array(
+					'title',
+					'image',
+					'price',
+					'description',
+					'rating',
+					'in_stock',
+					'weight',
+					'dimensions',
+					'attributes',
+					'additional_information',
+					'add_to_cart_button',
+				),
 				'dependent'   => array( 'enable_product_comparison' ),
 				'value'       => addonify_compare_products_get_option( 'compare_table_fields' ),
 			),
-			'product_attributes_to_compare'         => array(
-				'label'       => __( 'Products attributes to compare', 'addonify-compare-products' ),
-				'description' => __( 'Select product attributes that you want to compare.', 'addonify-compare-products' ),
+			'product_attributes_to_compare'          => array(
+				'label'         => __( 'Products attributes to compare', 'addonify-compare-products' ),
+				'description'   => __( 'Select product attributes that you want to compare.', 'addonify-compare-products' ),
 				'fallback_text' => __( 'You do not have product attributes.', 'addonify-compare-products' ),
-				'type'        => 'checkbox',
-				'className'   => 'fullwidth',
-				'choices'     => addonify_compare_products_get_all_product_attributes(),
-				'dependent'   => array( 'enable_product_comparison' ),
-				'value'       => addonify_compare_products_get_option( 'product_attributes_to_compare' ),
+				'type'          => 'sortable',
+				'className'     => 'fullwidth',
+				'choices'       => addonify_compare_products_get_all_product_attributes(),
+				'dependent'     => array( 'enable_product_comparison' ),
+				'value'         => wp_json_encode( addonify_compare_products_get_all_product_attributes() ),
 			),
 			'display_comparison_table_fields_header' => array(
 				'type'        => 'switch',
