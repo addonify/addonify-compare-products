@@ -183,24 +183,39 @@ if ( ! function_exists( 'addonify_compare_products_sortable_setting_value' ) ) {
 			return wp_json_encode( $filtered );
 		}
 
-		foreach ( $saved_values as $index_1 => $saved_value ) {
+		$actual_values_count = count( $actual_values ) + 1;
+
+		// If item in the saved value is present in the actual value, the add the item in the `filtered` array.
+		foreach ( $saved_values as $saved_index => $saved_value ) {
+
+			foreach ( $actual_values as $actual_index => $actual_value ) {
+
+				if ( $saved_value['id'] === $actual_value['id'] ) {
+					$filtered[ $saved_index ] = $saved_value;
+				}
+			}
+		}
+
+		// If a item in actual value is missing in the saved value, then add the item in the `filtered` array.
+		foreach ( $actual_values as $actual_index => $actual_value ) {
 
 			$in_array = false;
 
-			foreach ( $actual_values as $index_2 => $actual_value ) {
+			foreach ( $saved_values as $saved_index => $saved_value ) {
 
 				if ( $saved_value['id'] === $actual_value['id'] ) {
-					$filtered[ $index_2 ] = $saved_value;
-					$in_array             = true;
+					$in_array = true;
 				}
 			}
 
 			if ( ! $in_array ) {
-				$extras[ $index_1 ] = $actual_value;
+				$filtered[ $actual_values_count ] = $actual_value;
+				$actual_values_count++;
 			}
 		}
 
-		$filtered = array_merge( $filtered, $extras );
+		// Returns all the values from the array and indexes the array numerically.
+		$filtered = array_values( $filtered );
 
 		return wp_json_encode( $filtered );
 	}
