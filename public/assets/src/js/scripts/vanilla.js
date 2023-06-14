@@ -39,7 +39,7 @@ const initAddonifyCompareProductsScrollBar = () => {
 const addonifyCompareProductsModelCalcHeight = () => {
 
     const height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-    const addonifyCompareModelEle = document.getElementById('addonify-compare-modal-content');
+    const addonifyCompareModelEle = document.getElementById('addonify-compare-model-inner');
 
     if (addonifyCompareModelEle) {
 

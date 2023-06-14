@@ -22,14 +22,6 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div id="addonify-compare-products-table-wrapper">
-
-	<button id="addonify-compare-close-button" class="addonify-cp-fake-button addonify-compare-all-close-btn">
-		<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-			stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-			<line x1="18" y1="6" x2="6" y2="18"></line>
-			<line x1="6" y1="6" x2="18" y2="18"></line>
-		</svg>
-	</button>
 	<p id="addonify-compare-products-notice" class="<?php echo esc_attr( implode( ' ', $message_css_classes ) ); ?>">
 		<?php echo esc_html( $no_table_rows_message ); ?>
 	</p><!-- #addonify-compare-products-notice -->
@@ -44,7 +36,7 @@ defined( 'ABSPATH' ) || exit;
 					echo '<tr>';
 					foreach ( $col_content as $key => $value ) {
 						if ( 'product_id' !== $tablet_col ) {
-							echo '<td class="' . 'adfy-compare-table-row-' . $key . ' adfy-compare-td-field-' . $tablet_col . '" data-product_id="' . esc_attr( $table_rows['product_id'][ $key ] ) . '">' . ( $value ) . '</td>'; //phpcs:ignore
+							echo '<td class="' . 'adfy-compare-table-row-' . $key . ' adfy-compare-td-field-' . $tablet_col . '" data-product_id="' . esc_attr( $table_rows['product_id'][ $key ] ) . '">' . '<div class="adfy-compare-table-row-content">' . ( $value ) . '</div></td>'; //phpcs:ignore
 						}
 					}
 					echo '</tr>';
