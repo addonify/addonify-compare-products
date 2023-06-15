@@ -98,7 +98,7 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.9 - ? June, 2023 =
+= 1.1.9 - 15 June, 2023 =
 
 - Fixed: Issue of product image getting rendered twice in comparison docker. [GitHub Issue#159](https://github.com/addonify/addonify-compare-products/issues/159)
 - Fixed: PHP warnings. [GitHub Issue#168](https://github.com/addonify/addonify-compare-products/issues/168)
