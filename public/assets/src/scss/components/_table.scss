@@ -123,34 +123,6 @@
             margin: 0;
         }
     }
-
-    // Tbody style.
-    tbody {
-
-        tr {
-
-            td {
-
-                &:first-child {
-
-                    width: 200px;
-                    background-color: whitesmoke;
-
-                    // Resize width in ipadpro breakpoint.
-                    @include breakpoint(ipadpro) {
-
-                        width: 100px;
-                    }
-
-                    // Hide in medium breakpoint.
-                    @include breakpoint(medium) {
-
-                        display: none;
-                    }
-                }
-            }
-        }
-    }
 }
 
 /* -------------------------------------------------------------------------- 
@@ -206,14 +178,6 @@
                 }
 
                 td {
-
-                    &:first-child {
-
-                        @include breakpoint(medium) {
-
-                            display: none;
-                        }
-                    }
 
                     @include breakpoint(mobile) {
 
@@ -273,12 +237,40 @@
                 }
             }
         }
+    }
+}
 
-        &:not(.has-header) {
 
-            .adfy-compare-products-table-head {
+/* -------------------------------------------------------------------------- 
+	Resize the table header & hide it after certain breakpoint.
+  -------------------------------------------------------------------------- */
 
-                display: none;
+#addonify-compare-products-table.has-header,
+#addonify-compare-products-table-wrapper #addonify-compare-products-table.has-header {
+
+    tbody {
+
+        tr {
+
+            td {
+
+                &:first-child {
+
+                    width: 200px;
+                    background-color: whitesmoke;
+
+                    // Resize width in ipadpro breakpoint.
+                    @include breakpoint(ipadpro) {
+
+                        width: 100px;
+                    }
+
+                    // Hide afetr medium breakpoint.
+                    @include breakpoint(medium) {
+
+                        display: none;
+                    }
+                }
             }
         }
     }

@@ -368,8 +368,9 @@
         overflow: hidden;
         margin: 0 auto;
         height: 100%;
-        width: 97vw;
-        max-width: 1800px;
+        width: 98vw; // Fallback.
+        width: calc(100vw - 40px);
+        max-width: 2048px; // Max: 2K - 40px
         overflow: hidden;
         border-radius: 5px;
         background-color: white;
