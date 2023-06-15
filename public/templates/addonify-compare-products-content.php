@@ -32,14 +32,18 @@ defined( 'ABSPATH' ) || exit;
 		<table id="addonify-compare-products-table" class="<?php echo esc_attr( implode( ' ', $table_css_classes ) ); ?>">
 			<tbody>
 				<?php
-				foreach ( $table_rows as $tablet_col => $col_content ) {
-					echo '<tr>';
-					foreach ( $col_content as $key => $value ) {
-						if ( 'product_id' !== $tablet_col ) {
-							echo '<td class="' . 'adfy-compare-table-row-' . $key . ' adfy-compare-td-field-' . $tablet_col . '" data-product_id="' . esc_attr( $table_rows['product_id'][ $key ] ) . '">' . '<div class="adfy-compare-table-row-content">' . ( $value ) . '</div></td>'; //phpcs:ignore
+				foreach ( $table_rows as $table_col => $col_content ) {
+
+					if ( 'product_id' !== $table_col ) {
+
+						echo '<tr>';
+
+						foreach ( $col_content as $key => $value ) {
+							echo '<td class="' . 'adfy-compare-products-table-row-' . $key . ' adfy-compare-products-td-field-' . $table_col . '" data-product_id="' . esc_attr( $table_rows['product_id'][ $key ] ) . '">' . '<div class="adfy-compare-products-table-row-content">' . ( $value ) . '</div></td>'; //phpcs:ignore
 						}
+
+						echo '</tr>';
 					}
-					echo '</tr>';
 				}
 				?>
 			</tbody>

@@ -84,9 +84,9 @@
         }
     }
 
-    td:not(:first-child)[class*="adfy-compare-td-field-image"] {
+    td:not(:first-child)[class*="adfy-compare-products-td-field-image"] {
 
-        .adfy-compare-table-row-content {
+        .adfy-compare-products-table-row-content {
 
             a {
 
@@ -100,9 +100,9 @@
         }
     }
 
-    td:not(:first-child)[class*="adfy-compare-td-field-rating"] {
+    td:not(:first-child)[class*="adfy-compare-products-td-field-rating"] {
 
-        .adfy-compare-table-row-content {
+        .adfy-compare-products-table-row-content {
 
             @include flex();
             align-items: center;
@@ -116,7 +116,7 @@
         }
     }
 
-    td:not(:first-child)[class*="adfy-compare-td-field-attribute"] {
+    td:not(:first-child)[class*="adfy-compare-products-td-field-attribute"] {
 
         p {
 
@@ -276,7 +276,7 @@
 
         &:not(.has-header) {
 
-            .adfy-compare-table-head {
+            .adfy-compare-products-table-head {
 
                 display: none;
             }

@@ -196,7 +196,7 @@ if ( ! function_exists( 'addonify_compare_products_render_comparison_content' ) 
 		$comparison_content_args = array(
 			'no_table_rows_message' => '',
 			'message_css_classes'   => array( 'addonify-compare-products-notice' ),
-			'table_css_classes'     => array(),
+			'table_css_classes'     => array( 'addonify-compare-products-table' ),
 			'table_rows'            => array(),
 			'no_of_products'        => 0,
 			'table_fields'          => array(),
@@ -227,7 +227,7 @@ if ( ! function_exists( 'addonify_compare_products_render_comparison_content' ) 
 				$comparison_content_args['table_rows']['remove_button'][] = '';
 			} else {
 
-				$comparison_content_args['table_css_classes'][] = 'no-header';
+				$comparison_content_args['table_css_classes'][] = 'has-no-header';
 			}
 
 			$compare_table_defined_fields = addonify_compare_products_get_compare_table_fields();
