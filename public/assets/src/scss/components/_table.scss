@@ -11,6 +11,12 @@
     padding: 0;
     overflow: auto;
 
+    &.addonify-compare-hidden {
+
+        display: none; // Hide table if only 1 product exists in the compare list.
+    }
+
+    // All td & th style.
     th,
     td {
 
@@ -26,7 +32,6 @@
     }
 
     td {
-
         .price {
 
             display: inline-flex;
@@ -56,11 +61,6 @@
             }
         }
 
-        .star-rating {
-
-            float: left;
-        }
-
         .add_to_cart_inline {
 
             margin-bottom: 0;
@@ -84,48 +84,44 @@
         }
     }
 
-    td.adfy-compare-table-head {
+    td:not(:first-child)[class*="adfy-compare-products-td-field-image"] {
 
-        width: 200px;
+        .adfy-compare-products-table-row-content {
 
-        @include breakpoint(ipadpro) {
+            a {
 
-            width: 100px;
-        }
+                display: block;
 
-        @include breakpoint(mobile) {
+                img {
 
-            display: none;
-        }
-    }
-
-    td.adfy-compare-td-field-image {
-
-        > a {
-
-            display: inline-flex;
-
-            > img {
-
-                border-radius: 5px;
+                    border-radius: 5px;
+                }
             }
         }
     }
 
-    tbody {
+    td:not(:first-child)[class*="adfy-compare-products-td-field-rating"] {
 
-        tr {
+        .adfy-compare-products-table-row-content {
 
-            td:first-child {
+            @include flex();
+            align-items: center;
+            gap: 3px;
 
-                background-color: #F5F5F5;
+            .star-rating {
+
+                float: none;
+                margin: 0;
             }
         }
     }
 
-    &.addonify-compare-hidden {
+    td:not(:first-child)[class*="adfy-compare-products-td-field-attribute"] {
 
-        display: none; // Hide table if only 1 product exists in the compare list.
+        p {
+
+            margin: 0;
+        }
     }
 }
 
@@ -192,11 +188,6 @@
                         padding: 0;
                         margin: 0;
 
-                        &.adfy-compare-table-head {
-
-                            display: none !important;
-                        }
-
                         .star-rating {
 
                             float: none;
@@ -246,12 +237,40 @@
                 }
             }
         }
+    }
+}
 
-        &:not(.has-header) {
 
-            .adfy-compare-table-head {
+/* -------------------------------------------------------------------------- 
+	Resize the table header & hide it after certain breakpoint.
+  -------------------------------------------------------------------------- */
 
-                display: none;
+#addonify-compare-products-table.has-header,
+#addonify-compare-products-table-wrapper #addonify-compare-products-table.has-header {
+
+    tbody {
+
+        tr {
+
+            td {
+
+                &:first-child {
+
+                    width: 200px;
+                    background-color: whitesmoke;
+
+                    // Resize width in ipadpro breakpoint.
+                    @include breakpoint(ipadpro) {
+
+                        width: 100px;
+                    }
+
+                    // Hide afetr medium breakpoint.
+                    @include breakpoint(medium) {
+
+                        display: none;
+                    }
+                }
             }
         }
     }

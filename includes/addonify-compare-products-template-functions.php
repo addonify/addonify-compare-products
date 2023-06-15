@@ -196,124 +196,114 @@ if ( ! function_exists( 'addonify_compare_products_render_comparison_content' ) 
 		$comparison_content_args = array(
 			'no_table_rows_message' => '',
 			'message_css_classes'   => array( 'addonify-compare-products-notice' ),
-			'table_css_classes'     => array(),
+			'table_css_classes'     => array( 'addonify-compare-products-table' ),
 			'table_rows'            => array(),
 			'no_of_products'        => 0,
+			'table_fields'          => array(),
+			'wc_product_ids'        => array(),
 		);
 
-		$content_to_display = ( addonify_compare_products_get_option( 'fields_to_compare' ) ) ? json_decode( addonify_compare_products_get_option( 'fields_to_compare' ), true ) : array();
+		$content_to_display = ( addonify_compare_products_sortable_setting_value( 'compare_table_fields' ) ) ? json_decode( addonify_compare_products_sortable_setting_value( 'compare_table_fields' ), true ) : array();
+
+		$comparison_content_args['table_fields'] = $content_to_display;
 
 		if (
 			is_array( $content_to_display ) &&
 			count( $content_to_display ) > 1
 		) {
 
-			$comparison_content_args['table_rows'] = array( 'product_id' => array( '0' ) );
+			$display_compare_table_fields_head = (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' );
+
+			$comparison_content_args['table_rows'] = array( 'product_id' => array() );
 
 			$comparison_content_args['table_rows']['remove_button'] = array();
 
-			if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
+			if ( 1 === $display_compare_table_fields_head ) {
 
 				$comparison_content_args['table_css_classes'][] = 'has-header';
+
+				$comparison_content_args['table_rows']['product_id'][] = 0;
 
 				$comparison_content_args['table_rows']['remove_button'][] = '';
 			} else {
 
-				$comparison_content_args['table_css_classes'][] = 'no-header';
+				$comparison_content_args['table_css_classes'][] = 'has-no-header';
 			}
 
-			if ( in_array( 'title', $content_to_display, true ) ) {
-				if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
-					$comparison_content_args['table_rows']['title'] = array( __( 'Title', 'addonify-compare-products' ) );
-				}
-			}
+			$compare_table_defined_fields = addonify_compare_products_get_compare_table_fields();
 
-			if ( in_array( 'image', $content_to_display, true ) ) {
-				if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
-					$comparison_content_args['table_rows']['image'] = array( __( 'Image', 'addonify-compare-products' ) );
-				}
-			}
+			foreach ( $content_to_display as $table_field ) {
+				if ( isset( $table_field['status'] ) && true === $table_field['status'] ) {
 
-			if ( in_array( 'price', $content_to_display, true ) ) {
-				if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
-					$comparison_content_args['table_rows']['price'] = array( __( 'Price', 'addonify-compare-products' ) );
-				}
-			}
+					if ( isset( $table_field['id'] ) && 'attributes' !== $table_field['id'] ) {
+						if ( 1 === $display_compare_table_fields_head ) {
+							$comparison_content_args['table_rows'][ $table_field['id'] ] = array( $compare_table_defined_fields[ $table_field['id'] ] );
+						} else {
+							$comparison_content_args['table_rows'][ $table_field['id'] ] = array();
+						}
+					}
 
-			if ( in_array( 'description', $content_to_display, true ) ) {
-				if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
-					$comparison_content_args['table_rows']['description'] = array( __( 'Description', 'addonify-compare-products' ) );
-				}
-			}
+					if ( isset( $table_field['id'] ) && 'attributes' === $table_field['id'] ) {
 
-			if ( in_array( 'rating', $content_to_display, true ) ) {
-				if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
-					$comparison_content_args['table_rows']['rating'] = array( __( 'Rating', 'addonify-compare-products' ) );
-				}
-			}
+						$selected_attributes = ( addonify_compare_products_sortable_setting_value( 'product_attributes_to_compare' ) ) ?
+						json_decode( addonify_compare_products_sortable_setting_value( 'product_attributes_to_compare' ), true ) :
+						array();
 
-			if ( in_array( 'in_stock', $content_to_display, true ) ) {
-				if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
-					$comparison_content_args['table_rows']['in_stock'] = array( __( 'In Stock', 'addonify-compare-products' ) );
-				}
-			}
-
-			if ( in_array( 'add_to_cart_button', $content_to_display, true ) ) {
-				if ( (int) addonify_compare_products_get_option( 'display_comparison_table_fields_header' ) === 1 ) {
-					$comparison_content_args['table_rows']['add_to_cart_button'] = array( __( 'Action', 'addonify-compare-products' ) );
+						if ( $selected_attributes ) {
+							foreach ( $selected_attributes as $attribute ) {
+								if ( isset( $attribute['status'] ) && true === $attribute['status'] ) {
+									if ( 1 === $display_compare_table_fields_head ) {
+										$comparison_content_args['table_rows'][ 'attribute_id_' . $attribute['id'] ] = array( $attribute['name'] );
+									} else {
+										$comparison_content_args['table_rows'][ 'attribute_id_' . $attribute['id'] ] = array();
+									}
+								}
+							}
+						}
+					}
 				}
 			}
 
 			$products = addonify_compare_products_get_compare_products_list();
+
+			$comparison_content_args['wc_product_ids'] = $products;
 
 			$comparison_content_args['no_of_products'] = count( $products );
 
 			if ( is_array( $products ) && $comparison_content_args['no_of_products'] > 0 ) {
 
 				if ( $comparison_content_args['no_of_products'] > 1 ) {
+
 					foreach ( $products as $product_id ) {
 
 						$product = wc_get_product( $product_id );
 
 						$comparison_content_args['table_rows']['product_id'][] = $product_id;
 
-						$delete_button = '<button class="addonify-remove-compare-products addonify-compare-table-remove-btn" data-product_id="' . esc_attr( $product_id ) . '"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g id="_01_align_center" data-name="01 align center"><path d="M22,4H17V2a2,2,0,0,0-2-2H9A2,2,0,0,0,7,2V4H2V6H4V21a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V6h2ZM9,2h6V4H9Zm9,19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V6H18Z"/><rect x="9" y="10" width="2" height="8"/><rect x="13" y="10" width="2" height="8"/></g></svg></button>';
+						$comparison_content_args['table_rows']['remove_button'][] = addonify_compare_products_product_remove_button( $product );
 
-						$comparison_content_args['table_rows']['remove_button'][] = $delete_button;
+						foreach ( $content_to_display as $table_field ) {
 
-						if ( in_array( 'title', $content_to_display, true ) ) {
-							$comparison_content_args['table_rows']['title'][] = '<a class="product-title-link" href="' . esc_url( $product->get_permalink() ) . '" >' . wp_kses_post( $product->get_title() ) . '</a>';
-						}
+							if ( isset( $table_field['status'] ) && true === $table_field['status'] ) {
 
-						if ( in_array( 'image', $content_to_display, true ) ) {
+								if ( isset( $table_field['id'] ) && 'attributes' !== $table_field['id'] ) {
+									$comparison_content_args['table_rows'][ $table_field['id'] ][] = call_user_func( "addonify_compare_products_product_{$table_field['id']}", $product );
+								}
 
-							$comparison_content_args['table_rows']['image'][] = '<a href="' . esc_url( $product->get_permalink() ) . '" >' . wp_kses_post( $product->get_image() ) . '</a>';
-						}
+								if ( isset( $table_field['id'] ) && 'attributes' === $table_field['id'] ) {
+									$selected_attributes = ( addonify_compare_products_sortable_setting_value( 'product_attributes_to_compare' ) ) ?
+									json_decode( addonify_compare_products_sortable_setting_value( 'product_attributes_to_compare' ), true ) :
+									array();
 
-						if ( in_array( 'price', $content_to_display, true ) ) {
-
-							$comparison_content_args['table_rows']['price'][] = '<span class="price">' . wp_kses_post( $product->get_price_html() ) . '</span>';
-						}
-
-						if ( in_array( 'description', $content_to_display, true ) ) {
-
-							$comparison_content_args['table_rows']['description'][] = wp_kses_post( $product->get_short_description() );
-						}
-
-						if ( in_array( 'rating', $content_to_display, true ) ) {
-
-							$ratings = wc_get_rating_html( $product->get_average_rating() );
-							$comparison_content_args['table_rows']['rating'][] = ( $ratings ) ? wp_kses_post( $ratings ) : '-';
-						}
-
-						if ( in_array( 'in_stock', $content_to_display, true ) ) {
-
-							$comparison_content_args['table_rows']['in_stock'][] = ( $product->is_in_stock() ) ? __( 'Yes', 'addonify-compare-products' ) : __( 'No', 'addonify-compare-products' );
-						}
-
-						if ( in_array( 'add_to_cart_button', $content_to_display, true ) ) {
-
-							$comparison_content_args['table_rows']['add_to_cart_button'][] = do_shortcode( '[add_to_cart id="' . $product_id . '" show_price="false" style="" ]' );
+									if ( $selected_attributes ) {
+										foreach ( $selected_attributes as $attribute ) {
+											if ( isset( $attribute['status'] ) && true === $attribute['status'] ) {
+												$comparison_content_args['table_rows'][ 'attribute_id_' . $attribute['id'] ][] = addonify_compare_products_product_attribute_properties( $product, (int) $attribute['id'] );
+											}
+										}
+									}
+								}
+							}
 						}
 					}
 				} else {
@@ -437,6 +427,321 @@ if ( ! function_exists( 'addonify_compare_products_render_docker_search_result' 
 		addonify_compare_products_get_template(
 			'addonify-compare-products-search-result.php',
 			apply_filters( 'addonify_compare_products_docker_search_result_args', $args )
+		);
+	}
+}
+
+
+if ( ! function_exists( 'addonify_compare_products_product_remove_button' ) ) {
+	/**
+	 * HTML definition of product remove button displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_remove_button( $product ) {
+
+		$remove_button = '<button class="addonify-remove-compare-products addonify-compare-table-remove-btn" data-product_id="' . esc_attr( $product->get_id() ) . '"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g id="_01_align_center" data-name="01 align center"><path d="M22,4H17V2a2,2,0,0,0-2-2H9A2,2,0,0,0,7,2V4H2V6H4V21a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V6h2ZM9,2h6V4H9Zm9,19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V6H18Z"/><rect x="9" y="10" width="2" height="8"/><rect x="13" y="10" width="2" height="8"/></g></svg></button>';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_remove_button',
+			$remove_button,
+			$product
+		);
+	}
+}
+
+if ( ! function_exists( 'addonify_compare_products_product_image' ) ) {
+	/**
+	 * HTML definition of product image displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_image( $product ) {
+
+		$product_image = '<a href="' . esc_url( $product->get_permalink() ) . '" >' . wp_kses_post( $product->get_image() ) . '</a>';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_image',
+			$product_image,
+			$product
+		);
+	}
+}
+
+if ( ! function_exists( 'addonify_compare_products_product_title' ) ) {
+	/**
+	 * HTML definition of product title displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_title( $product ) {
+
+		$product_title = '<a class="product-title-link" href="' . esc_url( $product->get_permalink() ) . '" >' . wp_kses_post( $product->get_title() ) . '</a>';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_title',
+			$product_title,
+			$product
+		);
+	}
+}
+
+
+if ( ! function_exists( 'addonify_compare_products_product_price' ) ) {
+	/**
+	 * HTML definition of product price displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_price( $product ) {
+
+		$product_price = '<span class="price">' . wp_kses_post( $product->get_price_html() ) . '</span>';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_price',
+			$product_price,
+			$product
+		);
+	}
+}
+
+
+if ( ! function_exists( 'addonify_compare_products_product_description' ) ) {
+	/**
+	 * HTML definition of product remove button displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_description( $product ) {
+
+		$product_description = wp_kses_post( $product->get_short_description() );
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_description',
+			$product_description,
+			$product
+		);
+	}
+}
+
+
+if ( ! function_exists( 'addonify_compare_products_product_rating' ) ) {
+	/**
+	 * HTML definition of product rating displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_rating( $product ) {
+
+		$rating         = wc_get_rating_html( $product->get_average_rating() );
+		$ratings_count  = $product->get_rating_counts() ? count( $product->get_rating_counts() ) : 0;
+		$product_rating = ( $rating ) ? wp_kses_post( $rating ) . '(' . esc_html( $ratings_count ) . ')' : 'N/A';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_rating',
+			$product_rating,
+			$product
+		);
+	}
+}
+
+
+if ( ! function_exists( 'addonify_compare_products_product_in_stock' ) ) {
+	/**
+	 * HTML definition of product stock status displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_in_stock( $product ) {
+
+		$product_status = $product->get_stock_status();
+
+		$stock_status = '-';
+
+		switch ( $product_status ) {
+			case 'instock':
+				$stock_status = '<span class="stock in-stock">' . esc_html__( 'In stock', 'addonify-compare-products' ) . '</span>';
+				break;
+			case 'outofstock':
+				$stock_status = '<span class="stock out-of-stock">' . esc_html__( 'Out of stock', 'addonify-compare-products' ) . '</span>';
+				break;
+			default:
+		}
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_stock_status',
+			$stock_status,
+			$product
+		);
+	}
+}
+
+if ( ! function_exists( 'addonify_compare_products_product_add_to_cart_button' ) ) {
+	/**
+	 * HTML definition of product add to cart button displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_add_to_cart_button( $product ) {
+
+		$product_add_to_cart_button = do_shortcode( '[add_to_cart id="' . $product->get_id() . '" show_price="false" style="" ]' );
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_add_to_cart_button',
+			$product_add_to_cart_button,
+			$product
+		);
+	}
+}
+
+if ( ! function_exists( 'addonify_compare_products_product_attribute_properties' ) ) {
+	/**
+	 * HTML definition of default product attribute displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 * @param int        $attribute_id Attribute taxonomy ID.
+	 */
+	function addonify_compare_products_product_attribute_properties( $product, $attribute_id ) {
+
+		$product_attributes = $product->get_attributes();
+
+		$attribute_value_names = array();
+
+		if ( $product_attributes ) {
+
+			foreach ( $product_attributes as $attribute ) {
+
+				if ( $attribute->is_taxonomy() ) {
+
+					$attribute_taxonomy = $attribute->get_taxonomy_object();
+
+					if ( (int) $attribute_taxonomy->attribute_id === (int) $attribute_id ) {
+
+						$attribute_values = wc_get_product_terms( $product->get_id(), $attribute->get_name(), array( 'fields' => 'all' ) );
+
+						foreach ( $attribute_values as $attribute_value ) {
+							$attribute_value_names[] = esc_html( $attribute_value->name );
+						}
+					}
+				}
+			}
+		}
+
+		$product_attribute_properties = ( $attribute_value_names ) ? wpautop( wptexturize( implode( ', ', $attribute_value_names ) ) ) : 'N/A';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_attribute_properties',
+			$product_attribute_properties,
+			$product,
+			$attribute_id
+		);
+	}
+}
+
+if ( ! function_exists( 'addonify_compare_products_product_weight' ) ) {
+	/**
+	 * HTML definition of product weight displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_weight( $product ) {
+
+		$product_weight = ( $product->has_weight() && $product->get_weight() ) ? wc_format_weight( $product->get_weight() ) : 'N/A';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_weight',
+			$product_weight,
+			$product
+		);
+	}
+}
+
+if ( ! function_exists( 'addonify_compare_products_product_dimensions' ) ) {
+	/**
+	 * HTML definition of product dimensions displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_dimensions( $product ) {
+
+		$product_dimensions = ( $product->has_dimensions() && $product->get_dimensions( false ) ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : 'N/A';
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_dimensions',
+			$product_dimensions,
+			$product
+		);
+	}
+}
+
+
+if ( ! function_exists( 'addonify_compare_products_product_additional_information' ) ) {
+	/**
+	 * HTML definition of product additional information displayed in compare table.
+	 *
+	 * @since 1.1.9
+	 *
+	 * @param WC_Product $product Product Object.
+	 */
+	function addonify_compare_products_product_additional_information( $product ) {
+
+		$product_attributes = $product->get_attributes();
+
+		$custom_attributes = array();
+
+		if ( $product_attributes ) {
+
+			foreach ( $product_attributes as $index => $attribute ) {
+
+				if ( ! $attribute->is_taxonomy() ) {
+
+					$custom_attributes[ $index ]['label'] = wc_attribute_label( $attribute->get_name() );
+
+					$values = $attribute->get_options();
+
+					$custom_attributes[ $index ]['values'] = ( $values ) ? wptexturize( implode( ', ', $values ) ) : '';
+				}
+			}
+		}
+
+		$additional_information_html = '';
+
+		if ( $custom_attributes ) {
+			foreach ( $custom_attributes as $custom_attribute ) {
+				$additional_information_html .= '<div class="custom-attribute-' . $custom_attribute['label'] . '">';
+				$additional_information_html .= '<label class="attribute-label">' . $custom_attribute['label'] . '</label> - ' . $custom_attribute['values'];
+				$additional_information_html .= '</div>';
+			}
+		} else {
+			$additional_information_html = 'N/A';
+		}
+
+		return apply_filters(
+			'addonify_compare_products_filter_product_additional_information',
+			$additional_information_html,
+			$product
 		);
 	}
 }

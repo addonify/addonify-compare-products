@@ -2,9 +2,10 @@
 
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
-Requires at least: 5.5
+Requires at least: 5.9
 Tested up to: 6.2.2
-Stable tag: 1.1.8
+Stable tag: 1.1.9
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +97,17 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 
 == Changelog ==
+
+= 1.1.9 - 15 June, 2023 =
+
+- Fixed: Issue of product image getting rendered twice in comparison docker. [GitHub Issue#159](https://github.com/addonify/addonify-compare-products/issues/159)
+- Fixed: PHP warnings. [GitHub Issue#168](https://github.com/addonify/addonify-compare-products/issues/168)
+- Added: Product attributes, weight, dimensions, and additional information can now be selected for comparison.
+- Added: Sortable option to select product attributes for comparison.
+- Updated: Ratings count has been added after the rating in comparison table.
+- Updated: Option, `Compare Table Fields`, is updated to be sortable.
+- Updated: Table fields can be sorted.
+- Updated: Plugin setting page is now hidden if WooCommerce is inactive.
 
 = 1.1.8 - 07 June, 2023 =
 

@@ -1,0 +1,68 @@
+/* -------------------------------------------------------------------------- 
+	Alerts
+  -------------------------------------------------------------------------- */
+
+.adfy_alert {
+
+    display: grid;
+    grid-template-columns: 25px auto;
+    align-items: center;
+    padding: 13px 15px;
+    fill: #666666;
+    color: #666666;
+    background-color: #F5F5F5;
+    border-radius: 4px;
+    border: 2px solid #DDDDDD;
+
+    .icon {
+
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+    }
+
+    .message {
+
+        .content {
+            
+            display: block;
+            font-size: 15px;
+            font-weight: normal;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &.success {
+
+        fill: rgb(33 169 0);
+        color: rgb(33 169 0);
+        border-color: rgb(177 255 158);
+        background-color: rgb(231 255 225);
+    }
+
+    &.info {
+
+        fill: rgb(39, 129, 255);
+        color: rgb(39, 129, 255);
+        border-color: rgb(125, 178, 253);
+        background-color: rgb(220 234 255);
+    } 
+
+    &.warning {
+
+        fill: rgb(189 150 3);
+        color: rgb(189 150 3);
+        border-color: rgb(255 237 134);
+        background-color: rgb(255 253 225);
+    }
+
+    &.danger {
+
+        fill: rgb(255 66 66);
+        color: rgb(255 66 66);
+        border-color: rgb(255 156 156);
+        background-color: rgb(255 220 220);
+    }
+}

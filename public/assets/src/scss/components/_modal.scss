@@ -23,6 +23,7 @@
     width: 100%;
     height: 100%;
     cursor: pointer;
+    backdrop-filter: blur(10px);
     background-color: var(--adfy_compare_products_search_modal_overlay_bg_color);
     z-index: var(--adfy_compare_products_search_modal_overlay_zindex);
     @include visibilityVisible();
@@ -49,7 +50,7 @@
     z-index: var(--adfy_compare_products_search_modal_zindex);
     background-color: var(--adfy_compare_products_search_modal_bg_color);
     border-radius: 5px;
-    @include boxShadow();
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.2);
     @include breakpoint(ipad) {
 
         width: 90vw;
@@ -337,6 +338,9 @@
 
 #addonify-compare-modal {
 
+    @include flex();
+    flex-direction: column;
+    justify-content: center;
     position: fixed;
     top: 0;
     right: 0;
@@ -349,6 +353,11 @@
     border-radius: 5px;
     @include boxShadow();
 
+    &.addonify-compare-hidden {
+
+        display: none;
+    }
+
     .addonify-compare-model-inner  {
 
         @include flex();
@@ -357,20 +366,28 @@
         justify-content: center;
         position: relative;
         overflow: hidden;
+        margin: 0 auto;
         height: 100%;
-        width: 100%;
+        width: 98vw; // Fallback.
+        width: calc(100vw - 40px);
+        max-width: 2048px; // Max: 2K - 40px
+        overflow: hidden;
+        border-radius: 5px;
+        background-color: white;
+
+         #addonify-compare-close-button {
+
+            display: inline-flex; // Display the button on comparison table modal.
+            z-index: var(--adfy_compare_products_comparison_table_zindex);
+        }
 
         #addonify-compare-modal-content {
 
             position: relative;
             margin: 0;
             padding: 0;
-            width: 95vw;
-            max-width: 1800px;
-            overflow: auto;
-            border-radius: 5px;
-            background-color: white;
-            z-index: calc( var(--adfy_compare_products_comparison_table_zindex) + 10 );
+            height: 100%;
+            width: 100%;
 
             #addonify-compare-products-table-wrapper {
 
@@ -386,11 +403,6 @@
                 #addonify-compare-products-notice {
 
                     display: none;
-                }
-
-                #addonify-compare-close-button {
-
-                    display: inline-flex; // Display the button on comparison table modal.
                 }
             }
         }
