@@ -107,6 +107,7 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 - Updated: Ratings count has been added after the rating in comparison table.
 - Updated: Option, `Compare Table Fields`, is updated to be sortable.
 - Updated: Table fields can be sorted.
+- Updated: Plugin setting page is now hidden if WooCommerce is inactive.
 
 = 1.1.8 - 07 June, 2023 =
 

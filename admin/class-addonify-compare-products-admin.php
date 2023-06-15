@@ -78,13 +78,13 @@ class Addonify_Compare_Products_Admin {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 
 			add_action( 'admin_notices', array( $this, 'woocommerce_not_active_notice' ) );
+		} else {
+			// Register admin menu in the dashboard.
+			add_action( 'admin_menu', array( $this, 'add_menu_callback' ), 20 );
+
+			// Add a custom link in plugins.php page in wp-admin.
+			add_action( 'plugin_action_links', array( $this, 'custom_plugin_link_callback' ), 10, 2 );
 		}
-
-		// Register admin menu in the dashboard.
-		add_action( 'admin_menu', array( $this, 'add_menu_callback' ), 20 );
-
-		// Add a custom link in plugins.php page in wp-admin.
-		add_action( 'plugin_action_links', array( $this, 'custom_plugin_link_callback' ), 10, 2 );
 	}
 
 	/**
@@ -129,7 +129,7 @@ class Addonify_Compare_Products_Admin {
 		wp_register_script(
 			"{$this->plugin_name}-main",
 			plugin_dir_url( __FILE__ ) . 'assets/js/main.js',
-			array( 'lodash', "{$this->plugin_name}-vendor", 'wp-i18n', 'wp-api-fetch'),
+			array( 'lodash', "{$this->plugin_name}-vendor", 'wp-i18n', 'wp-api-fetch' ),
 			$this->version,
 			true
 		);
