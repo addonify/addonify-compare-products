@@ -547,7 +547,7 @@ if ( ! function_exists( 'addonify_compare_products_product_rating' ) ) {
 
 		$rating         = wc_get_rating_html( $product->get_average_rating() );
 		$ratings_count  = $product->get_rating_counts() ? count( $product->get_rating_counts() ) : 0;
-		$product_rating = ( $rating ) ? wp_kses_post( $rating ) . '(' . esc_html( $ratings_count ) . ')' : __('N/A', 'addonify-compare-products');
+		$product_rating = ( $rating ) ? wp_kses_post( $rating ) . '(' . esc_html( $ratings_count ) . ')' : esc_html__('N/A', 'addonify-compare-products');
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_rating',
@@ -645,7 +645,7 @@ if ( ! function_exists( 'addonify_compare_products_product_attribute_properties'
 			}
 		}
 
-		$product_attribute_properties = ( $attribute_value_names ) ? wpautop( wptexturize( implode( ', ', $attribute_value_names ) ) ) : __('N/A', 'addonify-compare-products');
+		$product_attribute_properties = ( $attribute_value_names ) ? wpautop( wptexturize( implode( ', ', $attribute_value_names ) ) ) : esc_html__('N/A', 'addonify-compare-products');
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_attribute_properties',
@@ -666,7 +666,7 @@ if ( ! function_exists( 'addonify_compare_products_product_weight' ) ) {
 	 */
 	function addonify_compare_products_product_weight( $product ) {
 
-		$product_weight = ( $product->has_weight() && $product->get_weight() ) ? wc_format_weight( $product->get_weight() ) : __('N/A', 'addonify-compare-products');
+		$product_weight = ( $product->has_weight() && $product->get_weight() ) ? wc_format_weight( $product->get_weight() ) : esc_html__('N/A', 'addonify-compare-products');
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_weight',
@@ -686,7 +686,7 @@ if ( ! function_exists( 'addonify_compare_products_product_dimensions' ) ) {
 	 */
 	function addonify_compare_products_product_dimensions( $product ) {
 
-		$product_dimensions = ( $product->has_dimensions() && $product->get_dimensions( false ) ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : __('N/A', 'addonify-compare-products');
+		$product_dimensions = ( $product->has_dimensions() && $product->get_dimensions( false ) ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : esc_html__('N/A', 'addonify-compare-products');
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_dimensions',
@@ -735,7 +735,7 @@ if ( ! function_exists( 'addonify_compare_products_product_additional_informatio
 				$additional_information_html .= '</div>';
 			}
 		} else {
-			$additional_information_html = __('N/A', 'addonify-compare-products');
+			$additional_information_html = esc_html__('N/A', 'addonify-compare-products');
 		}
 
 		return apply_filters(
