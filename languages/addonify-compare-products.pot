@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-06-15T09:41:38+00:00\n"
+"POT-Creation-Date: 2023-06-20T07:51:59+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: addonify-compare-products\n"
@@ -59,6 +59,14 @@ msgstr ""
 #: includes/addonify-compare-products-template-functions.php:400
 #: includes/setting-functions/settings.php:68
 msgid "Compare"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:550
+#: includes/addonify-compare-products-template-functions.php:648
+#: includes/addonify-compare-products-template-functions.php:669
+#: includes/addonify-compare-products-template-functions.php:689
+#: includes/addonify-compare-products-template-functions.php:738
+msgid "N/A"
 msgstr ""
 
 #: includes/addonify-compare-products-template-functions.php:577
