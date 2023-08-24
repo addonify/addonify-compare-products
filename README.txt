@@ -168,20 +168,20 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 - Tested: with WordPress version 6.0.2.
 
-== 1.0.3 - 7 August 2022 ==
+= 1.0.3 - 7 August 2022 =
 
 - Updated: Removed button from button.addonify-cp-button in custom.js
 
-== 1.0.2 - 29 July 2022 ==
+= 1.0.2 - 29 July 2022 =
 
 - Updated: Readme.txt file.
 - Fixed: Author URL.
 
-== 1.0.1 - 29 July 2022 ==
+= 1.0.1 - 29 July 2022 =
 
 - Added: wordpress.org graphics.
 - Fixed: Typo in vue js files.
 
-== 1.0.0 - 28 July 2022 ==
+= 1.0.0 - 28 July 2022 =
 
 - New: Initial release
