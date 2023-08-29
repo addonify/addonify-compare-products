@@ -19,7 +19,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
 	function addonify_compare_products_general_setting_fields() {
 
 		return array(
-			'enable_product_comparison'       => array(
+			'enable_product_comparison'            => array(
 				'label'       => __( 'Enable Products Comparison', 'addonify-compare-products' ),
 				'description' => __( 'If disabled, products comparison will not be functional.', 'addonify-compare-products' ),
 				'type'        => 'switch',
@@ -27,7 +27,23 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
 				'badge'       => 'Required',
 				'value'       => addonify_compare_products_get_option( 'enable_product_comparison' ),
 			),
-			'compare_products_display_type'   => array(
+			'enable_product_comparison_on_archive' => array(
+				'label'       => __( 'Enable Products Comparison on Product Archive Pages', 'addonify-compare-products' ),
+				'description' => __( 'If disabled, products comparison will not be functional on product archive pages.', 'addonify-compare-products' ),
+				'type'        => 'switch',
+				'className'   => '',
+				'dependent'   => array( 'enable_product_comparison' ),
+				'value'       => addonify_compare_products_get_option( 'enable_product_comparison_on_archive' ),
+			),
+			'enable_product_comparison_on_single'  => array(
+				'label'       => __( 'Enable Products Comparison on Product Single Page', 'addonify-compare-products' ),
+				'description' => __( 'If disabled, products comparison will not be functional on product single page.', 'addonify-compare-products' ),
+				'type'        => 'switch',
+				'className'   => '',
+				'dependent'   => array( 'enable_product_comparison' ),
+				'value'       => addonify_compare_products_get_option( 'enable_product_comparison_on_single' ),
+			),
+			'compare_products_display_type'        => array(
 				'type'        => 'select',
 				'className'   => '',
 				'placeholder' => __( 'Select a page', 'addonify-compare-products' ),
@@ -40,7 +56,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
 				),
 				'value'       => addonify_compare_products_get_option( 'compare_products_display_type' ),
 			),
-			'compare_page'                    => array(
+			'compare_page'                         => array(
 				'type'        => 'select',
 				'className'   => '',
 				'placeholder' => __( 'Select a page', 'addonify-compare-products' ),
@@ -50,7 +66,7 @@ if ( ! function_exists( 'addonify_compare_products_general_setting_fields' ) ) {
 				'choices'     => addonify_compare_products_get_pages(),
 				'value'       => addonify_compare_products_get_option( 'compare_page' ),
 			),
-			'compare_products_cookie_expires' => array(
+			'compare_products_cookie_expires'      => array(
 				'type'        => 'number',
 				'className'   => '',
 				'typeStyle'   => 'toggle', // Acceptable values - 'default', 'toggle' & slider.

@@ -19,19 +19,33 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 	function addonify_compare_products_compare_button_general_fields() {
 
 		return array(
-			'compare_products_btn_position'      => array(
+			'compare_products_btn_position'           => array(
 				'type'        => 'select',
 				'className'   => '',
-				'label'       => __( 'Button Position', 'addonify-compare-products' ),
-				'description' => __( 'Choose where to place the compare button.', 'addonify-compare-products' ),
+				'label'       => __( 'Button Position in Product Archive Page', 'addonify-compare-products' ),
+				'description' => __( 'Choose where to place the compare button in archive product loop.', 'addonify-compare-products' ),
 				'choices'     => array(
 					'after_add_to_cart'  => __( 'After Add to Cart Button', 'addonify-compare-products' ),
 					'before_add_to_cart' => __( 'Before Add to Cart Button', 'addonify-compare-products' ),
 				),
-				'dependent'   => array( 'enable_product_comparison' ),
+				'dependent'   => array( 'enable_product_comparison', 'enable_product_comparison_on_archive' ),
 				'value'       => addonify_compare_products_get_option( 'compare_products_btn_position' ),
 			),
-			'compare_products_btn_label'         => array(
+			'compare_products_btn_position_on_single' => array(
+				'type'        => 'select',
+				'className'   => '',
+				'label'       => __( 'Button Position in Product Single Page', 'addonify-compare-products' ),
+				'description' => __( 'Choose where to place the compare button in archive product loop.', 'addonify-compare-products' ),
+				'choices'     => array(
+					'before_add_to_cart_form'   => __( 'Before Add to Cart Form', 'addonify-compare-products' ),
+					'before_add_to_cart_button' => __( 'Before Add to Cart Button', 'addonify-compare-products' ),
+					'after_add_to_cart_button'  => __( 'After Add to Cart Button', 'addonify-compare-products' ),
+					'after_add_to_cart_form'    => __( 'After Add to Cart Form', 'addonify-compare-products' ),
+				),
+				'dependent'   => array( 'enable_product_comparison', 'enable_product_comparison_on_single' ),
+				'value'       => addonify_compare_products_get_option( 'compare_products_btn_position_on_single' ),
+			),
+			'compare_products_btn_label'              => array(
 				'type'        => 'text',
 				'className'   => '',
 				'label'       => __( 'Button Label', 'addonify-compare-products' ),
@@ -39,7 +53,7 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 				'dependent'   => array( 'enable_product_comparison' ),
 				'value'       => addonify_compare_products_get_option( 'compare_products_btn_label' ),
 			),
-			'compare_products_btn_show_icon'     => array(
+			'compare_products_btn_show_icon'          => array(
 				'type'        => 'switch',
 				'className'   => '',
 				'label'       => __( 'Show Icon', 'addonify-compare-products' ),
@@ -47,7 +61,7 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 				'dependent'   => array( 'enable_product_comparison' ),
 				'value'       => addonify_compare_products_get_option( 'compare_products_btn_show_icon' ),
 			),
-			'compare_products_btn_icon'          => array(
+			'compare_products_btn_icon'               => array(
 				'type'          => 'radio',
 				'typeStyle'     => 'radioIcon', // Not used on Front-End Control. Only for Ref!
 				'renderChoices' => 'html',
@@ -58,7 +72,7 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 				'dependent'     => array( 'enable_product_comparison', 'compare_products_btn_show_icon' ),
 				'value'         => addonify_compare_products_get_option( 'compare_products_btn_icon' ),
 			),
-			'compare_products_btn_icon_position' => array(
+			'compare_products_btn_icon_position'      => array(
 				'type'        => 'select',
 				'className'   => '',
 				'label'       => __( 'Icon Position', 'addonify-compare-products' ),
