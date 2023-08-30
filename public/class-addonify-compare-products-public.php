@@ -275,7 +275,6 @@ class Addonify_Compare_Products_Public {
 				'product_id'           => 0,
 				'button_label'         => $this->compare_button_label,
 				'classes'              => '',
-				'display_button_icon'  => '1',
 				'button_icon_position' => $this->compare_button_icon_position,
 			),
 			$atts,
@@ -291,12 +290,12 @@ class Addonify_Compare_Products_Public {
 			'button_icon'  => '',
 		);
 
-		$button_template_args['classes'][] = ( 'left' === $shortcode_atts['button_icon_position'] )
-		? 'icon-position-left' :
-		'icon-position-right';
-
-		if ( '1' === $shortcode_atts['display_button_icon'] ) {
+		if ( 'none' !== $shortcode_atts['button_icon_position'] ) {
 			$button_template_args['button_icon'] = addonify_compare_products_get_selected_compare_button_icon( $this->compare_button_icon );
+
+			$button_template_args['classes'][] = ( 'left' === $shortcode_atts['button_icon_position'] )
+			? 'icon-position-left' :
+			'icon-position-right';
 		}
 
 		ob_start();
