@@ -275,7 +275,7 @@ class Addonify_Compare_Products_Public {
 				'product_id'           => 0,
 				'button_label'         => $this->compare_button_label,
 				'classes'              => '',
-				'display_button_icon'  => true,
+				'display_button_icon'  => '1',
 				'button_icon_position' => $this->compare_button_icon_position,
 			),
 			$atts,
