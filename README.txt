@@ -76,7 +76,7 @@ Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to
 
 = Is there a shortcode for adding product compare button in the content?
 
-Yes, there is. Use `[addonify_compare_button]` to add product compare button in the content. `product_id` , `button_label`, `classes`, `display_button_icon`, and `button_icon_position` are the shortcode attributes that can be used. Shortcode attribute, `product_id` is required in order to display the compare button. Value for shortcode attributes `classes` should be CSS classes separated by a space. If icon is to be displayed, for `display_button_icon`, the value should be '1'. And the value for `button_icon_position`, should be either 'left' or 'right';
+Yes, there is. Use `[addonify_compare_button]` to add product compare button in the content. `product_id` , `button_label`, `classes`, and `button_icon_position` are the shortcode attributes that can be used. Shortcode attribute, `product_id` is required in order to display the compare button. Value for shortcode attributes `classes` should be CSS classes separated by a space. The value for `button_icon_position`, should be either 'left' or 'right' or 'none';
 
 = I'm a developer, is it possible to customize frontend output? =
 
