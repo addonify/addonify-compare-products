@@ -285,6 +285,7 @@ class Addonify_Compare_Products_Public {
 			'product'      => wc_get_product( (int) $shortcode_atts['product_id'] ),
 			'button_label' => $shortcode_atts['button_label'],
 			'classes'      => array(
+				'addonify-cp-shortcode-button',
 				$shortcode_atts['classes'],
 			),
 			'button_icon'  => '',
