@@ -2,8 +2,8 @@
 
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
-Requires at least: 5.9
-Tested up to: 6.3
+Requires at least: 6.0.0
+Tested up to: 6.3.1
 Stable tag: 1.1.11
 Requires PHP: 7.4
 License: GPLv2 or later
