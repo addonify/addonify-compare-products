@@ -22,8 +22,8 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 			'compare_products_btn_position'           => array(
 				'type'        => 'select',
 				'className'   => '',
-				'label'       => __( 'Button Position in Product Archive Page', 'addonify-compare-products' ),
-				'description' => __( 'Choose where to place the compare button in archive product loop.', 'addonify-compare-products' ),
+				'label'       => __( 'Button Position in Products Loop', 'addonify-compare-products' ),
+				'description' => __( 'Choose where to place the compare button in products loop.', 'addonify-compare-products' ),
 				'choices'     => array(
 					'after_add_to_cart'  => __( 'After Add to Cart Button', 'addonify-compare-products' ),
 					'before_add_to_cart' => __( 'Before Add to Cart Button', 'addonify-compare-products' ),
@@ -35,7 +35,7 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 				'type'        => 'select',
 				'className'   => '',
 				'label'       => __( 'Button Position in Product Single Page', 'addonify-compare-products' ),
-				'description' => __( 'Choose where to place the compare button in archive product loop.', 'addonify-compare-products' ),
+				'description' => __( 'Choose where to place the compare button in product single page.', 'addonify-compare-products' ),
 				'choices'     => array(
 					'before_add_to_cart_form'   => __( 'Before Add to Cart Form', 'addonify-compare-products' ),
 					'before_add_to_cart_button' => __( 'Before Add to Cart Button', 'addonify-compare-products' ),

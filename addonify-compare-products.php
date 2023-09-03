@@ -25,6 +25,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 define( 'ADDONIFY_COMPARE_PRODUCTS_VERSION', '1.1.11' );
+define( 'ADDONIFY_COMPARE_PRODUCTS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'ADDONIFY_CP_DB_INITIALS', 'addonify_cp_' );
 define( 'ADDONIFY_CP_PLUGIN_PATH', dirname( __FILE__ ) );
 
@@ -64,8 +65,21 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-addonify-compare-products.
  */
 function run_addonify_compare_products() {
 
-	$plugin = new Addonify_Compare_Products();
-	$plugin->run();
+	if ( class_exists( 'WooCommerce' ) ) {
+		$plugin = new Addonify_Compare_Products();
+		$plugin->run();
+	} else {
+		add_action(
+			'admin_notices',
+			function() {
+				?>
+				<div class="notice notice-error is-dismissible">
+					<p><?php esc_html_e( 'Addonify Compare Products is enabled but not effective. This plugin requires WooCommerce plugin in order to work.', 'addonify-compare-products' ); ?></p>
+				</div>
+				<?php
+			}
+		);
+	}
 
 }
-run_addonify_compare_products();
+add_action( 'plugins_loaded', 'run_addonify_compare_products' );

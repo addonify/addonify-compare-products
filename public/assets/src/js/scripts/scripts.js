@@ -235,6 +235,15 @@
 
 
 		function addonifyCompareProductsInit() {
+			/**
+			 * Hide compare dock if there are no compare buttons in the page.
+			 * 
+			 * @since 1.1.11
+			 */
+			if (!($('.addonify-cp-button').length > 0)) {
+				body.removeClass('addonify-compare-dock-is-visible');
+				return;
+			}
 
 			let product_ids = getLocalItem('product_ids');
 
@@ -282,6 +291,7 @@
 		 * Display dock if products available in storage.
 		 */
 		function addonifyCompareProductsDisplayDock() {
+
 			if (compareItemsCount === 0) {
 				body.removeClass('addonify-compare-dock-is-visible');
 			} else {
