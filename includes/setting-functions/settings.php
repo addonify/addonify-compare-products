@@ -62,6 +62,7 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
 			array(
 				// Settings.
 				'enable_product_comparison'                => true,
+				'enable_login_required'                    => false, // @since 1.1.11
 				'enable_product_comparison_on_archive'     => true, // @since 1.1.11
 				'enable_product_comparison_on_single'      => false, // @since 1.1.11
 				'compare_products_btn_position'            => 'after_add_to_cart',

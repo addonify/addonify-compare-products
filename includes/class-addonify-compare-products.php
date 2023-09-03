@@ -169,7 +169,12 @@ class Addonify_Compare_Products {
 
 		$plugin_admin = new Addonify_Compare_Products_Admin( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_admin, 'admin_init' );
+		$this->loader->add_action( 'plugin_action_links_' . ADDONIFY_COMPARE_PRODUCTS_BASENAME, $plugin_admin, 'custom_plugin_link_callback' );
+
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_menu_callback', 20 );
+
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
+		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 	}
 
 	/**
@@ -183,7 +188,7 @@ class Addonify_Compare_Products {
 
 		$plugin_public = new Addonify_Compare_Products_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'public_init' );
+		$this->loader->add_action( 'init', $plugin_public, 'public_init' );
 	}
 
 

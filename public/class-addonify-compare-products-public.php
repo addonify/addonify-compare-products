@@ -104,10 +104,11 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function public_init() {
 
-		if (
-			! class_exists( 'WooCommerce' ) ||
-			addonify_compare_products_get_option( 'enable_product_comparison' ) !== '1'
-		) {
+		if ( addonify_compare_products_get_option( 'enable_product_comparison' ) !== '1' ) {
+			return;
+		}
+
+		if ( addonify_compare_products_get_option( 'enable_login_required' ) === '1' && ! is_user_logged_in() ) {
 			return;
 		}
 
@@ -143,7 +144,6 @@ class Addonify_Compare_Products_Public {
 		}
 
 		if ( addonify_compare_products_get_option( 'enable_product_comparison_on_single' ) === '1' ) {
-
 			add_action(
 				'woocommerce_before_add_to_cart_form',
 				array( $this, 'render_compare_button_before_single_cart_form' )
@@ -199,12 +199,30 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/css/conditional/perfect-scrollbar.css', array(), $this->version );
+		wp_enqueue_style(
+			'perfect-scrollbar',
+			plugin_dir_url( __FILE__ ) . 'assets/build/css/conditional/perfect-scrollbar.css',
+			array(),
+			$this->version,
+			'all'
+		);
 
 		if ( is_rtl() ) {
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/public-rtl.css', array(), $this->version );
+			wp_enqueue_style(
+				$this->plugin_name,
+				plugin_dir_url( __FILE__ ) . 'assets/build/css/public-rtl.css',
+				array(),
+				$this->version,
+				'all'
+			);
 		} else {
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/public.css', array(), $this->version );
+			wp_enqueue_style(
+				$this->plugin_name,
+				plugin_dir_url( __FILE__ ) . 'assets/build/css/public.css',
+				array(),
+				$this->version,
+				'all'
+			);
 		}
 
 		if ( (int) addonify_compare_products_get_option( 'load_styles_from_plugin' ) === 1 ) {
@@ -231,9 +249,21 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/perfect-scrollbar.min.js', null, $this->version, true );
+		wp_enqueue_script(
+			'perfect-scrollbar',
+			plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/perfect-scrollbar.min.js',
+			null,
+			$this->version,
+			true
+		);
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/public.min.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script(
+			$this->plugin_name,
+			plugin_dir_url( __FILE__ ) . 'assets/build/js/public.min.js',
+			array( 'jquery' ),
+			$this->version,
+			true
+		);
 
 		$localize_args = array(
 			'ajaxURL'                 => admin_url( 'admin-ajax.php' ),
@@ -266,10 +296,6 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function compare_button_shortcode_callback( $atts ) {
 
-		if ( ! isset( $atts['product_id'] ) || empty( $atts['product_id'] ) ) {
-			return;
-		}
-
 		$shortcode_atts = shortcode_atts(
 			array(
 				'product_id'           => 0,
@@ -281,8 +307,20 @@ class Addonify_Compare_Products_Public {
 			'addonify_compare_button'
 		);
 
+		global $product;
+
+		if ( isset( $shortcode_atts['product_id'] ) ) {
+			$product = wc_get_product( (int) $shortcode_atts['product_id'] );
+		}
+
+		if ( ! $product || ! ( $product instanceof WC_Product ) ) {
+			ob_start();
+			echo esc_html__( 'Invalid product.', 'addonify-compare-products' );
+			return ob_get_clean();
+		}
+
 		$button_template_args = array(
-			'product'      => wc_get_product( (int) $shortcode_atts['product_id'] ),
+			'product'      => $product,
 			'button_label' => $shortcode_atts['button_label'],
 			'classes'      => array(
 				'addonify-cp-shortcode-button',
