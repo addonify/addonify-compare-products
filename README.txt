@@ -2,7 +2,7 @@
 
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
-Requires at least: 6.0.0
+Requires at least: 5.9
 Tested up to: 6.3.1
 Stable tag: 1.1.11
 Requires PHP: 7.4
@@ -74,9 +74,9 @@ Yes, Addonify Product Compare should work with all themes if the theme authors h
 
 Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to display in the compare table.
 
-= Is there a shortcode for adding product compare button in the content?
+= Is there a shortcode for adding product compare button?
 
-Yes, there is. Use `[addonify_compare_button]` to add product compare button in the content. `product_id` , `button_label`, `classes`, and `button_icon_position` are the shortcode attributes that can be used. Shortcode attribute, `product_id` is required in order to display the compare button outside the products loop. Value for shortcode attributes `classes` should be CSS classes separated by a space. The value for `button_icon_position`, should be either 'left' or 'right' or 'none'. For more information [check doc.](https://docs.addonify.com/kb/woocommerce-compare-products/getting-started/compare-button/)
+Yes, there is. Use `[addonify_compare_button]` to add product compare button. `product_id` , `button_label`, `classes`, and `button_icon_position` are the shortcode attributes that can be used. Shortcode attribute, `product_id` is required in order to display the compare button outside the products loop. Value for shortcode attribute `classes` should be CSS classes separated by a space. The value for `button_icon_position`, should be either 'left', 'right' or 'none';. For more information [check doc.](https://docs.addonify.com/kb/woocommerce-compare-products/getting-started/compare-button/)
 
 = I'm a developer, is it possible to customize frontend output? =
 
