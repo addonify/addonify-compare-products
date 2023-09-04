@@ -47,8 +47,6 @@ if ( ! function_exists( 'addonify_compare_products_locate_template' ) ) {
 }
 
 
-
-
 if ( ! function_exists( 'addonify_compare_products_get_template' ) ) {
 	/**
 	 * Get template file from plugin templates folder.
@@ -77,55 +75,22 @@ if ( ! function_exists( 'addonify_compare_products_get_template' ) ) {
 }
 
 
-
-
 if ( ! function_exists( 'addonify_compare_products_render_compare_button' ) ) {
 	/**
 	 * Renders the compare button in products loop.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @param array $args Button arguments.
 	 */
-	function addonify_compare_products_render_compare_button() {
-
-		global $product;
-
-		$compare_button_css_classes = array( 'button', 'addonify-cp-button' );
-
-		$button_icon = '';
-
-		if (
-			addonify_compare_products_get_option( 'compare_products_btn_show_icon' ) &&
-			addonify_compare_products_get_option( 'compare_products_btn_icon' )
-		) {
-
-			$compare_button_icon_key = addonify_compare_products_get_option( 'compare_products_btn_icon' );
-
-			$compare_button_icons = addonify_compare_products_get_compare_button_icons();
-
-			$button_icon = $compare_button_icons[ $compare_button_icon_key ];
-
-			if ( addonify_compare_products_get_option( 'compare_products_btn_icon_position' ) === 'left' ) {
-				$compare_button_css_classes[] = 'icon-position-left';
-			} else {
-				$compare_button_css_classes[] = 'icon-position-right';
-			}
-		}
-
-		$compare_button_args = array(
-			'product_id'  => $product->get_id(),
-			'label'       => addonify_compare_products_get_option( 'compare_products_btn_label' ),
-			'classes'     => apply_filters( 'addonify_compare_products_compare_button_css_classes', $compare_button_css_classes ),
-			'button_icon' => $button_icon,
-		);
+	function addonify_compare_products_render_compare_button( $args = array() ) {
 
 		addonify_compare_products_get_template(
 			'addonify-compare-products-button.php',
-			apply_filters( 'addonify_compare_products_compare_button_args', $compare_button_args )
+			apply_filters( 'addonify_compare_products_compare_button_args', $args )
 		);
 	}
 }
-
-
 
 
 if ( ! function_exists( 'addonify_compare_products_render_comparison_modal' ) ) {
@@ -168,8 +133,6 @@ if ( ! function_exists( 'addonify_compare_products_render_docker_modal' ) ) {
 }
 
 
-
-
 if ( ! function_exists( 'addonify_compare_products_render_search_modal' ) ) {
 	/**
 	 * Renders the search modal.
@@ -181,7 +144,6 @@ if ( ! function_exists( 'addonify_compare_products_render_search_modal' ) ) {
 		addonify_compare_products_get_template( 'addonify-compare-products-search-modal.php' );
 	}
 }
-
 
 
 if ( ! function_exists( 'addonify_compare_products_render_comparison_content' ) ) {
@@ -326,8 +288,6 @@ if ( ! function_exists( 'addonify_compare_products_render_comparison_content' ) 
 }
 
 
-
-
 if ( ! function_exists( 'addonify_compare_products_render_docker_message' ) ) {
 	/**
 	 * Renders the message in the docker.
@@ -349,8 +309,6 @@ if ( ! function_exists( 'addonify_compare_products_render_docker_message' ) ) {
 }
 
 
-
-
 if ( ! function_exists( 'addonify_compare_products_render_docker_add_button' ) ) {
 	/**
 	 * Renders the add button in the docker.
@@ -362,8 +320,6 @@ if ( ! function_exists( 'addonify_compare_products_render_docker_add_button' ) )
 		addonify_compare_products_get_template( 'docker/add-button.php' );
 	}
 }
-
-
 
 
 if ( ! function_exists( 'addonify_compare_products_render_docker_content' ) ) {
@@ -385,8 +341,6 @@ if ( ! function_exists( 'addonify_compare_products_render_docker_content' ) ) {
 		);
 	}
 }
-
-
 
 
 if ( ! function_exists( 'addonify_compare_products_render_docker_compare_button' ) ) {
@@ -411,8 +365,6 @@ if ( ! function_exists( 'addonify_compare_products_render_docker_compare_button'
 		);
 	}
 }
-
-
 
 
 if ( ! function_exists( 'addonify_compare_products_render_docker_search_result' ) ) {
@@ -452,6 +404,7 @@ if ( ! function_exists( 'addonify_compare_products_product_remove_button' ) ) {
 	}
 }
 
+
 if ( ! function_exists( 'addonify_compare_products_product_image' ) ) {
 	/**
 	 * HTML definition of product image displayed in compare table.
@@ -471,6 +424,7 @@ if ( ! function_exists( 'addonify_compare_products_product_image' ) ) {
 		);
 	}
 }
+
 
 if ( ! function_exists( 'addonify_compare_products_product_title' ) ) {
 	/**
@@ -547,7 +501,7 @@ if ( ! function_exists( 'addonify_compare_products_product_rating' ) ) {
 
 		$rating         = wc_get_rating_html( $product->get_average_rating() );
 		$ratings_count  = $product->get_rating_counts() ? count( $product->get_rating_counts() ) : 0;
-		$product_rating = ( $rating ) ? wp_kses_post( $rating ) . '(' . esc_html( $ratings_count ) . ')' : esc_html__('N/A', 'addonify-compare-products');
+		$product_rating = ( $rating ) ? wp_kses_post( $rating ) . '(' . esc_html( $ratings_count ) . ')' : esc_html__( 'N/A', 'addonify-compare-products' );
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_rating',
@@ -590,6 +544,7 @@ if ( ! function_exists( 'addonify_compare_products_product_in_stock' ) ) {
 	}
 }
 
+
 if ( ! function_exists( 'addonify_compare_products_product_add_to_cart_button' ) ) {
 	/**
 	 * HTML definition of product add to cart button displayed in compare table.
@@ -609,6 +564,7 @@ if ( ! function_exists( 'addonify_compare_products_product_add_to_cart_button' )
 		);
 	}
 }
+
 
 if ( ! function_exists( 'addonify_compare_products_product_attribute_properties' ) ) {
 	/**
@@ -645,7 +601,7 @@ if ( ! function_exists( 'addonify_compare_products_product_attribute_properties'
 			}
 		}
 
-		$product_attribute_properties = ( $attribute_value_names ) ? wpautop( wptexturize( implode( ', ', $attribute_value_names ) ) ) : esc_html__('N/A', 'addonify-compare-products');
+		$product_attribute_properties = ( $attribute_value_names ) ? wpautop( wptexturize( implode( ', ', $attribute_value_names ) ) ) : esc_html__( 'N/A', 'addonify-compare-products' );
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_attribute_properties',
@@ -655,6 +611,7 @@ if ( ! function_exists( 'addonify_compare_products_product_attribute_properties'
 		);
 	}
 }
+
 
 if ( ! function_exists( 'addonify_compare_products_product_weight' ) ) {
 	/**
@@ -666,7 +623,7 @@ if ( ! function_exists( 'addonify_compare_products_product_weight' ) ) {
 	 */
 	function addonify_compare_products_product_weight( $product ) {
 
-		$product_weight = ( $product->has_weight() && $product->get_weight() ) ? wc_format_weight( $product->get_weight() ) : esc_html__('N/A', 'addonify-compare-products');
+		$product_weight = ( $product->has_weight() && $product->get_weight() ) ? wc_format_weight( $product->get_weight() ) : esc_html__( 'N/A', 'addonify-compare-products' );
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_weight',
@@ -675,6 +632,7 @@ if ( ! function_exists( 'addonify_compare_products_product_weight' ) ) {
 		);
 	}
 }
+
 
 if ( ! function_exists( 'addonify_compare_products_product_dimensions' ) ) {
 	/**
@@ -686,7 +644,7 @@ if ( ! function_exists( 'addonify_compare_products_product_dimensions' ) ) {
 	 */
 	function addonify_compare_products_product_dimensions( $product ) {
 
-		$product_dimensions = ( $product->has_dimensions() && $product->get_dimensions( false ) ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : esc_html__('N/A', 'addonify-compare-products');
+		$product_dimensions = ( $product->has_dimensions() && $product->get_dimensions( false ) ) ? wc_format_dimensions( $product->get_dimensions( false ) ) : esc_html__( 'N/A', 'addonify-compare-products' );
 
 		return apply_filters(
 			'addonify_compare_products_filter_product_dimensions',
@@ -735,7 +693,7 @@ if ( ! function_exists( 'addonify_compare_products_product_additional_informatio
 				$additional_information_html .= '</div>';
 			}
 		} else {
-			$additional_information_html = esc_html__('N/A', 'addonify-compare-products');
+			$additional_information_html = esc_html__( 'N/A', 'addonify-compare-products' );
 		}
 
 		return apply_filters(

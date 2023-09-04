@@ -3,8 +3,8 @@
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.9
-Tested up to: 6.2.2
-Stable tag: 1.1.10
+Tested up to: 6.3.1
+Stable tag: 1.1.11
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -74,6 +74,10 @@ Yes, Addonify Product Compare should work with all themes if the theme authors h
 
 Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to display in the compare table.
 
+= Is there a shortcode for adding product compare button?
+
+Yes, there is. Use `[addonify_compare_button]` to add product compare button. `product_id` , `button_label`, `classes`, and `button_icon_position` are the shortcode attributes that can be used. Shortcode attribute, `product_id` is required in order to display the compare button outside the products loop. Value for shortcode attribute `classes` should be CSS classes separated by a space. The value for `button_icon_position`, should be either 'left', 'right' or 'none';. For more information [check doc.](https://docs.addonify.com/kb/woocommerce-compare-products/getting-started/compare-button/)
+
 = I'm a developer, is it possible to customize frontend output? =
 
 Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://docs.addonify.com/kb/woocommerce-compare-products/)
@@ -97,6 +101,17 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 
 == Changelog ==
+
+= 1.1.11 - 04 August, 2023 =
+
+- Added: Option to enable compare product button for logged in user.
+- Added: Options to enable compare product button on product single page.
+- Added: Option to enable product button on products loop.
+- Added: Shortcode, `[addonify_compare_button]`, for adding compare button.
+- Updated: Plugin setting page link moved before the 'Deactivate' link in plugins list page.
+- Updated: Compare dock is now visible only if there is compare button on a page.
+- Tested: Up to WooCommerce version 8.0.3.
+- Tested: WordPress version 6.3.1.
 
 = 1.1.10 - 20 June, 2023 =
 
@@ -168,20 +183,20 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 - Tested: with WordPress version 6.0.2.
 
-== 1.0.3 - 7 August 2022 ==
+= 1.0.3 - 7 August 2022 =
 
 - Updated: Removed button from button.addonify-cp-button in custom.js
 
-== 1.0.2 - 29 July 2022 ==
+= 1.0.2 - 29 July 2022 =
 
 - Updated: Readme.txt file.
 - Fixed: Author URL.
 
-== 1.0.1 - 29 July 2022 ==
+= 1.0.1 - 29 July 2022 =
 
 - Added: wordpress.org graphics.
 - Fixed: Typo in vue js files.
 
-== 1.0.0 - 28 July 2022 ==
+= 1.0.0 - 28 July 2022 =
 
 - New: Initial release

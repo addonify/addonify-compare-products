@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Addonify - Compare Products For WooCommerce 1.1.9\n"
+"Project-Id-Version: Addonify - Compare Products For WooCommerce 1.1.11\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/addonify-compare-products\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-06-20T07:51:59+00:00\n"
+"POT-Creation-Date: 2023-09-04T06:21:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: addonify-compare-products\n"
@@ -34,46 +34,46 @@ msgstr ""
 msgid "https://addonify.com/"
 msgstr ""
 
-#: admin/class-addonify-compare-products-admin.php:224
-#: includes/setting-functions/settings.php:306
-#: admin/assets/js/main.js:3296
-msgid "Settings"
-msgstr ""
-
-#: admin/templates/woocommerce-not-active-notice.php:24
+#: addonify-compare-products.php:77
 msgid "Addonify Compare Products is enabled but not effective. This plugin requires WooCommerce plugin in order to work."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:310
+#: admin/class-addonify-compare-products-admin.php:195
+#: includes/setting-functions/settings.php:310
+#: admin/assets/js/main.js:3365
+msgid "Settings"
+msgstr ""
+
+#: includes/addonify-compare-products-template-functions.php:272
 msgid "At least two products are needed for comparison. There is only one product in the comparison list."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:314
+#: includes/addonify-compare-products-template-functions.php:276
 msgid "There are no products to compare."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:341
+#: includes/addonify-compare-products-template-functions.php:301
 msgid "Select more than one item for comparison."
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:400
-#: includes/setting-functions/settings.php:68
+#: includes/addonify-compare-products-template-functions.php:354
+#: includes/setting-functions/settings.php:72
 msgid "Compare"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:550
-#: includes/addonify-compare-products-template-functions.php:648
-#: includes/addonify-compare-products-template-functions.php:669
-#: includes/addonify-compare-products-template-functions.php:689
-#: includes/addonify-compare-products-template-functions.php:738
+#: includes/addonify-compare-products-template-functions.php:504
+#: includes/addonify-compare-products-template-functions.php:604
+#: includes/addonify-compare-products-template-functions.php:626
+#: includes/addonify-compare-products-template-functions.php:647
+#: includes/addonify-compare-products-template-functions.php:696
 msgid "N/A"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:577
+#: includes/addonify-compare-products-template-functions.php:531
 msgid "In stock"
 msgstr ""
 
-#: includes/addonify-compare-products-template-functions.php:580
+#: includes/addonify-compare-products-template-functions.php:534
 msgid "Out of stock"
 msgstr ""
 
@@ -98,76 +98,94 @@ msgid "Ooops, you are not allowed to manage options."
 msgstr ""
 
 #: includes/setting-functions/fields/compare-button.php:25
-msgid "Button Position"
+msgid "Button Position in Products Loop"
 msgstr ""
 
 #: includes/setting-functions/fields/compare-button.php:26
-msgid "Choose where to place the compare button."
+msgid "Choose where to place the compare button in products loop."
 msgstr ""
 
 #: includes/setting-functions/fields/compare-button.php:28
+#: includes/setting-functions/fields/compare-button.php:42
 msgid "After Add to Cart Button"
 msgstr ""
 
 #: includes/setting-functions/fields/compare-button.php:29
+#: includes/setting-functions/fields/compare-button.php:41
 msgid "Before Add to Cart Button"
 msgstr ""
 
 #: includes/setting-functions/fields/compare-button.php:37
-msgid "Button Label"
+msgid "Button Position in Product Single Page"
 msgstr ""
 
 #: includes/setting-functions/fields/compare-button.php:38
+msgid "Choose where to place the compare button in product single page."
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:40
+msgid "Before Add to Cart Form"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:43
+msgid "After Add to Cart Form"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:51
+msgid "Button Label"
+msgstr ""
+
+#: includes/setting-functions/fields/compare-button.php:52
 msgid "Label for compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:45
+#: includes/setting-functions/fields/compare-button.php:59
 msgid "Show Icon"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:46
+#: includes/setting-functions/fields/compare-button.php:60
 msgid "Show icon on compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:55
+#: includes/setting-functions/fields/compare-button.php:69
 msgid "Select Icon"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:56
+#: includes/setting-functions/fields/compare-button.php:70
 msgid "Select icon to be displayed on compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:64
+#: includes/setting-functions/fields/compare-button.php:78
 msgid "Icon Position"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:65
+#: includes/setting-functions/fields/compare-button.php:79
 msgid "Choose position for icon in the compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:67
+#: includes/setting-functions/fields/compare-button.php:81
 msgid "Before Button Label"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:68
+#: includes/setting-functions/fields/compare-button.php:82
 msgid "After Button Label"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:90
+#: includes/setting-functions/fields/compare-button.php:104
 msgid "Label Color"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:97
+#: includes/setting-functions/fields/compare-button.php:111
 msgid "Label Color on Hover"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:104
+#: includes/setting-functions/fields/compare-button.php:118
 #: includes/setting-functions/fields/floating-compare-bar.php:24
 #: includes/setting-functions/fields/search-modal.php:31
 msgid "Background Color"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:111
+#: includes/setting-functions/fields/compare-button.php:125
 msgid "Background Color on Hover"
 msgstr ""
 
@@ -257,44 +275,68 @@ msgstr ""
 msgid "If disabled, products comparison will not be functional."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:33
-#: includes/setting-functions/fields/general.php:46
-msgid "Select a page"
+#: includes/setting-functions/fields/general.php:31
+msgid "Enable Login Required"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:34
-msgid "Products Comparison Display"
-msgstr ""
-
-#: includes/setting-functions/fields/general.php:35
-msgid "Select a method to display product comparison."
-msgstr ""
-
-#: includes/setting-functions/fields/general.php:38
-msgid "Popup Modal"
+#: includes/setting-functions/fields/general.php:32
+msgid "If enabled, products comparison will be available only to logged in users."
 msgstr ""
 
 #: includes/setting-functions/fields/general.php:39
-msgid "Page"
+msgid "Enable Products Comparison on Products Loop"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:40
+msgid "If disabled, products comparison will not be functional on products loop."
 msgstr ""
 
 #: includes/setting-functions/fields/general.php:47
-msgid "Products Comparison Page"
+msgid "Enable Products Comparison on Product Single Page"
 msgstr ""
 
 #: includes/setting-functions/fields/general.php:48
-msgid "Select a page to display products comparison table."
+msgid "If disabled, products comparison will not be functional on product single page."
 msgstr ""
 
 #: includes/setting-functions/fields/general.php:57
-msgid "Time to Save Compare Data"
+#: includes/setting-functions/fields/general.php:70
+msgid "Select a page"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:80
-msgid "Enable Styles from Plugin"
+#: includes/setting-functions/fields/general.php:58
+msgid "Products Comparison Display"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:59
+msgid "Select a method to display product comparison."
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:62
+msgid "Popup Modal"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:63
+msgid "Page"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:71
+msgid "Products Comparison Page"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:72
+msgid "Select a page to display products comparison table."
 msgstr ""
 
 #: includes/setting-functions/fields/general.php:81
+msgid "Time to Save Compare Data"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:104
+msgid "Enable Styles from Plugin"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:105
 msgid "Enable to apply styles and colors from the plugin."
 msgstr ""
 
@@ -381,43 +423,43 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: includes/setting-functions/settings.php:309
+#: includes/setting-functions/settings.php:313
 msgid "General Options"
 msgstr ""
 
-#: includes/setting-functions/settings.php:314
+#: includes/setting-functions/settings.php:318
 msgid "Compare Button Options"
 msgstr ""
 
-#: includes/setting-functions/settings.php:319
+#: includes/setting-functions/settings.php:323
 msgid "Comparison Table"
 msgstr ""
 
-#: includes/setting-functions/settings.php:328
+#: includes/setting-functions/settings.php:332
 msgid "General"
 msgstr ""
 
-#: includes/setting-functions/settings.php:333
+#: includes/setting-functions/settings.php:337
 msgid "Compare Button Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:340
+#: includes/setting-functions/settings.php:344
 msgid "Floating Dock Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:347
+#: includes/setting-functions/settings.php:351
 msgid "Search Modal Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:354
+#: includes/setting-functions/settings.php:358
 msgid "Comparison Table Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:361
+#: includes/setting-functions/settings.php:365
 msgid "Developer"
 msgstr ""
 
-#: includes/setting-functions/settings.php:370
+#: includes/setting-functions/settings.php:374
 msgid "Coming soon...."
 msgstr ""
 
@@ -450,16 +492,20 @@ msgstr ""
 msgid "Later"
 msgstr ""
 
-#: public/class-addonify-compare-products-public.php:197
-#: public/class-addonify-compare-products-public.php:219
+#: public/class-addonify-compare-products-public.php:318
+msgid "Invalid product."
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:371
+#: public/class-addonify-compare-products-public.php:393
 msgid "Invalid security token."
 msgstr ""
 
-#: public/class-addonify-compare-products-public.php:228
+#: public/class-addonify-compare-products-public.php:402
 msgid "Invalid product ID."
 msgstr ""
 
-#: public/class-addonify-compare-products-public.php:240
+#: public/class-addonify-compare-products-public.php:414
 msgid "Product added into the compare list."
 msgstr ""
 
@@ -521,80 +567,80 @@ msgstr ""
 msgid "Error: Couldn't activate the plugin."
 msgstr ""
 
-#: admin/assets/js/main.js:876
-#: admin/assets/js/main.js:1444
+#: admin/assets/js/main.js:920
+#: admin/assets/js/main.js:1488
 msgid "No choices found."
 msgstr ""
 
-#: admin/assets/js/main.js:1332
+#: admin/assets/js/main.js:1376
 msgid "Select"
 msgstr ""
 
-#: admin/assets/js/main.js:1897
+#: admin/assets/js/main.js:1947
 msgid "Activate now"
 msgstr ""
 
-#: admin/assets/js/main.js:1898
+#: admin/assets/js/main.js:1948
 msgid "Activating..."
 msgstr ""
 
-#: admin/assets/js/main.js:1899
+#: admin/assets/js/main.js:1949
 msgid "Install now"
 msgstr ""
 
-#: admin/assets/js/main.js:1900
+#: admin/assets/js/main.js:1950
 msgid "Installing..."
 msgstr ""
 
-#: admin/assets/js/main.js:1901
+#: admin/assets/js/main.js:1951
 msgid "Installed"
 msgstr ""
 
-#: admin/assets/js/main.js:2749
+#: admin/assets/js/main.js:2854
 msgid "Input is not supported."
 msgstr ""
 
-#: admin/assets/js/main.js:2749
+#: admin/assets/js/main.js:2854
 msgid "Check docs"
 msgstr ""
 
-#: admin/assets/js/main.js:3032
-#: admin/assets/js/main.js:3060
+#: admin/assets/js/main.js:3137
+#: admin/assets/js/main.js:3165
 msgid "Enter text here..."
 msgstr ""
 
-#: admin/assets/js/main.js:3108
+#: admin/assets/js/main.js:3213
 msgid "Version"
 msgstr ""
 
-#: admin/assets/js/main.js:3108
+#: admin/assets/js/main.js:3213
 msgid "Rate"
 msgstr ""
 
-#: admin/assets/js/main.js:3200
+#: admin/assets/js/main.js:3267
 msgid "Documentation"
 msgstr ""
 
-#: admin/assets/js/main.js:3208
+#: admin/assets/js/main.js:3277
 msgid "Save Options"
 msgstr ""
 
-#: admin/assets/js/main.js:3304
+#: admin/assets/js/main.js:3373
 msgid "Design"
 msgstr ""
 
-#: admin/assets/js/main.js:3312
+#: admin/assets/js/main.js:3381
 msgid "Products"
 msgstr ""
 
-#: admin/assets/js/main.js:3820
+#: admin/assets/js/main.js:3889
 msgid "404"
 msgstr ""
 
-#: admin/assets/js/main.js:3820
+#: admin/assets/js/main.js:3889
 msgid "Oops, page not found!"
 msgstr ""
 
-#: admin/assets/js/main.js:3825
+#: admin/assets/js/main.js:3894
 msgid "Go Back"
 msgstr ""

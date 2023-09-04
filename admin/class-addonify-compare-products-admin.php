@@ -63,29 +63,6 @@ class Addonify_Compare_Products_Admin {
 		$this->version     = $version;
 	}
 
-	/**
-	 * Initialize admin hooks.
-	 *
-	 * @since 1.0.0
-	 */
-	public function admin_init() {
-
-		// Enqueue admin scripts and styles.
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_styles' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
-		// Display admin notice if WooCommerce is not active.
-		if ( ! class_exists( 'WooCommerce' ) ) {
-
-			add_action( 'admin_notices', array( $this, 'woocommerce_not_active_notice' ) );
-		} else {
-			// Register admin menu in the dashboard.
-			add_action( 'admin_menu', array( $this, 'add_menu_callback' ), 20 );
-
-			// Add a custom link in plugins.php page in wp-admin.
-			add_action( 'plugin_action_links', array( $this, 'custom_plugin_link_callback' ), 10, 2 );
-		}
-	}
 
 	/**
 	 * Register the stylesheets for the admin area.
@@ -100,7 +77,6 @@ class Addonify_Compare_Products_Admin {
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/css/admin.css', array(), $this->version, 'all' );
 		}
 	}
-
 
 
 	/**
@@ -160,7 +136,6 @@ class Addonify_Compare_Products_Admin {
 	}
 
 
-
 	/**
 	 * Generate admin menu for this plugin
 	 *
@@ -208,23 +183,19 @@ class Addonify_Compare_Products_Admin {
 	}
 
 
-
 	/**
-	 * Print "settings" link in plugins.php admin page
+	 * Add settings link to plugin actions.
 	 *
 	 * @since    1.0.0
-	 * @param    string $links Links.
-	 * @param    string $file  PLugin file name.
+	 * @param array $links Plugin actions.
 	 */
-	public function custom_plugin_link_callback( $links, $file ) {
+	public function custom_plugin_link_callback( $links ) {
 
-		if ( plugin_basename( dirname( __FILE__, 2 ) . '/addonify-compare-products.php' ) === $file ) {
+		$action_links = array(
+			'<a href="admin.php?page=' . $this->settings_page_slug . '">' . __( 'Settings', 'addonify-compare-products' ) . '</a>',
+		);
 
-			// add "Settings" link.
-			$links[] = '<a href="admin.php?page=' . $this->settings_page_slug . '">' . __( 'Settings', 'addonify-compare-products' ) . '</a>';
-		}
-
-		return $links;
+		return array_merge( $action_links, $links );
 	}
 
 
@@ -237,15 +208,5 @@ class Addonify_Compare_Products_Admin {
 		?>
 		<div id="___adfy-compare-products-app___"></div>
 		<?php
-	}
-
-	/**
-	 * Show error message if woocommerce is not active
-	 *
-	 * @since    1.0.0
-	 */
-	public function woocommerce_not_active_notice() {
-
-		require dirname( __FILE__ ) . '/templates/woocommerce-not-active-notice.php';
 	}
 }

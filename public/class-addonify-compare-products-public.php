@@ -38,6 +38,51 @@ class Addonify_Compare_Products_Public {
 	 */
 	private $version;
 
+	/**
+	 * The label of compare button.
+	 *
+	 * @since    1.1.11
+	 * @access   private
+	 * @var      string    $compare_button_label    The label of compare button.
+	 */
+	private $compare_button_label;
+
+	/**
+	 * The true|false value to display icon in compare button.
+	 *
+	 * @since    1.1.11
+	 * @access   private
+	 * @var      boolean    $display_compare_button_icon    The boolean value to display icon in compare button.
+	 */
+	private $display_compare_button_icon;
+
+	/**
+	 * The icon of compare button.
+	 *
+	 * @since    1.1.11
+	 * @access   private
+	 * @var      string    $compare_button_icon    The icon of compare button.
+	 */
+	private $compare_button_icon;
+
+	/**
+	 * The position of icon in compare button.
+	 *
+	 * @since    1.1.11
+	 * @access   private
+	 * @var      string    $compare_button_icon_position    The position of icon in compare button.
+	 */
+	private $compare_button_icon_position;
+
+	/**
+	 * The template arguments needed to render compare button.
+	 *
+	 * @since    1.1.11
+	 * @access   private
+	 * @var      array    $compare_button_template_args    The template arguments needed to render compare button.
+	 */
+	private $compare_button_template_args;
+
 
 	/**
 	 * Initialize the class and set its properties.
@@ -59,24 +104,66 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function public_init() {
 
-		if (
-			! class_exists( 'WooCommerce' ) ||
-			(int) addonify_compare_products_get_option( 'enable_product_comparison' ) !== 1
-		) {
+		if ( addonify_compare_products_get_option( 'enable_product_comparison' ) !== '1' ) {
 			return;
 		}
+
+		if ( addonify_compare_products_get_option( 'enable_login_required' ) === '1' && ! is_user_logged_in() ) {
+			return;
+		}
+
+		$this->compare_button_label         = addonify_compare_products_get_option( 'compare_products_btn_label' );
+		$this->display_compare_button_icon  = addonify_compare_products_get_option( 'compare_products_btn_show_icon' );
+		$this->compare_button_icon          = addonify_compare_products_get_option( 'compare_products_btn_icon' );
+		$this->compare_button_icon_position = addonify_compare_products_get_option( 'compare_products_btn_icon_position' );
+
+		$this->compare_button_template_args = $this->prepare_compare_button_template_args();
 
 		// Register scripts and styles for the frontend.
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-		// Add the compare button to the product catalog.
-		switch ( addonify_compare_products_get_option( 'compare_products_btn_position' ) ) {
-			case 'before_add_to_cart':
-				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'render_compare_button' ), 5 );
-				break;
-			default:
-				add_action( 'woocommerce_after_shop_loop_item', array( $this, 'render_compare_button' ), 15 );
+		if ( addonify_compare_products_get_option( 'enable_product_comparison_on_archive' ) === '1' ) {
+
+			// Add the compare button on the product catalog.
+			switch ( addonify_compare_products_get_option( 'compare_products_btn_position' ) ) {
+				case 'before_add_to_cart':
+					add_action(
+						'woocommerce_after_shop_loop_item',
+						array( $this, 'render_compare_button' ),
+						5
+					);
+					break;
+				default:
+					add_action(
+						'woocommerce_after_shop_loop_item',
+						array( $this, 'render_compare_button' ),
+						15
+					);
+			}
+		}
+
+		if ( addonify_compare_products_get_option( 'enable_product_comparison_on_single' ) === '1' ) {
+			add_action(
+				'woocommerce_before_add_to_cart_form',
+				array( $this, 'render_compare_button_before_single_cart_form' )
+			);
+			add_action(
+				'woocommerce_after_add_to_cart_quantity',
+				array( $this, 'render_compare_button_after_single_quantity_field' )
+			);
+			add_action(
+				'woocommerce_before_add_to_cart_button',
+				array( $this, 'render_compare_button_before_single_add_to_cart_button' )
+			);
+			add_action(
+				'woocommerce_after_add_to_cart_button',
+				array( $this, 'render_compare_button_after_single_add_to_cart_button' )
+			);
+			add_action(
+				'woocommerce_after_add_to_cart_form',
+				array( $this, 'render_compare_button_after_single_cart_form' )
+			);
 		}
 
 		// Add custom markup into footer to display comparison modal.
@@ -100,6 +187,8 @@ class Addonify_Compare_Products_Public {
 
 		// Register shortocode to display comparison table in the comparison page.
 		add_shortcode( 'addonify_compare_products', array( $this, 'render_shortcode_content' ) );
+
+		add_shortcode( 'addonify_compare_button', array( $this, 'compare_button_shortcode_callback' ) );
 	}
 
 
@@ -110,12 +199,30 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_enqueue_style( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/css/conditional/perfect-scrollbar.css', array(), $this->version );
+		wp_enqueue_style(
+			'perfect-scrollbar',
+			plugin_dir_url( __FILE__ ) . 'assets/build/css/conditional/perfect-scrollbar.css',
+			array(),
+			$this->version,
+			'all'
+		);
 
 		if ( is_rtl() ) {
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/public-rtl.css', array(), $this->version );
+			wp_enqueue_style(
+				$this->plugin_name,
+				plugin_dir_url( __FILE__ ) . 'assets/build/css/public-rtl.css',
+				array(),
+				$this->version,
+				'all'
+			);
 		} else {
-			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/css/public.css', array(), $this->version );
+			wp_enqueue_style(
+				$this->plugin_name,
+				plugin_dir_url( __FILE__ ) . 'assets/build/css/public.css',
+				array(),
+				$this->version,
+				'all'
+			);
 		}
 
 		if ( (int) addonify_compare_products_get_option( 'load_styles_from_plugin' ) === 1 ) {
@@ -142,9 +249,21 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'perfect-scrollbar', plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/perfect-scrollbar.min.js', null, $this->version, true );
+		wp_enqueue_script(
+			'perfect-scrollbar',
+			plugin_dir_url( __FILE__ ) . 'assets/build/js/conditional/perfect-scrollbar.min.js',
+			null,
+			$this->version,
+			true
+		);
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'assets/build/js/public.min.js', array( 'jquery' ), $this->version, true );
+		wp_enqueue_script(
+			$this->plugin_name,
+			plugin_dir_url( __FILE__ ) . 'assets/build/js/public.min.js',
+			array( 'jquery' ),
+			$this->version,
+			true
+		);
 
 		$localize_args = array(
 			'ajaxURL'                 => admin_url( 'admin-ajax.php' ),
@@ -165,7 +284,62 @@ class Addonify_Compare_Products_Public {
 			'addonifyCompareProductsJSObject',
 			$localize_args
 		);
+	}
 
+
+	/**
+	 * Callback function for add_shortcode function to render compare button via shortcode.
+	 *
+	 * @since 1.1.11
+	 *
+	 * @param array $atts Shortcode attributes.
+	 */
+	public function compare_button_shortcode_callback( $atts ) {
+
+		$shortcode_atts = shortcode_atts(
+			array(
+				'product_id'           => 0,
+				'button_label'         => $this->compare_button_label,
+				'classes'              => '',
+				'button_icon_position' => $this->compare_button_icon_position,
+			),
+			$atts,
+			'addonify_compare_button'
+		);
+
+		global $product;
+
+		if ( isset( $shortcode_atts['product_id'] ) ) {
+			$product = wc_get_product( (int) $shortcode_atts['product_id'] );
+		}
+
+		if ( ! $product || ! ( $product instanceof WC_Product ) ) {
+			ob_start();
+			echo esc_html__( 'Invalid product.', 'addonify-compare-products' );
+			return ob_get_clean();
+		}
+
+		$button_template_args = array(
+			'product'      => $product,
+			'button_label' => $shortcode_atts['button_label'],
+			'classes'      => array(
+				'addonify-cp-shortcode-button',
+				$shortcode_atts['classes'],
+			),
+			'button_icon'  => '',
+		);
+
+		if ( 'none' !== $shortcode_atts['button_icon_position'] ) {
+			$button_template_args['button_icon'] = addonify_compare_products_get_selected_compare_button_icon( $this->compare_button_icon );
+
+			$button_template_args['classes'][] = ( 'left' === $shortcode_atts['button_icon_position'] )
+			? 'icon-position-left' :
+			'icon-position-right';
+		}
+
+		ob_start();
+		do_action( 'addonify_compare_products_compare_button', $button_template_args );
+		return ob_get_clean();
 	}
 
 	/**
@@ -308,6 +482,30 @@ class Addonify_Compare_Products_Public {
 		wp_die();
 	}
 
+	/**
+	 * Prepare button label, button CSS classes, and button icon for compare button.
+	 *
+	 * @since 1.1.11
+	 */
+	public function prepare_compare_button_template_args() {
+
+		$button_args = array(
+			'button_label' => $this->compare_button_label,
+			'classes'      => array(),
+			'button_icon'  => '',
+		);
+
+		if ( '1' === $this->display_compare_button_icon ) {
+			$button_args['button_icon'] = addonify_compare_products_get_selected_compare_button_icon( $this->compare_button_icon );
+		}
+
+		$button_args['classes'][] = ( 'left' === $this->compare_button_icon_position )
+		? 'icon-position-left' :
+		'icon-position-right';
+
+		return $button_args;
+	}
+
 
 	/**
 	 * Generating "Compare" button
@@ -316,7 +514,7 @@ class Addonify_Compare_Products_Public {
 	 */
 	public function render_compare_button() {
 
-		do_action( 'addonify_compare_products_compare_button' );
+		do_action( 'addonify_compare_products_compare_button', $this->prepare_compare_button_template_args() );
 	}
 
 
@@ -374,6 +572,99 @@ class Addonify_Compare_Products_Public {
 		return ob_get_clean();
 	}
 
+	/**
+	 * Render compare button in product single before cart form.
+	 *
+	 * @since 1.1.11
+	 */
+	public function render_compare_button_before_single_cart_form() {
+
+		$button_position = addonify_compare_products_get_option( 'compare_products_btn_position_on_single' );
+
+		if ( 'before_add_to_cart_form' === $button_position ) {
+
+			echo '<div class="adfy-single-compare-product-btn-wrapper">';
+			$this->render_compare_button();
+			echo '</div>';
+		}
+	}
+
+	/**
+	 * Render compare button in product single after cart form.
+	 *
+	 * @since 1.1.11
+	 */
+	public function render_compare_button_after_single_cart_form() {
+
+		$button_position = addonify_compare_products_get_option( 'compare_products_btn_position_on_single' );
+
+		if ( 'after_add_to_cart_form' === $button_position ) {
+
+			echo '<div class="adfy-single-compare-product-btn-wrapper">';
+			$this->render_compare_button();
+			echo '</div>';
+		}
+	}
+
+
+	/**
+	 * Render add to wishlist button in product single before add to cart button or brefore cart quantity.
+	 *
+	 * @since 1.1.11
+	 */
+	public function render_compare_button_before_single_add_to_cart_button() {
+
+		global $product;
+
+		$button_position = addonify_compare_products_get_option( 'compare_products_btn_position_on_single' );
+
+		if (
+			(
+				'simple' !== $product->get_type() &&
+				'variable' !== $product->get_type()
+			) &&
+			'before_add_to_cart_button' === $button_position
+		) {
+			$this->render_compare_button();
+		}
+	}
+
+
+	/**
+	 * Render add to wishlist button in product single after cart quantity.
+	 *
+	 * @since 1.1.11
+	 */
+	public function render_compare_button_after_single_quantity_field() {
+
+		global $product;
+
+		$button_position = addonify_compare_products_get_option( 'compare_products_btn_position_on_single' );
+
+		if (
+			(
+				'simple' === $product->get_type() ||
+				'variable' === $product->get_type()
+			) &&
+			'before_add_to_cart_button' === $button_position
+		) {
+			$this->render_compare_button();
+		}
+	}
+
+	/**
+	 * Render compare button in product single after add to cart button.
+	 *
+	 * @since 1.1.11
+	 */
+	public function render_compare_button_after_single_add_to_cart_button() {
+
+		$button_position = addonify_compare_products_get_option( 'compare_products_btn_position_on_single' );
+
+		if ( 'after_add_to_cart_button' === $button_position ) {
+			$this->render_compare_button();
+		}
+	}
 
 	/**
 	 * Print dynamic CSS generated from settings page.

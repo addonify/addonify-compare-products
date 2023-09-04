@@ -19,8 +19,16 @@
 
 // direct access is disabled.
 defined( 'ABSPATH' ) || exit;
+
+if ( ! isset( $product ) || ! ( $product instanceof WC_Product ) ) {
+	global $product;
+}
 ?>
-<button type="button" class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>" data-product_id="<?php echo esc_attr( $product_id ); ?>">
+<button
+	type="button"
+	class="button addonify-cp-button <?php echo is_array( $classes ) ? esc_attr( implode( ' ', $classes ) ) : esc_attr( $classes ); ?>"
+	data-product_id="<?php echo esc_attr( $product->get_id() ); ?>"
+>
 	<?php
 	if ( ! empty( $button_icon ) ) {
 		?>
@@ -28,6 +36,6 @@ defined( 'ABSPATH' ) || exit;
 		<?php
 	}
 	?>
-	<?php echo esc_html( $label ); ?>
+	<?php echo esc_html( $button_label ); ?>
 </button>
 <?php

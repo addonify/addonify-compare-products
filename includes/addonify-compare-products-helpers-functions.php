@@ -132,3 +132,20 @@ if ( ! function_exists( 'addonify_compare_products_is_empty_compare_cookie' ) ) 
 		return ( is_array( $compare_cookie ) && count( $compare_cookie ) === 0 ) ? true : false;
 	}
 }
+
+
+if ( ! function_exists( 'addonify_compare_products_get_selected_compare_button_icon' ) ) {
+	/**
+	 * Get selected compare button icon.
+	 *
+	 * @since 1.1.11
+	 *
+	 * @param string $selected_icon Selected icon.
+	 */
+	function addonify_compare_products_get_selected_compare_button_icon( $selected_icon = 'icon_one' ) {
+
+		$compare_button_icons = addonify_compare_products_get_compare_button_icons();
+
+		return $compare_button_icons[ $selected_icon ];
+	}
+}
