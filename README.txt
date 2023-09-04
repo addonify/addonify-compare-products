@@ -76,7 +76,7 @@ Yes, you can select the fields from Dashboard > Addonify > Compare > Settings to
 
 = Is there a shortcode for adding product compare button in the content?
 
-Yes, there is. Use `[addonify_compare_button]` to add product compare button in the content. `product_id` , `button_label`, `classes`, and `button_icon_position` are the shortcode attributes that can be used. Shortcode attribute, `product_id` is required in order to display the compare button outside the products loop. Value for shortcode attributes `classes` should be CSS classes separated by a space. The value for `button_icon_position`, should be either 'left' or 'right' or 'none';
+Yes, there is. Use `[addonify_compare_button]` to add product compare button in the content. `product_id` , `button_label`, `classes`, and `button_icon_position` are the shortcode attributes that can be used. Shortcode attribute, `product_id` is required in order to display the compare button outside the products loop. Value for shortcode attributes `classes` should be CSS classes separated by a space. The value for `button_icon_position`, should be either 'left' or 'right' or 'none'. For more information [check doc.](https://docs.addonify.com/kb/woocommerce-compare-products/getting-started/compare-button/)
 
 = I'm a developer, is it possible to customize frontend output? =
 
@@ -102,15 +102,16 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 == Changelog ==
 
-= 1.1.11 - ? August, 2023 =
+= 1.1.11 - 04 August, 2023 =
 
-- Updated: Plugin setting page link moved before the 'Deactivate' link in plugins list page.
-- Updated: Compare dock is now visible only if there is compare button on a page.
 - Added: Option to enable compare product button for logged in user.
 - Added: Options to enable compare product button on product single page.
 - Added: Option to enable product button on products loop.
 - Added: Shortcode, `[addonify_compare_button]`, for adding compare button.
+- Updated: Plugin setting page link moved before the 'Deactivate' link in plugins list page.
+- Updated: Compare dock is now visible only if there is compare button on a page.
 - Tested: Up to WooCommerce version 8.0.3.
+- Tested: WordPress version 6.3.1.
 
 = 1.1.10 - 20 June, 2023 =
 
