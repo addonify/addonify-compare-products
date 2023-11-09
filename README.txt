@@ -3,8 +3,8 @@
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 5.9
-Tested up to: 6.3.1
-Stable tag: 1.1.11
+Tested up to: 6.4.0
+Stable tag: 1.1.12
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -61,7 +61,7 @@ We are open to any kind of discussions on that can help improve our plugin. So, 
 
 ####  🎭 TRANSLATION GUIDELINES:
 
-If you wish Addonify Wishist to be translated in your language, feel free to contribute translating at [*transalte.wordpress.org*](https://translate.wordpress.org/projects/wp-plugins/addonify-compare-products) directly.
+If you wish Addonify Compare Products to be translated in your language, feel free to contribute translating at [*translate.wordpress.org*](https://translate.wordpress.org/projects/wp-plugins/addonify-compare-products) directly.
 
 
 == Frequently Asked Questions ==
@@ -80,7 +80,7 @@ Yes, there is. Use `[addonify_compare_button]` to add product compare button. `p
 
 = I'm a developer, is it possible to customize frontend output? =
 
-Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://docs.addonify.com/kb/woocommerce-compare-products/)
+Yes, you can do it. Copy template from "/public/templates" the plugin's folder and paste them inside "/addonify/addonify-compare-products" of your theme's folder. For more information, read the [plugin's documentation](https://docs.addonify.com/kb/woocommerce-compare-products/)
 
 
 == Installation ==
@@ -101,6 +101,11 @@ Yes, you can do it. Copy template from "/plublic/templates" the plugin's folder 
 
 
 == Changelog ==
+
+= 1.1.12 - 09 November, 2023 =
+
+- Tested: WordPress v6.4.0
+- Tested: WooCommerce v8.2.2
 
 = 1.1.11 - 04 August, 2023 =
 
