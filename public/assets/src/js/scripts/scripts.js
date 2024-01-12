@@ -240,7 +240,10 @@
 			 * 
 			 * @since 1.1.11
 			 */
-			if (!($('.addonify-cp-button').length > 0)) {
+			if (
+				! ( $('.addonify-cp-button').length > 0 ) &&
+				! ( $('#addonify-compare-products-comparison-table-on-page').length > 0 )
+			) {
 				body.removeClass('addonify-compare-dock-is-visible');
 				return;
 			}
