@@ -111,9 +111,31 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
 				'search_modal_close_btn_border_color'      => 'rgba(255, 255, 255, 0.3)',
 				'search_modal_close_btn_border_color_hover' => 'rgba(255, 255, 255, 1)',
 
-				// Design - Table.
-				'table_title_color'                        => '#444444',
-				'table_title_color_hover'                  => '#3765FA',
+				// Design - Comparison modal.
+				'comparison_modal_overlay_bg_color'        => 'rgba(0, 0, 0, 0.8)', // @since 1.1.13
+				'comparison_modal_bg_color'                => '#ffffff', // @since 1.1.13
+				'comparison_modal_txt_color'               => '#6d6d6d', // @since 1.1.13
+				'comparison_modal_link_color'              => '#6d6d6d', // @since 1.1.13
+				'comparison_modal_link_hover_color'        => '#6d6d6d', // @since 1.1.13
+				'comparison_modal_header_txt_color'        => '#6d6d6d', // @since 1.1.13
+				'comparison_modal_header_bg_color'         => '#f5f5f5', // @since 1.1.13
+				'comparison_modal_remove_btn_bg_color'     => '#eeeeee', // @since 1.1.13
+				'comparison_modal_remove_btn_bg_hover_color' => '#eeeeee', // @since 1.1.13
+				'comparison_modal_remove_btn_label_color'  => '#333333', // @since 1.1.13
+				'comparison_modal_remove_btn_label_hover_color' => '#333333', // @since 1.1.13
+				'comparison_modal_in_stock_txt_color'      => '#0f834d', // @since 1.1.13
+				'comparison_modal_out_of_stock_txt_color'  => '#e2401c', // @since 1.1.13
+				'comparison_modal_regular_price_color'     => '#444444', // @since 1.1.13
+				'comparison_modal_sale_price_color'        => '#ff0000', // @since 1.1.13
+				'comparison_modal_add_to_cart_btn_bg_color' => '#eeeeee', // @since 1.1.13
+				'comparison_modal_add_to_cart_btn_label_color' => '#333333', // @since 1.1.13
+				'comparison_modal_add_to_cart_btn_bg_hover_color' => '#eeeeee', // @since 1.1.13
+				'comparison_modal_add_to_cart_btn_label_hover_color' => '#333333', // @since 1.1.13
+				'comparison_modal_border_color'            => '#f5f5f5', // @since 1.1.13
+				'comparison_modal_close_btn_bg_color'      => '#dfdfdf', // @since 1.1.13
+				'comparison_modal_close_btn_bg_hover_color' => '#c1c1c1', // @since 1.1.13
+				'comparison_modal_close_btn_icon_color'    => '#8b8b8b', // @since 1.1.13
+				'comparison_modal_close_btn_icon_hover_color' => '#727272', // @since 1.1.13
 
 				// Design - Custom CSS.
 				'custom_css'                               => '',

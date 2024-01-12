@@ -672,10 +672,12 @@ class Addonify_Compare_Products_Public {
 	public function dynamic_css() {
 
 		$css_values = array(
+			// Compare button colors.
 			'--adfy_compare_products_button_color'       => addonify_compare_products_get_option( 'compare_btn_text_color' ),
 			'--adfy_compare_products_button_color_hover' => addonify_compare_products_get_option( 'compare_btn_text_color_hover' ),
 			'--adfy_compare_products_button_bg_color'    => addonify_compare_products_get_option( 'compare_btn_bck_color' ),
 			'--adfy_compare_products_button_bg_color_hover' => addonify_compare_products_get_option( 'compare_btn_bck_color_hover' ),
+			// Dock colors.
 			'--adfy_compare_products_dock_bg_color'      => addonify_compare_products_get_option( 'floating_bar_bck_color' ),
 			'--adfy_compare_products_dock_text_color'    => addonify_compare_products_get_option( 'floating_bar_text_color' ),
 			'--adfy_compare_products_dock_add_button_color' => addonify_compare_products_get_option( 'floating_bar_add_button_text_color' ),
@@ -686,6 +688,7 @@ class Addonify_Compare_Products_Public {
 			'--adfy_compare_products_dock_compare_button_color_hover' => addonify_compare_products_get_option( 'floating_bar_compare_button_text_color_hover' ),
 			'--adfy_compare_products_dock_compare_button_bg_color' => addonify_compare_products_get_option( 'floating_bar_compare_button_bck_color' ),
 			'--adfy_compare_products_dock_compare_button_bg_color_hover' => addonify_compare_products_get_option( 'floating_bar_compare_button_bck_color_hover' ),
+			// Search modal colors.
 			'--adfy_compare_products_search_modal_overlay_bg_color' => addonify_compare_products_get_option( 'search_modal_overlay_bck_color' ),
 			'--adfy_compare_products_search_modal_bg_color' => addonify_compare_products_get_option( 'search_modal_bck_color' ),
 			'--adfy_compare_products_search_modal_add_button_color' => addonify_compare_products_get_option( 'search_modal_add_btn_text_color' ),
@@ -696,8 +699,31 @@ class Addonify_Compare_Products_Public {
 			'--adfy_compare_products_search_modal_close_button_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_text_color_hover' ),
 			'--adfy_compare_products_search_modal_close_button_border_color' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color' ),
 			'--adfy_compare_products_search_modal_close_button_border_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color_hover' ),
-			'--adfy_compare_products_table_title_color'  => addonify_compare_products_get_option( 'table_title_color' ),
-			'--adfy_compare_products_table_title_color_hover' => addonify_compare_products_get_option( 'table_title_color_hover' ),
+			// Comparison modal colors.
+			'--adfy_compare_products_comparison_modal_overlay_bg_color' => addonify_compare_products_get_option( 'comparison_modal_overlay_bg_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_bg_color' => addonify_compare_products_get_option( 'comparison_modal_bg_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_txt_color' => addonify_compare_products_get_option( 'comparison_modal_txt_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_link_color' => addonify_compare_products_get_option( 'comparison_modal_link_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_link_hover_color' => addonify_compare_products_get_option( 'comparison_modal_link_hover_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_header_txt_color' => addonify_compare_products_get_option( 'comparison_modal_header_txt_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_header_bg_color' => addonify_compare_products_get_option( 'comparison_modal_header_bg_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_remove_btn_bg_color' => addonify_compare_products_get_option( 'comparison_modal_remove_btn_bg_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_remove_btn_bg_hover_color' => addonify_compare_products_get_option( 'comparison_modal_remove_btn_bg_hover_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_remove_btn_label_color' => addonify_compare_products_get_option( 'comparison_modal_remove_btn_label_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_remove_btn_label_hover_color' => addonify_compare_products_get_option( 'comparison_modal_remove_btn_label_hover_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_in_stock_txt_color' => addonify_compare_products_get_option( 'comparison_modal_in_stock_txt_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_out_of_stock_txt_color' => addonify_compare_products_get_option( 'comparison_modal_out_of_stock_txt_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_regular_price_color' => addonify_compare_products_get_option( 'comparison_modal_regular_price_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_sale_price_color' => addonify_compare_products_get_option( 'comparison_modal_sale_price_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_add_to_cart_btn_bg_color' => addonify_compare_products_get_option( 'comparison_modal_add_to_cart_btn_bg_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_add_to_cart_btn_label_color' => addonify_compare_products_get_option( 'comparison_modal_add_to_cart_btn_label_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_add_to_cart_btn_bg_hover_color' => addonify_compare_products_get_option( 'comparison_modal_add_to_cart_btn_bg_hover_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_add_to_cart_btn_label_hover_color' => addonify_compare_products_get_option( 'comparison_modal_add_to_cart_btn_label_hover_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_border_color' => addonify_compare_products_get_option( 'comparison_modal_border_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_close_btn_bg_color' => addonify_compare_products_get_option( 'comparison_modal_close_btn_bg_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_close_btn_bg_hover_color' => addonify_compare_products_get_option( 'comparison_modal_close_btn_bg_hover_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_close_btn_icon_color' => addonify_compare_products_get_option( 'comparison_modal_close_btn_icon_color' ), // @since 1.1.13
+			'--adfy_compare_products_comparison_modal_close_btn_icon_hover_color' => addonify_compare_products_get_option( 'comparison_modal_close_btn_icon_hover_color' ), // @since 1.1.13
 		);
 
 		$css = ':root {';
