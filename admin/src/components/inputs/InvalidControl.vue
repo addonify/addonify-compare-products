@@ -6,7 +6,7 @@
 		❌
 		{{ __("Input is not supported.", "addonify-compare-products") }}
 		<a
-			href="https://docs.addonify.com/kb/woocommerce-compare-products/developer/"
+			href="https://docs.addonify.com/kb/woocommerce-compare-products/"
 			target="_blank"
 			rel="documentation"
 			class="adfy-button fake-button has-underline forward-to-doc-link"

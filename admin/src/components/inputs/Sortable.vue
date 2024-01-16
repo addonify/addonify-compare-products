@@ -6,7 +6,6 @@
 	import Notice from "../layouts/Notice.vue";
 
 	/**
-	 *
 	 * Define props.
 	 * Props are reactive.
 	 *
@@ -14,7 +13,7 @@
 	 */
 	const props = defineProps({
 		modelValue: {
-			type: [String, Array, Object], // Loose type checking.
+			type: [String, Array, Object],
 			required: true,
 		},
 		fallbackText: {
@@ -24,16 +23,13 @@
 	});
 
 	/**
-	 *
 	 * Define emits for v-model usage.
-	 * Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
+	 * @ref https://vuejs.org/guide/components/events.html#usage-with-v-model
 	 *
 	 */
 	const emit = defineEmits(["update:modelValue"]);
 	const value = computed({
 		get() {
-			//console.log(typeof props.modelValue);
-			//console.log(props.modelValue);
 			return props.modelValue;
 		},
 		set(newValue) {
@@ -42,35 +38,24 @@
 	});
 
 	/**
-	 *
 	 * Import i18n.
-	 *
 	 */
-
 	const { __ } = wp.i18n;
 
 	/**
-	 *
-	 * Fall back text for fallbackText prop.
-	 *
+	 * Fall back text when no choices found.
 	 */
-
-	let fallbackText = props.fallbackText
+	const noticeContent = props.fallbackText
 		? props.fallbackText
 		: __("No choices found.", "addonify-compare-products");
 
 	/**
-	 *
 	 * Return current timestamp.
 	 *
-	 * @param {void} void
 	 * @return {number} timestamp
 	 * @since 1.1.9
 	 */
-
 	const currentTime = () => new Date().getTime();
-
-	console.log(value);
 </script>
 <template>
 	<template v-if="value.length !== 0">
@@ -117,6 +102,6 @@
 		</div>
 	</template>
 	<template v-else>
-		<Notice :content="fallbackText" type="info" />
+		<Notice :content="noticeContent" type="info" />
 	</template>
 </template>

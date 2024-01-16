@@ -54,7 +54,7 @@
                     font-size: 14px;
                     font-weight: normal;
                     line-height: 1;
-                    @include transation_delay();
+                    @include transition_delay();
 
                     &:hover {
 
@@ -91,7 +91,6 @@
 
             margin: 0;
             color: #888888;
-            font-family: var(--addonify_system_font_family);
             font-size: 14px;
             font-weight: normal;
         }

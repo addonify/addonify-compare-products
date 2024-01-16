@@ -100,6 +100,10 @@ const sourceFilesDirsToCompress = {
         '!./sftp-config.json',
         '!./webpack.mix.js',
         '!./babelrc',
+        '!./phpcs.xml',
+        '!./phpunit.xml',
+        '!./notice.json',
+
     ],
 
     pathToSaveProductionZip: "./",
@@ -108,7 +112,7 @@ const sourceFilesDirsToCompress = {
 /*
 ===========================================================
 =
-= Define task (Almost no chnages required)
+= Define task (Almost no change required)
 =
 ====================================================
 */
@@ -195,24 +199,21 @@ gulp.task('zipProductionFiles', function () {
 // = C O M M A N D S                      =
 //=========================================
 //
-// 1. Command: gulp assets
-// 2. Command: gulp zip
+// 1. Command: pnpm run dev:public
+// 2. Command: pnpm run zip
 //
 //=========================================
 
-
-gulp.task('default', shell.task(
-
-    'echo ===== ⛔️ Ooops! gulp default command is disabled in this project. These are the available commands: gulp assets & gulp zip =====',
-));
+gulp.task("default", (done) => {
+    console.log(`\n=======================================================\n⛔️ Oops! command not found. Check package.json.\n=======================================================\n`);
+    done();
+})
 
 gulp.task('zip', gulp.series('zipProductionFiles', (done) => {
-
     done();
 }));
 
 gulp.task('assets', gulp.series('scriptsTask', 'conditionalScriptsTask', 'sassTask', 'conditionalSassTask', 'doRtlTask', (done) => {
-
     gulp.watch(scriptPath.scriptSource, gulp.series('scriptsTask'));
     gulp.watch(sassPath.sassSource, gulp.series('sassTask'));
     gulp.watch(rtlCssPath.rtlCssSource, gulp.series('doRtlTask'));
