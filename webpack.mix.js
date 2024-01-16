@@ -39,10 +39,10 @@ mix.disableNotifications();
 mix.setPublicPath('admin/assets/');
 
 /**
- * Autoload jQuery
+ * Auto load jQuery
  */
 mix.autoload({
-    jquery: ['$', 'window.jQuery', 'jQuery']
+    jquery: ['$', 'window.jQuery', 'jQuery', 'jquery'],
 });
 
 /**
