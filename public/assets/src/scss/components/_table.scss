@@ -10,25 +10,36 @@
     margin: 0;
     padding: 0;
     overflow: auto;
+    background-color: var(--adfy_compare_products_comparison_modal_bg_color);
 
     &.addonify-compare-hidden {
 
-        display: none; // Hide table if only 1 product exists in the compare list.
+        // Hide table if only 1 product exists in the compare list.
+        display: none; 
     }
 
-    // All td & th style.
     th,
     td {
 
         padding: 15px 15px;
         text-align: left;
         vertical-align: top;
-        border-color: #F5F5F5;
+        color: var(--adfy_compare_products_comparison_modal_txt_color);
+        border: none;
+        background-color: transparent;
+    }
+
+    tr {
+
+        td:not(:first-child) {
+
+            border-bottom: 1px solid var(--adfy_compare_products_comparison_modal_border_color);
+        }
     }
 
     th {
-
-        background-color: #F5F5F5;
+        color: var(--adfy_compare_products_comparison_modal_txt_color);
+        background-color: var(--adfy_compare_products_comparison_modal_bg_color);
     }
 
     td {
@@ -39,7 +50,7 @@
             flex-direction: row;
             align-items: center;
             font-size: 16px;
-            color: #444444;
+            color: var(--adfy_compare_products_comparison_modal_regular_price_color);
             font-weight: bold;
             margin-bottom: 0;
 
@@ -47,7 +58,8 @@
 
                 display: inline-flex;
                 font-weight: bold;
-                color: red;
+                color: var(--adfy_compare_products_comparison_modal_sale_price_color);
+                background: transparent;
                 background-color: transparent;
             }
 
@@ -56,7 +68,7 @@
                 display: inline-flex;
                 margin-right: 5px;
                 font-size: 13px;
-                color: #444444;
+                color: var(--adfy_compare_products_comparison_modal_regular_price_color);
                 opacity: 0.8;
             }
         }
@@ -84,6 +96,38 @@
         }
     }
 
+    td:not(:first-child)[class*="adfy-compare-products-td-field-in_stock"] {
+
+        .stock {
+
+            color: var(--adfy_compare_products_comparison_modal_out_of_stock_txt_color);
+
+            &.in-stock {
+
+                color: var(--adfy_compare_products_comparison_modal_in_stock_txt_color);
+            }
+        }
+    }
+
+    td:not(:first-child)[class*="adfy-compare-products-td-field-add_to_cart_button"] {
+
+        .add_to_cart_button {
+
+            fill: var(--adfy_compare_products_comparison_modal_add_to_cart_btn_label_color);
+            color: var(--adfy_compare_products_comparison_modal_add_to_cart_btn_label_color);
+            background: transparent;
+            background-color: var(--adfy_compare_products_comparison_modal_add_to_cart_btn_bg_color);
+
+            &:hover, :focus {
+
+                fill: var(--adfy_compare_products_comparison_modal_add_to_cart_btn_label_hover_color);
+                color: var(--adfy_compare_products_comparison_modal_add_to_cart_btn_label_hover_color);
+                background: transparent;
+                background-color: var(--adfy_compare_products_comparison_modal_add_to_cart_btn_bg_hover_color);
+            }
+        }
+    }
+
     td:not(:first-child)[class*="adfy-compare-products-td-field-image"] {
 
         .adfy-compare-products-table-row-content {
@@ -91,10 +135,19 @@
             a {
 
                 display: block;
+                fill: transparent;
+                color: transparent;
 
                 img {
 
                     border-radius: 5px;
+                }
+
+                &:hover, &:focus {
+
+                    color: transparent;
+                    fill: transparent;
+                    outline: 0;
                 }
             }
         }
@@ -198,12 +251,12 @@
                     .product-title-link {
 
                         display: inline-flex;
-                        color: var(--adfy_compare_products_table_title_color);
+                        color: var(--adfy_compare_products_comparison_modal_link_color);
                         line-height: 1.3;
 
                         &:hover {
 
-                            color: var(--adfy_compare_products_table_title_color_hover);
+                            color: var(--adfy_compare_products_comparison_modal_link_hover_color);
                         }
                     }
 
@@ -223,15 +276,24 @@
                         box-shadow: none;
                         appearance: none;
                         text-decoration: none;
-                        fill: white;
-                        color: white;
+                        fill: var(--adfy_compare_products_comparison_modal_remove_btn_label_color);
+                        color: var(--adfy_compare_products_comparison_modal_remove_btn_label_color);
                         border-radius: 4px;
+                        background: transparent;
+                        background-color: var(--adfy_compare_products_comparison_modal_remove_btn_bg_color);
                         @include transitionDelay();
 
                         svg {
 
                             width: 18px;
                             height: 18px;
+                        }
+
+                        &:focus, &:hover {
+
+                            fill: var(--adfy_compare_products_comparison_modal_remove_btn_label_hover_color);
+                            color: var(--adfy_compare_products_comparison_modal_remove_btn_label_hover_color);
+                            background-color: var(--adfy_compare_products_comparison_modal_remove_btn_bg_hover_color);  
                         }
                     }
                 }
@@ -257,15 +319,16 @@
                 &:first-child {
 
                     width: 200px;
-                    background-color: whitesmoke;
+                    color: var(--adfy_compare_products_comparison_modal_header_txt_color);
+                    background-color: var(--adfy_compare_products_comparison_modal_header_bg_color);
 
-                    // Resize width in ipadpro breakpoint.
+                    // Resize width in "ipadpro" breakpoint.
                     @include breakpoint(ipadpro) {
 
                         width: 100px;
                     }
 
-                    // Hide afetr medium breakpoint.
+                    // Hide after medium breakpoint.
                     @include breakpoint(medium) {
 
                         display: none;

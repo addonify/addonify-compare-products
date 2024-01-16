@@ -30,6 +30,11 @@
     @include transitionDelay();
 }
 
+#addonify-compare-modal-overlay {
+    
+    background-color: var(--adfy_compare_products_comparison_modal_overlay_bg_color);
+}
+
 #addonify-compare-modal-overlay.addonify-compare-hidden,
 #addonify-compare-search-modal-overlay.addonify-compare-hidden {
 
@@ -375,10 +380,20 @@
         border-radius: 5px;
         background-color: white;
 
-         #addonify-compare-close-button {
+        #addonify-compare-close-button {
 
             display: inline-flex; // Display the button on comparison table modal.
+            color: var(--adfy_compare_products_comparison_modal_close_btn_icon_color);
+            fill: var(--adfy_compare_products_comparison_modal_close_btn_icon_color);
+            background-color: var(--adfy_compare_products_comparison_modal_close_btn_bg_color);
             z-index: var(--adfy_compare_products_comparison_table_zindex);
+
+            &:hover, &:focus {
+
+                color: var(--adfy_compare_products_comparison_modal_close_btn_icon_hover_color);
+                fill: var(--adfy_compare_products_comparison_modal_close_btn_icon_hover_color);
+                background-color: var(--adfy_compare_products_comparison_modal_close_btn_bg_hover_color);
+            }
         }
 
         #addonify-compare-modal-content {

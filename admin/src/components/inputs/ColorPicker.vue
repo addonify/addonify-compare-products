@@ -8,9 +8,16 @@
 	 * @since 1.0.0
 	 */
 	const props = defineProps({
-		colorVal: String,
-		isAlpha: [Boolean, String],
-		label: String,
+		colorVal: {
+			type: String,
+		},
+		isAlpha: {
+			type: [Boolean, String],
+			default: true,
+		},
+		label: {
+			type: String,
+		},
 	});
 
 	/**
