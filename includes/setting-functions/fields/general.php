@@ -97,7 +97,7 @@ if ( ! function_exists( 'addonify_compare_products_styles_settings_fields' ) ) {
 			'load_styles_from_plugin' => array(
 				'type'        => 'switch',
 				'className'   => '',
-				'label'       => __( 'Enable Styles from Plugin', 'addonify-compare-products' ),
+				'label'       => __( 'Enable dynamic styles', 'addonify-compare-products' ),
 				'description' => __( 'Enable to apply styles and colors from the plugin.', 'addonify-compare-products' ),
 				'value'       => addonify_compare_products_get_option( 'load_styles_from_plugin' ),
 			),

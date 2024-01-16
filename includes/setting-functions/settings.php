@@ -351,7 +351,7 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
 				'styles'   => array(
 					'sections' => array(
 						'general'                => array(
-							'title'       => __( 'General', 'addonify-compare-products' ),
+							'title'       => __( 'Interface Design', 'addonify-compare-products' ),
 							'description' => '',
 							'fields'      => addonify_compare_products_styles_settings_fields(),
 						),
