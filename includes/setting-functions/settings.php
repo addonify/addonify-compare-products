@@ -351,35 +351,35 @@ if ( ! function_exists( 'addonify_compare_products_get_settings_fields' ) ) {
 				'styles'   => array(
 					'sections' => array(
 						'general'                => array(
-							'title'       => __( 'General', 'addonify-compare-products' ),
+							'title'       => __( 'Interface Design', 'addonify-compare-products' ),
 							'description' => '',
 							'fields'      => addonify_compare_products_styles_settings_fields(),
 						),
 						'compare_button_colors'  => array(
 							'title'       => __( 'Compare Button Colors', 'addonify-compare-products' ),
 							'description' => '',
-							'type'        => 'color-options-group',
+							'type'        => 'render-jumbo-box',
 							'dependent'   => array( 'load_styles_from_plugin' ),
 							'fields'      => addonify_compare_products_compare_button_styles_fields(),
 						),
 						'floating_bar_colors'    => array(
 							'title'       => __( 'Floating Dock Colors', 'addonify-compare-products' ),
 							'description' => '',
-							'type'        => 'color-options-group',
+							'type'        => 'render-jumbo-box',
 							'dependent'   => array( 'load_styles_from_plugin' ),
 							'fields'      => addonify_compare_products_floating_bar_styles_fields(),
 						),
 						'search_modal_color'     => array(
 							'title'       => __( 'Search Modal Colors', 'addonify-compare-products' ),
 							'description' => '',
-							'type'        => 'color-options-group',
+							'type'        => 'render-jumbo-box',
 							'dependent'   => array( 'load_styles_from_plugin' ),
 							'fields'      => addonify_compare_products_search_modal_styles_fields(),
 						),
 						'comparison_table_color' => array(
 							'title'       => __( 'Comparison Table Colors', 'addonify-compare-products' ),
 							'description' => '',
-							'type'        => 'color-options-group',
+							'type'        => 'render-jumbo-box',
 							'dependent'   => array( 'load_styles_from_plugin' ),
 							'fields'      => addonify_compare_products_comparison_table_styles_fields(),
 						),

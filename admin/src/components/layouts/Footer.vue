@@ -1,18 +1,18 @@
 <script setup>
 	const { __ } = wp.i18n;
-	const versionNumber = ADDONIFY_COMPARE_PRODUCTS_LOCOLIZER.version_number;
-	const thisYear = new Date().getFullYear();
+	const versionNumber = ADDONIFY_COMPARE_PRODUCTS_LOCALIZER.version_number;
+	const currentYear = new Date().getFullYear();
 </script>
 <template>
 	<footer class="adfy-colopon">
 		<div class="adfy-row">
 			<div class="adfy-col left">
 				<p class="text">
-					© 2020 - {{ thisYear }} Addonify Products Compare
-					<span class="version"
-						>{{ __("Version", "addonify-compare-products") }}:
-						{{ versionNumber }}</span
-					>
+					© 2020 - {{ currentYear }} Addonify Compare Products
+					<span class="version">
+						{{ __("Version", "addonify-compare-products") }}:
+						{{ versionNumber }}
+					</span>
 				</p>
 			</div>
 			<div class="adfy-col right">

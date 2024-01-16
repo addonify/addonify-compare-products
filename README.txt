@@ -105,9 +105,11 @@ Yes, you can do it. Copy template from "/public/templates" the plugin's folder a
 = 1.1.13 - ? January, 2023 =
 
 - Fixed: Comparison table not displaying in comparison page.
+- New: Plugin setting page user interface.
 - Added: Color options for comparison modal.
-- Tested: Upto WooCommerce version 8.4.0.
-- Tested: Upto WordPress version 6.4.2.
+- Added: Dashboard notice in plugin setting page.
+- Tested: WooCommerce version 8.4.0.
+- Tested: WordPress version 6.4.2.
 
 = 1.1.12 - 09 November, 2023 =
 

@@ -1,0 +1,14 @@
+{
+    "version": "1.0.0",
+    "alerts": {
+        "2024-01-16": {
+            "live": true,
+            "type": "warning",
+            "size": "small",
+            "data": {
+                "locale": "en_US",
+                "content": "<strong>V1.1.13</strong> new color options for comparison modal."
+            }
+        }
+    }
+}

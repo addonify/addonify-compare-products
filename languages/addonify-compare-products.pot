@@ -1,17 +1,17 @@
-# Copyright (C) 2023 Addonify
+# Copyright (C) 2024 Addonify
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Addonify - Compare Products For WooCommerce 1.1.11\n"
+"Project-Id-Version: Addonify - Compare Products For WooCommerce 1.1.12\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/addonify-compare-products\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-09-04T06:21:38+00:00\n"
+"POT-Creation-Date: 2024-01-16T09:14:18+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: addonify-compare-products\n"
 
 #. Plugin Name of the plugin
@@ -39,8 +39,8 @@ msgid "Addonify Compare Products is enabled but not effective. This plugin requi
 msgstr ""
 
 #: admin/class-addonify-compare-products-admin.php:195
-#: includes/setting-functions/settings.php:310
-#: admin/assets/js/main.js:3365
+#: includes/setting-functions/settings.php:332
+#: admin/assets/js/main.js:3898
 msgid "Settings"
 msgstr ""
 
@@ -97,95 +97,96 @@ msgstr ""
 msgid "Ooops, you are not allowed to manage options."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:25
+#: includes/setting-functions/fields/compare-button.php:24
 msgid "Button Position in Products Loop"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:26
+#: includes/setting-functions/fields/compare-button.php:25
 msgid "Choose where to place the compare button in products loop."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:28
-#: includes/setting-functions/fields/compare-button.php:42
+#: includes/setting-functions/fields/compare-button.php:27
+#: includes/setting-functions/fields/compare-button.php:40
 msgid "After Add to Cart Button"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:29
-#: includes/setting-functions/fields/compare-button.php:41
+#: includes/setting-functions/fields/compare-button.php:28
+#: includes/setting-functions/fields/compare-button.php:39
 msgid "Before Add to Cart Button"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:37
+#: includes/setting-functions/fields/compare-button.php:35
 msgid "Button Position in Product Single Page"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:38
+#: includes/setting-functions/fields/compare-button.php:36
 msgid "Choose where to place the compare button in product single page."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:40
+#: includes/setting-functions/fields/compare-button.php:38
 msgid "Before Add to Cart Form"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:43
+#: includes/setting-functions/fields/compare-button.php:41
 msgid "After Add to Cart Form"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:51
+#: includes/setting-functions/fields/compare-button.php:48
 msgid "Button Label"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:52
+#: includes/setting-functions/fields/compare-button.php:49
 msgid "Label for compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:59
+#: includes/setting-functions/fields/compare-button.php:55
 msgid "Show Icon"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:60
+#: includes/setting-functions/fields/compare-button.php:56
 msgid "Show icon on compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:69
+#: includes/setting-functions/fields/compare-button.php:64
 msgid "Select Icon"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:70
+#: includes/setting-functions/fields/compare-button.php:65
 msgid "Select icon to be displayed on compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:78
+#: includes/setting-functions/fields/compare-button.php:72
 msgid "Icon Position"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:79
+#: includes/setting-functions/fields/compare-button.php:73
 msgid "Choose position for icon in the compare button."
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:81
+#: includes/setting-functions/fields/compare-button.php:75
 msgid "Before Button Label"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:82
+#: includes/setting-functions/fields/compare-button.php:76
 msgid "After Button Label"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:104
+#: includes/setting-functions/fields/compare-button.php:98
 msgid "Label Color"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:111
+#: includes/setting-functions/fields/compare-button.php:105
 msgid "Label Color on Hover"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:118
+#: includes/setting-functions/fields/compare-button.php:112
+#: includes/setting-functions/fields/comparison-table.php:74
 #: includes/setting-functions/fields/floating-compare-bar.php:24
 #: includes/setting-functions/fields/search-modal.php:31
 msgid "Background Color"
 msgstr ""
 
-#: includes/setting-functions/fields/compare-button.php:125
+#: includes/setting-functions/fields/compare-button.php:119
 msgid "Background Color on Hover"
 msgstr ""
 
@@ -209,16 +210,102 @@ msgstr ""
 msgid "You do not have product attributes."
 msgstr ""
 
-#: includes/setting-functions/fields/comparison-table.php:44
+#: includes/setting-functions/fields/comparison-table.php:43
 msgid "Show Table Fields Header"
 msgstr ""
 
 #: includes/setting-functions/fields/comparison-table.php:66
-msgid "Table Title Color"
+#: includes/setting-functions/fields/search-modal.php:24
+msgid "Overlay Color"
 msgstr ""
 
-#: includes/setting-functions/fields/comparison-table.php:73
-msgid "Table Title Color on Hover"
+#: includes/setting-functions/fields/comparison-table.php:82
+#: includes/setting-functions/fields/floating-compare-bar.php:31
+msgid "Text Color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:90
+msgid "Link Color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:98
+msgid "Link Color on Hover"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:106
+msgid "Table header text color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:114
+msgid "Table header background color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:122
+msgid "Product remove button background color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:130
+msgid "Product remove button label color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:138
+msgid "Product remove button background color on hover"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:146
+msgid "Product remove button label color on hover"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:154
+msgid "Product regular price color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:162
+msgid "Product sale price color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:170
+msgid "Product in stock label color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:178
+msgid "Product out of stock label color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:186
+msgid "Add to cart button background color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:194
+msgid "Add to cart button label color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:202
+msgid "Add to cart button background color on hover"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:210
+msgid "Add to cart button label color on hover"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:218
+msgid "Table border color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:226
+msgid "Modal close button background color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:234
+msgid "Modal close button icon color"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:242
+msgid "Modal close button background color on hover"
+msgstr ""
+
+#: includes/setting-functions/fields/comparison-table.php:250
+msgid "Modal close button icon color on hover"
 msgstr ""
 
 #: includes/setting-functions/fields/custom-css.php:26
@@ -227,10 +314,6 @@ msgstr ""
 
 #: includes/setting-functions/fields/custom-css.php:27
 msgid "If required, add your custom CSS code here."
-msgstr ""
-
-#: includes/setting-functions/fields/floating-compare-bar.php:31
-msgid "Text Color"
 msgstr ""
 
 #: includes/setting-functions/fields/floating-compare-bar.php:38
@@ -275,73 +358,73 @@ msgstr ""
 msgid "If disabled, products comparison will not be functional."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:31
+#: includes/setting-functions/fields/general.php:30
 msgid "Enable Login Required"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:32
+#: includes/setting-functions/fields/general.php:31
 msgid "If enabled, products comparison will be available only to logged in users."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:39
+#: includes/setting-functions/fields/general.php:37
 msgid "Enable Products Comparison on Products Loop"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:40
+#: includes/setting-functions/fields/general.php:38
 msgid "If disabled, products comparison will not be functional on products loop."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:47
+#: includes/setting-functions/fields/general.php:44
 msgid "Enable Products Comparison on Product Single Page"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:48
+#: includes/setting-functions/fields/general.php:45
 msgid "If disabled, products comparison will not be functional on product single page."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:57
-#: includes/setting-functions/fields/general.php:70
+#: includes/setting-functions/fields/general.php:52
+#: includes/setting-functions/fields/general.php:64
 msgid "Select a page"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:58
+#: includes/setting-functions/fields/general.php:53
 msgid "Products Comparison Display"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:59
+#: includes/setting-functions/fields/general.php:54
 msgid "Select a method to display product comparison."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:62
+#: includes/setting-functions/fields/general.php:57
 msgid "Popup Modal"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:63
+#: includes/setting-functions/fields/general.php:58
 msgid "Page"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:71
+#: includes/setting-functions/fields/general.php:65
 msgid "Products Comparison Page"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:72
+#: includes/setting-functions/fields/general.php:66
 msgid "Select a page to display products comparison table."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:81
+#: includes/setting-functions/fields/general.php:77
 msgid "Time to Save Compare Data"
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:104
-msgid "Enable Styles from Plugin"
+#: includes/setting-functions/fields/general.php:79
+msgid "Set the number of days to save the compare products data in browser cookie."
 msgstr ""
 
-#: includes/setting-functions/fields/general.php:105
+#: includes/setting-functions/fields/general.php:100
+msgid "Enable dynamic styles"
+msgstr ""
+
+#: includes/setting-functions/fields/general.php:101
 msgid "Enable to apply styles and colors from the plugin."
-msgstr ""
-
-#: includes/setting-functions/fields/search-modal.php:24
-msgid "Overlay Color"
 msgstr ""
 
 #: includes/setting-functions/fields/search-modal.php:38
@@ -423,43 +506,43 @@ msgstr ""
 msgid "Action"
 msgstr ""
 
-#: includes/setting-functions/settings.php:313
+#: includes/setting-functions/settings.php:335
 msgid "General Options"
 msgstr ""
 
-#: includes/setting-functions/settings.php:318
+#: includes/setting-functions/settings.php:340
 msgid "Compare Button Options"
 msgstr ""
 
-#: includes/setting-functions/settings.php:323
+#: includes/setting-functions/settings.php:345
 msgid "Comparison Table"
 msgstr ""
 
-#: includes/setting-functions/settings.php:332
-msgid "General"
+#: includes/setting-functions/settings.php:354
+msgid "Interface Design"
 msgstr ""
 
-#: includes/setting-functions/settings.php:337
+#: includes/setting-functions/settings.php:359
 msgid "Compare Button Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:344
+#: includes/setting-functions/settings.php:366
 msgid "Floating Dock Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:351
+#: includes/setting-functions/settings.php:373
 msgid "Search Modal Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:358
+#: includes/setting-functions/settings.php:380
 msgid "Comparison Table Colors"
 msgstr ""
 
-#: includes/setting-functions/settings.php:365
+#: includes/setting-functions/settings.php:387
 msgid "Developer"
 msgstr ""
 
-#: includes/setting-functions/settings.php:374
+#: includes/setting-functions/settings.php:396
 msgid "Coming soon...."
 msgstr ""
 
@@ -522,125 +605,115 @@ msgstr ""
 msgid "Add product"
 msgstr ""
 
-#: admin/assets/js/main.js:339
-#: admin/src/stores/options.js:64
+#: admin/assets/js/main.js:407
+#: admin/src/stores/options.js:106
 msgid "Something went wrong while fetching settings."
 msgstr ""
 
-#: admin/assets/js/main.js:395
-#: admin/src/stores/options.js:135
-msgid "Something went wrong while updating settings."
+#: admin/assets/js/main.js:470
+#: admin/assets/js/main.js:491
+#: admin/src/stores/options.js:158
+#: admin/src/stores/options.js:182
+msgid "Error saving changes! Please try again."
 msgstr ""
 
-#: admin/assets/js/main.js:502
-#: admin/src/stores/product.js:76
-msgid "Error: couldn't fetch recommended plugins list."
-msgstr ""
-
-#: admin/assets/js/main.js:546
-#: admin/src/stores/product.js:121
-msgid "Error: couldn't process the recommended plugins list."
-msgstr ""
-
-#: admin/assets/js/main.js:585
-#: admin/src/stores/product.js:158
-msgid "Error: Couldn't retrive the list of installed plugins."
-msgstr ""
-
-#: admin/assets/js/main.js:660
-#: admin/src/stores/product.js:237
+#: admin/assets/js/main.js:762
+#: admin/src/stores/product.js:216
 msgid "Plugin installed successfully."
 msgstr ""
 
-#: admin/assets/js/main.js:677
-#: admin/src/stores/product.js:251
+#: admin/assets/js/main.js:783
+#: admin/src/stores/product.js:231
 msgid "Error: couldn't install plugin."
 msgstr ""
 
-#: admin/assets/js/main.js:725
-#: admin/src/stores/product.js:290
+#: admin/assets/js/main.js:833
+#: admin/src/stores/product.js:266
 msgid "Plugin activated successfully."
 msgstr ""
 
-#: admin/assets/js/main.js:742
-#: admin/src/stores/product.js:304
+#: admin/assets/js/main.js:852
+#: admin/src/stores/product.js:279
 msgid "Error: Couldn't activate the plugin."
 msgstr ""
 
-#: admin/assets/js/main.js:920
-#: admin/assets/js/main.js:1488
+#: admin/assets/js/main.js:1712
 msgid "No choices found."
 msgstr ""
 
-#: admin/assets/js/main.js:1376
-msgid "Select"
-msgstr ""
-
-#: admin/assets/js/main.js:1947
+#: admin/assets/js/main.js:2252
 msgid "Activate now"
 msgstr ""
 
-#: admin/assets/js/main.js:1948
+#: admin/assets/js/main.js:2253
 msgid "Activating..."
 msgstr ""
 
-#: admin/assets/js/main.js:1949
+#: admin/assets/js/main.js:2254
 msgid "Install now"
 msgstr ""
 
-#: admin/assets/js/main.js:1950
+#: admin/assets/js/main.js:2255
 msgid "Installing..."
 msgstr ""
 
-#: admin/assets/js/main.js:1951
+#: admin/assets/js/main.js:2256
 msgid "Installed"
 msgstr ""
 
-#: admin/assets/js/main.js:2854
+#: admin/assets/js/main.js:3366
 msgid "Input is not supported."
 msgstr ""
 
-#: admin/assets/js/main.js:2854
+#: admin/assets/js/main.js:3366
 msgid "Check docs"
 msgstr ""
 
-#: admin/assets/js/main.js:3137
-#: admin/assets/js/main.js:3165
+#: admin/assets/js/main.js:3535
+msgid "Select"
+msgstr ""
+
+#: admin/assets/js/main.js:3678
+#: admin/assets/js/main.js:3706
 msgid "Enter text here..."
 msgstr ""
 
-#: admin/assets/js/main.js:3213
+#: admin/assets/js/main.js:3754
 msgid "Version"
 msgstr ""
 
-#: admin/assets/js/main.js:3213
+#: admin/assets/js/main.js:3754
 msgid "Rate"
 msgstr ""
 
-#: admin/assets/js/main.js:3267
-msgid "Documentation"
+#: admin/assets/js/main.js:3821
+msgid "ACP Docs"
 msgstr ""
 
-#: admin/assets/js/main.js:3277
+#: admin/assets/js/main.js:3823
+msgid "Rate ACP"
+msgstr ""
+
+#: admin/assets/js/main.js:3833
 msgid "Save Options"
 msgstr ""
 
-#: admin/assets/js/main.js:3373
+#: admin/assets/js/main.js:3907
 msgid "Design"
 msgstr ""
 
-#: admin/assets/js/main.js:3381
+#: admin/assets/js/main.js:3916
 msgid "Products"
 msgstr ""
 
-#: admin/assets/js/main.js:3889
+#: admin/assets/js/main.js:4408
 msgid "404"
 msgstr ""
 
-#: admin/assets/js/main.js:3889
+#: admin/assets/js/main.js:4408
 msgid "Oops, page not found!"
 msgstr ""
 
-#: admin/assets/js/main.js:3894
+#: admin/assets/js/main.js:4413
 msgid "Go Back"
 msgstr ""

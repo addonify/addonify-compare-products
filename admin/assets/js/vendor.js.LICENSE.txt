@@ -1,21 +1,29 @@
 /*!
-  * vue-router v4.1.6
-  * (c) 2022 Eduardo San Martin Morote
+  * vue-router v4.2.5
+  * (c) 2023 Eduardo San Martin Morote
   * @license MIT
   */
 
 /*!
- * jQuery JavaScript Library v3.7.0
+ * jQuery JavaScript Library v3.7.1
  * https://jquery.com/
  *
  * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2023-05-11T18:29Z
+ * Date: 2023-08-28T13:37Z
  */
 
-/*! Element Plus Icons Vue v2.0.10 */
+/*! #__NO_SIDE_EFFECTS__ */
+
+/*! Element Plus Icons Vue v2.3.1 */
+
+/**
+* @vue/shared v3.4.14
+* (c) 2018-present Yuxi (Evan) You and Vue contributors
+* @license MIT
+**/
 
 /**!
  * Sortable 1.14.0
