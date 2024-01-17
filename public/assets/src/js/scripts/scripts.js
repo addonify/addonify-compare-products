@@ -241,8 +241,8 @@
 			 * @since 1.1.11
 			 */
 			if (
-				! ( $('.addonify-cp-button').length > 0 ) &&
-				! ( $('#addonify-compare-products-comparison-table-on-page').length > 0 )
+				!($('.addonify-cp-button').length > 0) &&
+				!($('#addonify-compare-products-comparison-table-on-page').length > 0)
 			) {
 				body.removeClass('addonify-compare-dock-is-visible');
 				return;
@@ -352,7 +352,9 @@
 			if (!searchVal.length) return;
 
 			// Show loading animation.
-			$('#addonify-compare-search-results').html('').addClass('loading');
+			$('#addonify-compare-search-results').addClass('loading');
+
+			$('#addonify-compare-search-results ul').remove();
 
 			let product_ids = getProductids();
 
@@ -367,7 +369,8 @@
 				addonifyCompareProductsJSObject.ajaxURL,
 				data,
 				function (response) {
-					$('#addonify-compare-search-results').removeClass('loading').html(response);
+					$('#addonify-compare-search-results').removeClass('loading');
+					$('#addonify-compare-search-results').prepend(response);
 				}
 			);
 		}

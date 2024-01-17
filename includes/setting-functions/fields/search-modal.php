@@ -76,19 +76,19 @@ if ( ! function_exists( 'addonify_compare_products_search_modal_styles_fields' )
 				'className'     => '',
 				'value'         => addonify_compare_products_get_option( 'search_modal_close_btn_text_color_hover' ),
 			),
-			'search_modal_close_btn_border_color'         => array(
+			'search_modal_close_btn_bg_color'         => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Close Button Border Color', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Close Button Background Color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
-				'value'         => addonify_compare_products_get_option( 'search_modal_close_btn_border_color' ),
+				'value'         => addonify_compare_products_get_option( 'search_modal_close_btn_bg_color' ),
 			),
-			'search_modal_close_btn_border_color_hover'   => array(
+			'search_modal_close_btn_bg_color_hover'   => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Close Button On Hover Border Color', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Close Button On Hover Background Color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
-				'value'         => addonify_compare_products_get_option( 'search_modal_close_btn_border_color_hover' ),
+				'value'         => addonify_compare_products_get_option( 'search_modal_close_btn_bg_color_hover' ),
 			),
 			// @since 1.1.13
 			'search_modal_product_title_color'            => array(
@@ -107,12 +107,12 @@ if ( ! function_exists( 'addonify_compare_products_search_modal_styles_fields' )
 				'value'         => addonify_compare_products_get_option( 'search_modal_product_separator_color' ),
 			),
 			// @since 1.1.13
-			'search_modal_search_icon_color'              => array(
+			'search_modal_search_spinner_color'            => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Search Icon Color', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Search Spinner Color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
-				'value'         => addonify_compare_products_get_option( 'search_modal_search_icon_color' ),
+				'value'         => addonify_compare_products_get_option( 'search_modal_search_spinner_color' ),
 			),
 			// @since 1.1.13
 			'search_modal_search_field_bg_color'          => array(
