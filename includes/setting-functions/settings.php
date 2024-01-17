@@ -101,21 +101,21 @@ if ( ! function_exists( 'addonify_compare_products_settings_defaults' ) ) {
 				'search_modal_overlay_bck_color'           => 'rgba(0, 0, 0, 0.8)',
 				'search_modal_bck_color'                   => '#FFFFFF',
 
-				'search_modal_add_btn_text_color'          => '#444444',
-				'search_modal_add_btn_text_color_hover'    => '#444444',
+				'search_modal_add_btn_text_color'          => '#898989',
+				'search_modal_add_btn_text_color_hover'    => '#777777',
 				'search_modal_add_btn_bck_color'           => '#EEEEEE',
 				'search_modal_add_btn_bck_color_hover'     => '#D4D4D4',
 
-				'search_modal_close_btn_text_color'        => 'rgba(255, 255, 255, 0.7)',
-				'search_modal_close_btn_text_color_hover'  => 'rgba(255, 255, 255, 1)',
-				'search_modal_close_btn_border_color'      => 'rgba(255, 255, 255, 0.3)',
-				'search_modal_close_btn_border_color_hover' => 'rgba(255, 255, 255, 1)',
+				'search_modal_close_btn_text_color'        => '#444444',
+				'search_modal_close_btn_text_color_hover'  => '#AFAFAF',
+				'search_modal_close_btn_bg_color'      	   => '#EEEEEE',
+				'search_modal_close_btn_bg_color_hover'    => '#DDDDDD',
 
-				'search_modal_product_title_color'         => '#6d6d6d', // @since 1.1.13
-				'search_modal_product_separator_color'     => '#f5f5f5', // @since 1.1.13
-				'search_modal_search_icon_color'           => '#f5f5f5', // @since 1.1.13
-				'search_modal_search_field_bg_color'       => '#ffffff', // @since 1.1.13
-				'search_modal_search_field_border_color'   => '#eeeeee', // @since 1.1.13
+				'search_modal_product_title_color'         => '#444444', // @since 1.1.13
+				'search_modal_product_separator_color'     => '#F5F5F5', // @since 1.1.13
+				'search_modal_search_spinner_color'        => '#444444', // @since 1.1.13
+				'search_modal_search_field_bg_color'       => '#FFFFFF', // @since 1.1.13
+				'search_modal_search_field_border_color'   => '#EEEEEE', // @since 1.1.13
 				'search_modal_search_field_text_color'     => '#444444', // @since 1.1.13
 				'search_modal_search_field_placeholder_color' => '#444444', // @since 1.1.13
 

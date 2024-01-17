@@ -697,8 +697,15 @@ class Addonify_Compare_Products_Public {
 			'--adfy_compare_products_search_modal_add_button_bg_color_hover' => addonify_compare_products_get_option( 'search_modal_add_btn_bck_color_hover' ),
 			'--adfy_compare_products_search_modal_close_button_color' => addonify_compare_products_get_option( 'search_modal_close_btn_text_color' ),
 			'--adfy_compare_products_search_modal_close_button_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_text_color_hover' ),
-			'--adfy_compare_products_search_modal_close_button_border_color' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color' ),
-			'--adfy_compare_products_search_modal_close_button_border_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_border_color_hover' ),
+			'--adfy_compare_products_search_modal_close_button_bg_color' => addonify_compare_products_get_option( 'search_modal_close_btn_bg_color' ),
+			'--adfy_compare_products_search_modal_close_button_bg_color_hover' => addonify_compare_products_get_option( 'search_modal_close_btn_bg_color_hover' ),
+			'--adfy_compare_products_search_modal_text_color' => addonify_compare_products_get_option( 'search_modal_product_title_color' ),
+			'--adfy_compare_products_search_modal_separator_color' => addonify_compare_products_get_option( 'search_modal_product_separator_color' ),
+			'--adfy_compare_products_search_modal_search_input_bg_color' => addonify_compare_products_get_option( 'search_modal_search_field_bg_color' ),
+			'--adfy_compare_products_search_modal_search_input_text_color' => addonify_compare_products_get_option( 'search_modal_search_field_text_color' ),
+			'--adfy_compare_products_search_modal_search_input_border_color' => addonify_compare_products_get_option( 'search_modal_search_field_border_color' ),
+			'--adfy_compare_products_search_modal_search_input_placeholder_color' => addonify_compare_products_get_option( 'search_modal_search_field_placeholder_color' ),
+			'--adfy_compare_products_search_modal_spinner_color' => addonify_compare_products_get_option( 'search_modal_search_spinner_color' ),
 			// Comparison modal colors.
 			'--adfy_compare_products_comparison_modal_overlay_bg_color' => addonify_compare_products_get_option( 'comparison_modal_overlay_bg_color' ), // @since 1.1.13
 			'--adfy_compare_products_comparison_modal_bg_color' => addonify_compare_products_get_option( 'comparison_modal_bg_color' ), // @since 1.1.13

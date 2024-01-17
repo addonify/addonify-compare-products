@@ -3,8 +3,8 @@
     /**
     * Button colors.
     */
-    --adfy_compare_products_button_color: white;
-    --adfy_compare_products_button_color_hover: white;
+    --adfy_compare_products_button_color: #FFFFFF;
+    --adfy_compare_products_button_color_hover: #FFFFFF;
     --adfy_compare_products_button_bg_color: #444444;
     --adfy_compare_products_button_bg_color_hover: #3765FA;
 
@@ -12,18 +12,27 @@
     * Search modal colors.
     */
     --adfy_compare_products_search_modal_overlay_bg_color: rgba(0, 0, 0, 0.8);
-    --adfy_compare_products_search_modal_bg_color: white;
+    --adfy_compare_products_search_modal_bg_color: #FFFFFF;
     --adfy_compare_products_search_modal_text_color: #444444;
+
+    --adfy_compare_products_search_modal_separator_color: #EEEEEE;
 
     --adfy_compare_products_search_modal_add_button_color: #444444;
     --adfy_compare_products_search_modal_add_button_color_hover: #444444;
     --adfy_compare_products_search_modal_add_button_bg_color: #EEEEEE;
     --adfy_compare_products_search_modal_add_button_bg_color_hover: #D4D4D4;
 
-    --adfy_compare_products_search_modal_close_button_color: rgba(255, 255, 255, 0.7);
-    --adfy_compare_products_search_modal_close_button_color_hover: rgba(255, 255, 255, 1);
-    --adfy_compare_products_search_modal_close_button_border_color: rgba(255, 255, 255, 0.3);
-    --adfy_compare_products_search_modal_close_button_border_color_hover: rgba(255, 255, 255, 1);
+    --adfy_compare_products_search_modal_close_button_color: #898989;
+    --adfy_compare_products_search_modal_close_button_color_hover: #777777;
+    --adfy_compare_products_search_modal_close_button_bg_color: #EEEEEE;
+    --adfy_compare_products_search_modal_close_button_bg_color_hover: #DDDDDD;
+
+    --adfy_compare_products_search_modal_search_input_bg_color: rgba(255, 255, 255, 1);
+    --adfy_compare_products_search_modal_search_input_border_color: #EEEEEE;
+    --adfy_compare_products_search_modal_search_input_text_color: #444444;
+    --adfy_compare_products_search_modal_search_input_placeholder_color: #444444;
+
+    --adfy_compare_products_search_modal_spinner_color: #444444;
 
     /**
     * Compare dock colors.
@@ -31,14 +40,14 @@
     --adfy_compare_products_dock_bg_color: #02030E;
     --adfy_compare_products_dock_text_color: rgba(255, 255, 255, 0.7);
 
-    --adfy_compare_products_dock_add_button_color: white;
-    --adfy_compare_products_dock_add_button_color_hover: white;
+    --adfy_compare_products_dock_add_button_color: #FFFFFF;
+    --adfy_compare_products_dock_add_button_color_hover: #FFFFFF;
     --adfy_compare_products_dock_add_button_bg_color: #343434;
     --adfy_compare_products_dock_add_button_bg_color_hover: #3765FA;
 
     --adfy_compare_products_dock_compare_button_color: #444444;
-    --adfy_compare_products_dock_compare_button_color_hover: white;
-    --adfy_compare_products_dock_compare_button_bg_color: white;
+    --adfy_compare_products_dock_compare_button_color_hover: #FFFFFF;
+    --adfy_compare_products_dock_compare_button_bg_color: #FFFFFF;
     --adfy_compare_products_dock_compare_button_bg_color_hover: #3765FA;
 
     /**
