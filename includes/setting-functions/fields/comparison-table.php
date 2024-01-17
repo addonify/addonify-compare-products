@@ -61,47 +61,47 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 
 		return array(
 			// @since 1.1.13
-			'comparison_modal_overlay_bg_color' => array(
+			'comparison_modal_overlay_bg_color'            => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Overlay Color', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Overlay color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_overlay_bg_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_bg_color' => array(
+			'comparison_modal_bg_color'                    => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Background Color', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Background color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_bg_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_txt_color' => array(
+			'comparison_modal_txt_color'                   => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Text Color', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Text color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_txt_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_link_color' => array(
+			'comparison_modal_link_color'                  => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Link Color', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Link color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_link_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_link_hover_color' => array(
+			'comparison_modal_link_hover_color'            => array(
 				'type'          => 'color',
-				'label'         => esc_html__( 'Link Color on Hover', 'addonify-compare-products' ),
+				'label'         => esc_html__( 'Link color on hover', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
 				'className'     => '',
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_link_hover_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_header_txt_color' => array(
+			'comparison_modal_header_txt_color'            => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Table header text color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -109,7 +109,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_header_txt_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_header_bg_color' => array(
+			'comparison_modal_header_bg_color'             => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Table header background color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -117,7 +117,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_header_bg_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_remove_btn_bg_color' => array(
+			'comparison_modal_remove_btn_bg_color'         => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Product remove button background color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -125,7 +125,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_remove_btn_bg_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_remove_btn_label_color' => array(
+			'comparison_modal_remove_btn_label_color'      => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Product remove button label color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -133,7 +133,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_remove_btn_label_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_remove_btn_bg_hover_color' => array(
+			'comparison_modal_remove_btn_bg_hover_color'   => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Product remove button background color on hover', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -149,7 +149,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_remove_btn_label_hover_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_regular_price_color' => array(
+			'comparison_modal_regular_price_color'         => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Product regular price color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -157,7 +157,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_regular_price_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_sale_price_color' => array(
+			'comparison_modal_sale_price_color'            => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Product sale price color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -165,7 +165,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_sale_price_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_in_stock_txt_color' => array(
+			'comparison_modal_in_stock_txt_color'          => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Product in stock label color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -173,7 +173,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_in_stock_txt_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_out_of_stock_txt_color' => array(
+			'comparison_modal_out_of_stock_txt_color'      => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Product out of stock label color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -181,7 +181,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_out_of_stock_txt_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_add_to_cart_btn_bg_color' => array(
+			'comparison_modal_add_to_cart_btn_bg_color'    => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Add to cart button background color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -213,7 +213,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_add_to_cart_btn_label_hover_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_border_color' => array(
+			'comparison_modal_border_color'                => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Table border color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -221,7 +221,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_border_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_close_btn_bg_color' => array(
+			'comparison_modal_close_btn_bg_color'          => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Modal close button background color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -229,7 +229,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_close_btn_bg_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_close_btn_icon_color' => array(
+			'comparison_modal_close_btn_icon_color'        => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Modal close button icon color', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -237,7 +237,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_close_btn_icon_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_close_btn_bg_hover_color' => array(
+			'comparison_modal_close_btn_bg_hover_color'    => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Modal close button background color on hover', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
@@ -245,7 +245,7 @@ if ( ! function_exists( 'addonify_compare_products_comparison_table_styles_field
 				'value'         => addonify_compare_products_get_option( 'comparison_modal_close_btn_bg_hover_color' ),
 			),
 			// @since 1.1.13
-			'comparison_modal_close_btn_icon_hover_color' => array(
+			'comparison_modal_close_btn_icon_hover_color'  => array(
 				'type'          => 'color',
 				'label'         => esc_html__( 'Modal close button icon color on hover', 'addonify-compare-products' ),
 				'isAlphaPicker' => true,
