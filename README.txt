@@ -2,9 +2,9 @@
 
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
-Requires at least: 5.9
-Tested up to: 6.4.0
-Stable tag: 1.1.12
+Requires at least: 6.3
+Tested up to: 6.4.2
+Stable tag: 1.1.13
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,16 @@ Yes, you can do it. Copy template from "/public/templates" the plugin's folder a
 
 
 == Changelog ==
+
+= 1.1.13 - 17 January, 2024 =
+
+- Fixed:  Comparison table not displaying in comparison page.
+- New:    Plugin setting page user interface.
+- Added:  Color options for comparison modal.
+- Added:  Color optoins for product search modal.
+- Added:  Dashboard notice in plugin setting page.
+- Tested: WooCommerce version 8.5.1.
+- Tested: WordPress version 6.4.2.
 
 = 1.1.12 - 09 November, 2023 =
 

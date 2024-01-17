@@ -2,26 +2,33 @@
 	import { computed } from "vue";
 	import { ElSelect, ElOption } from "element-plus";
 
+	/**
+	 * Define props.
+	 *
+	 * @since 1.2.8
+	 */
 	const props = defineProps({
 		modelValue: {
-			type: [Number, String, Array, Object],
+			type: String,
 			required: true,
 		},
 		choices: {
 			type: [Object, Array],
-			required: false,
+			required: true,
 		},
 		placeholder: {
 			type: String,
 			required: false,
+			default: "",
 		},
 	});
 
 	/**
+	 * Define emit.
 	 *
-	 * Define emits for v-model usage.
-	 * Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
-	 *
+	 * @param {String} value
+	 * @returns {String} updated value
+	 * @since 1.2.8
 	 */
 	const emit = defineEmits(["update:modelValue"]);
 	const value = computed({
@@ -33,15 +40,21 @@
 		},
 	});
 
+	/**
+	 * Import __ from wp.i18n.
+	 *
+	 */
 	const { __ } = wp.i18n;
-	const defPlaceholder = __("Select", "addonify-compare-products");
 </script>
 <template>
 	<el-select
 		v-model="value"
+		:placeholder="
+			props.placeholder
+				? props.placeholder
+				: __('Select', 'addonify-compare-products')
+		"
 		size="large"
-		filterable
-		:placeholder="props.placeholder ? props.placeholder : defPlaceholder"
 	>
 		<el-option
 			v-for="(label, key) in props.choices"
@@ -50,8 +63,3 @@
 		/>
 	</el-select>
 </template>
-<style lang="css">
-	.wp-admin .el-select-dropdown__item.selected {
-		font-weight: normal;
-	}
-</style>

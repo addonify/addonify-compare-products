@@ -122,7 +122,7 @@ class Addonify_Compare_Products_Admin {
 
 			wp_localize_script(
 				"{$this->plugin_name}-main",
-				'ADDONIFY_COMPARE_PRODUCTS_LOCOLIZER',
+				'ADDONIFY_COMPARE_PRODUCTS_LOCALIZER',
 				array(
 					'admin_url'      => esc_url( admin_url( '/' ) ),
 					'ajax_url'       => esc_url( admin_url( 'admin-ajax.php' ) ),

@@ -2,13 +2,30 @@
 	import { computed } from "vue";
 	import { ElColorPicker } from "element-plus";
 
+	/**
+	 * Define props.
+	 *
+	 * @since 1.0.0
+	 */
 	const props = defineProps({
-		colorVal: String,
-		isAlphaPicker: [Boolean, String],
-		label: String,
+		colorVal: {
+			type: String,
+		},
+		isAlpha: {
+			type: [Boolean, String],
+			default: true,
+		},
+		label: {
+			type: String,
+		},
 	});
 
-	const emit = defineEmits(["update:colorVal"]); // Ref: https://vuejs.org/guide/components/events.html#usage-with-v-model
+	/**
+	 * Define emit.
+	 *
+	 * @since 1.0.0
+	 */
+	const emit = defineEmits(["update:colorVal"]);
 	const value = computed({
 		get() {
 			return props.colorVal;
@@ -18,44 +35,20 @@
 		},
 	});
 
+	/**
+	 * Handle color changed.
+	 * Emit the color immediately. Don't wait till the "ok" button is clicked.
+	 *
+	 * @since 1.0.0
+	 */
 	const handleColorChanged = (color) => {
-		// Emit the color immediately. Don't wait till the "ok" button is clicked.
 		emit("update:colorVal", color);
 	};
 </script>
 <template>
 	<el-color-picker
 		v-model="value"
-		:show-alpha="props.isAlphaPicker ? props.isAlphaPicker : true"
+		:show-alpha="props.isAlpha"
 		@active-change="handleColorChanged"
 	/>
-	<span class="label" v-if="props.label">{{ props.label }}</span>
 </template>
-<style>
-	.adfy-options .el-color-picker__trigger,
-	.adfy-options .el-color-picker__color,
-	.adfy-options .el-color-picker__color-inner {
-		border-radius: 100%;
-		border: none;
-	}
-
-	.adfy-options .el-color-picker__trigger {
-		height: 42px;
-		width: 42px;
-		padding: 3px;
-		border: 2px solid white;
-		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
-	}
-
-	.adfy-options .el-color-picker .el-color-picker__icon {
-		font-size: 16px;
-		color: white;
-		line-height: 1;
-	}
-
-	.adfy-options .el-color-picker .el-color-picker__empty {
-		font-size: 20px;
-		color: red;
-		line-height: 1;
-	}
-</style>

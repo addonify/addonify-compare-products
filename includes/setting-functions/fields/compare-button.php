@@ -21,7 +21,6 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 		return array(
 			'compare_products_btn_position'           => array(
 				'type'        => 'select',
-				'className'   => '',
 				'label'       => __( 'Button Position in Products Loop', 'addonify-compare-products' ),
 				'description' => __( 'Choose where to place the compare button in products loop.', 'addonify-compare-products' ),
 				'choices'     => array(
@@ -33,7 +32,6 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 			),
 			'compare_products_btn_position_on_single' => array(
 				'type'        => 'select',
-				'className'   => '',
 				'label'       => __( 'Button Position in Product Single Page', 'addonify-compare-products' ),
 				'description' => __( 'Choose where to place the compare button in product single page.', 'addonify-compare-products' ),
 				'choices'     => array(
@@ -47,7 +45,6 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 			),
 			'compare_products_btn_label'              => array(
 				'type'        => 'text',
-				'className'   => '',
 				'label'       => __( 'Button Label', 'addonify-compare-products' ),
 				'description' => __( 'Label for compare button.', 'addonify-compare-products' ),
 				'dependent'   => array( 'enable_product_comparison' ),
@@ -55,15 +52,13 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 			),
 			'compare_products_btn_show_icon'          => array(
 				'type'        => 'switch',
-				'className'   => '',
 				'label'       => __( 'Show Icon', 'addonify-compare-products' ),
 				'description' => __( 'Show icon on compare button.', 'addonify-compare-products' ),
 				'dependent'   => array( 'enable_product_comparison' ),
 				'value'       => addonify_compare_products_get_option( 'compare_products_btn_show_icon' ),
 			),
 			'compare_products_btn_icon'               => array(
-				'type'          => 'radio',
-				'typeStyle'     => 'radioIcon', // Not used on Front-End Control. Only for Ref!
+				'type'          => 'radio-icons',
 				'renderChoices' => 'html',
 				'className'     => 'fullwidth radio-input-group hide-label svg-icons-choices',
 				'label'         => __( 'Select Icon', 'addonify-compare-products' ),
@@ -74,7 +69,6 @@ if ( ! function_exists( 'addonify_compare_products_compare_button_general_fields
 			),
 			'compare_products_btn_icon_position'      => array(
 				'type'        => 'select',
-				'className'   => '',
 				'label'       => __( 'Icon Position', 'addonify-compare-products' ),
 				'description' => __( 'Choose position for icon in the compare button.', 'addonify-compare-products' ),
 				'choices'     => array(
