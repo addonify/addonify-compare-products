@@ -10,8 +10,8 @@
  * Plugin Name:       Addonify - Compare Products For WooCommerce
  * Plugin URI:        https://wordpress.org/plugins/addonify-compare-products/
  * Description:       Addonify Compare Products is a WooCommerce extension that allows website visitors to compare multiple products on your online store.
- * Version:           1.1.13
- * Tested up to:      6.4.2
+ * Version:           1.1.14
+ * Tested up to:      6.5
  * Requires at least: 6.3
  * Requires PHP:      7.4
  * Author:            Addonify
@@ -20,6 +20,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       addonify-compare-products
  * Domain Path:       /languages
+ * Requires Plugins:  woocommerce
  */
 
 // If this file is called directly, abort.
@@ -27,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'ADDONIFY_COMPARE_PRODUCTS_VERSION', '1.1.13' );
+define( 'ADDONIFY_COMPARE_PRODUCTS_VERSION', '1.1.14' );
 define( 'ADDONIFY_COMPARE_PRODUCTS_BASENAME', plugin_basename( __FILE__ ) );
 define( 'ADDONIFY_CP_DB_INITIALS', 'addonify_cp_' );
 define( 'ADDONIFY_CP_PLUGIN_PATH', dirname( __FILE__ ) );
@@ -72,17 +73,18 @@ function run_addonify_compare_products() {
 		$plugin = new Addonify_Compare_Products();
 		$plugin->run();
 	} else {
-		add_action(
-			'admin_notices',
-			function() {
-				?>
-				<div class="notice notice-error is-dismissible">
-					<p><?php esc_html_e( 'Addonify Compare Products is enabled but not effective. This plugin requires WooCommerce plugin in order to work.', 'addonify-compare-products' ); ?></p>
-				</div>
-				<?php
-			}
-		);
+		if ( version_compare( get_bloginfo( 'version' ), '6.5', '<' ) ) {
+			add_action(
+				'admin_notices',
+				function() {
+					?>
+					<div class="notice notice-error is-dismissible">
+						<p><?php esc_html_e( 'Addonify Compare Products is enabled but not effective. This plugin requires WooCommerce plugin in order to work.', 'addonify-compare-products' ); ?></p>
+					</div>
+					<?php
+				}
+			);
+		}
 	}
-
 }
 add_action( 'plugins_loaded', 'run_addonify_compare_products' );
