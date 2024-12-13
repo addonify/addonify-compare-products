@@ -107,8 +107,6 @@ Yes, you can do it. Copy template from "/public/templates" the plugin's folder a
 - Tested: WordPress version 6.7.1.
 - Tested: WooCommerce version 9.4.3.
 
-== Changelog ==
-
 = 1.1.14 - 03 April, 2024 =
 
 - Tested: WordPress version 6.5.
