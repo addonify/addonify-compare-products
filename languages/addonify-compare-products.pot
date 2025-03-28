@@ -615,6 +615,14 @@ msgstr ""
 msgid "Later"
 msgstr ""
 
+#: public/class-addonify-compare-products-public.php:276
+msgid "No products to compare"
+msgstr ""
+
+#: public/class-addonify-compare-products-public.php:277
+msgid "More than one products required for comparison."
+msgstr ""
+
 #: public/class-addonify-compare-products-public.php:318
 msgid "Invalid product."
 msgstr ""
