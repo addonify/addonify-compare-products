@@ -3,8 +3,8 @@
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 6.3
-Tested up to: 6.8
-Stable tag: 1.1.17
+Tested up to: 6.9.1
+Stable tag: 1.1.18
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,10 @@ Yes, you can do it. Copy template from "/public/templates" the plugin's folder a
 
 
 == Changelog ==
+
+= 1.1.18 - 15 February, 2026 =
+
+- Fix: Broken Access Control in UDP Agent (CVSS 5.3). Credits to Legion Hunter. Unauthenticated attacker can update option value for "udp_agent_allow_tracking" via "init" hook due to missing authorization and nonce check in it's callback function "on_init". 
 
 = 1.1.17 - 28 March, 2024 =
 
