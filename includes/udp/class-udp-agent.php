@@ -178,23 +178,25 @@ class Udp_Agent {
 			exit;
 		}
 
+		if ( ! isset( $_GET['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['nonce'] ) ), 'udp_nonce' ) ) {
+			wp_safe_redirect( admin_url() );
+			exit;
+		}
+
 		$users_choice = isset( $_GET['udp-agent-allow-access'] ) ? sanitize_text_field( wp_unslash( $_GET['udp-agent-allow-access'] ) ) : ''; //phpcs:ignore
 
 		if ( empty( $users_choice ) ) {
-			return;
+			wp_safe_redirect( admin_url() );
+			exit;
 		}
 
 		// Add data into database.
 		update_option( 'udp_agent_allow_tracking', $users_choice );
-		if ( 'yes' === $users_choice ) {
-			$this->do_handshake();
-		}
 		update_option( 'udp_agent_tracking_msg_last_shown_at', time() );
 
 		// Redirect back to dashboard.
 		wp_safe_redirect( admin_url() );
 		exit;
-
 	}
 
 	// ----------------------------------------------
@@ -211,9 +213,16 @@ class Udp_Agent {
 		if ( ! class_exists( 'WP_Debug_Data' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-debug-data.php';
 			require_once ABSPATH . 'wp-includes/load.php';
-			require_once ABSPATH . 'wp-admin/includes/update.php';
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 			require_once ABSPATH . 'wp-admin/includes/misc.php';
+		}
+
+		if ( ! function_exists( 'get_core_updates' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/update.php';
+		}
+
+		if ( ! function_exists( 'get_home_path' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
 
 		if ( ! class_exists( 'WP_Site_Health' ) ) {
@@ -230,7 +239,7 @@ class Udp_Agent {
 		$data['data']            = WP_Debug_Data::debug_data();
 		$data['site_url']        = $site_scheme . $site_host . $site_port;
 		$data['site_user_email'] = get_bloginfo( 'admin_email' );
-		$plugin_directory        = untrailingslashit( dirname( __FILE__, 3 ) );
+		$plugin_directory        = untrailingslashit( dirname( __FILE__, 3 ) ); // phpcs:ignore
 		$dir_names               = explode( '/', $plugin_directory );
 		if ( strpos( $dir_names[ count( $dir_names ) - 1 ], '\\' ) ) {
 			$dir_names = explode( '\\', $dir_names[ count( $dir_names ) - 1 ] );
@@ -247,30 +256,13 @@ class Udp_Agent {
 		return $data;
 	}
 
-
-
 	/**
-	 * Authorize this agent to send data to engine.
-	 * get secret key from engine
-	 * run on agent activation.
+	 * Does nothing. This is only here to avoid conflicts with other plugins or themes.
 	 *
 	 * @since    1.0.0
+	 * @updated  1.0.3
 	 */
 	public function do_handshake() {
-
-		$track_user = get_option( 'udp_agent_allow_tracking' );
-
-		if ( 'yes' !== $track_user ) {
-			// Do not send data.
-			return;
-		}
-
-		$data['agent_data'] = serialize( $this->get_data() ); //phpcs:ignore
-		$url                = untrailingslashit( $this->engine_url ) . '/wp-json/udp-engine/v1/handshake';
-
-		$this->do_curl( $url, $data );
-
-		return true;
 	}
 
 	// ------------------------------------------------
@@ -312,7 +304,7 @@ class Udp_Agent {
 		}
 
 		$data_to_send['agent_data'] = serialize( $this->get_data() ); //phpcs:ignore
-		$url                        = untrailingslashit( $this->engine_url ) . '/wp-json/udp-engine/v1/process-data';
+		$url                        = untrailingslashit( $this->engine_url );
 		$this->do_curl( $url, $data_to_send );
 		exit;
 	}

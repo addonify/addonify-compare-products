@@ -3,8 +3,8 @@
 Contributors: addonify
 Tags: compare, woocommerce compare, products comparison, compare products, compare woocommerce, addonify, woocommerce
 Requires at least: 6.3
-Tested up to: 6.9.1
-Stable tag: 1.1.18
+Tested up to: 7.0.1
+Stable tag: 1.1.19
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,6 +101,10 @@ Yes, you can do it. Copy template from "/public/templates" the plugin's folder a
 
 
 == Changelog ==
+
+= 1.1.19 - 16 July, 2026 =
+
+- Updated: UDP agent.
 
 = 1.1.18 - 15 February, 2026 =
 
